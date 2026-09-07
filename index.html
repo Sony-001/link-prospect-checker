@@ -2002,7 +2002,7 @@
       </div>
 
       <div id="authNote" class="auth-note">
-        Your email must be confirmed before the first login.
+        Sign up with your email and password. Confirm the email, then log in with the same credentials.
       </div>
 
     </form>
@@ -3781,7 +3781,7 @@
       }
 
       showAuthMessage(
-        "Password reset email sent. Open the link in your inbox.",
+        "Password reset link sent. Open the email, follow the link, and set a new password.",
         "success"
       );
 
@@ -3839,23 +3839,39 @@
       newPassword.value =
         "";
 
-      showAuthMessage(
-        "Password updated.",
-        "success"
+      const recoveredEmail =
+        currentUser?.email ||
+        authEmail.value.trim();
+
+      await supabaseClient.auth.signOut();
+
+      currentUser =
+        null;
+
+      currentProfile =
+        null;
+
+      setAuthMode(
+        "login"
       );
 
-      const {
-        data: {
-          user
-        }
-      } =
-        await supabaseClient.auth.getUser();
+      authEmail.value =
+        recoveredEmail || "";
 
-      if (user) {
-        await handleSignedIn(
-          user
-        );
-      }
+      authPassword.value =
+        "";
+
+      authOverlay.classList.remove(
+        "hidden"
+      );
+
+      document.body.style.overflow =
+        "hidden";
+
+      showAuthMessage(
+        "Password updated. Log in with your email and new password.",
+        "success"
+      );
 
     } catch (error) {
       showAuthMessage(
@@ -3913,8 +3929,8 @@
 
     authCopy.textContent =
       isSignup
-        ? "Create your Easy Pro account."
-        : "Log in to your Pro workspace.";
+        ? "Register with your email and password."
+        : "Log in with the email and password you used to register.";
 
     authSubmitButton.textContent =
       isSignup
@@ -4275,29 +4291,27 @@
           if (
             data.session
           ) {
-
-            await handleSignedIn(
-              data.user
-            );
-
-          } else {
-
-            setAuthMode(
-              "login"
-            );
-
-            authEmail.value =
-              email;
-
-            showAuthMessage(
-              "Account created. Confirm your email before the first login.",
-              "success"
-            );
-
-            resendConfirmationButton.classList.remove(
-              "hidden"
-            );
+            await supabaseClient.auth.signOut();
           }
+
+          setAuthMode(
+            "login"
+          );
+
+          authEmail.value =
+            email;
+
+          authPassword.value =
+            "";
+
+          showAuthMessage(
+            "Account created. Check your inbox and confirm your email, then log in with the same email and password.",
+            "success"
+          );
+
+          resendConfirmationButton.classList.remove(
+            "hidden"
+          );
 
         } else {
 
@@ -4325,14 +4339,23 @@
           error?.message ||
           "Could not continue. Please try again.";
 
-        showAuthMessage(
-          message,
-          "error"
-        );
-
         const lower =
           String(message)
             .toLowerCase();
+
+        if (
+          lower.includes("invalid login credentials")
+        ) {
+          showAuthMessage(
+            "Email or password is incorrect. Use the same credentials you used when signing up, or reset your password.",
+            "error"
+          );
+        } else {
+          showAuthMessage(
+            message,
+            "error"
+          );
+        }
 
         if (
           lower.includes("confirm") ||
@@ -4425,7 +4448,7 @@
           "Set a new password";
 
         authCopy.textContent =
-          "Choose a new password for your Easy account.";
+          "Set a new password. After saving it, log in with your email and the new password.";
 
         resetPasswordPanel.classList.remove(
           "hidden"
