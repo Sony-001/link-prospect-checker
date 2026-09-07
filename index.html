@@ -270,11 +270,20 @@
         We’ll try to detect the correct columns automatically.
       </p>
 
-      <input
-        type="file"
-        id="databaseFile"
-        accept=".csv,text/csv"
-      >
+    <input
+  type="file"
+  id="ahrefsFile"
+  accept=".csv,text/csv"
+  hidden
+>
+
+<button
+  type="button"
+  class="secondary"
+  onclick="document.getElementById('ahrefsFile').click()"
+>
+  Upload Ahrefs CSV
+</button>
 
       <div
         class="file-info"
