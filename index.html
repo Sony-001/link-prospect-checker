@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Link Prospect Checker</title>
 
   <style>
@@ -17,45 +17,117 @@
       color: #171717;
     }
 
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
     .container {
       width: 92%;
       max-width: 1080px;
       margin: 48px auto;
     }
 
+    .hidden {
+      display: none !important;
+    }
+
     h1 {
       margin: 0 0 8px;
       font-size: 32px;
-      letter-spacing: -0.7px;
+      letter-spacing: -0.8px;
     }
 
     h2 {
-      margin: 0 0 8px;
+      margin: 0;
       font-size: 18px;
+    }
+
+    p {
+      margin: 0;
     }
 
     .subtitle {
       color: #737373;
-      margin: 0 0 32px;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border: 1px solid #e5e5e5;
+      border-radius: 999px;
+      background: #fff;
+      color: #737373;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .card {
+      margin-top: 22px;
       background: #fff;
       border: 1px solid #e7e7e7;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.03);
     }
 
-    .description {
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .card-header-text {
+      max-width: 720px;
+    }
+
+    .card-description {
+      margin-top: 6px;
       color: #737373;
       font-size: 14px;
       line-height: 1.5;
     }
 
-    .hidden {
-      display: none !important;
+    .primary {
+      background: #111;
+      color: white;
+    }
+
+    .secondary {
+      background: #f1f1f1;
+      color: #171717;
+    }
+
+    .ghost {
+      background: transparent;
+      color: #525252;
+      padding: 6px 8px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .full {
+      width: 100%;
     }
 
     .success {
@@ -73,109 +145,232 @@
     }
 
     .stats {
-      margin-top: 10px;
-      color: #737373;
       font-size: 13px;
+      color: #737373;
     }
 
-    button {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: 600;
+    /* DATABASE UPLOAD */
+
+    .db-dropzone {
+      border: 1.5px dashed #d7d7d7;
+      border-radius: 16px;
+      padding: 28px;
+      background: #fafafa;
+      text-align: center;
       cursor: pointer;
       transition: .15s ease;
     }
 
-    button:hover {
-      transform: translateY(-1px);
+    .db-dropzone:hover,
+    .db-dropzone.dragging {
+      border-color: #111;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
     }
 
-    .primary {
-      background: #111;
-      color: #fff;
-    }
-
-    .secondary {
-      background: #f1f1f1;
-      color: #171717;
-    }
-
-    .full {
-      width: 100%;
-    }
-
-    .topbar {
+    .db-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 12px;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      background: #fff;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      margin-bottom: 24px;
+      justify-content: center;
+      font-size: 20px;
     }
 
-    .file-info {
-      margin-top: 16px;
-      padding: 14px;
+    .db-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .db-hint {
+      color: #8a8a8a;
+      font-size: 13px;
+    }
+
+    .db-saved {
+      display: none;
+      padding: 16px 18px;
+      border: 1px solid #e8e8e8;
+      border-radius: 14px;
       background: #fafafa;
-      border-radius: 10px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .db-saved.active {
+      display: flex;
+    }
+
+    .db-saved-title {
+      font-weight: 600;
       font-size: 14px;
-      line-height: 1.6;
+    }
+
+    .db-saved-meta {
+      margin-top: 4px;
+      color: #737373;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* MAPPING */
+
+    .mapping-toggle {
+      margin-top: 14px;
     }
 
     .mapping {
       display: none;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid #ececec;
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid #ececec;
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .mapping.active {
+      display: block;
     }
 
     .mapping-row {
-      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 10px 0;
     }
 
     .mapping-row label {
-      display: inline-block;
-      width: 140px;
       font-size: 14px;
+      color: #525252;
     }
 
-    .requirement {
-      display: flex;
+    select {
+      min-width: 220px;
+      padding: 9px 10px;
+      border: 1px solid #dcdcdc;
+      border-radius: 9px;
+      background: white;
+    }
+
+    /* REQUIREMENTS */
+
+    .requirements-list {
+      border: 1px solid #ececec;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .requirement-row {
+      display: grid;
+      grid-template-columns: 44px 1fr minmax(150px, auto);
+      gap: 14px;
       align-items: center;
-      gap: 12px;
-      margin: 16px 0;
-      flex-wrap: wrap;
+      padding: 16px 18px;
+      border-bottom: 1px solid #ececec;
     }
 
-    .requirement label {
-      min-width: 230px;
+    .requirement-row:last-child {
+      border-bottom: 0;
+    }
+
+    .requirement-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .requirement-hint {
+      margin-top: 3px;
+      font-size: 12px;
+      color: #8a8a8a;
+    }
+
+    .requirement-value {
+      display: flex;
+      justify-content: flex-end;
     }
 
     input[type="number"],
-    input[type="text"],
-    select {
+    input[type="text"] {
+      width: 180px;
+      max-width: 100%;
+      padding: 9px 10px;
       border: 1px solid #dcdcdc;
       border-radius: 9px;
-      padding: 9px 11px;
-      background: #fff;
-    }
-
-    input[type="number"] {
-      width: 120px;
+      background: white;
     }
 
     input[type="text"] {
-      width: 300px;
-      max-width: 100%;
+      width: 260px;
     }
 
-    /* CHECKER COMBINED INPUT */
+    .switch {
+      position: relative;
+      width: 38px;
+      height: 22px;
+      flex: 0 0 auto;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #d4d4d4;
+      border-radius: 999px;
+      transition: .2s ease;
+      cursor: pointer;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: .2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    }
+
+    .switch input:checked + .slider {
+      background: #111;
+    }
+
+    .switch input:checked + .slider:before {
+      transform: translateX(16px);
+    }
+
+    .actions {
+      margin-top: 22px;
+    }
+
+    /* CHECKER */
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
 
     .prospect-input {
       margin-top: 18px;
       border: 1.5px solid #dcdcdc;
       border-radius: 16px;
-      background: #fff;
+      background: white;
       overflow: hidden;
       transition: .15s ease;
     }
@@ -189,11 +384,10 @@
     textarea {
       width: 100%;
       min-height: 230px;
-      resize: vertical;
       border: 0;
-      outline: none;
+      outline: 0;
+      resize: vertical;
       padding: 20px;
-      font-family: inherit;
       font-size: 14px;
       line-height: 1.55;
       color: #171717;
@@ -224,12 +418,11 @@
       width: 34px;
       height: 34px;
       border-radius: 9px;
-      background: #fff;
+      background: white;
       border: 1px solid #e5e5e5;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 17px;
     }
 
     .upload-title {
@@ -238,15 +431,14 @@
     }
 
     .upload-hint {
+      margin-top: 3px;
       font-size: 12px;
       color: #8a8a8a;
-      margin-top: 3px;
     }
 
     .browse {
       font-size: 13px;
       font-weight: 600;
-      color: #111;
       white-space: nowrap;
     }
 
@@ -270,25 +462,21 @@
     }
 
     .file-meta {
+      margin-top: 3px;
       font-size: 12px;
       color: #737373;
-      margin-top: 3px;
-    }
-
-    .remove-file {
-      background: transparent;
-      color: #737373;
-      padding: 6px 8px;
     }
 
     .checker-actions {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 16px;
       margin-top: 14px;
       flex-wrap: wrap;
     }
+
+    /* RESULTS */
 
     .results-summary {
       font-size: 14px;
@@ -309,9 +497,9 @@
     th,
     td {
       padding: 11px 12px;
-      border-bottom: 1px solid #ececec;
       text-align: left;
       vertical-align: top;
+      border-bottom: 1px solid #ececec;
       font-size: 14px;
     }
 
@@ -327,19 +515,30 @@
       line-height: 1.4;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
       .container {
         margin: 24px auto;
       }
 
-      .topbar {
+      .topbar,
+      .card-header,
+      .db-saved {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .upload-zone,
-      .file-loaded {
-        align-items: flex-start;
+      .requirement-row {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .requirement-value {
+        grid-column: 2;
+        justify-content: flex-start;
+      }
+
+      input[type="number"],
+      input[type="text"] {
+        width: 100%;
       }
     }
   </style>
@@ -349,40 +548,131 @@
 
 <main class="container">
 
-  <!-- SETUP -->
+  <!-- SETUP SCREEN -->
 
   <section id="setupScreen">
 
-    <h1>Link Prospect Checker</h1>
-    <p class="subtitle">Set up your database and requirements once, then check prospects anytime.</p>
+    <div class="eyebrow">
+      Step 1 of 2 · Setup
+    </div>
+
+    <h1>Set up your checker</h1>
+
+    <p class="subtitle">
+      Add your database and choose the metrics you want to use.
+      You can change everything later.
+    </p>
+
+
+    <!-- DATABASE -->
 
     <section class="card">
 
-      <h2>Your Database</h2>
+      <div class="card-header">
 
-      <p class="description">
-        Upload a CSV with your existing domains and statuses.
-      </p>
+        <div class="card-header-text">
+          <h2>Your database</h2>
+
+          <p class="card-description">
+            Upload a CSV with domains and statuses.
+            Your statuses are kept exactly as they appear in the file.
+          </p>
+        </div>
+
+      </div>
+
 
       <input
         type="file"
         id="databaseFile"
         accept=".csv,text/csv"
+        hidden
       >
 
-      <div class="file-info" id="fileInfo">
-        No database uploaded.
+
+      <div
+        class="db-dropzone"
+        id="dbDropzone"
+      >
+
+        <div class="db-icon">↑</div>
+
+        <div class="db-title">
+          Drop your database CSV here
+        </div>
+
+        <div class="db-hint">
+          or click to browse files
+        </div>
+
       </div>
 
-      <div class="mapping" id="mapping">
+
+      <div
+        class="db-saved"
+        id="dbSaved"
+      >
+
+        <div>
+
+          <div
+            class="db-saved-title"
+            id="dbSavedTitle"
+          >
+            Database ready
+          </div>
+
+          <div
+            class="db-saved-meta"
+            id="dbSavedMeta"
+          ></div>
+
+        </div>
+
+
+        <button
+          id="replaceDatabase"
+          class="secondary"
+          type="button"
+        >
+          Replace database
+        </button>
+
+      </div>
+
+
+      <div class="mapping-toggle">
+
+        <button
+          id="toggleMapping"
+          class="ghost hidden"
+          type="button"
+        >
+          Change columns
+        </button>
+
+      </div>
+
+
+      <div
+        class="mapping"
+        id="mapping"
+      >
 
         <div class="mapping-row">
-          <label for="domainColumn">Domain column</label>
+          <label for="domainColumn">
+            Domain column
+          </label>
+
           <select id="domainColumn"></select>
         </div>
 
+
         <div class="mapping-row">
-          <label for="statusColumn">Status column</label>
+          <label for="statusColumn">
+            Status column
+          </label>
+
           <select id="statusColumn"></select>
         </div>
 
@@ -390,79 +680,257 @@
 
     </section>
 
+
+    <!-- REQUIREMENTS -->
+
     <section class="card">
 
-      <h2>Your Requirements</h2>
+      <div class="card-header">
 
-      <p class="description">
-        Select only the Ahrefs metrics that matter to you.
-      </p>
+        <div class="card-header-text">
 
-      <div class="requirement">
-        <input type="checkbox" id="useDR">
-        <label for="useDR">Minimum DR</label>
-        <input type="number" id="minDR" value="50" min="0">
+          <h2>Your requirements</h2>
+
+          <p class="card-description">
+            Turn on only the checks you actually use.
+            These rules will be applied when you upload an Ahrefs Batch Analysis CSV.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="requirement">
-        <input type="checkbox" id="useTraffic">
-        <label for="useTraffic">Minimum Organic Traffic</label>
-        <input type="number" id="minTraffic" value="2000" min="0">
-      </div>
 
-      <div class="requirement">
-        <input type="checkbox" id="useRD">
-        <label for="useRD">Minimum Referring Domains</label>
-        <input type="number" id="minRD" value="500" min="0">
-      </div>
+      <div class="requirements-list">
 
-      <div class="requirement">
-        <input type="checkbox" id="useRDLD">
-        <label for="useRDLD">Referring Domains ≥ Linked Domains</label>
-      </div>
 
-      <div class="requirement">
-        <input type="checkbox" id="useCountry">
-        <label for="useCountry">Allowed top countries</label>
-        <input type="text" id="countries" placeholder="US, UK, CA, AU">
+        <div class="requirement-row">
+
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="useDR"
+            >
+            <span class="slider"></span>
+          </label>
+
+          <div>
+            <div class="requirement-title">
+              Minimum DR
+            </div>
+
+            <div class="requirement-hint">
+              Minimum Domain Rating required
+            </div>
+          </div>
+
+          <div class="requirement-value">
+            <input
+              type="number"
+              id="minDR"
+              value="50"
+              min="0"
+            >
+          </div>
+
+        </div>
+
+
+        <div class="requirement-row">
+
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="useTraffic"
+            >
+            <span class="slider"></span>
+          </label>
+
+          <div>
+            <div class="requirement-title">
+              Minimum organic traffic
+            </div>
+
+            <div class="requirement-hint">
+              Minimum Ahrefs organic traffic
+            </div>
+          </div>
+
+          <div class="requirement-value">
+            <input
+              type="number"
+              id="minTraffic"
+              value="2000"
+              min="0"
+            >
+          </div>
+
+        </div>
+
+
+        <div class="requirement-row">
+
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="useRD"
+            >
+            <span class="slider"></span>
+          </label>
+
+          <div>
+            <div class="requirement-title">
+              Minimum referring domains
+            </div>
+
+            <div class="requirement-hint">
+              Optional minimum RD threshold
+            </div>
+          </div>
+
+          <div class="requirement-value">
+            <input
+              type="number"
+              id="minRD"
+              value="500"
+              min="0"
+            >
+          </div>
+
+        </div>
+
+
+        <div class="requirement-row">
+
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="useRDLD"
+            >
+            <span class="slider"></span>
+          </label>
+
+          <div>
+            <div class="requirement-title">
+              RD ≥ Linked Domains
+            </div>
+
+            <div class="requirement-hint">
+              Referring domains must be equal to or higher than linked domains
+            </div>
+          </div>
+
+          <div></div>
+
+        </div>
+
+
+        <div class="requirement-row">
+
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="useCountry"
+            >
+            <span class="slider"></span>
+          </label>
+
+          <div>
+            <div class="requirement-title">
+              Allowed top countries
+            </div>
+
+            <div class="requirement-hint">
+              Separate country codes with commas
+            </div>
+          </div>
+
+          <div class="requirement-value">
+            <input
+              type="text"
+              id="countries"
+              placeholder="US, UK, CA, AU"
+            >
+          </div>
+
+        </div>
+
+
       </div>
 
     </section>
 
-    <button id="saveSettings" class="primary full">
-      Save Settings
-    </button>
 
-  </section>
+    <div class="actions">
 
-
-  <!-- CHECKER -->
-
-  <section id="checkerScreen" class="hidden">
-
-    <div class="topbar">
-
-      <div>
-        <h1>Link Prospect Checker</h1>
-        <div class="stats" id="databaseStats"></div>
-      </div>
-
-      <button id="editSettings" class="secondary">
-        Edit Settings
+      <button
+        id="saveSettings"
+        class="primary full"
+      >
+        Save & Continue
       </button>
 
     </div>
 
+  </section>
+
+
+  <!-- CHECKER SCREEN -->
+
+  <section
+    id="checkerScreen"
+    class="hidden"
+  >
+
+    <div class="topbar">
+
+      <div>
+
+        <div class="eyebrow">
+          Step 2 of 2 · Checker
+        </div>
+
+        <h1>Check prospects</h1>
+
+        <div
+          class="stats"
+          id="databaseStats"
+        ></div>
+
+      </div>
+
+
+      <button
+        id="editSettings"
+        class="secondary"
+      >
+        Edit settings
+      </button>
+
+    </div>
+
+
     <section class="card">
 
-      <h2>Check prospects</h2>
+      <div class="card-header">
 
-      <p class="description">
-        Paste any text with domains, or drop your Ahrefs Batch Analysis CSV into the same field.
-      </p>
+        <div class="card-header-text">
+
+          <h2>Add prospects</h2>
+
+          <p class="card-description">
+            Paste any text with domains, or upload an Ahrefs Batch Analysis CSV in the same field.
+          </p>
+
+        </div>
+
+      </div>
 
 
-      <div class="prospect-input" id="prospectInput">
+      <div
+        class="prospect-input"
+        id="prospectInput"
+      >
 
         <textarea
           id="domainInput"
@@ -471,7 +939,7 @@
 Example:
 techbullion.com DR 73 $100
 https://example.com/blog/article
-I can offer another-site.co.uk for $150"
+Another site: www.test.co.uk"
         ></textarea>
 
 
@@ -485,6 +953,7 @@ I can offer another-site.co.uk for $150"
             <div class="upload-icon">↑</div>
 
             <div>
+
               <div class="upload-title">
                 Drop Ahrefs Batch CSV here
               </div>
@@ -492,9 +961,11 @@ I can offer another-site.co.uk for $150"
               <div class="upload-hint">
                 or choose a file from your computer
               </div>
+
             </div>
 
           </div>
+
 
           <div class="browse">
             Browse files
@@ -509,6 +980,7 @@ I can offer another-site.co.uk for $150"
         >
 
           <div>
+
             <div
               class="file-name"
               id="loadedFileName"
@@ -518,11 +990,13 @@ I can offer another-site.co.uk for $150"
               class="file-meta"
               id="loadedFileMeta"
             ></div>
+
           </div>
 
+
           <button
-            class="remove-file"
             id="removeFile"
+            class="ghost"
             type="button"
           >
             Remove
@@ -550,6 +1024,7 @@ I can offer another-site.co.uk for $150"
           0 unique domains detected
         </div>
 
+
         <button
           id="checkDomains"
           class="primary"
@@ -573,6 +1048,7 @@ I can offer another-site.co.uk for $150"
         class="results-summary"
         id="resultsSummary"
       ></div>
+
 
       <div class="table-wrap">
 
@@ -599,6 +1075,10 @@ I can offer another-site.co.uk for $150"
   let ahrefsHeaders = [];
   let ahrefsColumnMap = null;
 
+
+  /* =========================
+     HELPERS
+  ========================= */
 
   function cleanHeader(value) {
     return String(value || "")
@@ -741,7 +1221,10 @@ I can offer another-site.co.uk for $150"
   }
 
 
-  function findColumn(headers, possibleNames) {
+  function findColumn(
+    headers,
+    possibleNames
+  ) {
 
     const normalized =
       headers.map(cleanHeader);
@@ -883,22 +1366,144 @@ I can offer another-site.co.uk for $150"
   }
 
 
-  /* DATABASE */
+  /* =========================
+     DATABASE
+  ========================= */
 
   const databaseFile =
-    document.getElementById("databaseFile");
+    document.getElementById(
+      "databaseFile"
+    );
 
-  const fileInfo =
-    document.getElementById("fileInfo");
+  const dbDropzone =
+    document.getElementById(
+      "dbDropzone"
+    );
+
+  const dbSaved =
+    document.getElementById(
+      "dbSaved"
+    );
+
+  const dbSavedMeta =
+    document.getElementById(
+      "dbSavedMeta"
+    );
+
+  const replaceDatabase =
+    document.getElementById(
+      "replaceDatabase"
+    );
+
+  const toggleMapping =
+    document.getElementById(
+      "toggleMapping"
+    );
 
   const mapping =
-    document.getElementById("mapping");
+    document.getElementById(
+      "mapping"
+    );
 
   const domainColumn =
-    document.getElementById("domainColumn");
+    document.getElementById(
+      "domainColumn"
+    );
 
   const statusColumn =
-    document.getElementById("statusColumn");
+    document.getElementById(
+      "statusColumn"
+    );
+
+
+  dbDropzone.addEventListener(
+    "click",
+    function () {
+      databaseFile.click();
+    }
+  );
+
+
+  replaceDatabase.addEventListener(
+    "click",
+    function () {
+      databaseFile.click();
+    }
+  );
+
+
+  toggleMapping.addEventListener(
+    "click",
+    function () {
+
+      mapping.classList.toggle(
+        "active"
+      );
+
+    }
+  );
+
+
+  dbDropzone.addEventListener(
+    "dragover",
+    function (event) {
+
+      event.preventDefault();
+
+      dbDropzone.classList.add(
+        "dragging"
+      );
+
+    }
+  );
+
+
+  dbDropzone.addEventListener(
+    "dragleave",
+    function () {
+
+      dbDropzone.classList.remove(
+        "dragging"
+      );
+
+    }
+  );
+
+
+  dbDropzone.addEventListener(
+    "drop",
+    function (event) {
+
+      event.preventDefault();
+
+      dbDropzone.classList.remove(
+        "dragging"
+      );
+
+      const file =
+        event.dataTransfer.files[0];
+
+      if (
+        file &&
+        file.name
+          .toLowerCase()
+          .endsWith(".csv")
+      ) {
+
+        loadDatabaseFile(file);
+
+      }
+
+      else {
+
+        alert(
+          "Please upload a CSV file."
+        );
+
+      }
+
+    }
+  );
 
 
   databaseFile.addEventListener(
@@ -908,172 +1513,193 @@ I can offer another-site.co.uk for $150"
       const file =
         databaseFile.files[0];
 
-      if (!file) {
-        return;
+      if (file) {
+        loadDatabaseFile(file);
       }
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        function (event) {
-
-          try {
-
-            const rows =
-              parseCSV(
-                event.target.result
-              );
-
-            if (rows.length < 2) {
-
-              fileInfo.innerHTML =
-                '<span class="error">Could not read this CSV.</span>';
-
-              return;
-            }
-
-            databaseHeaders =
-              rows[0].map(
-                header =>
-                  String(header || "")
-                    .replace(
-                      /^\uFEFF/,
-                      ""
-                    )
-                    .trim()
-              );
-
-            rawDatabase =
-              rows.slice(1);
-
-            domainColumn.innerHTML = "";
-            statusColumn.innerHTML = "";
-
-            databaseHeaders.forEach(
-              (header, index) => {
-
-                const option1 =
-                  document.createElement(
-                    "option"
-                  );
-
-                option1.value =
-                  index;
-
-                option1.textContent =
-                  header ||
-                  "Column " +
-                  (index + 1);
-
-                domainColumn.appendChild(
-                  option1
-                );
-
-
-                const option2 =
-                  document.createElement(
-                    "option"
-                  );
-
-                option2.value =
-                  index;
-
-                option2.textContent =
-                  header ||
-                  "Column " +
-                  (index + 1);
-
-                statusColumn.appendChild(
-                  option2
-                );
-
-              }
-            );
-
-
-            const detectedDomain =
-              findColumn(
-                databaseHeaders,
-                [
-                  "domain",
-                  "website",
-                  "site",
-                  "url",
-                  "domain name",
-                  "website url"
-                ]
-              );
-
-
-            const detectedStatus =
-              findColumn(
-                databaseHeaders,
-                [
-                  "status",
-                  "state",
-                  "stage",
-                  "current status"
-                ]
-              );
-
-
-            if (
-              detectedDomain !== -1
-            ) {
-              domainColumn.value =
-                detectedDomain;
-            }
-
-
-            if (
-              detectedStatus !== -1
-            ) {
-              statusColumn.value =
-                detectedStatus;
-            }
-
-
-            mapping.style.display =
-              "block";
-
-            updateDatabasePreview();
-
-          }
-
-          catch (error) {
-
-            fileInfo.innerHTML =
-              '<span class="error">Something went wrong while reading the CSV.</span>';
-
-          }
-
-        };
-
-
-      reader.readAsText(file);
 
     }
   );
 
 
-  domainColumn.addEventListener(
-    "change",
-    updateDatabasePreview
-  );
+  function loadDatabaseFile(file) {
 
-  statusColumn.addEventListener(
-    "change",
-    updateDatabasePreview
-  );
+    const reader =
+      new FileReader();
 
 
-  function updateDatabasePreview() {
+    reader.onload =
+      function (event) {
+
+        try {
+
+          const rows =
+            parseCSV(
+              event.target.result
+            );
+
+
+          if (rows.length < 2) {
+
+            alert(
+              "Could not read this database CSV."
+            );
+
+            return;
+
+          }
+
+
+          databaseHeaders =
+            rows[0].map(
+              header =>
+                String(
+                  header || ""
+                )
+                  .replace(
+                    /^\uFEFF/,
+                    ""
+                  )
+                  .trim()
+            );
+
+
+          rawDatabase =
+            rows.slice(1);
+
+
+          domainColumn.innerHTML = "";
+          statusColumn.innerHTML = "";
+
+
+          databaseHeaders.forEach(
+            (header, index) => {
+
+              const domainOption =
+                document.createElement(
+                  "option"
+                );
+
+              domainOption.value =
+                index;
+
+              domainOption.textContent =
+                header ||
+                "Column " +
+                (index + 1);
+
+              domainColumn.appendChild(
+                domainOption
+              );
+
+
+              const statusOption =
+                document.createElement(
+                  "option"
+                );
+
+              statusOption.value =
+                index;
+
+              statusOption.textContent =
+                header ||
+                "Column " +
+                (index + 1);
+
+              statusColumn.appendChild(
+                statusOption
+              );
+
+            }
+          );
+
+
+          const detectedDomain =
+            findColumn(
+              databaseHeaders,
+              [
+                "domain",
+                "website",
+                "site",
+                "url",
+                "domain name",
+                "website url"
+              ]
+            );
+
+
+          const detectedStatus =
+            findColumn(
+              databaseHeaders,
+              [
+                "status",
+                "state",
+                "stage",
+                "current status"
+              ]
+            );
+
+
+          if (
+            detectedDomain !== -1
+          ) {
+            domainColumn.value =
+              detectedDomain;
+          }
+
+
+          if (
+            detectedStatus !== -1
+          ) {
+            statusColumn.value =
+              detectedStatus;
+          }
+
+
+          showDatabasePreview(
+            file.name
+          );
+
+
+          toggleMapping.classList.remove(
+            "hidden"
+          );
+
+
+          dbDropzone.classList.add(
+            "hidden"
+          );
+
+
+          dbSaved.classList.add(
+            "active"
+          );
+
+        }
+
+        catch (error) {
+
+          alert(
+            "Something went wrong while reading the database."
+          );
+
+        }
+
+      };
+
+
+    reader.readAsText(file);
+
+  }
+
+
+  function showDatabasePreview(
+    fileName = ""
+  ) {
 
     if (!rawDatabase.length) {
       return;
     }
+
 
     const domainIndex =
       Number(
@@ -1085,6 +1711,7 @@ I can offer another-site.co.uk for $150"
         statusColumn.value
       );
 
+
     const domains =
       rawDatabase
         .map(
@@ -1095,8 +1722,10 @@ I can offer another-site.co.uk for $150"
         )
         .filter(Boolean);
 
+
     const uniqueDomains =
       [...new Set(domains)];
+
 
     const statuses =
       rawDatabase
@@ -1108,33 +1737,62 @@ I can offer another-site.co.uk for $150"
         )
         .filter(Boolean);
 
+
     const uniqueStatuses =
       [...new Set(statuses)];
 
-    fileInfo.innerHTML =
-      '<span class="success">✓ Database loaded</span>' +
-      "<br>" +
+
+    dbSavedMeta.innerHTML =
+      (
+        fileName
+          ? fileName + "<br>"
+          : ""
+      ) +
       uniqueDomains.length +
-      " unique domains detected" +
-      "<br>" +
+      " unique domains · " +
       uniqueStatuses.length +
-      " status variations detected";
+      " status variations";
+
   }
 
 
-  /* SAVE */
+  domainColumn.addEventListener(
+    "change",
+    function () {
+      showDatabasePreview();
+    }
+  );
+
+
+  statusColumn.addEventListener(
+    "change",
+    function () {
+      showDatabasePreview();
+    }
+  );
+
+
+  /* =========================
+     SETTINGS SAVE
+  ========================= */
 
   document
-    .getElementById("saveSettings")
+    .getElementById(
+      "saveSettings"
+    )
     .addEventListener(
       "click",
       function () {
 
+        const existingDatabase =
+          localStorage.getItem(
+            "prospectCheckerDatabase"
+          );
+
+
         if (
           !rawDatabase.length &&
-          !localStorage.getItem(
-            "prospectCheckerDatabase"
-          )
+          !existingDatabase
         ) {
 
           alert(
@@ -1142,7 +1800,9 @@ I can offer another-site.co.uk for $150"
           );
 
           return;
+
         }
+
 
         const settings = {
 
@@ -1190,12 +1850,15 @@ I can offer another-site.co.uk for $150"
             document.getElementById(
               "countries"
             ).value
+
         };
 
 
         localStorage.setItem(
           "prospectCheckerSettings",
-          JSON.stringify(settings)
+          JSON.stringify(
+            settings
+          )
         );
 
 
@@ -1220,17 +1883,33 @@ I can offer another-site.co.uk for $150"
               Number(
                 statusColumn.value
               )
+
           };
 
 
-          localStorage.setItem(
-            "prospectCheckerDatabase",
-            JSON.stringify(
-              databaseData
-            )
-          );
+          try {
+
+            localStorage.setItem(
+              "prospectCheckerDatabase",
+              JSON.stringify(
+                databaseData
+              )
+            );
+
+          }
+
+          catch (error) {
+
+            alert(
+              "This database is too large for localStorage. We'll move database storage to IndexedDB in the next step."
+            );
+
+            return;
+
+          }
 
         }
+
 
         showChecker();
 
@@ -1238,91 +1917,9 @@ I can offer another-site.co.uk for $150"
     );
 
 
-  function showChecker() {
-
-    const savedDatabase =
-      localStorage.getItem(
-        "prospectCheckerDatabase"
-      );
-
-    if (!savedDatabase) {
-      return;
-    }
-
-    const database =
-      JSON.parse(
-        savedDatabase
-      );
-
-    document
-      .getElementById(
-        "setupScreen"
-      )
-      .classList
-      .add("hidden");
-
-    document
-      .getElementById(
-        "checkerScreen"
-      )
-      .classList
-      .remove("hidden");
-
-    const uniqueDomains =
-      new Set();
-
-    database.rows.forEach(
-      row => {
-
-        const domain =
-          normalizeDomain(
-            row[
-              database.domainColumn
-            ]
-          );
-
-        if (domain) {
-          uniqueDomains.add(domain);
-        }
-
-      }
-    );
-
-    document
-      .getElementById(
-        "databaseStats"
-      )
-      .textContent =
-        uniqueDomains.size +
-        " domains in your saved database";
-  }
-
-
-  document
-    .getElementById("editSettings")
-    .addEventListener(
-      "click",
-      function () {
-
-        document
-          .getElementById(
-            "checkerScreen"
-          )
-          .classList
-          .add("hidden");
-
-        document
-          .getElementById(
-            "setupScreen"
-          )
-          .classList
-          .remove("hidden");
-
-      }
-    );
-
-
-  /* LOAD SETTINGS */
+  /* =========================
+     LOAD SAVED SETTINGS
+  ========================= */
 
   const savedSettings =
     localStorage.getItem(
@@ -1337,6 +1934,7 @@ I can offer another-site.co.uk for $150"
         savedSettings
       );
 
+
     document.getElementById(
       "useDR"
     ).checked =
@@ -1344,10 +1942,12 @@ I can offer another-site.co.uk for $150"
         settings.useDR
       );
 
+
     document.getElementById(
       "minDR"
     ).value =
       settings.minDR ?? 50;
+
 
     document.getElementById(
       "useTraffic"
@@ -1356,10 +1956,12 @@ I can offer another-site.co.uk for $150"
         settings.useTraffic
       );
 
+
     document.getElementById(
       "minTraffic"
     ).value =
       settings.minTraffic ?? 2000;
+
 
     document.getElementById(
       "useRD"
@@ -1368,10 +1970,12 @@ I can offer another-site.co.uk for $150"
         settings.useRD
       );
 
+
     document.getElementById(
       "minRD"
     ).value =
       settings.minRD ?? 500;
+
 
     document.getElementById(
       "useRDLD"
@@ -1380,6 +1984,7 @@ I can offer another-site.co.uk for $150"
         settings.useRDLD
       );
 
+
     document.getElementById(
       "useCountry"
     ).checked =
@@ -1387,14 +1992,238 @@ I can offer another-site.co.uk for $150"
         settings.useCountry
       );
 
+
     document.getElementById(
       "countries"
     ).value =
       settings.countries || "";
+
   }
 
 
-  /* LIVE TEXT DOMAIN COUNT */
+  /* =========================
+     SAVED DATABASE UI
+  ========================= */
+
+  function loadSavedDatabaseUI() {
+
+    const savedDatabase =
+      localStorage.getItem(
+        "prospectCheckerDatabase"
+      );
+
+
+    if (!savedDatabase) {
+      return;
+    }
+
+
+    try {
+
+      const database =
+        JSON.parse(
+          savedDatabase
+        );
+
+
+      rawDatabase =
+        database.rows || [];
+
+      databaseHeaders =
+        database.headers || [];
+
+
+      domainColumn.innerHTML = "";
+      statusColumn.innerHTML = "";
+
+
+      databaseHeaders.forEach(
+        (header, index) => {
+
+          const option1 =
+            document.createElement(
+              "option"
+            );
+
+          option1.value =
+            index;
+
+          option1.textContent =
+            header ||
+            "Column " +
+            (index + 1);
+
+          domainColumn.appendChild(
+            option1
+          );
+
+
+          const option2 =
+            document.createElement(
+              "option"
+            );
+
+          option2.value =
+            index;
+
+          option2.textContent =
+            header ||
+            "Column " +
+            (index + 1);
+
+          statusColumn.appendChild(
+            option2
+          );
+
+        }
+      );
+
+
+      domainColumn.value =
+        database.domainColumn;
+
+      statusColumn.value =
+        database.statusColumn;
+
+
+      showDatabasePreview(
+        "Saved database"
+      );
+
+
+      dbDropzone.classList.add(
+        "hidden"
+      );
+
+
+      dbSaved.classList.add(
+        "active"
+      );
+
+
+      toggleMapping.classList.remove(
+        "hidden"
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Could not load saved database."
+      );
+
+    }
+
+  }
+
+
+  loadSavedDatabaseUI();
+
+
+  /* =========================
+     CHECKER SCREEN
+  ========================= */
+
+  function showChecker() {
+
+    const savedDatabase =
+      localStorage.getItem(
+        "prospectCheckerDatabase"
+      );
+
+
+    if (!savedDatabase) {
+      return;
+    }
+
+
+    const database =
+      JSON.parse(
+        savedDatabase
+      );
+
+
+    document
+      .getElementById(
+        "setupScreen"
+      )
+      .classList
+      .add("hidden");
+
+
+    document
+      .getElementById(
+        "checkerScreen"
+      )
+      .classList
+      .remove("hidden");
+
+
+    const uniqueDomains =
+      new Set();
+
+
+    database.rows.forEach(
+      row => {
+
+        const domain =
+          normalizeDomain(
+            row[
+              database.domainColumn
+            ]
+          );
+
+
+        if (domain) {
+          uniqueDomains.add(domain);
+        }
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "databaseStats"
+      )
+      .textContent =
+        uniqueDomains.size +
+        " domains in your saved database";
+
+  }
+
+
+  document
+    .getElementById(
+      "editSettings"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+        document
+          .getElementById(
+            "checkerScreen"
+          )
+          .classList
+          .add("hidden");
+
+
+        document
+          .getElementById(
+            "setupScreen"
+          )
+          .classList
+          .remove("hidden");
+
+      }
+    );
+
+
+  /* =========================
+     TEXT INPUT
+  ========================= */
 
   const domainInput =
     document.getElementById(
@@ -1406,14 +2235,18 @@ I can offer another-site.co.uk for $150"
     "input",
     function () {
 
-      if (ahrefsRows.length) {
+      if (
+        ahrefsRows.length
+      ) {
         return;
       }
+
 
       const domains =
         extractDomains(
           domainInput.value
         );
+
 
       document
         .getElementById(
@@ -1422,11 +2255,14 @@ I can offer another-site.co.uk for $150"
         .textContent =
           domains.length +
           " unique domains detected";
+
     }
   );
 
 
-  /* AHREFS */
+  /* =========================
+     AHREFS
+  ========================= */
 
   function detectAhrefsColumns(
     headers
@@ -1493,7 +2329,9 @@ I can offer another-site.co.uk for $150"
             "country"
           ]
         )
+
     };
+
   }
 
 
@@ -1556,6 +2394,7 @@ I can offer another-site.co.uk for $150"
     function (event) {
 
       event.preventDefault();
+
       prospectInput.classList.add(
         "dragging"
       );
@@ -1586,8 +2425,10 @@ I can offer another-site.co.uk for $150"
         "dragging"
       );
 
+
       const file =
         event.dataTransfer.files[0];
+
 
       if (
         file &&
@@ -1628,6 +2469,7 @@ I can offer another-site.co.uk for $150"
               event.target.result
             );
 
+
           if (
             rows.length < 2
           ) {
@@ -1637,7 +2479,9 @@ I can offer another-site.co.uk for $150"
             );
 
             return;
+
           }
+
 
           ahrefsHeaders =
             rows[0].map(
@@ -1652,13 +2496,16 @@ I can offer another-site.co.uk for $150"
                   .trim()
             );
 
+
           ahrefsRows =
             rows.slice(1);
+
 
           ahrefsColumnMap =
             detectAhrefsColumns(
               ahrefsHeaders
             );
+
 
           if (
             ahrefsColumnMap.domain === -1
@@ -1669,7 +2516,9 @@ I can offer another-site.co.uk for $150"
             );
 
             return;
+
           }
+
 
           const domains =
             ahrefsRows
@@ -1683,6 +2532,7 @@ I can offer another-site.co.uk for $150"
               )
               .filter(Boolean);
 
+
           const uniqueDomains =
             [...new Set(domains)];
 
@@ -1690,20 +2540,27 @@ I can offer another-site.co.uk for $150"
           loadedFileName.textContent =
             file.name;
 
+
           loadedFileMeta.textContent =
             uniqueDomains.length +
             " unique domains detected";
+
 
           uploadZone.classList.add(
             "hidden"
           );
 
+
           fileLoaded.classList.add(
             "active"
           );
 
+
           domainInput.value = "";
-          domainInput.disabled = true;
+
+          domainInput.disabled =
+            true;
+
 
           document
             .getElementById(
@@ -1727,6 +2584,7 @@ I can offer another-site.co.uk for $150"
 
 
     reader.readAsText(file);
+
   }
 
 
@@ -1740,21 +2598,27 @@ I can offer another-site.co.uk for $150"
 
         event.stopPropagation();
 
+
         ahrefsRows = [];
         ahrefsHeaders = [];
         ahrefsColumnMap = null;
 
         ahrefsFile.value = "";
 
+
         fileLoaded.classList.remove(
           "active"
         );
+
 
         uploadZone.classList.remove(
           "hidden"
         );
 
-        domainInput.disabled = false;
+
+        domainInput.disabled =
+          false;
+
 
         document
           .getElementById(
@@ -1770,7 +2634,9 @@ I can offer another-site.co.uk for $150"
     );
 
 
-  /* REQUIREMENTS */
+  /* =========================
+     REQUIREMENTS EVALUATION
+  ========================= */
 
   function evaluateRequirements(
     row
@@ -1782,6 +2648,7 @@ I can offer another-site.co.uk for $150"
           "prospectCheckerSettings"
         ) || "{}"
       );
+
 
     const failures = [];
     const missing = [];
@@ -1808,12 +2675,16 @@ I can offer another-site.co.uk for $150"
             ]
           );
 
+
         const minDR =
           numberValue(
             settings.minDR
           );
 
-        if (dr < minDR) {
+
+        if (
+          dr < minDR
+        ) {
 
           failures.push(
             "DR " +
@@ -1852,10 +2723,12 @@ I can offer another-site.co.uk for $150"
             ]
           );
 
+
         const minTraffic =
           numberValue(
             settings.minTraffic
           );
+
 
         if (
           traffic < minTraffic
@@ -1898,12 +2771,16 @@ I can offer another-site.co.uk for $150"
             ]
           );
 
+
         const minRD =
           numberValue(
             settings.minRD
           );
 
-        if (rd < minRD) {
+
+        if (
+          rd < minRD
+        ) {
 
           failures.push(
             "RD " +
@@ -1943,6 +2820,7 @@ I can offer another-site.co.uk for $150"
             ]
           );
 
+
         const ld =
           numberValue(
             row[
@@ -1950,7 +2828,10 @@ I can offer another-site.co.uk for $150"
             ]
           );
 
-        if (rd < ld) {
+
+        if (
+          rd < ld
+        ) {
 
           failures.push(
             "RD " +
@@ -1995,6 +2876,7 @@ I can offer another-site.co.uk for $150"
             )
             .filter(Boolean);
 
+
         const actualCountry =
           String(
             row[
@@ -2003,6 +2885,7 @@ I can offer another-site.co.uk for $150"
           )
             .trim()
             .toUpperCase();
+
 
         if (
           allowedCountries.length &&
@@ -2032,11 +2915,15 @@ I can offer another-site.co.uk for $150"
 
       failures,
       missing
+
     };
+
   }
 
 
-  /* DATABASE MAP */
+  /* =========================
+     DATABASE MAP
+  ========================= */
 
   function getSavedDatabaseMap() {
 
@@ -2045,15 +2932,19 @@ I can offer another-site.co.uk for $150"
         "prospectCheckerDatabase"
       );
 
+
     if (!saved) {
       return null;
     }
 
+
     const database =
       JSON.parse(saved);
 
+
     const map =
       new Map();
+
 
     database.rows.forEach(
       row => {
@@ -2065,12 +2956,14 @@ I can offer another-site.co.uk for $150"
             ]
           );
 
+
         const status =
           String(
             row[
               database.statusColumn
             ] || ""
           ).trim();
+
 
         if (domain) {
 
@@ -2084,14 +2977,18 @@ I can offer another-site.co.uk for $150"
       }
     );
 
+
     return {
       map,
       database
     };
+
   }
 
 
-  /* CHECK */
+  /* =========================
+     CHECK
+  ========================= */
 
   document
     .getElementById(
@@ -2104,6 +3001,7 @@ I can offer another-site.co.uk for $150"
         const databaseData =
           getSavedDatabaseMap();
 
+
         if (!databaseData) {
 
           alert(
@@ -2111,10 +3009,13 @@ I can offer another-site.co.uk for $150"
           );
 
           return;
+
         }
+
 
         const databaseMap =
           databaseData.map;
+
 
         let results = [];
 
@@ -2141,6 +3042,7 @@ I can offer another-site.co.uk for $150"
                       ]
                     );
 
+
                   if (
                     !domain ||
                     seen.has(domain)
@@ -2148,16 +3050,20 @@ I can offer another-site.co.uk for $150"
                     return null;
                   }
 
+
                   seen.add(domain);
+
 
                   const requirementResult =
                     evaluateRequirements(
                       row
                     );
 
+
                   return {
 
-                    mode: "ahrefs",
+                    mode:
+                      "ahrefs",
 
                     domain,
 
@@ -2212,6 +3118,7 @@ I can offer another-site.co.uk for $150"
 
                     missing:
                       requirementResult.missing
+
                   };
 
                 }
@@ -2227,11 +3134,14 @@ I can offer another-site.co.uk for $150"
               domainInput.value
             );
 
+
           results =
             domains.map(
               domain => ({
 
-                mode: "text",
+                mode:
+                  "text",
+
                 domain,
 
                 status:
@@ -2241,36 +3151,46 @@ I can offer another-site.co.uk for $150"
 
                 found:
                   databaseMap.has(domain)
+
               })
             );
 
         }
 
 
-        renderResults(results);
+        renderResults(
+          results
+        );
 
       }
     );
 
 
-  /* RESULTS */
+  /* =========================
+     RESULTS
+  ========================= */
 
-  function renderResults(results) {
+  function renderResults(
+    results
+  ) {
 
     const card =
       document.getElementById(
         "resultsCard"
       );
 
+
     const head =
       document.getElementById(
         "resultsHead"
       );
 
+
     const body =
       document.getElementById(
         "resultsBody"
       );
+
 
     const summary =
       document.getElementById(
@@ -2295,6 +3215,7 @@ I can offer another-site.co.uk for $150"
       );
 
       return;
+
     }
 
 
@@ -2302,10 +3223,12 @@ I can offer another-site.co.uk for $150"
       results[0].mode ===
       "ahrefs";
 
+
     const foundCount =
       results.filter(
         item => item.found
       ).length;
+
 
     summary.textContent =
       results.length +
@@ -2387,6 +3310,7 @@ I can offer another-site.co.uk for $150"
             domainTd
           );
 
+
           tr.appendChild(
             statusTd
           );
@@ -2414,8 +3338,10 @@ I can offer another-site.co.uk for $150"
                   "td"
                 );
 
+
               td.textContent =
                 value;
+
 
               if (
                 index === 1 &&
@@ -2424,6 +3350,7 @@ I can offer another-site.co.uk for $150"
                 td.className =
                   "muted";
               }
+
 
               tr.appendChild(td);
 
@@ -2451,6 +3378,7 @@ I can offer another-site.co.uk for $150"
             reqTd.innerHTML =
               '<span class="error">Fail</span>';
 
+
             const reasons = [
               ...result.failures,
               ...result.missing.map(
@@ -2459,6 +3387,7 @@ I can offer another-site.co.uk for $150"
                   item
               )
             ];
+
 
             if (
               reasons.length
@@ -2469,13 +3398,16 @@ I can offer another-site.co.uk for $150"
                   "div"
                 );
 
+
               div.className =
                 "fail-reasons";
+
 
               div.innerHTML =
                 reasons.join(
                   "<br>"
                 );
+
 
               reqTd.appendChild(
                 div
@@ -2502,15 +3434,19 @@ I can offer another-site.co.uk for $150"
     card.classList.remove(
       "hidden"
     );
+
   }
 
 
-  /* AUTO OPEN */
+  /* =========================
+     AUTO OPEN CHECKER
+  ========================= */
 
   const existingDatabase =
     localStorage.getItem(
       "prospectCheckerDatabase"
     );
+
 
   if (existingDatabase) {
     showChecker();
