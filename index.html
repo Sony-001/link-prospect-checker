@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Link Prospect Checker</title>
 
   <style>
@@ -132,6 +133,11 @@
       font-weight: 600;
     }
 
+    .warning {
+      color: #92400e;
+      font-weight: 600;
+    }
+
     .muted {
       color: #a3a3a3;
     }
@@ -140,8 +146,6 @@
       color: #737373;
       font-size: 13px;
     }
-
-    /* CURRENT CHECK */
 
     .current-check {
       margin-top: 18px;
@@ -165,8 +169,6 @@
       color: #737373;
       font-size: 12px;
     }
-
-    /* DATABASE */
 
     .db-dropzone {
       margin-top: 18px;
@@ -198,7 +200,23 @@
       margin-top: 4px;
       color: #737373;
       font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .db-warning {
+      display: none;
+      margin-top: 12px;
+      padding: 11px 13px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      color: #92400e;
+      font-size: 13px;
       line-height: 1.5;
+    }
+
+    .db-warning.active {
+      display: block;
     }
 
     .mapping {
@@ -230,8 +248,6 @@
       border-radius: 9px;
       background: #fff;
     }
-
-    /* REQUIREMENTS */
 
     .requirements-list {
       margin-top: 18px;
@@ -304,8 +320,6 @@
     .switch input:checked + .slider:before {
       transform: translateX(16px);
     }
-
-    /* COUNTRIES */
 
     .country-picker {
       position: relative;
@@ -386,8 +400,6 @@
       background: #f7f7f7;
     }
 
-    /* CHECKER */
-
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -448,8 +460,6 @@
       margin-top: 14px;
       flex-wrap: wrap;
     }
-
-    /* RESULTS */
 
     .results-toolbar {
       margin: 20px 0 14px;
@@ -595,8 +605,6 @@
 
 <main class="container">
 
-  <!-- SETUP -->
-
   <section id="setupScreen">
 
     <div class="eyebrow">Step 1 of 2 · Setup</div>
@@ -658,6 +666,12 @@
         </button>
 
       </div>
+
+
+      <div
+        class="db-warning"
+        id="dbWarning"
+      ></div>
 
 
       <button
@@ -842,8 +856,6 @@
   </section>
 
 
-  <!-- CHECKER -->
-
   <section
     id="checkerScreen"
     class="hidden"
@@ -994,8 +1006,6 @@
     </section>
 
 
-    <!-- RESULTS -->
-
     <section
       class="card hidden"
       id="resultsCard"
@@ -1134,10 +1144,6 @@
 
 <script>
 
-  /* =========================
-     STATE
-  ========================= */
-
   let rawDatabase = [];
   let databaseHeaders = [];
 
@@ -1156,10 +1162,6 @@
     "prospectCheckerCurrentCheck";
 
 
-  /* =========================
-     DOM
-  ========================= */
-
   const setupScreen =
     document.getElementById("setupScreen");
 
@@ -1177,6 +1179,9 @@
 
   const dbSavedMeta =
     document.getElementById("dbSavedMeta");
+
+  const dbWarning =
+    document.getElementById("dbWarning");
 
   const replaceDatabase =
     document.getElementById("replaceDatabase");
@@ -1410,15 +1415,13 @@
 
 
         transaction.oncomplete =
-          () =>
-            resolve();
+          () => resolve();
 
 
         transaction.onerror =
-          () =>
-            reject(
-              transaction.error
-            );
+          () => reject(
+            transaction.error
+          );
 
       }
     );
@@ -1851,7 +1854,231 @@
 
 
   /* =========================
-     CURRENT CHECK STORAGE
+     DATABASE ANALYSIS
+  ========================= */
+
+  function analyzeDatabaseRows(
+    rows,
+    domainIndex,
+    statusIndex
+  ) {
+
+    const domainMap =
+      new Map();
+
+    let validRows =
+      0;
+
+
+    rows.forEach(
+      row => {
+
+        const domain =
+          normalizeDomain(
+            row[
+              domainIndex
+            ]
+          );
+
+
+        if (!domain) {
+          return;
+        }
+
+
+        validRows++;
+
+
+        const status =
+          String(
+            row[
+              statusIndex
+            ] || ""
+          ).trim();
+
+
+        if (
+          !domainMap.has(
+            domain
+          )
+        ) {
+
+          domainMap.set(
+            domain,
+            {
+              rows: 0,
+              statuses: new Set()
+            }
+          );
+
+        }
+
+
+        const entry =
+          domainMap.get(
+            domain
+          );
+
+
+        entry.rows++;
+
+
+        if (status) {
+
+          entry.statuses.add(
+            status
+          );
+
+        }
+
+      }
+    );
+
+
+    let duplicateRows =
+      0;
+
+    let conflictingDomains =
+      0;
+
+
+    domainMap.forEach(
+      entry => {
+
+        if (
+          entry.rows > 1
+        ) {
+
+          duplicateRows +=
+            entry.rows - 1;
+
+        }
+
+
+        if (
+          entry.statuses.size > 1
+        ) {
+
+          conflictingDomains++;
+
+        }
+
+      }
+    );
+
+
+    return {
+
+      uniqueDomains:
+        domainMap.size,
+
+      validRows,
+
+      duplicateRows,
+
+      conflictingDomains,
+
+      domainMap
+
+    };
+
+  }
+
+
+  function buildDatabaseStatusMap(
+    rows,
+    domainIndex,
+    statusIndex
+  ) {
+
+    const map =
+      new Map();
+
+
+    rows.forEach(
+      row => {
+
+        const domain =
+          normalizeDomain(
+            row[
+              domainIndex
+            ]
+          );
+
+
+        if (!domain) {
+          return;
+        }
+
+
+        const status =
+          String(
+            row[
+              statusIndex
+            ] || ""
+          ).trim();
+
+
+        if (
+          !map.has(
+            domain
+          )
+        ) {
+
+          map.set(
+            domain,
+            new Set()
+          );
+
+        }
+
+
+        if (status) {
+
+          map.get(
+            domain
+          ).add(
+            status
+          );
+
+        }
+
+      }
+    );
+
+
+    const finalMap =
+      new Map();
+
+
+    map.forEach(
+      (
+        statuses,
+        domain
+      ) => {
+
+        const values =
+          [...statuses];
+
+
+        finalMap.set(
+          domain,
+          values.length
+            ? values.join(" / ")
+            : ""
+        );
+
+      }
+    );
+
+
+    return finalMap;
+
+  }
+
+
+  /* =========================
+     CURRENT CHECK
   ========================= */
 
   function saveCurrentCheck() {
@@ -2492,26 +2719,12 @@
       );
 
 
-    const domains =
-      rawDatabase
-        .map(
-          row =>
-            normalizeDomain(
-              row[domainIndex]
-            )
-        )
-        .filter(Boolean);
-
-
-    const statuses =
-      rawDatabase
-        .map(
-          row =>
-            String(
-              row[statusIndex] || ""
-            ).trim()
-        )
-        .filter(Boolean);
+    const analysis =
+      analyzeDatabaseRows(
+        rawDatabase,
+        domainIndex,
+        statusIndex
+      );
 
 
     dbSavedMeta.innerHTML =
@@ -2520,10 +2733,40 @@
           ? filename + "<br>"
           : ""
       ) +
-      [...new Set(domains)].length +
+      analysis.uniqueDomains +
       " unique domains · " +
-      [...new Set(statuses)].length +
-      " status variations";
+      analysis.duplicateRows +
+      " duplicate rows";
+
+
+    if (
+      analysis.conflictingDomains > 0
+    ) {
+
+      dbWarning.classList.add(
+        "active"
+      );
+
+
+      dbWarning.innerHTML =
+        '<span class="warning">' +
+        analysis.conflictingDomains +
+        " domains have conflicting statuses.</span> " +
+        "All unique statuses will be kept and shown together.";
+
+    }
+
+    else {
+
+      dbWarning.classList.remove(
+        "active"
+      );
+
+
+      dbWarning.innerHTML =
+        "";
+
+    }
 
   }
 
@@ -2709,21 +2952,16 @@
     );
 
 
-    const domains =
-      db.rows
-        .map(
-          row =>
-            normalizeDomain(
-              row[
-                db.domainColumn
-              ]
-            )
-        )
-        .filter(Boolean);
+    const analysis =
+      analyzeDatabaseRows(
+        db.rows,
+        db.domainColumn,
+        db.statusColumn
+      );
 
 
     databaseStats.textContent =
-      [...new Set(domains)].length +
+      analysis.uniqueDomains +
       " domains in your database";
 
   }
@@ -3205,41 +3443,11 @@
 
 
       const dbMap =
-        new Map();
-
-
-      db.rows.forEach(
-        row => {
-
-          const domain =
-            normalizeDomain(
-              row[
-                db.domainColumn
-              ]
-            );
-
-
-          const status =
-            String(
-              row[
-                db.statusColumn
-              ] || ""
-            ).trim();
-
-
-          if (
-            domain
-          ) {
-
-            dbMap.set(
-              domain,
-              status
-            );
-
-          }
-
-        }
-      );
+        buildDatabaseStatusMap(
+          db.rows,
+          db.domainColumn,
+          db.statusColumn
+        );
 
 
       if (
@@ -3300,8 +3508,10 @@
                     dbMap.has(
                       domain
                     )
-                      ? dbMap.get(
-                          domain
+                      ? (
+                          dbMap.get(
+                            domain
+                          ) || "No status"
                         )
                       : "Not found",
 
@@ -3338,8 +3548,10 @@
                   dbMap.has(
                     domain
                   )
-                    ? dbMap.get(
-                        domain
+                    ? (
+                        dbMap.get(
+                          domain
+                        ) || "No status"
                       )
                     : "Not found"
 
