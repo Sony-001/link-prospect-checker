@@ -78,14 +78,6 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.03);
     }
 
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: flex-start;
-      margin-bottom: 20px;
-    }
-
     .card-description {
       margin-top: 6px;
       color: #737373;
@@ -145,8 +137,6 @@
       color: #737373;
     }
 
-    /* DATABASE */
-
     .db-dropzone {
       border: 1.5px dashed #d7d7d7;
       border-radius: 16px;
@@ -154,37 +144,6 @@
       background: #fafafa;
       text-align: center;
       cursor: pointer;
-      transition: .15s ease;
-    }
-
-    .db-dropzone:hover,
-    .db-dropzone.dragging {
-      border-color: #111;
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
-    }
-
-    .db-icon {
-      width: 44px;
-      height: 44px;
-      margin: 0 auto 12px;
-      border: 1px solid #e5e5e5;
-      border-radius: 12px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-    }
-
-    .db-title {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .db-hint {
-      color: #8a8a8a;
-      font-size: 13px;
     }
 
     .db-saved {
@@ -202,20 +161,11 @@
       display: flex;
     }
 
-    .db-saved-title {
-      font-weight: 600;
-      font-size: 14px;
-    }
-
     .db-saved-meta {
       margin-top: 4px;
       color: #737373;
       font-size: 12px;
       line-height: 1.5;
-    }
-
-    .mapping-toggle {
-      margin-top: 14px;
     }
 
     .mapping {
@@ -233,21 +183,19 @@
 
     .mapping-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 16px;
       margin: 10px 0;
     }
 
-    select {
-      min-width: 220px;
+    select,
+    input[type="number"] {
+      min-width: 180px;
       padding: 9px 10px;
       border: 1px solid #dcdcdc;
       border-radius: 9px;
       background: white;
     }
-
-    /* REQUIREMENTS */
 
     .requirements-list {
       border: 1px solid #ececec;
@@ -280,20 +228,6 @@
       color: #8a8a8a;
     }
 
-    .requirement-value {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    input[type="number"] {
-      width: 180px;
-      max-width: 100%;
-      padding: 9px 10px;
-      border: 1px solid #dcdcdc;
-      border-radius: 9px;
-      background: white;
-    }
-
     .switch {
       position: relative;
       width: 38px;
@@ -312,7 +246,6 @@
       background: #d4d4d4;
       border-radius: 999px;
       cursor: pointer;
-      transition: .2s ease;
     }
 
     .slider:before {
@@ -325,7 +258,6 @@
       background: white;
       border-radius: 50%;
       transition: .2s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,.15);
     }
 
     .switch input:checked + .slider {
@@ -336,12 +268,9 @@
       transform: translateX(16px);
     }
 
-    /* COUNTRIES */
-
     .country-picker {
       position: relative;
       width: 320px;
-      max-width: 100%;
     }
 
     .country-control {
@@ -351,16 +280,6 @@
       border-radius: 10px;
       background: #fff;
       cursor: pointer;
-      position: relative;
-    }
-
-    .country-control:after {
-      content: "⌄";
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      color: #737373;
-      font-size: 18px;
     }
 
     .country-placeholder {
@@ -376,21 +295,11 @@
     }
 
     .country-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       padding: 5px 8px;
       background: #f1f1f1;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 600;
-    }
-
-    .country-chip button {
-      padding: 0;
-      background: transparent;
-      color: #737373;
-      transform: none;
     }
 
     .country-menu {
@@ -415,23 +324,10 @@
 
     .country-option {
       display: flex;
-      align-items: center;
       gap: 10px;
       padding: 9px 10px;
-      border-radius: 8px;
-      cursor: pointer;
       font-size: 13px;
     }
-
-    .country-option:hover {
-      background: #f7f7f7;
-    }
-
-    .actions {
-      margin-top: 22px;
-    }
-
-    /* CHECKER */
 
     .topbar {
       display: flex;
@@ -466,37 +362,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
       background: #fafafa;
       cursor: pointer;
-    }
-
-    .upload-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .upload-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      background: white;
-      border: 1px solid #e5e5e5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .upload-title {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .upload-hint {
-      margin-top: 3px;
-      font-size: 12px;
-      color: #8a8a8a;
     }
 
     .file-loaded {
@@ -516,12 +383,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
       margin-top: 14px;
       flex-wrap: wrap;
     }
-
-    /* RESULTS FILTERS */
 
     .results-toolbar {
       display: flex;
@@ -547,17 +411,7 @@
 
     .filter-tab.active {
       background: #111;
-      color: #fff;
-    }
-
-    .filter-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .status-filter {
-      min-width: 190px;
+      color: white;
     }
 
     .table-wrap {
@@ -573,32 +427,25 @@
     th,
     td {
       padding: 11px 12px;
-      text-align: left;
-      vertical-align: top;
       border-bottom: 1px solid #ececec;
+      text-align: left;
       font-size: 14px;
+      vertical-align: top;
     }
 
     th {
       background: #fafafa;
-      white-space: nowrap;
     }
 
     .fail-reasons {
       margin-top: 4px;
       color: #737373;
       font-size: 12px;
-      line-height: 1.4;
     }
 
     @media (max-width: 760px) {
       .requirement-row {
         grid-template-columns: 44px 1fr;
-      }
-
-      .requirement-value {
-        grid-column: 2;
-        justify-content: flex-start;
       }
 
       .topbar,
@@ -617,72 +464,31 @@
 <section id="setupScreen">
 
   <div class="eyebrow">Step 1 of 2 · Setup</div>
-
   <h1>Set up your checker</h1>
-
-  <p class="subtitle">
-    Add your database and choose the metrics you want to use.
-  </p>
+  <p class="subtitle">Add your database and choose the metrics you want to use.</p>
 
   <section class="card">
-
     <h2>Your database</h2>
-
-    <p class="card-description">
-      Upload a CSV with domains and statuses.
-    </p>
+    <p class="card-description">Upload a CSV with domains and statuses.</p>
 
     <input type="file" id="databaseFile" accept=".csv" hidden>
 
     <div class="db-dropzone" id="dbDropzone">
-
-      <div class="db-icon">↑</div>
-
-      <div class="db-title">
-        Drop your database CSV here
-      </div>
-
-      <div class="db-hint">
-        or click to browse files
-      </div>
-
+      Drop your database CSV here or click to browse
     </div>
 
     <div class="db-saved" id="dbSaved">
-
       <div>
-        <div class="db-saved-title">
-          Database ready
-        </div>
-
-        <div
-          class="db-saved-meta"
-          id="dbSavedMeta"
-        ></div>
+        <strong>Database ready</strong>
+        <div class="db-saved-meta" id="dbSavedMeta"></div>
       </div>
 
-      <button
-        id="replaceDatabase"
-        class="secondary"
-      >
-        Replace database
-      </button>
-
+      <button id="replaceDatabase" class="secondary">Replace database</button>
     </div>
 
-    <div class="mapping-toggle">
-
-      <button
-        id="toggleMapping"
-        class="ghost hidden"
-      >
-        Change columns
-      </button>
-
-    </div>
+    <button id="toggleMapping" class="ghost hidden">Change columns</button>
 
     <div class="mapping" id="mapping">
-
       <div class="mapping-row">
         <label>Domain column</label>
         <select id="domainColumn"></select>
@@ -692,9 +498,7 @@
         <label>Status column</label>
         <select id="statusColumn"></select>
       </div>
-
     </div>
-
   </section>
 
 
@@ -702,204 +506,101 @@
 
     <h2>Your requirements</h2>
 
-    <p class="card-description">
-      Turn on only the checks you want to apply.
-    </p>
-
-
     <div class="requirements-list">
 
       <div class="requirement-row">
-
         <label class="switch">
           <input type="checkbox" id="useDR">
           <span class="slider"></span>
         </label>
 
         <div>
-          <div class="requirement-title">
-            Minimum DR
-          </div>
-
-          <div class="requirement-hint">
-            Domain Rating from 0 to 100
-          </div>
+          <div class="requirement-title">Minimum DR</div>
+          <div class="requirement-hint">0–100</div>
         </div>
 
-        <div class="requirement-value">
-          <input
-            type="number"
-            id="minDR"
-            value="50"
-            min="0"
-            max="100"
-          >
-        </div>
-
+        <input type="number" id="minDR" value="50" min="0" max="100">
       </div>
 
 
       <div class="requirement-row">
-
         <label class="switch">
           <input type="checkbox" id="useTraffic">
           <span class="slider"></span>
         </label>
 
-        <div>
-          <div class="requirement-title">
-            Minimum organic traffic
-          </div>
-        </div>
+        <div class="requirement-title">Minimum organic traffic</div>
 
-        <div class="requirement-value">
-          <input
-            type="number"
-            id="minTraffic"
-            value="2000"
-            min="0"
-          >
-        </div>
-
+        <input type="number" id="minTraffic" value="2000" min="0">
       </div>
 
 
       <div class="requirement-row">
-
         <label class="switch">
           <input type="checkbox" id="useRD">
           <span class="slider"></span>
         </label>
 
-        <div>
-          <div class="requirement-title">
-            Minimum referring domains
-          </div>
-        </div>
+        <div class="requirement-title">Minimum referring domains</div>
 
-        <div class="requirement-value">
-          <input
-            type="number"
-            id="minRD"
-            value="500"
-            min="0"
-          >
-        </div>
-
+        <input type="number" id="minRD" value="500" min="0">
       </div>
 
 
       <div class="requirement-row">
-
         <label class="switch">
           <input type="checkbox" id="useRDLD">
           <span class="slider"></span>
         </label>
 
         <div>
-          <div class="requirement-title">
-            RD ≥ LD
-          </div>
-
-          <div class="requirement-hint">
-            Referring domains must be equal to or higher than linked domains
-          </div>
+          <div class="requirement-title">RD ≥ LD</div>
         </div>
 
         <div></div>
-
       </div>
 
 
       <div class="requirement-row">
-
         <label class="switch">
           <input type="checkbox" id="useCountry">
           <span class="slider"></span>
         </label>
 
-        <div>
-          <div class="requirement-title">
-            Allowed top countries
-          </div>
-        </div>
+        <div class="requirement-title">Allowed top countries</div>
 
-        <div class="requirement-value">
+        <div class="country-picker" id="countryPicker">
 
-          <div class="country-picker" id="countryPicker">
-
-            <div
-              class="country-control"
-              id="countryControl"
-            >
-
-              <div
-                class="country-placeholder"
-                id="countryPlaceholder"
-              >
-                Select countries
-              </div>
-
-              <div
-                class="country-chips"
-                id="countryChips"
-              ></div>
-
-            </div>
-
-            <div
-              class="country-menu"
-              id="countryMenu"
-            ></div>
-
+          <div class="country-control" id="countryControl">
+            <div class="country-placeholder" id="countryPlaceholder">Select countries</div>
+            <div class="country-chips" id="countryChips"></div>
           </div>
 
-        </div>
+          <div class="country-menu" id="countryMenu"></div>
 
+        </div>
       </div>
 
     </div>
 
   </section>
 
-  <div class="actions">
-    <button
-      id="saveSettings"
-      class="primary full"
-    >
-      Save & Continue
-    </button>
-  </div>
+  <button id="saveSettings" class="primary full">Save & Continue</button>
 
 </section>
 
 
-<section
-  id="checkerScreen"
-  class="hidden"
->
+<section id="checkerScreen" class="hidden">
 
   <div class="topbar">
 
     <div>
-      <div class="eyebrow">
-        Step 2 of 2 · Checker
-      </div>
-
+      <div class="eyebrow">Step 2 of 2 · Checker</div>
       <h1>Check prospects</h1>
-
-      <div
-        class="stats"
-        id="databaseStats"
-      ></div>
+      <div class="stats" id="databaseStats"></div>
     </div>
 
-    <button
-      id="editSettings"
-      class="secondary"
-    >
-      Edit settings
-    </button>
+    <button id="editSettings" class="secondary">Edit settings</button>
 
   </div>
 
@@ -908,195 +609,72 @@
 
     <h2>Add prospects</h2>
 
-    <p class="card-description">
-      Paste any text with domains or upload an Ahrefs Batch Analysis CSV.
-    </p>
-
-
-    <div
-      class="prospect-input"
-      id="prospectInput"
-    >
+    <div class="prospect-input">
 
       <textarea
         id="domainInput"
-        placeholder="Paste domains, URLs, messages, prices, notes..."
+        placeholder="Paste domains, URLs, vendor messages, prices, notes..."
       ></textarea>
 
-
-      <div
-        class="upload-zone"
-        id="uploadZone"
-      >
-
-        <div class="upload-left">
-
-          <div class="upload-icon">
-            ↑
-          </div>
-
-          <div>
-
-            <div class="upload-title">
-              Drop Ahrefs Batch CSV here
-            </div>
-
-            <div class="upload-hint">
-              or choose a file from your computer
-            </div>
-
-          </div>
-
-        </div>
-
+      <div class="upload-zone" id="uploadZone">
+        <span>Drop Ahrefs Batch CSV here</span>
         <strong>Browse files</strong>
-
       </div>
 
-
-      <div
-        class="file-loaded"
-        id="fileLoaded"
-      >
-
+      <div class="file-loaded" id="fileLoaded">
         <div>
           <strong id="loadedFileName"></strong>
-
-          <div
-            class="stats"
-            id="loadedFileMeta"
-          ></div>
+          <div class="stats" id="loadedFileMeta"></div>
         </div>
 
-        <button
-          id="removeFile"
-          class="ghost"
-        >
-          Remove
-        </button>
-
+        <button id="removeFile" class="ghost">Remove</button>
       </div>
 
     </div>
 
-
-    <input
-      type="file"
-      id="ahrefsFile"
-      accept=".csv"
-      hidden
-    >
-
+    <input type="file" id="ahrefsFile" accept=".csv" hidden>
 
     <div class="checker-actions">
-
-      <div
-        class="stats"
-        id="detectedInfo"
-      >
-        0 unique domains detected
-      </div>
-
-      <button
-        id="checkDomains"
-        class="primary"
-      >
-        Check domains
-      </button>
-
+      <div class="stats" id="detectedInfo">0 unique domains detected</div>
+      <button id="checkDomains" class="primary">Check domains</button>
     </div>
 
   </section>
 
 
-  <section
-    class="card hidden"
-    id="resultsCard"
-  >
+  <section class="card hidden" id="resultsCard">
 
     <h2>Results</h2>
 
-    <div
-      class="stats"
-      id="resultsSummary"
-    ></div>
-
+    <div class="stats" id="resultsSummary"></div>
 
     <div class="results-toolbar">
 
       <div class="filter-tabs">
 
-        <button
-          class="filter-tab active"
-          data-filter="all"
-        >
-          All
-        </button>
-
-        <button
-          class="filter-tab"
-          data-filter="passed"
-        >
-          Passed
-        </button>
-
-        <button
-          class="filter-tab"
-          data-filter="failed"
-        >
-          Failed
-        </button>
-
-        <button
-          class="filter-tab"
-          data-filter="database"
-        >
-          In database
-        </button>
-
-        <button
-          class="filter-tab"
-          data-filter="new"
-        >
-          New
-        </button>
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="passed">Passed</button>
+        <button class="filter-tab" data-filter="failed">Failed</button>
+        <button class="filter-tab" data-filter="database">In database</button>
+        <button class="filter-tab" data-filter="new">New</button>
 
       </div>
 
-
-      <div class="filter-actions">
-
-        <select
-          id="statusFilter"
-          class="status-filter"
-        >
-          <option value="all">
-            All statuses
-          </option>
+      <div>
+        <select id="statusFilter">
+          <option value="all">All statuses</option>
         </select>
 
-        <button
-          id="exportFiltered"
-          class="secondary"
-        >
-          Export filtered CSV
-        </button>
-
+        <button id="exportFiltered" class="secondary">Export filtered CSV</button>
       </div>
 
     </div>
 
-
     <div class="table-wrap">
-
       <table>
-
         <thead id="resultsHead"></thead>
-
         <tbody id="resultsBody"></tbody>
-
       </table>
-
     </div>
 
   </section>
@@ -1120,33 +698,180 @@ let allResults = [];
 let currentResultFilter = "all";
 
 
-const countryList = [
-  ["US","United States"],
-  ["GB","United Kingdom"],
-  ["CA","Canada"],
-  ["AU","Australia"],
-  ["NZ","New Zealand"],
-  ["DE","Germany"],
-  ["FR","France"],
-  ["NL","Netherlands"],
-  ["CH","Switzerland"],
-  ["SE","Sweden"],
-  ["NO","Norway"],
-  ["DK","Denmark"],
-  ["FI","Finland"],
-  ["AT","Austria"],
-  ["IE","Ireland"],
-  ["BE","Belgium"],
-  ["ES","Spain"],
-  ["IT","Italy"],
-  ["PL","Poland"],
-  ["PT","Portugal"],
-  ["BR","Brazil"],
-  ["MX","Mexico"],
-  ["CO","Colombia"],
-  ["AR","Argentina"]
-];
+/* =========================
+   INDEXED DB
+========================= */
 
+const DB_NAME = "LinkProspectCheckerDB";
+const STORE_NAME = "database";
+const DB_VERSION = 1;
+
+
+function openDatabase() {
+
+  return new Promise((resolve, reject) => {
+
+    const request =
+      indexedDB.open(
+        DB_NAME,
+        DB_VERSION
+      );
+
+
+    request.onupgradeneeded =
+      function (event) {
+
+        const db =
+          event.target.result;
+
+
+        if (
+          !db.objectStoreNames.contains(
+            STORE_NAME
+          )
+        ) {
+
+          db.createObjectStore(
+            STORE_NAME,
+            {
+              keyPath: "id"
+            }
+          );
+
+        }
+
+      };
+
+
+    request.onsuccess =
+      function () {
+
+        resolve(
+          request.result
+        );
+
+      };
+
+
+    request.onerror =
+      function () {
+
+        reject(
+          request.error
+        );
+
+      };
+
+  });
+
+}
+
+
+async function saveDatabaseIndexed(
+  databaseData
+) {
+
+  const db =
+    await openDatabase();
+
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const transaction =
+        db.transaction(
+          STORE_NAME,
+          "readwrite"
+        );
+
+
+      const store =
+        transaction.objectStore(
+          STORE_NAME
+        );
+
+
+      store.put({
+        id: "mainDatabase",
+        ...databaseData
+      });
+
+
+      transaction.oncomplete =
+        function () {
+          resolve();
+        };
+
+
+      transaction.onerror =
+        function () {
+          reject(
+            transaction.error
+          );
+        };
+
+    }
+  );
+
+}
+
+
+async function loadDatabaseIndexed() {
+
+  const db =
+    await openDatabase();
+
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const transaction =
+        db.transaction(
+          STORE_NAME,
+          "readonly"
+        );
+
+
+      const store =
+        transaction.objectStore(
+          STORE_NAME
+        );
+
+
+      const request =
+        store.get(
+          "mainDatabase"
+        );
+
+
+      request.onsuccess =
+        function () {
+
+          resolve(
+            request.result || null
+          );
+
+        };
+
+
+      request.onerror =
+        function () {
+
+          reject(
+            request.error
+          );
+
+        };
+
+    }
+  );
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
 
 function cleanHeader(value) {
   return String(value || "")
@@ -1261,9 +986,7 @@ function findColumn(
     headers.map(cleanHeader);
 
 
-  for (
-    const name of names
-  ) {
+  for (const name of names) {
 
     const index =
       clean.indexOf(
@@ -1289,6 +1012,7 @@ function numberValue(value) {
         .replace(/,/g, "")
         .trim()
     );
+
 
   return Number.isFinite(number)
     ? number
@@ -1347,27 +1071,36 @@ function extractDomains(text) {
 }
 
 
-/* COUNTRY */
+/* =========================
+   COUNTRIES
+========================= */
 
-const countryControl =
-  document.getElementById(
-    "countryControl"
-  );
-
-const countryMenu =
-  document.getElementById(
-    "countryMenu"
-  );
-
-const countryChips =
-  document.getElementById(
-    "countryChips"
-  );
-
-const countryPlaceholder =
-  document.getElementById(
-    "countryPlaceholder"
-  );
+const countryList = [
+  ["US","United States"],
+  ["GB","United Kingdom"],
+  ["CA","Canada"],
+  ["AU","Australia"],
+  ["NZ","New Zealand"],
+  ["DE","Germany"],
+  ["FR","France"],
+  ["NL","Netherlands"],
+  ["CH","Switzerland"],
+  ["SE","Sweden"],
+  ["NO","Norway"],
+  ["DK","Denmark"],
+  ["FI","Finland"],
+  ["AT","Austria"],
+  ["IE","Ireland"],
+  ["BE","Belgium"],
+  ["ES","Spain"],
+  ["IT","Italy"],
+  ["PL","Poland"],
+  ["PT","Portugal"],
+  ["BR","Brazil"],
+  ["MX","Mexico"],
+  ["CO","Colombia"],
+  ["AR","Argentina"]
+];
 
 
 function buildCountries() {
@@ -1480,7 +1213,6 @@ function renderCountries() {
       chip.className =
         "country-chip";
 
-
       chip.textContent =
         name;
 
@@ -1509,51 +1241,18 @@ buildCountries();
 renderCountries();
 
 
-/* DATABASE */
-
-const databaseFile =
-  document.getElementById(
-    "databaseFile"
-  );
-
-const dbDropzone =
-  document.getElementById(
-    "dbDropzone"
-  );
-
-const dbSaved =
-  document.getElementById(
-    "dbSaved"
-  );
-
-const dbSavedMeta =
-  document.getElementById(
-    "dbSavedMeta"
-  );
-
-const domainColumn =
-  document.getElementById(
-    "domainColumn"
-  );
-
-const statusColumn =
-  document.getElementById(
-    "statusColumn"
-  );
-
+/* =========================
+   DATABASE UPLOAD
+========================= */
 
 dbDropzone.onclick =
   () =>
     databaseFile.click();
 
 
-document
-  .getElementById(
-    "replaceDatabase"
-  )
-  .onclick =
-    () =>
-      databaseFile.click();
+replaceDatabase.onclick =
+  () =>
+    databaseFile.click();
 
 
 databaseFile.onchange =
@@ -1561,6 +1260,7 @@ databaseFile.onchange =
 
     const file =
       databaseFile.files[0];
+
 
     if (!file) {
       return;
@@ -1580,6 +1280,19 @@ databaseFile.onchange =
           );
 
 
+        if (
+          rows.length < 2
+        ) {
+
+          alert(
+            "Could not read this CSV."
+          );
+
+          return;
+
+        }
+
+
         databaseHeaders =
           rows[0];
 
@@ -1594,21 +1307,19 @@ databaseFile.onchange =
         databaseHeaders.forEach(
           (header, index) => {
 
-            const a =
+            domainColumn.add(
               new Option(
                 header,
                 index
-              );
+              )
+            );
 
-            const b =
+            statusColumn.add(
               new Option(
                 header,
                 index
-              );
-
-
-            domainColumn.add(a);
-            statusColumn.add(b);
+              )
+            );
 
           }
         );
@@ -1666,12 +1377,9 @@ databaseFile.onchange =
         );
 
 
-        document
-          .getElementById(
-            "toggleMapping"
-          )
-          .classList
-          .remove("hidden");
+        toggleMapping.classList.remove(
+          "hidden"
+        );
 
       };
 
@@ -1725,129 +1433,132 @@ function updateDatabasePreview() {
 }
 
 
-document
-  .getElementById(
-    "toggleMapping"
-  )
-  .onclick =
-    () =>
-      document
-        .getElementById(
-          "mapping"
-        )
-        .classList
-        .toggle("active");
+toggleMapping.onclick =
+  () =>
+    mapping.classList.toggle(
+      "active"
+    );
 
 
-/* SAVE */
+/* =========================
+   SAVE SETTINGS
+========================= */
 
-document
-  .getElementById(
-    "saveSettings"
-  )
-  .onclick =
-    function () {
+saveSettings.onclick =
+  async function () {
 
-      let dr =
-        Number(
-          document
-            .getElementById(
-              "minDR"
-            )
-            .value
-        );
+    let dr =
+      Number(
+        minDR.value
+      );
 
 
-      dr =
-        Math.min(
-          100,
-          Math.max(
-            0,
-            dr || 0
-          )
-        );
-
-
-      const settings = {
-
-        useDR:
-          useDR.checked,
-
-        minDR:
-          dr,
-
-        useTraffic:
-          useTraffic.checked,
-
-        minTraffic:
-          Number(
-            minTraffic.value
-          ),
-
-        useRD:
-          useRD.checked,
-
-        minRD:
-          Number(
-            minRD.value
-          ),
-
-        useRDLD:
-          useRDLD.checked,
-
-        useCountry:
-          useCountry.checked,
-
-        countries:
-          selectedCountries
-
-      };
-
-
-      localStorage.setItem(
-        "prospectCheckerSettings",
-        JSON.stringify(
-          settings
+    dr =
+      Math.min(
+        100,
+        Math.max(
+          0,
+          dr || 0
         )
       );
 
 
-      if (
-        rawDatabase.length
-      ) {
+    const settings = {
 
-        localStorage.setItem(
-          "prospectCheckerDatabase",
-          JSON.stringify({
+      useDR:
+        useDR.checked,
 
-            headers:
-              databaseHeaders,
+      minDR:
+        dr,
 
-            rows:
-              rawDatabase,
+      useTraffic:
+        useTraffic.checked,
 
-            domainColumn:
-              Number(
-                domainColumn.value
-              ),
+      minTraffic:
+        Number(
+          minTraffic.value
+        ),
 
-            statusColumn:
-              Number(
-                statusColumn.value
-              )
+      useRD:
+        useRD.checked,
 
-          })
-        );
+      minRD:
+        Number(
+          minRD.value
+        ),
 
-      }
+      useRDLD:
+        useRDLD.checked,
 
+      useCountry:
+        useCountry.checked,
 
-      showChecker();
+      countries:
+        selectedCountries
 
     };
 
 
-/* LOAD SAVED DATA */
+    localStorage.setItem(
+      "prospectCheckerSettings",
+      JSON.stringify(
+        settings
+      )
+    );
+
+
+    if (
+      rawDatabase.length
+    ) {
+
+      await saveDatabaseIndexed({
+
+        headers:
+          databaseHeaders,
+
+        rows:
+          rawDatabase,
+
+        domainColumn:
+          Number(
+            domainColumn.value
+          ),
+
+        statusColumn:
+          Number(
+            statusColumn.value
+          )
+
+      });
+
+    }
+
+
+    const database =
+      await loadDatabaseIndexed();
+
+
+    if (!database) {
+
+      alert(
+        "Please upload your database first."
+      );
+
+      return;
+
+    }
+
+
+    showChecker(
+      database
+    );
+
+  };
+
+
+/* =========================
+   LOAD SETTINGS
+========================= */
 
 const existingSettings =
   JSON.parse(
@@ -1892,48 +1603,18 @@ if (existingSettings) {
 }
 
 
-const existingDB =
-  JSON.parse(
-    localStorage.getItem(
-      "prospectCheckerDatabase"
-    ) || "null"
-  );
+/* =========================
+   CHECKER
+========================= */
 
-
-if (existingDB) {
-
-  rawDatabase =
-    existingDB.rows;
-
-  databaseHeaders =
-    existingDB.headers;
-
-}
-
-
-/* CHECKER */
-
-function showChecker() {
-
-  const db =
-    JSON.parse(
-      localStorage.getItem(
-        "prospectCheckerDatabase"
-      )
-    );
-
-
-  if (!db) {
-    alert(
-      "Please upload your database first."
-    );
-    return;
-  }
-
+function showChecker(
+  db
+) {
 
   setupScreen.classList.add(
     "hidden"
   );
+
 
   checkerScreen.classList.remove(
     "hidden"
@@ -1967,14 +1648,13 @@ editSettings.onclick =
       "hidden"
     );
 
+
     setupScreen.classList.remove(
       "hidden"
     );
 
   };
 
-
-/* TEXT INPUT */
 
 domainInput.oninput =
   function () {
@@ -1995,7 +1675,9 @@ domainInput.oninput =
   };
 
 
-/* AHREFS */
+/* =========================
+   AHREFS
+========================= */
 
 function detectAhrefsColumns(
   headers
@@ -2071,6 +1753,7 @@ ahrefsFile.onchange =
     const file =
       ahrefsFile.files[0];
 
+
     if (!file) {
       return;
     }
@@ -2101,19 +1784,6 @@ ahrefsFile.onchange =
           detectAhrefsColumns(
             headers
           );
-
-
-        if (
-          ahrefsColumnMap.domain === -1
-        ) {
-
-          alert(
-            "Target column not found."
-          );
-
-          return;
-
-        }
 
 
         loadedFileName.textContent =
@@ -2172,8 +1842,6 @@ removeFile.onclick =
 
   };
 
-
-/* EVALUATION */
 
 function evaluateRequirements(
   row
@@ -2296,34 +1964,39 @@ function evaluateRequirements(
 
 
   return {
-
     passed:
       failures.length === 0,
-
     failures,
-
     dr,
     traffic,
     rd,
     ld,
     country
-
   };
 
 }
 
 
-/* CHECK */
+/* =========================
+   CHECK
+========================= */
 
 checkDomains.onclick =
-  function () {
+  async function () {
 
     const db =
-      JSON.parse(
-        localStorage.getItem(
-          "prospectCheckerDatabase"
-        )
+      await loadDatabaseIndexed();
+
+
+    if (!db) {
+
+      alert(
+        "Database not found."
       );
+
+      return;
+
+    }
 
 
     const dbMap =
@@ -2441,32 +2114,14 @@ checkDomains.onclick =
       "all";
 
 
-    document
-      .querySelectorAll(
-        ".filter-tab"
-      )
-      .forEach(
-        tab =>
-          tab.classList.remove(
-            "active"
-          )
-      );
-
-
-    document
-      .querySelector(
-        '[data-filter="all"]'
-      )
-      .classList
-      .add("active");
-
-
     renderFilteredResults();
 
   };
 
 
-/* FILTERS */
+/* =========================
+   FILTERS
+========================= */
 
 function getFilteredResults() {
 
@@ -2530,18 +2185,16 @@ function getFilteredResults() {
   }
 
 
-  const status =
-    statusFilter.value;
-
-
   if (
-    status !== "all"
+    statusFilter.value !==
+    "all"
   ) {
 
     results =
       results.filter(
         x =>
-          x.status === status
+          x.status ===
+          statusFilter.value
       );
 
   }
@@ -2604,11 +2257,9 @@ function buildStatusFilter() {
   const statuses =
     [
       ...new Set(
-        allResults
-          .map(
-            x => x.status
-          )
-          .filter(Boolean)
+        allResults.map(
+          x => x.status
+        )
       )
     ].sort();
 
@@ -2629,7 +2280,9 @@ function buildStatusFilter() {
 }
 
 
-/* RENDER */
+/* =========================
+   RESULTS
+========================= */
 
 function renderFilteredResults() {
 
@@ -2742,7 +2395,9 @@ function renderFilteredResults() {
 }
 
 
-/* EXPORT */
+/* =========================
+   EXPORT
+========================= */
 
 exportFiltered.onclick =
   function () {
@@ -2756,17 +2411,8 @@ exportFiltered.onclick =
     }
 
 
-    const isAhrefs =
-      results[0].mode ===
-      "ahrefs";
-
-
-    const rows = [];
-
-
-    if (isAhrefs) {
-
-      rows.push([
+    const rows = [
+      [
         "Domain",
         "Status",
         "DR",
@@ -2776,51 +2422,31 @@ exportFiltered.onclick =
         "Country",
         "Result",
         "Reasons"
-      ]);
+      ]
+    ];
 
 
-      results.forEach(
-        x => {
+    results.forEach(
+      x => {
 
-          rows.push([
-            x.domain,
-            x.status,
-            x.dr,
-            x.traffic,
-            x.rd,
-            x.ld,
-            x.country,
-            x.passed
-              ? "Passed"
-              : "Failed",
-            x.failures.join("; ")
-          ]);
+        rows.push([
+          x.domain,
+          x.status,
+          x.dr ?? "",
+          x.traffic ?? "",
+          x.rd ?? "",
+          x.ld ?? "",
+          x.country ?? "",
+          x.passed
+            ? "Passed"
+            : "Failed",
+          x.failures
+            ? x.failures.join("; ")
+            : ""
+        ]);
 
-        }
-      );
-
-    }
-
-    else {
-
-      rows.push([
-        "Domain",
-        "Status"
-      ]);
-
-
-      results.forEach(
-        x => {
-
-          rows.push([
-            x.domain,
-            x.status
-          ]);
-
-        }
-      );
-
-    }
+      }
+    );
 
 
     const csv =
@@ -2830,15 +2456,8 @@ exportFiltered.onclick =
             row
               .map(
                 value =>
-                  '"' +
-                  String(
-                    value ?? ""
-                  )
-                    .replace(
-                      /"/g,
-                      '""'
-                    ) +
-                  '"'
+                  `"${String(value ?? "")
+                    .replace(/"/g,'""')}"`
               )
               .join(",")
         )
@@ -2870,13 +2489,10 @@ exportFiltered.onclick =
     link.href =
       url;
 
-
     link.download =
       "filtered-prospects.csv";
 
-
     link.click();
-
 
     URL.revokeObjectURL(
       url
@@ -2885,13 +2501,47 @@ exportFiltered.onclick =
   };
 
 
-if (
-  localStorage.getItem(
-    "prospectCheckerDatabase"
-  )
-) {
-  showChecker();
-}
+/* =========================
+   INITIAL LOAD
+========================= */
+
+(async function init() {
+
+  const savedDb =
+    await loadDatabaseIndexed();
+
+
+  if (savedDb) {
+
+    rawDatabase =
+      savedDb.rows;
+
+    databaseHeaders =
+      savedDb.headers;
+
+
+    dbDropzone.classList.add(
+      "hidden"
+    );
+
+
+    dbSaved.classList.add(
+      "active"
+    );
+
+
+    dbSavedMeta.textContent =
+      rawDatabase.length +
+      " rows stored in IndexedDB";
+
+
+    showChecker(
+      savedDb
+    );
+
+  }
+
+})();
 
 </script>
 
