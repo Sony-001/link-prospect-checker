@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Link Prospect Checker</title>
 
   <style>
@@ -20,8 +19,8 @@
 
     .container {
       width: 90%;
-      max-width: 850px;
-      margin: 60px auto;
+      max-width: 950px;
+      margin: 50px auto;
     }
 
     h1 {
@@ -30,14 +29,14 @@
 
     .subtitle {
       color: #6b7280;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .card {
       background: white;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
-      padding: 25px;
+      padding: 24px;
       margin-bottom: 20px;
     }
 
@@ -56,7 +55,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 18px 0;
+      margin: 16px 0;
     }
 
     .requirement label {
@@ -80,27 +79,24 @@
       width: 280px;
     }
 
-    select {
-      min-width: 180px;
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
     }
 
     .file-info {
-      margin-top: 18px;
-      padding: 15px;
+      margin-top: 16px;
+      padding: 14px;
       background: #f9fafb;
       border-radius: 8px;
       font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .success {
-      color: #15803d;
-      font-weight: 600;
-    }
-
-    .error {
-      color: #b91c1c;
-      font-weight: 600;
+      line-height: 1.6;
     }
 
     .mapping {
@@ -117,31 +113,78 @@
     .mapping-row label {
       display: inline-block;
       width: 130px;
-      font-size: 14px;
     }
 
-    .save-button {
-      width: 100%;
-      padding: 14px;
+    button {
       border: none;
-      border-radius: 9px;
-      background: #111827;
-      color: white;
-      font-size: 15px;
+      border-radius: 8px;
+      padding: 12px 18px;
       font-weight: 600;
       cursor: pointer;
     }
 
-    .save-button:hover {
-      opacity: 0.9;
+    .primary {
+      background: #111827;
+      color: white;
     }
 
-    .saved-message {
-      display: none;
-      text-align: center;
-      margin-top: 15px;
+    .secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .stats {
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .success {
       color: #15803d;
       font-weight: 600;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      background: white;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f9fafb;
+    }
+
+    .not-found {
+      color: #9ca3af;
     }
   </style>
 </head>
@@ -150,154 +193,186 @@
 
 <main class="container">
 
-  <h1>Link Prospect Checker</h1>
+  <!-- SETUP SCREEN -->
 
-  <p class="subtitle">
-    Set up your database and prospect requirements.
-    You only need to do this once.
-  </p>
+  <section id="setupScreen">
 
+    <h1>Link Prospect Checker</h1>
 
-  <!-- DATABASE -->
-
-  <section class="card">
-
-    <h2>1. Your Database</h2>
-
-    <p class="description">
-      Upload a CSV with the domains you've already worked with.
-      We'll detect the domain and status columns automatically.
+    <p class="subtitle">
+      Set up your database and requirements.
     </p>
 
-    <input
-      type="file"
-      id="databaseFile"
-      accept=".csv,text/csv"
+    <section class="card">
+
+      <h2>1. Your Database</h2>
+
+      <p class="description">
+        Upload a CSV with your existing domains and statuses.
+      </p>
+
+      <input
+        type="file"
+        id="databaseFile"
+        accept=".csv,text/csv"
+      >
+
+      <div class="file-info" id="fileInfo">
+        No database uploaded.
+      </div>
+
+      <div class="mapping" id="mapping">
+
+        <div class="mapping-row">
+          <label>Domain column</label>
+          <select id="domainColumn"></select>
+        </div>
+
+        <div class="mapping-row">
+          <label>Status column</label>
+          <select id="statusColumn"></select>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="card">
+
+      <h2>2. Your Requirements</h2>
+
+      <div class="requirement">
+        <input type="checkbox" id="useDR">
+        <label for="useDR">Minimum DR</label>
+        <input type="number" id="minDR" value="50">
+      </div>
+
+      <div class="requirement">
+        <input type="checkbox" id="useTraffic">
+        <label for="useTraffic">Minimum Organic Traffic</label>
+        <input type="number" id="minTraffic" value="2000">
+      </div>
+
+      <div class="requirement">
+        <input type="checkbox" id="useRD">
+        <label for="useRD">Minimum Referring Domains</label>
+        <input type="number" id="minRD" value="500">
+      </div>
+
+      <div class="requirement">
+        <input type="checkbox" id="useRDLD">
+        <label for="useRDLD">Referring Domains ≥ Linked Domains</label>
+      </div>
+
+      <div class="requirement">
+        <input type="checkbox" id="useCountry">
+        <label for="useCountry">Allowed top countries</label>
+        <input
+          type="text"
+          id="countries"
+          placeholder="US, UK, CA, AU"
+        >
+      </div>
+
+    </section>
+
+
+    <button
+      id="saveSettings"
+      class="primary full"
+    >
+      Save Settings
+    </button>
+
+  </section>
+
+
+  <!-- CHECKER SCREEN -->
+
+  <section
+    id="checkerScreen"
+    class="hidden"
+  >
+
+    <div class="topbar">
+
+      <div>
+        <h1>Link Prospect Checker</h1>
+        <div
+          class="stats"
+          id="databaseStats"
+        ></div>
+      </div>
+
+      <button
+        id="editSettings"
+        class="secondary"
+      >
+        Edit Settings
+      </button>
+
+    </div>
+
+
+    <section class="card">
+
+      <h2>Check Domains</h2>
+
+      <p class="description">
+        Paste domains, URLs, vendor messages or any text.
+        We'll extract the domains automatically.
+      </p>
+
+      <textarea
+        id="domainInput"
+        placeholder="Paste anything here..."
+      ></textarea>
+
+      <div
+        class="stats"
+        id="detectedInfo"
+      >
+        0 domains detected
+      </div>
+
+      <br>
+
+      <button
+        id="checkDomains"
+        class="primary"
+      >
+        Check domains
+      </button>
+
+    </section>
+
+
+    <section
+      class="card hidden"
+      id="resultsCard"
     >
 
-    <div class="file-info" id="fileInfo">
-      No database uploaded.
-    </div>
+      <h2>Results</h2>
 
+      <div id="resultsSummary"></div>
 
-    <div class="mapping" id="mapping">
+      <table>
 
-      <strong>Database columns</strong>
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Status</th>
+          </tr>
+        </thead>
 
-      <div class="mapping-row">
-        <label>Domain column</label>
-        <select id="domainColumn"></select>
-      </div>
+        <tbody id="resultsBody"></tbody>
 
-      <div class="mapping-row">
-        <label>Status column</label>
-        <select id="statusColumn"></select>
-      </div>
+      </table>
 
-    </div>
+    </section>
 
   </section>
-
-
-  <!-- REQUIREMENTS -->
-
-  <section class="card">
-
-    <h2>2. Your Requirements</h2>
-
-    <p class="description">
-      Choose which Ahrefs metrics should be checked.
-      Disabled metrics will be ignored.
-    </p>
-
-
-    <div class="requirement">
-      <input type="checkbox" id="useDR">
-
-      <label for="useDR">
-        Minimum DR
-      </label>
-
-      <input
-        type="number"
-        id="minDR"
-        value="50"
-        min="0"
-      >
-    </div>
-
-
-    <div class="requirement">
-      <input type="checkbox" id="useTraffic">
-
-      <label for="useTraffic">
-        Minimum Organic Traffic
-      </label>
-
-      <input
-        type="number"
-        id="minTraffic"
-        value="2000"
-        min="0"
-      >
-    </div>
-
-
-    <div class="requirement">
-      <input type="checkbox" id="useRD">
-
-      <label for="useRD">
-        Minimum Referring Domains
-      </label>
-
-      <input
-        type="number"
-        id="minRD"
-        value="500"
-        min="0"
-      >
-    </div>
-
-
-    <div class="requirement">
-      <input type="checkbox" id="useRDLD">
-
-      <label for="useRDLD">
-        Referring Domains ≥ Linked Domains
-      </label>
-    </div>
-
-
-    <div class="requirement">
-      <input type="checkbox" id="useCountry">
-
-      <label for="useCountry">
-        Allowed top countries
-      </label>
-
-      <input
-        type="text"
-        id="countries"
-        placeholder="US, UK, CA, AU"
-      >
-    </div>
-
-  </section>
-
-
-  <button
-    class="save-button"
-    id="saveSettings"
-  >
-    Save Settings
-  </button>
-
-  <div
-    class="saved-message"
-    id="savedMessage"
-  >
-    Settings saved ✓
-  </div>
 
 </main>
 
@@ -308,9 +383,19 @@ let rawDatabase = [];
 let databaseHeaders = [];
 
 
-/* -----------------------
-   CSV PARSER
------------------------ */
+/* =========================
+   HELPERS
+========================= */
+
+function cleanHeader(value) {
+
+  return String(value || "")
+    .replace(/^\uFEFF/, "")
+    .trim()
+    .toLowerCase();
+
+}
+
 
 function parseCSV(text) {
 
@@ -327,7 +412,11 @@ function parseCSV(text) {
     const next = text[i + 1];
 
 
-    if (char === '"' && insideQuotes && next === '"') {
+    if (
+      char === '"' &&
+      insideQuotes &&
+      next === '"'
+    ) {
 
       cell += '"';
       i++;
@@ -340,7 +429,10 @@ function parseCSV(text) {
 
     }
 
-    else if (char === "," && !insideQuotes) {
+    else if (
+      char === "," &&
+      !insideQuotes
+    ) {
 
       row.push(cell);
       cell = "";
@@ -352,13 +444,21 @@ function parseCSV(text) {
       !insideQuotes
     ) {
 
-      if (char === "\r" && next === "\n") {
+      if (
+        char === "\r" &&
+        next === "\n"
+      ) {
         i++;
       }
 
       row.push(cell);
 
-      if (row.some(value => value.trim() !== "")) {
+      if (
+        row.some(
+          value =>
+            String(value).trim() !== ""
+        )
+      ) {
         rows.push(row);
       }
 
@@ -378,7 +478,12 @@ function parseCSV(text) {
 
   row.push(cell);
 
-  if (row.some(value => value.trim() !== "")) {
+  if (
+    row.some(
+      value =>
+        String(value).trim() !== ""
+    )
+  ) {
     rows.push(row);
   }
 
@@ -388,30 +493,21 @@ function parseCSV(text) {
 }
 
 
-/* -----------------------
-   COLUMN DETECTION
------------------------ */
+function findColumn(
+  headers,
+  possibleNames
+) {
 
-function cleanHeader(value) {
-
-  return String(value || "")
-    .replace(/^\uFEFF/, "")
-    .trim()
-    .toLowerCase();
-
-}
-
-
-function findColumn(headers, possibleNames) {
-
-  const normalizedHeaders =
+  const normalized =
     headers.map(cleanHeader);
 
 
-  for (const name of possibleNames) {
+  for (
+    const name of possibleNames
+  ) {
 
     const index =
-      normalizedHeaders.indexOf(name);
+      normalized.indexOf(name);
 
     if (index !== -1) {
       return index;
@@ -425,53 +521,160 @@ function findColumn(headers, possibleNames) {
 }
 
 
-/* -----------------------
+/* =========================
+   DOMAIN NORMALIZATION
+========================= */
+
+function normalizeDomain(value) {
+
+  if (!value) {
+    return "";
+  }
+
+
+  let domain =
+    String(value)
+      .trim()
+      .toLowerCase();
+
+
+  domain =
+    domain.replace(
+      /^[("'[\]{}<>]+/,
+      ""
+    );
+
+
+  domain =
+    domain.replace(
+      /[)"'\],;:{}<>.!?]+$/,
+      ""
+    );
+
+
+  domain =
+    domain.replace(
+      /^https?:\/\//i,
+      ""
+    );
+
+
+  domain =
+    domain.replace(
+      /^www\./i,
+      ""
+    );
+
+
+  domain =
+    domain.split("/")[0];
+
+  domain =
+    domain.split("?")[0];
+
+  domain =
+    domain.split("#")[0];
+
+
+  return domain.trim();
+
+}
+
+
+/* =========================
+   EXTRACT DOMAINS FROM TEXT
+========================= */
+
+function extractDomains(text) {
+
+  if (!text) {
+    return [];
+  }
+
+
+  const regex =
+    /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>"']*)?/gi;
+
+
+  const matches =
+    text.match(regex) || [];
+
+
+  const domains =
+    matches
+      .map(normalizeDomain)
+      .filter(domain =>
+        domain &&
+        domain.includes(".")
+      );
+
+
+  return [
+    ...new Set(domains)
+  ];
+
+}
+
+
+/* =========================
    DATABASE UPLOAD
------------------------ */
+========================= */
 
 const databaseFile =
-  document.getElementById("databaseFile");
+  document.getElementById(
+    "databaseFile"
+  );
 
 const fileInfo =
-  document.getElementById("fileInfo");
+  document.getElementById(
+    "fileInfo"
+  );
 
 const mapping =
-  document.getElementById("mapping");
+  document.getElementById(
+    "mapping"
+  );
 
 const domainColumn =
-  document.getElementById("domainColumn");
+  document.getElementById(
+    "domainColumn"
+  );
 
 const statusColumn =
-  document.getElementById("statusColumn");
+  document.getElementById(
+    "statusColumn"
+  );
 
 
 databaseFile.addEventListener(
   "change",
   function () {
 
-    const file = databaseFile.files[0];
+    const file =
+      databaseFile.files[0];
 
     if (!file) {
       return;
     }
 
 
-    const reader = new FileReader();
+    const reader =
+      new FileReader();
 
 
-    reader.onload = function (event) {
+    reader.onload =
+      function (event) {
 
-      try {
-
-        const text = event.target.result;
-
-        const rows = parseCSV(text);
+        const rows =
+          parseCSV(
+            event.target.result
+          );
 
 
         if (rows.length < 2) {
 
           fileInfo.innerHTML =
-            '<span class="error">Could not read this CSV.</span>';
+            '<span class="error">Could not read CSV.</span>';
 
           return;
 
@@ -479,18 +682,20 @@ databaseFile.addEventListener(
 
 
         databaseHeaders =
-          rows[0].map(header =>
-            String(header || "")
-              .replace(/^\uFEFF/, "")
-              .trim()
+          rows[0].map(
+            header =>
+              String(header || "")
+                .replace(
+                  /^\uFEFF/,
+                  ""
+                )
+                .trim()
           );
 
 
         rawDatabase =
           rows.slice(1);
 
-
-        /* Fill column selectors */
 
         domainColumn.innerHTML = "";
         statusColumn.innerHTML = "";
@@ -499,34 +704,40 @@ databaseFile.addEventListener(
         databaseHeaders.forEach(
           (header, index) => {
 
-            const domainOption =
-              document.createElement("option");
+            const option1 =
+              document.createElement(
+                "option"
+              );
 
-            domainOption.value = index;
-            domainOption.textContent =
-              header || "Column " + (index + 1);
+            option1.value = index;
+            option1.textContent =
+              header ||
+              "Column " +
+              (index + 1);
 
             domainColumn.appendChild(
-              domainOption
+              option1
             );
 
 
-            const statusOption =
-              document.createElement("option");
+            const option2 =
+              document.createElement(
+                "option"
+              );
 
-            statusOption.value = index;
-            statusOption.textContent =
-              header || "Column " + (index + 1);
+            option2.value = index;
+            option2.textContent =
+              header ||
+              "Column " +
+              (index + 1);
 
             statusColumn.appendChild(
-              statusOption
+              option2
             );
 
           }
         );
 
-
-        /* Detect domain column */
 
         const detectedDomain =
           findColumn(
@@ -542,8 +753,6 @@ databaseFile.addEventListener(
           );
 
 
-        /* Detect status column */
-
         const detectedStatus =
           findColumn(
             databaseHeaders,
@@ -556,7 +765,9 @@ databaseFile.addEventListener(
           );
 
 
-        if (detectedDomain !== -1) {
+        if (
+          detectedDomain !== -1
+        ) {
 
           domainColumn.value =
             detectedDomain;
@@ -564,7 +775,9 @@ databaseFile.addEventListener(
         }
 
 
-        if (detectedStatus !== -1) {
+        if (
+          detectedStatus !== -1
+        ) {
 
           statusColumn.value =
             detectedStatus;
@@ -578,28 +791,7 @@ databaseFile.addEventListener(
 
         updateDatabasePreview();
 
-
-        domainColumn.addEventListener(
-          "change",
-          updateDatabasePreview
-        );
-
-
-        statusColumn.addEventListener(
-          "change",
-          updateDatabasePreview
-        );
-
-      }
-
-      catch (error) {
-
-        fileInfo.innerHTML =
-          '<span class="error">Something went wrong while reading the CSV.</span>';
-
-      }
-
-    };
+      };
 
 
     reader.readAsText(file);
@@ -608,9 +800,9 @@ databaseFile.addEventListener(
 );
 
 
-/* -----------------------
+/* =========================
    DATABASE PREVIEW
------------------------ */
+========================= */
 
 function updateDatabasePreview() {
 
@@ -620,23 +812,32 @@ function updateDatabasePreview() {
 
 
   const domainIndex =
-    Number(domainColumn.value);
+    Number(
+      domainColumn.value
+    );
 
   const statusIndex =
-    Number(statusColumn.value);
+    Number(
+      statusColumn.value
+    );
 
 
-  const domains = rawDatabase
-    .map(row =>
-      String(row[domainIndex] || "").trim()
-    )
-    .filter(Boolean);
+  const domains =
+    rawDatabase
+      .map(row =>
+        normalizeDomain(
+          row[domainIndex]
+        )
+      )
+      .filter(Boolean);
 
 
   const statuses =
     rawDatabase
       .map(row =>
-        String(row[statusIndex] || "").trim()
+        String(
+          row[statusIndex] || ""
+        ).trim()
       )
       .filter(Boolean);
 
@@ -646,114 +847,421 @@ function updateDatabasePreview() {
 
 
   fileInfo.innerHTML =
-
     '<span class="success">✓ Database loaded</span>' +
-
     "<br>" +
-
     domains.length +
-    " rows detected" +
-
+    " domains detected" +
     "<br>" +
-
     uniqueStatuses.length +
     " status variations detected";
 
 }
 
 
-/* -----------------------
-   SETTINGS
------------------------ */
+domainColumn.addEventListener(
+  "change",
+  updateDatabasePreview
+);
 
-const saveButton =
-  document.getElementById("saveSettings");
-
-const savedMessage =
-  document.getElementById("savedMessage");
-
-
-saveButton.addEventListener(
-  "click",
-  function () {
-
-    const settings = {
-
-      useDR:
-        document.getElementById("useDR").checked,
-
-      minDR:
-        document.getElementById("minDR").value,
-
-      useTraffic:
-        document.getElementById("useTraffic").checked,
-
-      minTraffic:
-        document.getElementById("minTraffic").value,
-
-      useRD:
-        document.getElementById("useRD").checked,
-
-      minRD:
-        document.getElementById("minRD").value,
-
-      useRDLD:
-        document.getElementById("useRDLD").checked,
-
-      useCountry:
-        document.getElementById("useCountry").checked,
-
-      countries:
-        document.getElementById("countries").value
-
-    };
+statusColumn.addEventListener(
+  "change",
+  updateDatabasePreview
+);
 
 
-    localStorage.setItem(
-      "prospectCheckerSettings",
-      JSON.stringify(settings)
-    );
+/* =========================
+   SAVE SETTINGS
+========================= */
 
+document
+  .getElementById(
+    "saveSettings"
+  )
+  .addEventListener(
+    "click",
+    function () {
 
-    /* Save database */
+      const settings = {
 
-    if (rawDatabase.length) {
+        useDR:
+          document.getElementById(
+            "useDR"
+          ).checked,
 
-      const databaseData = {
+        minDR:
+          document.getElementById(
+            "minDR"
+          ).value,
 
-        headers:
-          databaseHeaders,
+        useTraffic:
+          document.getElementById(
+            "useTraffic"
+          ).checked,
 
-        rows:
-          rawDatabase,
+        minTraffic:
+          document.getElementById(
+            "minTraffic"
+          ).value,
 
-        domainColumn:
-          Number(domainColumn.value),
+        useRD:
+          document.getElementById(
+            "useRD"
+          ).checked,
 
-        statusColumn:
-          Number(statusColumn.value)
+        minRD:
+          document.getElementById(
+            "minRD"
+          ).value,
+
+        useRDLD:
+          document.getElementById(
+            "useRDLD"
+          ).checked,
+
+        useCountry:
+          document.getElementById(
+            "useCountry"
+          ).checked,
+
+        countries:
+          document.getElementById(
+            "countries"
+          ).value
 
       };
 
 
       localStorage.setItem(
-        "prospectCheckerDatabase",
-        JSON.stringify(databaseData)
+        "prospectCheckerSettings",
+        JSON.stringify(settings)
       );
 
+
+      if (rawDatabase.length) {
+
+        const databaseData = {
+
+          headers:
+            databaseHeaders,
+
+          rows:
+            rawDatabase,
+
+          domainColumn:
+            Number(
+              domainColumn.value
+            ),
+
+          statusColumn:
+            Number(
+              statusColumn.value
+            )
+
+        };
+
+
+        localStorage.setItem(
+          "prospectCheckerDatabase",
+          JSON.stringify(
+            databaseData
+          )
+        );
+
+      }
+
+
+      showChecker();
+
     }
+  );
 
 
-    savedMessage.style.display =
-      "block";
+/* =========================
+   SHOW CHECKER
+========================= */
+
+function showChecker() {
+
+  const savedDatabase =
+    localStorage.getItem(
+      "prospectCheckerDatabase"
+    );
+
+
+  if (!savedDatabase) {
+
+    alert(
+      "Please upload and save your database first."
+    );
+
+    return;
+
+  }
+
+
+  const database =
+    JSON.parse(savedDatabase);
+
+
+  document
+    .getElementById(
+      "setupScreen"
+    )
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById(
+      "checkerScreen"
+    )
+    .classList
+    .remove("hidden");
+
+
+  document
+    .getElementById(
+      "databaseStats"
+    )
+    .textContent =
+      database.rows.length +
+      " rows in your database";
+
+}
+
+
+/* =========================
+   EDIT SETTINGS
+========================= */
+
+document
+  .getElementById(
+    "editSettings"
+  )
+  .addEventListener(
+    "click",
+    function () {
+
+      document
+        .getElementById(
+          "checkerScreen"
+        )
+        .classList
+        .add("hidden");
+
+
+      document
+        .getElementById(
+          "setupScreen"
+        )
+        .classList
+        .remove("hidden");
+
+    }
+  );
+
+
+/* =========================
+   LIVE DOMAIN COUNT
+========================= */
+
+const domainInput =
+  document.getElementById(
+    "domainInput"
+  );
+
+
+domainInput.addEventListener(
+  "input",
+  function () {
+
+    const domains =
+      extractDomains(
+        domainInput.value
+      );
+
+
+    document
+      .getElementById(
+        "detectedInfo"
+      )
+      .textContent =
+        domains.length +
+        " unique domains detected";
 
   }
 );
 
 
-/* -----------------------
-   LOAD SAVED SETTINGS
------------------------ */
+/* =========================
+   CHECK DOMAINS
+========================= */
+
+document
+  .getElementById(
+    "checkDomains"
+  )
+  .addEventListener(
+    "click",
+    function () {
+
+      const domains =
+        extractDomains(
+          domainInput.value
+        );
+
+
+      const savedDatabase =
+        JSON.parse(
+          localStorage.getItem(
+            "prospectCheckerDatabase"
+          )
+        );
+
+
+      const domainIndex =
+        savedDatabase.domainColumn;
+
+      const statusIndex =
+        savedDatabase.statusColumn;
+
+
+      const databaseMap =
+        new Map();
+
+
+      savedDatabase.rows.forEach(
+        row => {
+
+          const domain =
+            normalizeDomain(
+              row[domainIndex]
+            );
+
+
+          const status =
+            String(
+              row[statusIndex] || ""
+            ).trim();
+
+
+          if (domain) {
+
+            databaseMap.set(
+              domain,
+              status
+            );
+
+          }
+
+        }
+      );
+
+
+      const resultsBody =
+        document.getElementById(
+          "resultsBody"
+        );
+
+
+      resultsBody.innerHTML = "";
+
+
+      let foundCount = 0;
+
+
+      domains.forEach(
+        domain => {
+
+          const status =
+            databaseMap.has(domain)
+              ? databaseMap.get(domain)
+              : "Not found";
+
+
+          if (
+            databaseMap.has(domain)
+          ) {
+            foundCount++;
+          }
+
+
+          const row =
+            document.createElement(
+              "tr"
+            );
+
+
+          const domainCell =
+            document.createElement(
+              "td"
+            );
+
+          domainCell.textContent =
+            domain;
+
+
+          const statusCell =
+            document.createElement(
+              "td"
+            );
+
+          statusCell.textContent =
+            status;
+
+
+          if (
+            status === "Not found"
+          ) {
+            statusCell.className =
+              "not-found";
+          }
+
+
+          row.appendChild(
+            domainCell
+          );
+
+          row.appendChild(
+            statusCell
+          );
+
+          resultsBody.appendChild(
+            row
+          );
+
+        }
+      );
+
+
+      document
+        .getElementById(
+          "resultsSummary"
+        )
+        .textContent =
+          domains.length +
+          " domains checked · " +
+          foundCount +
+          " found in database · " +
+          (domains.length -
+            foundCount) +
+          " not found";
+
+
+      document
+        .getElementById(
+          "resultsCard"
+        )
+        .classList
+        .remove("hidden");
+
+    }
+  );
+
+
+/* =========================
+   LOAD EXISTING DATA
+========================= */
 
 const savedSettings =
   localStorage.getItem(
@@ -764,42 +1272,58 @@ const savedSettings =
 if (savedSettings) {
 
   const settings =
-    JSON.parse(savedSettings);
+    JSON.parse(
+      savedSettings
+    );
 
 
-  document.getElementById("useDR").checked =
+  document.getElementById(
+    "useDR"
+  ).checked =
     settings.useDR;
 
-  document.getElementById("minDR").value =
+  document.getElementById(
+    "minDR"
+  ).value =
     settings.minDR;
 
-  document.getElementById("useTraffic").checked =
+  document.getElementById(
+    "useTraffic"
+  ).checked =
     settings.useTraffic;
 
-  document.getElementById("minTraffic").value =
+  document.getElementById(
+    "minTraffic"
+  ).value =
     settings.minTraffic;
 
-  document.getElementById("useRD").checked =
+  document.getElementById(
+    "useRD"
+  ).checked =
     settings.useRD;
 
-  document.getElementById("minRD").value =
+  document.getElementById(
+    "minRD"
+  ).value =
     settings.minRD;
 
-  document.getElementById("useRDLD").checked =
+  document.getElementById(
+    "useRDLD"
+  ).checked =
     settings.useRDLD;
 
-  document.getElementById("useCountry").checked =
+  document.getElementById(
+    "useCountry"
+  ).checked =
     settings.useCountry;
 
-  document.getElementById("countries").value =
-    settings.countries;
+  document.getElementById(
+    "countries"
+  ).value =
+    settings.countries || "";
 
 }
 
-
-/* -----------------------
-   LOAD SAVED DATABASE
------------------------ */
 
 const savedDatabase =
   localStorage.getItem(
@@ -809,30 +1333,7 @@ const savedDatabase =
 
 if (savedDatabase) {
 
-  try {
-
-    const database =
-      JSON.parse(savedDatabase);
-
-
-    fileInfo.innerHTML =
-
-      '<span class="success">✓ Saved database found</span>' +
-
-      "<br>" +
-
-      database.rows.length +
-      " rows stored in this browser";
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Could not load saved database."
-    );
-
-  }
+  showChecker();
 
 }
 
