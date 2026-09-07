@@ -3,11 +3,227 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Link Prospect Checker</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f7f9;
+      color: #1f2937;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 60px auto;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      resize: vertical;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .primary {
+      background: #111827;
+      color: white;
+    }
+
+    .requirement {
+      margin: 12px 0;
+    }
+
+    .requirement input[type="number"] {
+      width: 100px;
+      margin-left: 10px;
+      padding: 6px;
+    }
+
+    .actions {
+      margin-top: 16px;
+    }
+
+    .placeholder {
+      color: #9ca3af;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Link Prospect Checker</h1>
-  <p>Upload your database and check domains.</p>
+
+  <main class="container">
+
+    <h1>Link Prospect Checker</h1>
+    <p class="subtitle">
+      Filter link prospects using your own database and requirements.
+    </p>
+
+
+    <!-- DATABASE -->
+
+    <section class="card">
+
+      <h2>1. My Database</h2>
+
+      <p>
+        Upload a CSV containing your domains and statuses.
+      </p>
+
+      <input
+        type="file"
+        id="databaseFile"
+        accept=".csv"
+      >
+
+      <p class="placeholder">
+        No database uploaded yet.
+      </p>
+
+    </section>
+
+
+    <!-- REQUIREMENTS -->
+
+    <section class="card">
+
+      <h2>2. My Requirements</h2>
+
+      <div class="requirement">
+        <label>
+          <input type="checkbox" checked>
+          Minimum DR
+        </label>
+
+        <input type="number" value="50">
+      </div>
+
+
+      <div class="requirement">
+        <label>
+          <input type="checkbox" checked>
+          Minimum Organic Traffic
+        </label>
+
+        <input type="number" value="2000">
+      </div>
+
+
+      <div class="requirement">
+        <label>
+          <input type="checkbox">
+          Minimum Referring Domains
+        </label>
+
+        <input type="number" value="500">
+      </div>
+
+
+      <div class="requirement">
+        <label>
+          <input type="checkbox" checked>
+          RD ≥ Linked Domains
+        </label>
+      </div>
+
+
+      <div class="requirement">
+        <label>
+          <input type="checkbox">
+          Check top country
+        </label>
+      </div>
+
+    </section>
+
+
+    <!-- CHECK DOMAINS -->
+
+    <section class="card">
+
+      <h2>3. Check Domains</h2>
+
+      <p>
+        Paste any text containing domains or upload an Ahrefs Batch Analysis CSV.
+      </p>
+
+      <textarea
+        id="domainInput"
+        placeholder="Paste domains, URLs, vendor messages or any text here..."
+      ></textarea>
+
+      <p><strong>or</strong></p>
+
+      <input
+        type="file"
+        id="ahrefsFile"
+        accept=".csv"
+      >
+
+      <div class="actions">
+        <button class="primary" id="checkButton">
+          Check domains
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+
+    <section class="card">
+
+      <h2>4. Results</h2>
+
+      <p class="placeholder">
+        Your results will appear here.
+      </p>
+
+    </section>
+
+  </main>
+
 </body>
 </html>
