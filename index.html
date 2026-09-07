@@ -26,7 +26,7 @@
 
     .container {
       width: 92%;
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 48px auto;
     }
 
@@ -86,31 +86,11 @@
       margin-bottom: 20px;
     }
 
-    .card-header-text {
-      max-width: 720px;
-    }
-
     .card-description {
       margin-top: 6px;
       color: #737373;
       font-size: 14px;
       line-height: 1.5;
-    }
-
-    .primary {
-      background: #111;
-      color: white;
-    }
-
-    .secondary {
-      background: #f1f1f1;
-      color: #171717;
-    }
-
-    .ghost {
-      background: transparent;
-      color: #525252;
-      padding: 6px 8px;
     }
 
     button {
@@ -124,6 +104,22 @@
 
     button:hover {
       transform: translateY(-1px);
+    }
+
+    .primary {
+      background: #111;
+      color: #fff;
+    }
+
+    .secondary {
+      background: #f1f1f1;
+      color: #171717;
+    }
+
+    .ghost {
+      background: transparent;
+      color: #525252;
+      padding: 6px 8px;
     }
 
     .full {
@@ -243,11 +239,6 @@
       margin: 10px 0;
     }
 
-    .mapping-row label {
-      font-size: 14px;
-      color: #525252;
-    }
-
     select {
       min-width: 220px;
       padding: 9px 10px;
@@ -292,7 +283,6 @@
     .requirement-value {
       display: flex;
       justify-content: flex-end;
-      align-items: center;
     }
 
     input[type="number"] {
@@ -308,7 +298,6 @@
       position: relative;
       width: 38px;
       height: 22px;
-      flex: 0 0 auto;
     }
 
     .switch input {
@@ -322,8 +311,8 @@
       inset: 0;
       background: #d4d4d4;
       border-radius: 999px;
-      transition: .2s ease;
       cursor: pointer;
+      transition: .2s ease;
     }
 
     .slider:before {
@@ -347,7 +336,7 @@
       transform: translateX(16px);
     }
 
-    /* COUNTRY MULTISELECT */
+    /* COUNTRIES */
 
     .country-picker {
       position: relative;
@@ -401,8 +390,6 @@
       padding: 0;
       background: transparent;
       color: #737373;
-      font-size: 13px;
-      line-height: 1;
       transform: none;
     }
 
@@ -440,10 +427,6 @@
       background: #f7f7f7;
     }
 
-    .country-option input {
-      accent-color: #111;
-    }
-
     .actions {
       margin-top: 22px;
     }
@@ -464,13 +447,6 @@
       border-radius: 16px;
       background: white;
       overflow: hidden;
-      transition: .15s ease;
-    }
-
-    .prospect-input:focus-within,
-    .prospect-input.dragging {
-      border-color: #111;
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
     }
 
     textarea {
@@ -482,11 +458,6 @@
       padding: 20px;
       font-size: 14px;
       line-height: 1.55;
-      color: #171717;
-    }
-
-    textarea::placeholder {
-      color: #a3a3a3;
     }
 
     .upload-zone {
@@ -528,12 +499,6 @@
       color: #8a8a8a;
     }
 
-    .browse {
-      font-size: 13px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
     .file-loaded {
       display: none;
       padding: 16px 20px;
@@ -541,39 +506,58 @@
       background: #fafafa;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
     }
 
     .file-loaded.active {
       display: flex;
     }
 
-    .file-name {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .file-meta {
-      margin-top: 3px;
-      font-size: 12px;
-      color: #737373;
-    }
-
     .checker-actions {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
       margin-top: 14px;
       flex-wrap: wrap;
     }
 
-    /* RESULTS */
+    /* RESULTS FILTERS */
 
-    .results-summary {
-      font-size: 14px;
+    .results-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: #f4f4f4;
       color: #525252;
-      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .filter-tab.active {
+      background: #111;
+      color: #fff;
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-filter {
+      min-width: 190px;
     }
 
     .table-wrap {
@@ -583,7 +567,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 760px;
+      min-width: 900px;
     }
 
     th,
@@ -608,17 +592,6 @@
     }
 
     @media (max-width: 760px) {
-      .container {
-        margin: 24px auto;
-      }
-
-      .topbar,
-      .card-header,
-      .db-saved {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
       .requirement-row {
         grid-template-columns: 44px 1fr;
       }
@@ -628,10 +601,10 @@
         justify-content: flex-start;
       }
 
-      input[type="number"],
-      .country-picker,
-      .country-menu {
-        width: 100%;
+      .topbar,
+      .db-saved {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -641,328 +614,394 @@
 
 <main class="container">
 
-  <section id="setupScreen">
+<section id="setupScreen">
 
-    <div class="eyebrow">
-      Step 1 of 2 · Setup
+  <div class="eyebrow">Step 1 of 2 · Setup</div>
+
+  <h1>Set up your checker</h1>
+
+  <p class="subtitle">
+    Add your database and choose the metrics you want to use.
+  </p>
+
+  <section class="card">
+
+    <h2>Your database</h2>
+
+    <p class="card-description">
+      Upload a CSV with domains and statuses.
+    </p>
+
+    <input type="file" id="databaseFile" accept=".csv" hidden>
+
+    <div class="db-dropzone" id="dbDropzone">
+
+      <div class="db-icon">↑</div>
+
+      <div class="db-title">
+        Drop your database CSV here
+      </div>
+
+      <div class="db-hint">
+        or click to browse files
+      </div>
+
     </div>
 
-    <h1>Set up your checker</h1>
+    <div class="db-saved" id="dbSaved">
 
-    <p class="subtitle">
-      Add your database and choose the metrics you want to use.
-      You can change everything later.
+      <div>
+        <div class="db-saved-title">
+          Database ready
+        </div>
+
+        <div
+          class="db-saved-meta"
+          id="dbSavedMeta"
+        ></div>
+      </div>
+
+      <button
+        id="replaceDatabase"
+        class="secondary"
+      >
+        Replace database
+      </button>
+
+    </div>
+
+    <div class="mapping-toggle">
+
+      <button
+        id="toggleMapping"
+        class="ghost hidden"
+      >
+        Change columns
+      </button>
+
+    </div>
+
+    <div class="mapping" id="mapping">
+
+      <div class="mapping-row">
+        <label>Domain column</label>
+        <select id="domainColumn"></select>
+      </div>
+
+      <div class="mapping-row">
+        <label>Status column</label>
+        <select id="statusColumn"></select>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>Your requirements</h2>
+
+    <p class="card-description">
+      Turn on only the checks you want to apply.
     </p>
 
 
-    <section class="card">
+    <div class="requirements-list">
 
-      <div class="card-header">
+      <div class="requirement-row">
 
-        <div class="card-header-text">
-          <h2>Your database</h2>
-
-          <p class="card-description">
-            Upload a CSV with domains and statuses.
-            Your statuses are kept exactly as they appear in the file.
-          </p>
-        </div>
-
-      </div>
-
-
-      <input
-        type="file"
-        id="databaseFile"
-        accept=".csv,text/csv"
-        hidden
-      >
-
-
-      <div
-        class="db-dropzone"
-        id="dbDropzone"
-      >
-
-        <div class="db-icon">↑</div>
-
-        <div class="db-title">
-          Drop your database CSV here
-        </div>
-
-        <div class="db-hint">
-          or click to browse files
-        </div>
-
-      </div>
-
-
-      <div
-        class="db-saved"
-        id="dbSaved"
-      >
+        <label class="switch">
+          <input type="checkbox" id="useDR">
+          <span class="slider"></span>
+        </label>
 
         <div>
-
-          <div class="db-saved-title">
-            Database ready
+          <div class="requirement-title">
+            Minimum DR
           </div>
 
-          <div
-            class="db-saved-meta"
-            id="dbSavedMeta"
-          ></div>
-
+          <div class="requirement-hint">
+            Domain Rating from 0 to 100
+          </div>
         </div>
 
-
-        <button
-          id="replaceDatabase"
-          class="secondary"
-          type="button"
-        >
-          Replace database
-        </button>
-
-      </div>
-
-
-      <div class="mapping-toggle">
-
-        <button
-          id="toggleMapping"
-          class="ghost hidden"
-          type="button"
-        >
-          Change columns
-        </button>
-
-      </div>
-
-
-      <div
-        class="mapping"
-        id="mapping"
-      >
-
-        <div class="mapping-row">
-          <label for="domainColumn">
-            Domain column
-          </label>
-
-          <select id="domainColumn"></select>
-        </div>
-
-
-        <div class="mapping-row">
-          <label for="statusColumn">
-            Status column
-          </label>
-
-          <select id="statusColumn"></select>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <section class="card">
-
-      <div class="card-header">
-
-        <div class="card-header-text">
-
-          <h2>Your requirements</h2>
-
-          <p class="card-description">
-            Turn on only the checks you actually use.
-            These rules will be applied to Ahrefs Batch Analysis CSV files.
-          </p>
-
+        <div class="requirement-value">
+          <input
+            type="number"
+            id="minDR"
+            value="50"
+            min="0"
+            max="100"
+          >
         </div>
 
       </div>
 
 
-      <div class="requirements-list">
+      <div class="requirement-row">
+
+        <label class="switch">
+          <input type="checkbox" id="useTraffic">
+          <span class="slider"></span>
+        </label>
+
+        <div>
+          <div class="requirement-title">
+            Minimum organic traffic
+          </div>
+        </div>
+
+        <div class="requirement-value">
+          <input
+            type="number"
+            id="minTraffic"
+            value="2000"
+            min="0"
+          >
+        </div>
+
+      </div>
 
 
-        <div class="requirement-row">
+      <div class="requirement-row">
 
-          <label class="switch">
-            <input type="checkbox" id="useDR">
-            <span class="slider"></span>
-          </label>
+        <label class="switch">
+          <input type="checkbox" id="useRD">
+          <span class="slider"></span>
+        </label>
 
-          <div>
-            <div class="requirement-title">
-              Minimum DR
-            </div>
+        <div>
+          <div class="requirement-title">
+            Minimum referring domains
+          </div>
+        </div>
 
-            <div class="requirement-hint">
-              Domain Rating from 0 to 100
-            </div>
+        <div class="requirement-value">
+          <input
+            type="number"
+            id="minRD"
+            value="500"
+            min="0"
+          >
+        </div>
+
+      </div>
+
+
+      <div class="requirement-row">
+
+        <label class="switch">
+          <input type="checkbox" id="useRDLD">
+          <span class="slider"></span>
+        </label>
+
+        <div>
+          <div class="requirement-title">
+            RD ≥ LD
           </div>
 
-          <div class="requirement-value">
-            <input
-              type="number"
-              id="minDR"
-              value="50"
-              min="0"
-              max="100"
+          <div class="requirement-hint">
+            Referring domains must be equal to or higher than linked domains
+          </div>
+        </div>
+
+        <div></div>
+
+      </div>
+
+
+      <div class="requirement-row">
+
+        <label class="switch">
+          <input type="checkbox" id="useCountry">
+          <span class="slider"></span>
+        </label>
+
+        <div>
+          <div class="requirement-title">
+            Allowed top countries
+          </div>
+        </div>
+
+        <div class="requirement-value">
+
+          <div class="country-picker" id="countryPicker">
+
+            <div
+              class="country-control"
+              id="countryControl"
             >
-          </div>
-
-        </div>
-
-
-        <div class="requirement-row">
-
-          <label class="switch">
-            <input type="checkbox" id="useTraffic">
-            <span class="slider"></span>
-          </label>
-
-          <div>
-            <div class="requirement-title">
-              Minimum organic traffic
-            </div>
-
-            <div class="requirement-hint">
-              Minimum Ahrefs organic traffic
-            </div>
-          </div>
-
-          <div class="requirement-value">
-            <input
-              type="number"
-              id="minTraffic"
-              value="2000"
-              min="0"
-            >
-          </div>
-
-        </div>
-
-
-        <div class="requirement-row">
-
-          <label class="switch">
-            <input type="checkbox" id="useRD">
-            <span class="slider"></span>
-          </label>
-
-          <div>
-            <div class="requirement-title">
-              Minimum referring domains
-            </div>
-
-            <div class="requirement-hint">
-              Optional minimum RD threshold
-            </div>
-          </div>
-
-          <div class="requirement-value">
-            <input
-              type="number"
-              id="minRD"
-              value="500"
-              min="0"
-            >
-          </div>
-
-        </div>
-
-
-        <div class="requirement-row">
-
-          <label class="switch">
-            <input type="checkbox" id="useRDLD">
-            <span class="slider"></span>
-          </label>
-
-          <div>
-            <div class="requirement-title">
-              RD ≥ Linked Domains
-            </div>
-
-            <div class="requirement-hint">
-              Referring domains must be equal to or higher than linked domains
-            </div>
-          </div>
-
-          <div></div>
-
-        </div>
-
-
-        <div class="requirement-row">
-
-          <label class="switch">
-            <input type="checkbox" id="useCountry">
-            <span class="slider"></span>
-          </label>
-
-          <div>
-            <div class="requirement-title">
-              Allowed top countries
-            </div>
-
-            <div class="requirement-hint">
-              Select one or multiple countries
-            </div>
-          </div>
-
-          <div class="requirement-value">
-
-            <div class="country-picker" id="countryPicker">
 
               <div
-                class="country-control"
-                id="countryControl"
+                class="country-placeholder"
+                id="countryPlaceholder"
               >
-
-                <div
-                  class="country-placeholder"
-                  id="countryPlaceholder"
-                >
-                  Select countries
-                </div>
-
-                <div
-                  class="country-chips"
-                  id="countryChips"
-                ></div>
-
+                Select countries
               </div>
 
-
               <div
-                class="country-menu"
-                id="countryMenu"
+                class="country-chips"
+                id="countryChips"
               ></div>
 
             </div>
 
+            <div
+              class="country-menu"
+              id="countryMenu"
+            ></div>
+
           </div>
 
         </div>
 
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="actions">
+    <button
+      id="saveSettings"
+      class="primary full"
+    >
+      Save & Continue
+    </button>
+  </div>
+
+</section>
+
+
+<section
+  id="checkerScreen"
+  class="hidden"
+>
+
+  <div class="topbar">
+
+    <div>
+      <div class="eyebrow">
+        Step 2 of 2 · Checker
+      </div>
+
+      <h1>Check prospects</h1>
+
+      <div
+        class="stats"
+        id="databaseStats"
+      ></div>
+    </div>
+
+    <button
+      id="editSettings"
+      class="secondary"
+    >
+      Edit settings
+    </button>
+
+  </div>
+
+
+  <section class="card">
+
+    <h2>Add prospects</h2>
+
+    <p class="card-description">
+      Paste any text with domains or upload an Ahrefs Batch Analysis CSV.
+    </p>
+
+
+    <div
+      class="prospect-input"
+      id="prospectInput"
+    >
+
+      <textarea
+        id="domainInput"
+        placeholder="Paste domains, URLs, messages, prices, notes..."
+      ></textarea>
+
+
+      <div
+        class="upload-zone"
+        id="uploadZone"
+      >
+
+        <div class="upload-left">
+
+          <div class="upload-icon">
+            ↑
+          </div>
+
+          <div>
+
+            <div class="upload-title">
+              Drop Ahrefs Batch CSV here
+            </div>
+
+            <div class="upload-hint">
+              or choose a file from your computer
+            </div>
+
+          </div>
+
+        </div>
+
+        <strong>Browse files</strong>
 
       </div>
 
-    </section>
+
+      <div
+        class="file-loaded"
+        id="fileLoaded"
+      >
+
+        <div>
+          <strong id="loadedFileName"></strong>
+
+          <div
+            class="stats"
+            id="loadedFileMeta"
+          ></div>
+        </div>
+
+        <button
+          id="removeFile"
+          class="ghost"
+        >
+          Remove
+        </button>
+
+      </div>
+
+    </div>
 
 
-    <div class="actions">
+    <input
+      type="file"
+      id="ahrefsFile"
+      accept=".csv"
+      hidden
+    >
+
+
+    <div class="checker-actions">
+
+      <div
+        class="stats"
+        id="detectedInfo"
+      >
+        0 unique domains detected
+      </div>
 
       <button
-        id="saveSettings"
-        class="primary full"
+        id="checkDomains"
+        class="primary"
       >
-        Save & Continue
+        Check domains
       </button>
 
     </div>
@@ -971,1322 +1010,815 @@
 
 
   <section
-    id="checkerScreen"
-    class="hidden"
+    class="card hidden"
+    id="resultsCard"
   >
 
-    <div class="topbar">
+    <h2>Results</h2>
 
-      <div>
-
-        <div class="eyebrow">
-          Step 2 of 2 · Checker
-        </div>
-
-        <h1>Check prospects</h1>
-
-        <div
-          class="stats"
-          id="databaseStats"
-        ></div>
-
-      </div>
+    <div
+      class="stats"
+      id="resultsSummary"
+    ></div>
 
 
-      <button
-        id="editSettings"
-        class="secondary"
-      >
-        Edit settings
-      </button>
+    <div class="results-toolbar">
 
-    </div>
-
-
-    <section class="card">
-
-      <div class="card-header">
-
-        <div class="card-header-text">
-
-          <h2>Add prospects</h2>
-
-          <p class="card-description">
-            Paste any text with domains, or upload an Ahrefs Batch Analysis CSV in the same field.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="prospect-input"
-        id="prospectInput"
-      >
-
-        <textarea
-          id="domainInput"
-          placeholder="Paste domains, URLs, vendor messages, prices, notes... anything.
-
-Example:
-techbullion.com DR 73 $100
-https://example.com/blog/article
-Another site: www.test.co.uk"
-        ></textarea>
-
-
-        <div
-          class="upload-zone"
-          id="uploadZone"
-        >
-
-          <div class="upload-left">
-
-            <div class="upload-icon">↑</div>
-
-            <div>
-
-              <div class="upload-title">
-                Drop Ahrefs Batch CSV here
-              </div>
-
-              <div class="upload-hint">
-                or choose a file from your computer
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="browse">
-            Browse files
-          </div>
-
-        </div>
-
-
-        <div
-          class="file-loaded"
-          id="fileLoaded"
-        >
-
-          <div>
-
-            <div
-              class="file-name"
-              id="loadedFileName"
-            ></div>
-
-            <div
-              class="file-meta"
-              id="loadedFileMeta"
-            ></div>
-
-          </div>
-
-
-          <button
-            id="removeFile"
-            class="ghost"
-            type="button"
-          >
-            Remove
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <input
-        type="file"
-        id="ahrefsFile"
-        accept=".csv,text/csv"
-        hidden
-      >
-
-
-      <div class="checker-actions">
-
-        <div
-          class="stats"
-          id="detectedInfo"
-        >
-          0 unique domains detected
-        </div>
-
+      <div class="filter-tabs">
 
         <button
-          id="checkDomains"
-          class="primary"
+          class="filter-tab active"
+          data-filter="all"
         >
-          Check domains
+          All
+        </button>
+
+        <button
+          class="filter-tab"
+          data-filter="passed"
+        >
+          Passed
+        </button>
+
+        <button
+          class="filter-tab"
+          data-filter="failed"
+        >
+          Failed
+        </button>
+
+        <button
+          class="filter-tab"
+          data-filter="database"
+        >
+          In database
+        </button>
+
+        <button
+          class="filter-tab"
+          data-filter="new"
+        >
+          New
         </button>
 
       </div>
 
-    </section>
 
+      <div class="filter-actions">
 
-    <section
-      class="card hidden"
-      id="resultsCard"
-    >
+        <select
+          id="statusFilter"
+          class="status-filter"
+        >
+          <option value="all">
+            All statuses
+          </option>
+        </select>
 
-      <h2>Results</h2>
-
-      <div
-        class="results-summary"
-        id="resultsSummary"
-      ></div>
-
-
-      <div class="table-wrap">
-
-        <table>
-          <thead id="resultsHead"></thead>
-          <tbody id="resultsBody"></tbody>
-        </table>
+        <button
+          id="exportFiltered"
+          class="secondary"
+        >
+          Export filtered CSV
+        </button>
 
       </div>
 
-    </section>
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead id="resultsHead"></thead>
+
+        <tbody id="resultsBody"></tbody>
+
+      </table>
+
+    </div>
 
   </section>
+
+</section>
 
 </main>
 
 
 <script>
 
-  let rawDatabase = [];
-  let databaseHeaders = [];
+let rawDatabase = [];
+let databaseHeaders = [];
 
-  let ahrefsRows = [];
-  let ahrefsHeaders = [];
-  let ahrefsColumnMap = null;
+let ahrefsRows = [];
+let ahrefsColumnMap = null;
 
-  let selectedCountries = [];
+let selectedCountries = [];
 
-
-  const countryList = [
-    ["US", "United States"],
-    ["GB", "United Kingdom"],
-    ["CA", "Canada"],
-    ["AU", "Australia"],
-    ["NZ", "New Zealand"],
-    ["DE", "Germany"],
-    ["CH", "Switzerland"],
-    ["FR", "France"],
-    ["NL", "Netherlands"],
-    ["SE", "Sweden"],
-    ["NO", "Norway"],
-    ["DK", "Denmark"],
-    ["FI", "Finland"],
-    ["AT", "Austria"],
-    ["IE", "Ireland"],
-    ["BE", "Belgium"],
-    ["ES", "Spain"],
-    ["IT", "Italy"],
-    ["PT", "Portugal"],
-    ["PL", "Poland"],
-    ["CZ", "Czech Republic"],
-    ["RO", "Romania"],
-    ["HU", "Hungary"],
-    ["GR", "Greece"],
-    ["BR", "Brazil"],
-    ["MX", "Mexico"],
-    ["CO", "Colombia"],
-    ["AR", "Argentina"],
-    ["CL", "Chile"],
-    ["PE", "Peru"],
-    ["IN", "India"],
-    ["SG", "Singapore"],
-    ["JP", "Japan"],
-    ["KR", "South Korea"],
-    ["AE", "United Arab Emirates"],
-    ["SA", "Saudi Arabia"],
-    ["ZA", "South Africa"]
-  ];
+let allResults = [];
+let currentResultFilter = "all";
 
 
-  function cleanHeader(value) {
-    return String(value || "")
-      .replace(/^\uFEFF/, "")
-      .trim()
-      .toLowerCase();
-  }
+const countryList = [
+  ["US","United States"],
+  ["GB","United Kingdom"],
+  ["CA","Canada"],
+  ["AU","Australia"],
+  ["NZ","New Zealand"],
+  ["DE","Germany"],
+  ["FR","France"],
+  ["NL","Netherlands"],
+  ["CH","Switzerland"],
+  ["SE","Sweden"],
+  ["NO","Norway"],
+  ["DK","Denmark"],
+  ["FI","Finland"],
+  ["AT","Austria"],
+  ["IE","Ireland"],
+  ["BE","Belgium"],
+  ["ES","Spain"],
+  ["IT","Italy"],
+  ["PL","Poland"],
+  ["PT","Portugal"],
+  ["BR","Brazil"],
+  ["MX","Mexico"],
+  ["CO","Colombia"],
+  ["AR","Argentina"]
+];
 
 
-  function detectDelimiter(text) {
+function cleanHeader(value) {
+  return String(value || "")
+    .replace(/^\uFEFF/, "")
+    .trim()
+    .toLowerCase();
+}
 
-    const firstLine =
-      text.split(/\r?\n/)[0] || "";
 
-    const commaCount =
-      (firstLine.match(/,/g) || []).length;
+function parseCSV(text) {
 
-    const semicolonCount =
-      (firstLine.match(/;/g) || []).length;
+  const rows = [];
 
-    const tabCount =
-      (firstLine.match(/\t/g) || []).length;
+  let row = [];
+  let cell = "";
+  let quoted = false;
+
+
+  for (let i = 0; i < text.length; i++) {
+
+    const char = text[i];
+    const next = text[i + 1];
 
 
     if (
-      semicolonCount > commaCount &&
-      semicolonCount >= tabCount
+      char === '"' &&
+      quoted &&
+      next === '"'
     ) {
-      return ";";
+
+      cell += '"';
+      i++;
+
     }
 
-    if (
-      tabCount > commaCount &&
-      tabCount > semicolonCount
-    ) {
-      return "\t";
+    else if (char === '"') {
+
+      quoted = !quoted;
+
     }
 
-    return ",";
-  }
+    else if (
+      char === "," &&
+      !quoted
+    ) {
 
+      row.push(cell);
+      cell = "";
 
-  function parseCSV(text) {
+    }
 
-    const delimiter =
-      detectDelimiter(text);
-
-    const rows = [];
-
-    let row = [];
-    let cell = "";
-    let insideQuotes = false;
-
-
-    for (let i = 0; i < text.length; i++) {
-
-      const char = text[i];
-      const next = text[i + 1];
-
+    else if (
+      (char === "\n" ||
+       char === "\r") &&
+      !quoted
+    ) {
 
       if (
-        char === '"' &&
-        insideQuotes &&
-        next === '"'
+        char === "\r" &&
+        next === "\n"
       ) {
-
-        cell += '"';
         i++;
-
       }
 
-      else if (char === '"') {
+      row.push(cell);
 
-        insideQuotes =
-          !insideQuotes;
-
-      }
-
-      else if (
-        char === delimiter &&
-        !insideQuotes
+      if (
+        row.some(
+          x =>
+            String(x).trim() !== ""
+        )
       ) {
-
-        row.push(cell);
-        cell = "";
-
+        rows.push(row);
       }
 
-      else if (
-        (char === "\n" ||
-          char === "\r") &&
-        !insideQuotes
-      ) {
-
-        if (
-          char === "\r" &&
-          next === "\n"
-        ) {
-          i++;
-        }
-
-        row.push(cell);
-
-        if (
-          row.some(
-            value =>
-              String(value).trim() !== ""
-          )
-        ) {
-          rows.push(row);
-        }
-
-        row = [];
-        cell = "";
-
-      }
-
-      else {
-
-        cell += char;
-
-      }
+      row = [];
+      cell = "";
 
     }
 
+    else {
 
-    row.push(cell);
+      cell += char;
 
-    if (
-      row.some(
-        value =>
-          String(value).trim() !== ""
-      )
-    ) {
-      rows.push(row);
     }
 
-
-    return rows;
   }
 
 
-  function findColumn(headers, possibleNames) {
+  row.push(cell);
 
-    const normalized =
-      headers.map(cleanHeader);
-
-    for (const name of possibleNames) {
-
-      const index =
-        normalized.indexOf(
-          name.toLowerCase()
-        );
-
-      if (index !== -1) {
-        return index;
-      }
-
-    }
-
-    return -1;
+  if (
+    row.some(
+      x =>
+        String(x).trim() !== ""
+    )
+  ) {
+    rows.push(row);
   }
 
 
-  function numberValue(value) {
+  return rows;
+}
 
-    if (
-      value === null ||
-      value === undefined ||
-      value === ""
-    ) {
-      return 0;
+
+function findColumn(
+  headers,
+  names
+) {
+
+  const clean =
+    headers.map(cleanHeader);
+
+
+  for (
+    const name of names
+  ) {
+
+    const index =
+      clean.indexOf(
+        name.toLowerCase()
+      );
+
+    if (index !== -1) {
+      return index;
     }
 
-    let cleaned =
-      String(value)
-        .replace(/\s/g, "")
+  }
+
+
+  return -1;
+}
+
+
+function numberValue(value) {
+
+  const number =
+    Number(
+      String(value || "")
         .replace(/,/g, "")
-        .trim();
-
-    const lower =
-      cleaned.toLowerCase();
-
-    let multiplier = 1;
-
-    if (lower.endsWith("k")) {
-      multiplier = 1000;
-      cleaned = cleaned.slice(0, -1);
-    }
-
-    else if (lower.endsWith("m")) {
-      multiplier = 1000000;
-      cleaned = cleaned.slice(0, -1);
-    }
-
-    const number =
-      Number(cleaned);
-
-    return Number.isFinite(number)
-      ? number * multiplier
-      : 0;
-  }
-
-
-  function clampDR() {
-
-    const input =
-      document.getElementById(
-        "minDR"
-      );
-
-    let value =
-      Number(input.value);
-
-    if (!Number.isFinite(value)) {
-      value = 0;
-    }
-
-    if (value < 0) {
-      value = 0;
-    }
-
-    if (value > 100) {
-      value = 100;
-    }
-
-    input.value = value;
-  }
-
-
-  document
-    .getElementById("minDR")
-    .addEventListener(
-      "change",
-      clampDR
-    );
-
-
-  document
-    .getElementById("minDR")
-    .addEventListener(
-      "blur",
-      clampDR
-    );
-
-
-  function normalizeDomain(value) {
-
-    if (!value) {
-      return "";
-    }
-
-    let domain =
-      String(value)
         .trim()
-        .toLowerCase();
+    );
 
-    domain =
-      domain.replace(
-        /^[("'[\]{}<>]+/,
-        ""
-      );
+  return Number.isFinite(number)
+    ? number
+    : 0;
+}
 
-    domain =
-      domain.replace(
-        /[)"'\],;:{}<>!?]+$/,
-        ""
-      );
 
-    domain =
-      domain.replace(
-        /^https?:\/\//i,
-        ""
-      );
+function normalizeDomain(value) {
 
-    domain =
-      domain.replace(
-        /^www\./i,
-        ""
-      );
-
-    domain =
-      domain.split("/")[0];
-
-    domain =
-      domain.split("?")[0];
-
-    domain =
-      domain.split("#")[0];
-
-    domain =
-      domain.replace(
-        /:\d+$/,
-        ""
-      );
-
-    return domain.trim();
+  if (!value) {
+    return "";
   }
 
 
-  function extractDomains(text) {
+  let domain =
+    String(value)
+      .trim()
+      .toLowerCase()
+      .replace(/^https?:\/\//i, "")
+      .replace(/^www\./i, "");
 
-    if (!text) {
-      return [];
-    }
 
-    const regex =
-      /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>"']*)?/gi;
+  domain =
+    domain.split("/")[0];
 
-    const matches =
-      text.match(regex) || [];
+  domain =
+    domain.split("?")[0];
 
-    const domains =
+  domain =
+    domain.split("#")[0];
+
+
+  return domain
+    .replace(/[.,;:!?)]+$/, "")
+    .trim();
+}
+
+
+function extractDomains(text) {
+
+  const regex =
+    /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>"']*)?/gi;
+
+
+  const matches =
+    text.match(regex) || [];
+
+
+  return [
+    ...new Set(
       matches
         .map(normalizeDomain)
-        .filter(
-          domain =>
-            domain &&
-            domain.includes(".")
+        .filter(Boolean)
+    )
+  ];
+}
+
+
+/* COUNTRY */
+
+const countryControl =
+  document.getElementById(
+    "countryControl"
+  );
+
+const countryMenu =
+  document.getElementById(
+    "countryMenu"
+  );
+
+const countryChips =
+  document.getElementById(
+    "countryChips"
+  );
+
+const countryPlaceholder =
+  document.getElementById(
+    "countryPlaceholder"
+  );
+
+
+function buildCountries() {
+
+  countryMenu.innerHTML = "";
+
+
+  countryList.forEach(
+    ([code, name]) => {
+
+      const label =
+        document.createElement(
+          "label"
         );
 
-    return [...new Set(domains)];
-  }
+      label.className =
+        "country-option";
 
 
-  /* COUNTRY PICKER */
+      const checkbox =
+        document.createElement(
+          "input"
+        );
 
-  const countryControl =
-    document.getElementById(
-      "countryControl"
-    );
+      checkbox.type =
+        "checkbox";
 
-  const countryMenu =
-    document.getElementById(
-      "countryMenu"
-    );
-
-  const countryChips =
-    document.getElementById(
-      "countryChips"
-    );
-
-  const countryPlaceholder =
-    document.getElementById(
-      "countryPlaceholder"
-    );
+      checkbox.checked =
+        selectedCountries.includes(
+          code
+        );
 
 
-  function buildCountryMenu() {
+      checkbox.onchange =
+        function () {
 
-    countryMenu.innerHTML = "";
+          if (
+            checkbox.checked
+          ) {
 
-    countryList.forEach(
-      ([code, name]) => {
-
-        const label =
-          document.createElement(
-            "label"
-          );
-
-        label.className =
-          "country-option";
-
-
-        const checkbox =
-          document.createElement(
-            "input"
-          );
-
-        checkbox.type =
-          "checkbox";
-
-        checkbox.value =
-          code;
-
-        checkbox.checked =
-          selectedCountries.includes(
-            code
-          );
-
-
-        checkbox.addEventListener(
-          "change",
-          function () {
-
-            if (checkbox.checked) {
-
-              if (
-                !selectedCountries.includes(
-                  code
-                )
-              ) {
-                selectedCountries.push(
-                  code
-                );
-              }
-
+            if (
+              !selectedCountries.includes(
+                code
+              )
+            ) {
+              selectedCountries.push(
+                code
+              );
             }
-
-            else {
-
-              selectedCountries =
-                selectedCountries.filter(
-                  item =>
-                    item !== code
-                );
-
-            }
-
-
-            renderCountryChips();
 
           }
-        );
 
-
-        const text =
-          document.createElement(
-            "span"
-          );
-
-        text.textContent =
-          name;
-
-
-        label.appendChild(
-          checkbox
-        );
-
-        label.appendChild(
-          text
-        );
-
-        countryMenu.appendChild(
-          label
-        );
-
-      }
-    );
-
-  }
-
-
-  function renderCountryChips() {
-
-    countryChips.innerHTML = "";
-
-
-    countryPlaceholder.style.display =
-      selectedCountries.length
-        ? "none"
-        : "block";
-
-
-    selectedCountries.forEach(
-      code => {
-
-        const entry =
-          countryList.find(
-            item =>
-              item[0] === code
-          );
-
-
-        if (!entry) {
-          return;
-        }
-
-
-        const chip =
-          document.createElement(
-            "span"
-          );
-
-        chip.className =
-          "country-chip";
-
-
-        const label =
-          document.createElement(
-            "span"
-          );
-
-        label.textContent =
-          entry[1];
-
-
-        const remove =
-          document.createElement(
-            "button"
-          );
-
-        remove.type =
-          "button";
-
-        remove.textContent =
-          "×";
-
-
-        remove.addEventListener(
-          "click",
-          function (event) {
-
-            event.stopPropagation();
+          else {
 
             selectedCountries =
               selectedCountries.filter(
-                item =>
-                  item !== code
+                x => x !== code
               );
 
-            buildCountryMenu();
-            renderCountryChips();
-
           }
-        );
 
 
-        chip.appendChild(
-          label
-        );
+          renderCountries();
 
-        chip.appendChild(
-          remove
-        );
-
-        countryChips.appendChild(
-          chip
-        );
-
-      }
-    );
-
-  }
+        };
 
 
-  countryControl.addEventListener(
-    "click",
-    function () {
+      label.append(
+        checkbox,
+        document.createTextNode(
+          name
+        )
+      );
 
-      countryMenu.classList.toggle(
-        "active"
+
+      countryMenu.appendChild(
+        label
       );
 
     }
   );
 
+}
 
-  document.addEventListener(
-    "click",
-    function (event) {
 
-      if (
-        !document
-          .getElementById(
-            "countryPicker"
-          )
-          .contains(
-            event.target
-          )
-      ) {
+function renderCountries() {
 
-        countryMenu.classList.remove(
-          "active"
+  countryChips.innerHTML = "";
+
+  countryPlaceholder.style.display =
+    selectedCountries.length
+      ? "none"
+      : "block";
+
+
+  selectedCountries.forEach(
+    code => {
+
+      const name =
+        countryList.find(
+          x => x[0] === code
+        )?.[1] || code;
+
+
+      const chip =
+        document.createElement(
+          "span"
         );
 
-      }
+      chip.className =
+        "country-chip";
+
+
+      chip.textContent =
+        name;
+
+
+      countryChips.appendChild(
+        chip
+      );
 
     }
   );
 
-
-  buildCountryMenu();
-  renderCountryChips();
+}
 
 
-  /* DATABASE */
+countryControl.onclick =
+  function () {
 
-  const databaseFile =
-    document.getElementById(
-      "databaseFile"
+    countryMenu.classList.toggle(
+      "active"
     );
 
-  const dbDropzone =
-    document.getElementById(
-      "dbDropzone"
-    );
-
-  const dbSaved =
-    document.getElementById(
-      "dbSaved"
-    );
-
-  const dbSavedMeta =
-    document.getElementById(
-      "dbSavedMeta"
-    );
-
-  const replaceDatabase =
-    document.getElementById(
-      "replaceDatabase"
-    );
-
-  const toggleMapping =
-    document.getElementById(
-      "toggleMapping"
-    );
-
-  const mapping =
-    document.getElementById(
-      "mapping"
-    );
-
-  const domainColumn =
-    document.getElementById(
-      "domainColumn"
-    );
-
-  const statusColumn =
-    document.getElementById(
-      "statusColumn"
-    );
+  };
 
 
-  dbDropzone.addEventListener(
-    "click",
-    function () {
+buildCountries();
+renderCountries();
+
+
+/* DATABASE */
+
+const databaseFile =
+  document.getElementById(
+    "databaseFile"
+  );
+
+const dbDropzone =
+  document.getElementById(
+    "dbDropzone"
+  );
+
+const dbSaved =
+  document.getElementById(
+    "dbSaved"
+  );
+
+const dbSavedMeta =
+  document.getElementById(
+    "dbSavedMeta"
+  );
+
+const domainColumn =
+  document.getElementById(
+    "domainColumn"
+  );
+
+const statusColumn =
+  document.getElementById(
+    "statusColumn"
+  );
+
+
+dbDropzone.onclick =
+  () =>
+    databaseFile.click();
+
+
+document
+  .getElementById(
+    "replaceDatabase"
+  )
+  .onclick =
+    () =>
       databaseFile.click();
+
+
+databaseFile.onchange =
+  function () {
+
+    const file =
+      databaseFile.files[0];
+
+    if (!file) {
+      return;
     }
-  );
 
-
-  replaceDatabase.addEventListener(
-    "click",
-    function () {
-      databaseFile.click();
-    }
-  );
-
-
-  toggleMapping.addEventListener(
-    "click",
-    function () {
-
-      mapping.classList.toggle(
-        "active"
-      );
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "dragover",
-    function (event) {
-
-      event.preventDefault();
-
-      dbDropzone.classList.add(
-        "dragging"
-      );
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "dragleave",
-    function () {
-
-      dbDropzone.classList.remove(
-        "dragging"
-      );
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "drop",
-    function (event) {
-
-      event.preventDefault();
-
-      dbDropzone.classList.remove(
-        "dragging"
-      );
-
-      const file =
-        event.dataTransfer.files[0];
-
-      if (
-        file &&
-        file.name
-          .toLowerCase()
-          .endsWith(".csv")
-      ) {
-
-        loadDatabaseFile(file);
-
-      }
-
-      else {
-
-        alert(
-          "Please upload a CSV file."
-        );
-
-      }
-
-    }
-  );
-
-
-  databaseFile.addEventListener(
-    "change",
-    function () {
-
-      const file =
-        databaseFile.files[0];
-
-      if (file) {
-        loadDatabaseFile(file);
-      }
-
-    }
-  );
-
-
-  function loadDatabaseFile(file) {
 
     const reader =
       new FileReader();
 
 
     reader.onload =
-      function (event) {
+      function (e) {
 
-        try {
-
-          const rows =
-            parseCSV(
-              event.target.result
-            );
+        const rows =
+          parseCSV(
+            e.target.result
+          );
 
 
-          if (rows.length < 2) {
+        databaseHeaders =
+          rows[0];
 
-            alert(
-              "Could not read this database CSV."
-            );
-
-            return;
-
-          }
+        rawDatabase =
+          rows.slice(1);
 
 
-          databaseHeaders =
-            rows[0].map(
-              header =>
-                String(
-                  header || ""
-                )
-                  .replace(
-                    /^\uFEFF/,
-                    ""
-                  )
-                  .trim()
-            );
+        domainColumn.innerHTML = "";
+        statusColumn.innerHTML = "";
 
 
-          rawDatabase =
-            rows.slice(1);
+        databaseHeaders.forEach(
+          (header, index) => {
 
+            const a =
+              new Option(
+                header,
+                index
+              );
 
-          domainColumn.innerHTML = "";
-          statusColumn.innerHTML = "";
-
-
-          databaseHeaders.forEach(
-            (header, index) => {
-
-              const domainOption =
-                document.createElement(
-                  "option"
-                );
-
-              domainOption.value =
-                index;
-
-              domainOption.textContent =
-                header ||
-                "Column " +
-                (index + 1);
-
-              domainColumn.appendChild(
-                domainOption
+            const b =
+              new Option(
+                header,
+                index
               );
 
 
-              const statusOption =
-                document.createElement(
-                  "option"
-                );
+            domainColumn.add(a);
+            statusColumn.add(b);
 
-              statusOption.value =
-                index;
-
-              statusOption.textContent =
-                header ||
-                "Column " +
-                (index + 1);
-
-              statusColumn.appendChild(
-                statusOption
-              );
-
-            }
-          );
-
-
-          const detectedDomain =
-            findColumn(
-              databaseHeaders,
-              [
-                "domain",
-                "website",
-                "site",
-                "url",
-                "domain name",
-                "website url"
-              ]
-            );
-
-
-          const detectedStatus =
-            findColumn(
-              databaseHeaders,
-              [
-                "status",
-                "state",
-                "stage",
-                "current status"
-              ]
-            );
-
-
-          if (
-            detectedDomain !== -1
-          ) {
-            domainColumn.value =
-              detectedDomain;
           }
+        );
 
 
-          if (
-            detectedStatus !== -1
-          ) {
-            statusColumn.value =
-              detectedStatus;
-          }
-
-
-          showDatabasePreview(
-            file.name
+        const detectedDomain =
+          findColumn(
+            databaseHeaders,
+            [
+              "domain",
+              "website",
+              "site",
+              "url"
+            ]
           );
 
 
-          toggleMapping.classList.remove(
-            "hidden"
+        const detectedStatus =
+          findColumn(
+            databaseHeaders,
+            [
+              "status",
+              "state",
+              "stage"
+            ]
           );
 
 
-          dbDropzone.classList.add(
-            "hidden"
-          );
-
-
-          dbSaved.classList.add(
-            "active"
-          );
-
+        if (
+          detectedDomain !== -1
+        ) {
+          domainColumn.value =
+            detectedDomain;
         }
 
-        catch (error) {
 
-          alert(
-            "Something went wrong while reading the database."
-          );
-
+        if (
+          detectedStatus !== -1
+        ) {
+          statusColumn.value =
+            detectedStatus;
         }
+
+
+        updateDatabasePreview();
+
+
+        dbDropzone.classList.add(
+          "hidden"
+        );
+
+
+        dbSaved.classList.add(
+          "active"
+        );
+
+
+        document
+          .getElementById(
+            "toggleMapping"
+          )
+          .classList
+          .remove("hidden");
 
       };
 
 
     reader.readAsText(file);
 
-  }
+  };
 
 
-  function showDatabasePreview(
-    fileName = ""
-  ) {
+function updateDatabasePreview() {
 
-    if (!rawDatabase.length) {
-      return;
-    }
+  const domainIndex =
+    Number(
+      domainColumn.value
+    );
 
-
-    const domainIndex =
-      Number(
-        domainColumn.value
-      );
-
-    const statusIndex =
-      Number(
-        statusColumn.value
-      );
+  const statusIndex =
+    Number(
+      statusColumn.value
+    );
 
 
-    const domains =
-      rawDatabase
-        .map(
-          row =>
-            normalizeDomain(
-              row[domainIndex]
+  const domains =
+    rawDatabase
+      .map(
+        row =>
+          normalizeDomain(
+            row[domainIndex]
+          )
+      )
+      .filter(Boolean);
+
+
+  const statuses =
+    rawDatabase
+      .map(
+        row =>
+          String(
+            row[statusIndex] || ""
+          ).trim()
+      )
+      .filter(Boolean);
+
+
+  dbSavedMeta.textContent =
+    [...new Set(domains)].length +
+    " unique domains · " +
+    [...new Set(statuses)].length +
+    " status variations";
+
+}
+
+
+document
+  .getElementById(
+    "toggleMapping"
+  )
+  .onclick =
+    () =>
+      document
+        .getElementById(
+          "mapping"
+        )
+        .classList
+        .toggle("active");
+
+
+/* SAVE */
+
+document
+  .getElementById(
+    "saveSettings"
+  )
+  .onclick =
+    function () {
+
+      let dr =
+        Number(
+          document
+            .getElementById(
+              "minDR"
             )
-        )
-        .filter(Boolean);
+            .value
+        );
 
 
-    const uniqueDomains =
-      [...new Set(domains)];
-
-
-    const statuses =
-      rawDatabase
-        .map(
-          row =>
-            String(
-              row[statusIndex] || ""
-            ).trim()
-        )
-        .filter(Boolean);
-
-
-    const uniqueStatuses =
-      [...new Set(statuses)];
-
-
-    dbSavedMeta.innerHTML =
-      (
-        fileName
-          ? fileName + "<br>"
-          : ""
-      ) +
-      uniqueDomains.length +
-      " unique domains · " +
-      uniqueStatuses.length +
-      " status variations";
-
-  }
-
-
-  domainColumn.addEventListener(
-    "change",
-    function () {
-      showDatabasePreview();
-    }
-  );
-
-
-  statusColumn.addEventListener(
-    "change",
-    function () {
-      showDatabasePreview();
-    }
-  );
-
-
-  /* SAVE SETTINGS */
-
-  document
-    .getElementById(
-      "saveSettings"
-    )
-    .addEventListener(
-      "click",
-      function () {
-
-        clampDR();
-
-
-        const existingDatabase =
-          localStorage.getItem(
-            "prospectCheckerDatabase"
-          );
-
-
-        if (
-          !rawDatabase.length &&
-          !existingDatabase
-        ) {
-
-          alert(
-            "Please upload your database first."
-          );
-
-          return;
-
-        }
-
-
-        const settings = {
-
-          useDR:
-            document.getElementById(
-              "useDR"
-            ).checked,
-
-          minDR:
-            Number(
-              document.getElementById(
-                "minDR"
-              ).value
-            ),
-
-          useTraffic:
-            document.getElementById(
-              "useTraffic"
-            ).checked,
-
-          minTraffic:
-            document.getElementById(
-              "minTraffic"
-            ).value,
-
-          useRD:
-            document.getElementById(
-              "useRD"
-            ).checked,
-
-          minRD:
-            document.getElementById(
-              "minRD"
-            ).value,
-
-          useRDLD:
-            document.getElementById(
-              "useRDLD"
-            ).checked,
-
-          useCountry:
-            document.getElementById(
-              "useCountry"
-            ).checked,
-
-          countries:
-            selectedCountries
-
-        };
-
-
-        localStorage.setItem(
-          "prospectCheckerSettings",
-          JSON.stringify(
-            settings
+      dr =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            dr || 0
           )
         );
 
 
-        if (
-          rawDatabase.length
-        ) {
+      const settings = {
 
-          const databaseData = {
+        useDR:
+          useDR.checked,
+
+        minDR:
+          dr,
+
+        useTraffic:
+          useTraffic.checked,
+
+        minTraffic:
+          Number(
+            minTraffic.value
+          ),
+
+        useRD:
+          useRD.checked,
+
+        minRD:
+          Number(
+            minRD.value
+          ),
+
+        useRDLD:
+          useRDLD.checked,
+
+        useCountry:
+          useCountry.checked,
+
+        countries:
+          selectedCountries
+
+      };
+
+
+      localStorage.setItem(
+        "prospectCheckerSettings",
+        JSON.stringify(
+          settings
+        )
+      );
+
+
+      if (
+        rawDatabase.length
+      ) {
+
+        localStorage.setItem(
+          "prospectCheckerDatabase",
+          JSON.stringify({
 
             headers:
               databaseHeaders,
@@ -2304,1066 +1836,507 @@ Another site: www.test.co.uk"
                 statusColumn.value
               )
 
-          };
-
-
-          localStorage.setItem(
-            "prospectCheckerDatabase",
-            JSON.stringify(
-              databaseData
-            )
-          );
-
-        }
-
-
-        showChecker();
-
-      }
-    );
-
-
-  /* LOAD SAVED SETTINGS */
-
-  const savedSettings =
-    localStorage.getItem(
-      "prospectCheckerSettings"
-    );
-
-
-  if (savedSettings) {
-
-    const settings =
-      JSON.parse(
-        savedSettings
-      );
-
-
-    document.getElementById(
-      "useDR"
-    ).checked =
-      Boolean(
-        settings.useDR
-      );
-
-
-    document.getElementById(
-      "minDR"
-    ).value =
-      Math.min(
-        100,
-        Math.max(
-          0,
-          Number(
-            settings.minDR ?? 50
-          )
-        )
-      );
-
-
-    document.getElementById(
-      "useTraffic"
-    ).checked =
-      Boolean(
-        settings.useTraffic
-      );
-
-
-    document.getElementById(
-      "minTraffic"
-    ).value =
-      settings.minTraffic ?? 2000;
-
-
-    document.getElementById(
-      "useRD"
-    ).checked =
-      Boolean(
-        settings.useRD
-      );
-
-
-    document.getElementById(
-      "minRD"
-    ).value =
-      settings.minRD ?? 500;
-
-
-    document.getElementById(
-      "useRDLD"
-    ).checked =
-      Boolean(
-        settings.useRDLD
-      );
-
-
-    document.getElementById(
-      "useCountry"
-    ).checked =
-      Boolean(
-        settings.useCountry
-      );
-
-
-    selectedCountries =
-      Array.isArray(
-        settings.countries
-      )
-        ? settings.countries
-        : [];
-
-
-    buildCountryMenu();
-    renderCountryChips();
-
-  }
-
-
-  /* SAVED DATABASE */
-
-  function loadSavedDatabaseUI() {
-
-    const savedDatabase =
-      localStorage.getItem(
-        "prospectCheckerDatabase"
-      );
-
-
-    if (!savedDatabase) {
-      return;
-    }
-
-
-    try {
-
-      const database =
-        JSON.parse(
-          savedDatabase
+          })
         );
 
-
-      rawDatabase =
-        database.rows || [];
-
-      databaseHeaders =
-        database.headers || [];
-
-
-      domainColumn.innerHTML = "";
-      statusColumn.innerHTML = "";
-
-
-      databaseHeaders.forEach(
-        (header, index) => {
-
-          const option1 =
-            document.createElement(
-              "option"
-            );
-
-          option1.value =
-            index;
-
-          option1.textContent =
-            header ||
-            "Column " +
-            (index + 1);
-
-          domainColumn.appendChild(
-            option1
-          );
-
-
-          const option2 =
-            document.createElement(
-              "option"
-            );
-
-          option2.value =
-            index;
-
-          option2.textContent =
-            header ||
-            "Column " +
-            (index + 1);
-
-          statusColumn.appendChild(
-            option2
-          );
-
-        }
-      );
-
-
-      domainColumn.value =
-        database.domainColumn;
-
-      statusColumn.value =
-        database.statusColumn;
-
-
-      showDatabasePreview(
-        "Saved database"
-      );
-
-
-      dbDropzone.classList.add(
-        "hidden"
-      );
-
-
-      dbSaved.classList.add(
-        "active"
-      );
-
-
-      toggleMapping.classList.remove(
-        "hidden"
-      );
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "Could not load saved database."
-      );
-
-    }
-
-  }
-
-
-  loadSavedDatabaseUI();
-
-
-  /* CHECKER */
-
-  function showChecker() {
-
-    const savedDatabase =
-      localStorage.getItem(
-        "prospectCheckerDatabase"
-      );
-
-
-    if (!savedDatabase) {
-      return;
-    }
-
-
-    const database =
-      JSON.parse(
-        savedDatabase
-      );
-
-
-    document
-      .getElementById(
-        "setupScreen"
-      )
-      .classList
-      .add("hidden");
-
-
-    document
-      .getElementById(
-        "checkerScreen"
-      )
-      .classList
-      .remove("hidden");
-
-
-    const uniqueDomains =
-      new Set();
-
-
-    database.rows.forEach(
-      row => {
-
-        const domain =
-          normalizeDomain(
-            row[
-              database.domainColumn
-            ]
-          );
-
-
-        if (domain) {
-          uniqueDomains.add(domain);
-        }
-
-      }
-    );
-
-
-    document
-      .getElementById(
-        "databaseStats"
-      )
-      .textContent =
-        uniqueDomains.size +
-        " domains in your saved database";
-
-  }
-
-
-  document
-    .getElementById(
-      "editSettings"
-    )
-    .addEventListener(
-      "click",
-      function () {
-
-        document
-          .getElementById(
-            "checkerScreen"
-          )
-          .classList
-          .add("hidden");
-
-
-        document
-          .getElementById(
-            "setupScreen"
-          )
-          .classList
-          .remove("hidden");
-
-      }
-    );
-
-
-  /* INPUT */
-
-  const domainInput =
-    document.getElementById(
-      "domainInput"
-    );
-
-
-  domainInput.addEventListener(
-    "input",
-    function () {
-
-      if (
-        ahrefsRows.length
-      ) {
-        return;
       }
 
 
-      const domains =
-        extractDomains(
-          domainInput.value
-        );
-
-
-      document
-        .getElementById(
-          "detectedInfo"
-        )
-        .textContent =
-          domains.length +
-          " unique domains detected";
-
-    }
-  );
-
-
-  /* AHREFS */
-
-  function detectAhrefsColumns(
-    headers
-  ) {
-
-    return {
-
-      domain:
-        findColumn(
-          headers,
-          [
-            "target",
-            "domain",
-            "url"
-          ]
-        ),
-
-      dr:
-        findColumn(
-          headers,
-          [
-            "domain rating",
-            "dr"
-          ]
-        ),
-
-      traffic:
-        findColumn(
-          headers,
-          [
-            "organic traffic",
-            "organic traffic total",
-            "traffic"
-          ]
-        ),
-
-      rd:
-        findColumn(
-          headers,
-          [
-            "referring domains",
-            "ref domains",
-            "rd"
-          ]
-        ),
-
-      ld:
-        findColumn(
-          headers,
-          [
-            "linked domains",
-            "linked domains dofollow",
-            "dofollow linked domains",
-            "linked domains total"
-          ]
-        ),
-
-      country:
-        findColumn(
-          headers,
-          [
-            "organic traffic top country",
-            "top country",
-            "country"
-          ]
-        )
+      showChecker();
 
     };
 
+
+/* LOAD SAVED DATA */
+
+const existingSettings =
+  JSON.parse(
+    localStorage.getItem(
+      "prospectCheckerSettings"
+    ) || "null"
+  );
+
+
+if (existingSettings) {
+
+  useDR.checked =
+    existingSettings.useDR;
+
+  minDR.value =
+    existingSettings.minDR ?? 50;
+
+  useTraffic.checked =
+    existingSettings.useTraffic;
+
+  minTraffic.value =
+    existingSettings.minTraffic ?? 2000;
+
+  useRD.checked =
+    existingSettings.useRD;
+
+  minRD.value =
+    existingSettings.minRD ?? 500;
+
+  useRDLD.checked =
+    existingSettings.useRDLD;
+
+  useCountry.checked =
+    existingSettings.useCountry;
+
+  selectedCountries =
+    existingSettings.countries || [];
+
+  buildCountries();
+  renderCountries();
+
+}
+
+
+const existingDB =
+  JSON.parse(
+    localStorage.getItem(
+      "prospectCheckerDatabase"
+    ) || "null"
+  );
+
+
+if (existingDB) {
+
+  rawDatabase =
+    existingDB.rows;
+
+  databaseHeaders =
+    existingDB.headers;
+
+}
+
+
+/* CHECKER */
+
+function showChecker() {
+
+  const db =
+    JSON.parse(
+      localStorage.getItem(
+        "prospectCheckerDatabase"
+      )
+    );
+
+
+  if (!db) {
+    alert(
+      "Please upload your database first."
+    );
+    return;
   }
 
 
-  const ahrefsFile =
-    document.getElementById(
-      "ahrefsFile"
-    );
+  setupScreen.classList.add(
+    "hidden"
+  );
 
-  const uploadZone =
-    document.getElementById(
-      "uploadZone"
-    );
-
-  const prospectInput =
-    document.getElementById(
-      "prospectInput"
-    );
-
-  const fileLoaded =
-    document.getElementById(
-      "fileLoaded"
-    );
-
-  const loadedFileName =
-    document.getElementById(
-      "loadedFileName"
-    );
-
-  const loadedFileMeta =
-    document.getElementById(
-      "loadedFileMeta"
-    );
-
-
-  uploadZone.addEventListener(
-    "click",
-    function () {
-      ahrefsFile.click();
-    }
+  checkerScreen.classList.remove(
+    "hidden"
   );
 
 
-  ahrefsFile.addEventListener(
-    "change",
-    function () {
+  const domains =
+    db.rows
+      .map(
+        row =>
+          normalizeDomain(
+            row[
+              db.domainColumn
+            ]
+          )
+      )
+      .filter(Boolean);
 
-      const file =
-        ahrefsFile.files[0];
 
-      if (file) {
-        loadAhrefsFile(file);
-      }
+  databaseStats.textContent =
+    [...new Set(domains)].length +
+    " domains in your database";
 
+}
+
+
+editSettings.onclick =
+  function () {
+
+    checkerScreen.classList.add(
+      "hidden"
+    );
+
+    setupScreen.classList.remove(
+      "hidden"
+    );
+
+  };
+
+
+/* TEXT INPUT */
+
+domainInput.oninput =
+  function () {
+
+    if (
+      ahrefsRows.length
+    ) {
+      return;
     }
-  );
 
 
-  prospectInput.addEventListener(
-    "dragover",
-    function (event) {
+    detectedInfo.textContent =
+      extractDomains(
+        domainInput.value
+      ).length +
+      " unique domains detected";
 
-      event.preventDefault();
+  };
 
-      prospectInput.classList.add(
-        "dragging"
+
+/* AHREFS */
+
+function detectAhrefsColumns(
+  headers
+) {
+
+  return {
+
+    domain:
+      findColumn(
+        headers,
+        ["target"]
+      ),
+
+    dr:
+      findColumn(
+        headers,
+        ["domain rating"]
+      ),
+
+    traffic:
+      findColumn(
+        headers,
+        ["organic / traffic"]
+      ),
+
+    country:
+      findColumn(
+        headers,
+        ["organic / top countries"]
+      ),
+
+    rd:
+      findColumn(
+        headers,
+        ["ref. domains / all"]
+      ),
+
+    ld:
+      findColumn(
+        headers,
+        ["outgoing domains / followed"]
+      )
+
+  };
+
+}
+
+
+function extractTopCountry(value) {
+
+  const match =
+    String(value || "")
+      .match(
+        /\(([a-z]{2}),/i
       );
 
+
+  return match
+    ? match[1].toUpperCase()
+    : "";
+
+}
+
+
+uploadZone.onclick =
+  () =>
+    ahrefsFile.click();
+
+
+ahrefsFile.onchange =
+  function () {
+
+    const file =
+      ahrefsFile.files[0];
+
+    if (!file) {
+      return;
     }
-  );
 
-
-  prospectInput.addEventListener(
-    "dragleave",
-    function () {
-
-      prospectInput.classList.remove(
-        "dragging"
-      );
-
-    }
-  );
-
-
-  prospectInput.addEventListener(
-    "drop",
-    function (event) {
-
-      event.preventDefault();
-
-      prospectInput.classList.remove(
-        "dragging"
-      );
-
-
-      const file =
-        event.dataTransfer.files[0];
-
-
-      if (
-        file &&
-        file.name
-          .toLowerCase()
-          .endsWith(".csv")
-      ) {
-
-        loadAhrefsFile(file);
-
-      }
-
-      else {
-
-        alert(
-          "Please drop a CSV file."
-        );
-
-      }
-
-    }
-  );
-
-
-  function loadAhrefsFile(file) {
 
     const reader =
       new FileReader();
 
 
     reader.onload =
-      function (event) {
+      function (e) {
 
-        try {
-
-          const rows =
-            parseCSV(
-              event.target.result
-            );
-
-
-          if (
-            rows.length < 2
-          ) {
-
-            alert(
-              "Could not read this CSV."
-            );
-
-            return;
-
-          }
-
-
-          ahrefsHeaders =
-            rows[0].map(
-              header =>
-                String(
-                  header || ""
-                )
-                  .replace(
-                    /^\uFEFF/,
-                    ""
-                  )
-                  .trim()
-            );
-
-
-          ahrefsRows =
-            rows.slice(1);
-
-
-          ahrefsColumnMap =
-            detectAhrefsColumns(
-              ahrefsHeaders
-            );
-
-
-          if (
-            ahrefsColumnMap.domain === -1
-          ) {
-
-            alert(
-              "Could not detect the domain column in this CSV."
-            );
-
-            return;
-
-          }
-
-
-          const domains =
-            ahrefsRows
-              .map(
-                row =>
-                  normalizeDomain(
-                    row[
-                      ahrefsColumnMap.domain
-                    ]
-                  )
-              )
-              .filter(Boolean);
-
-
-          const uniqueDomains =
-            [...new Set(domains)];
-
-
-          loadedFileName.textContent =
-            file.name;
-
-
-          loadedFileMeta.textContent =
-            uniqueDomains.length +
-            " unique domains detected";
-
-
-          uploadZone.classList.add(
-            "hidden"
+        const rows =
+          parseCSV(
+            e.target.result
           );
 
 
-          fileLoaded.classList.add(
-            "active"
+        const headers =
+          rows[0];
+
+
+        ahrefsRows =
+          rows.slice(1);
+
+
+        ahrefsColumnMap =
+          detectAhrefsColumns(
+            headers
           );
 
 
-          domainInput.value = "";
-
-          domainInput.disabled =
-            true;
-
-
-          document
-            .getElementById(
-              "detectedInfo"
-            )
-            .textContent =
-              uniqueDomains.length +
-              " domains ready to check";
-
-        }
-
-        catch (error) {
+        if (
+          ahrefsColumnMap.domain === -1
+        ) {
 
           alert(
-            "Something went wrong while reading the Ahrefs CSV."
+            "Target column not found."
           );
 
+          return;
+
         }
+
+
+        loadedFileName.textContent =
+          file.name;
+
+
+        loadedFileMeta.textContent =
+          ahrefsRows.length +
+          " rows detected";
+
+
+        uploadZone.classList.add(
+          "hidden"
+        );
+
+
+        fileLoaded.classList.add(
+          "active"
+        );
+
+
+        domainInput.disabled =
+          true;
+
+
+        detectedInfo.textContent =
+          ahrefsRows.length +
+          " domains ready to check";
 
       };
 
 
     reader.readAsText(file);
 
-  }
+  };
 
 
-  document
-    .getElementById(
-      "removeFile"
-    )
-    .addEventListener(
-      "click",
-      function (event) {
+removeFile.onclick =
+  function () {
 
-        event.stopPropagation();
+    ahrefsRows = [];
+    ahrefsColumnMap = null;
 
+    ahrefsFile.value = "";
 
-        ahrefsRows = [];
-        ahrefsHeaders = [];
-        ahrefsColumnMap = null;
+    fileLoaded.classList.remove(
+      "active"
+    );
 
-        ahrefsFile.value = "";
+    uploadZone.classList.remove(
+      "hidden"
+    );
 
+    domainInput.disabled =
+      false;
 
-        fileLoaded.classList.remove(
-          "active"
-        );
-
-
-        uploadZone.classList.remove(
-          "hidden"
-        );
+  };
 
 
-        domainInput.disabled =
-          false;
+/* EVALUATION */
 
+function evaluateRequirements(
+  row
+) {
 
-        document
-          .getElementById(
-            "detectedInfo"
-          )
-          .textContent =
-            extractDomains(
-              domainInput.value
-            ).length +
-            " unique domains detected";
-
-      }
+  const settings =
+    JSON.parse(
+      localStorage.getItem(
+        "prospectCheckerSettings"
+      ) || "{}"
     );
 
 
-  /* REQUIREMENTS */
+  const failures = [];
 
-  function evaluateRequirements(
-    row
+
+  const dr =
+    numberValue(
+      row[
+        ahrefsColumnMap.dr
+      ]
+    );
+
+
+  const traffic =
+    numberValue(
+      row[
+        ahrefsColumnMap.traffic
+      ]
+    );
+
+
+  const rd =
+    numberValue(
+      row[
+        ahrefsColumnMap.rd
+      ]
+    );
+
+
+  const ld =
+    numberValue(
+      row[
+        ahrefsColumnMap.ld
+      ]
+    );
+
+
+  const country =
+    extractTopCountry(
+      row[
+        ahrefsColumnMap.country
+      ]
+    );
+
+
+  if (
+    settings.useDR &&
+    dr < settings.minDR
   ) {
 
-    const settings =
-      JSON.parse(
-        localStorage.getItem(
-          "prospectCheckerSettings"
-        ) || "{}"
-      );
-
-
-    const failures = [];
-    const missing = [];
-
-
-    if (
-      settings.useDR
-    ) {
-
-      if (
-        ahrefsColumnMap.dr === -1
-      ) {
-
-        missing.push("DR");
-
-      }
-
-      else {
-
-        const dr =
-          numberValue(
-            row[
-              ahrefsColumnMap.dr
-            ]
-          );
-
-
-        const minDR =
-          Math.min(
-            100,
-            Math.max(
-              0,
-              numberValue(
-                settings.minDR
-              )
-            )
-          );
-
-
-        if (
-          dr < minDR
-        ) {
-
-          failures.push(
-            "DR " +
-            dr +
-            " < " +
-            minDR
-          );
-
-        }
-
-      }
-
-    }
-
-
-    if (
-      settings.useTraffic
-    ) {
-
-      if (
-        ahrefsColumnMap.traffic === -1
-      ) {
-
-        missing.push(
-          "Organic Traffic"
-        );
-
-      }
-
-      else {
-
-        const traffic =
-          numberValue(
-            row[
-              ahrefsColumnMap.traffic
-            ]
-          );
-
-
-        const minTraffic =
-          numberValue(
-            settings.minTraffic
-          );
-
-
-        if (
-          traffic < minTraffic
-        ) {
-
-          failures.push(
-            "Traffic " +
-            traffic +
-            " < " +
-            minTraffic
-          );
-
-        }
-
-      }
-
-    }
-
-
-    if (
-      settings.useRD
-    ) {
-
-      if (
-        ahrefsColumnMap.rd === -1
-      ) {
-
-        missing.push(
-          "Referring Domains"
-        );
-
-      }
-
-      else {
-
-        const rd =
-          numberValue(
-            row[
-              ahrefsColumnMap.rd
-            ]
-          );
-
-
-        const minRD =
-          numberValue(
-            settings.minRD
-          );
-
-
-        if (
-          rd < minRD
-        ) {
-
-          failures.push(
-            "RD " +
-            rd +
-            " < " +
-            minRD
-          );
-
-        }
-
-      }
-
-    }
-
-
-    if (
-      settings.useRDLD
-    ) {
-
-      if (
-        ahrefsColumnMap.rd === -1 ||
-        ahrefsColumnMap.ld === -1
-      ) {
-
-        missing.push(
-          "RD / Linked Domains"
-        );
-
-      }
-
-      else {
-
-        const rd =
-          numberValue(
-            row[
-              ahrefsColumnMap.rd
-            ]
-          );
-
-
-        const ld =
-          numberValue(
-            row[
-              ahrefsColumnMap.ld
-            ]
-          );
-
-
-        if (
-          rd < ld
-        ) {
-
-          failures.push(
-            "RD " +
-            rd +
-            " < LD " +
-            ld
-          );
-
-        }
-
-      }
-
-    }
-
-
-    if (
-      settings.useCountry
-    ) {
-
-      if (
-        ahrefsColumnMap.country === -1
-      ) {
-
-        missing.push(
-          "Top Country"
-        );
-
-      }
-
-      else {
-
-        const allowedCountries =
-          Array.isArray(
-            settings.countries
-          )
-            ? settings.countries.map(
-                item =>
-                  String(item)
-                    .trim()
-                    .toUpperCase()
-              )
-            : [];
-
-
-        const actualCountry =
-          String(
-            row[
-              ahrefsColumnMap.country
-            ] || ""
-          )
-            .trim()
-            .toUpperCase();
-
-
-        if (
-          allowedCountries.length &&
-          !allowedCountries.includes(
-            actualCountry
-          )
-        ) {
-
-          failures.push(
-            "Country " +
-            actualCountry +
-            " not allowed"
-          );
-
-        }
-
-      }
-
-    }
-
-
-    return {
-
-      passed:
-        failures.length === 0 &&
-        missing.length === 0,
-
-      failures,
-      missing
-
-    };
+    failures.push(
+      `DR ${dr} < ${settings.minDR}`
+    );
 
   }
 
 
-  /* DATABASE MAP */
+  if (
+    settings.useTraffic &&
+    traffic <
+      settings.minTraffic
+  ) {
 
-  function getSavedDatabaseMap() {
+    failures.push(
+      `Traffic ${traffic} < ${settings.minTraffic}`
+    );
 
-    const saved =
-      localStorage.getItem(
-        "prospectCheckerDatabase"
+  }
+
+
+  if (
+    settings.useRD &&
+    rd <
+      settings.minRD
+  ) {
+
+    failures.push(
+      `RD ${rd} < ${settings.minRD}`
+    );
+
+  }
+
+
+  if (
+    settings.useRDLD &&
+    rd < ld
+  ) {
+
+    failures.push(
+      `RD ${rd} < LD ${ld}`
+    );
+
+  }
+
+
+  if (
+    settings.useCountry &&
+    settings.countries.length &&
+    !settings.countries.includes(
+      country
+    )
+  ) {
+
+    failures.push(
+      `Country ${country} not allowed`
+    );
+
+  }
+
+
+  return {
+
+    passed:
+      failures.length === 0,
+
+    failures,
+
+    dr,
+    traffic,
+    rd,
+    ld,
+    country
+
+  };
+
+}
+
+
+/* CHECK */
+
+checkDomains.onclick =
+  function () {
+
+    const db =
+      JSON.parse(
+        localStorage.getItem(
+          "prospectCheckerDatabase"
+        )
       );
 
 
-    if (!saved) {
-      return null;
-    }
-
-
-    const database =
-      JSON.parse(saved);
-
-
-    const map =
+    const dbMap =
       new Map();
 
 
-    database.rows.forEach(
+    db.rows.forEach(
       row => {
 
         const domain =
           normalizeDomain(
             row[
-              database.domainColumn
+              db.domainColumn
             ]
           );
 
@@ -3371,14 +2344,14 @@ Another site: www.test.co.uk"
         const status =
           String(
             row[
-              database.statusColumn
+              db.statusColumn
             ] || ""
           ).trim();
 
 
         if (domain) {
 
-          map.set(
+          dbMap.set(
             domain,
             status
           );
@@ -3389,240 +2362,397 @@ Another site: www.test.co.uk"
     );
 
 
-    return {
-      map,
-      database
-    };
+    if (
+      ahrefsRows.length
+    ) {
+
+      allResults =
+        ahrefsRows.map(
+          row => {
+
+            const domain =
+              normalizeDomain(
+                row[
+                  ahrefsColumnMap.domain
+                ]
+              );
+
+
+            const check =
+              evaluateRequirements(
+                row
+              );
+
+
+            return {
+
+              mode:
+                "ahrefs",
+
+              domain,
+
+              found:
+                dbMap.has(domain),
+
+              status:
+                dbMap.has(domain)
+                  ? dbMap.get(domain)
+                  : "Not found",
+
+              ...check
+
+            };
+
+          }
+        );
+
+    }
+
+    else {
+
+      allResults =
+        extractDomains(
+          domainInput.value
+        ).map(
+          domain => ({
+
+            mode:
+              "text",
+
+            domain,
+
+            found:
+              dbMap.has(domain),
+
+            status:
+              dbMap.has(domain)
+                ? dbMap.get(domain)
+                : "Not found"
+
+          })
+        );
+
+    }
+
+
+    buildStatusFilter();
+
+    currentResultFilter =
+      "all";
+
+
+    document
+      .querySelectorAll(
+        ".filter-tab"
+      )
+      .forEach(
+        tab =>
+          tab.classList.remove(
+            "active"
+          )
+      );
+
+
+    document
+      .querySelector(
+        '[data-filter="all"]'
+      )
+      .classList
+      .add("active");
+
+
+    renderFilteredResults();
+
+  };
+
+
+/* FILTERS */
+
+function getFilteredResults() {
+
+  let results =
+    [...allResults];
+
+
+  if (
+    currentResultFilter ===
+    "passed"
+  ) {
+
+    results =
+      results.filter(
+        x =>
+          x.mode === "ahrefs" &&
+          x.passed
+      );
 
   }
 
 
-  /* CHECK */
+  if (
+    currentResultFilter ===
+    "failed"
+  ) {
 
-  document
-    .getElementById(
-      "checkDomains"
-    )
-    .addEventListener(
-      "click",
-      function () {
+    results =
+      results.filter(
+        x =>
+          x.mode === "ahrefs" &&
+          !x.passed
+      );
 
-        const databaseData =
-          getSavedDatabaseMap();
+  }
 
 
-        if (!databaseData) {
+  if (
+    currentResultFilter ===
+    "database"
+  ) {
 
-          alert(
-            "Please save your database first."
+    results =
+      results.filter(
+        x => x.found
+      );
+
+  }
+
+
+  if (
+    currentResultFilter ===
+    "new"
+  ) {
+
+    results =
+      results.filter(
+        x => !x.found
+      );
+
+  }
+
+
+  const status =
+    statusFilter.value;
+
+
+  if (
+    status !== "all"
+  ) {
+
+    results =
+      results.filter(
+        x =>
+          x.status === status
+      );
+
+  }
+
+
+  return results;
+
+}
+
+
+document
+  .querySelectorAll(
+    ".filter-tab"
+  )
+  .forEach(
+    tab => {
+
+      tab.onclick =
+        function () {
+
+          document
+            .querySelectorAll(
+              ".filter-tab"
+            )
+            .forEach(
+              x =>
+                x.classList.remove(
+                  "active"
+                )
+            );
+
+
+          tab.classList.add(
+            "active"
           );
 
-          return;
 
-        }
-
-
-        const databaseMap =
-          databaseData.map;
+          currentResultFilter =
+            tab.dataset.filter;
 
 
-        let results = [];
+          renderFilteredResults();
+
+        };
+
+    }
+  );
 
 
-        if (
-          ahrefsRows.length &&
-          ahrefsColumnMap &&
-          ahrefsColumnMap.domain !== -1
-        ) {
-
-          const seen =
-            new Set();
+statusFilter.onchange =
+  renderFilteredResults;
 
 
-          results =
-            ahrefsRows
-              .map(
-                row => {
+function buildStatusFilter() {
 
-                  const domain =
-                    normalizeDomain(
-                      row[
-                        ahrefsColumnMap.domain
-                      ]
-                    );
+  statusFilter.innerHTML =
+    '<option value="all">All statuses</option>';
 
 
-                  if (
-                    !domain ||
-                    seen.has(domain)
-                  ) {
-                    return null;
-                  }
+  const statuses =
+    [
+      ...new Set(
+        allResults
+          .map(
+            x => x.status
+          )
+          .filter(Boolean)
+      )
+    ].sort();
 
 
-                  seen.add(domain);
+  statuses.forEach(
+    status => {
+
+      statusFilter.add(
+        new Option(
+          status,
+          status
+        )
+      );
+
+    }
+  );
+
+}
 
 
-                  const requirementResult =
-                    evaluateRequirements(
-                      row
-                    );
+/* RENDER */
+
+function renderFilteredResults() {
+
+  const results =
+    getFilteredResults();
 
 
-                  return {
-
-                    mode:
-                      "ahrefs",
-
-                    domain,
-
-                    status:
-                      databaseMap.has(domain)
-                        ? databaseMap.get(domain)
-                        : "Not found",
-
-                    found:
-                      databaseMap.has(domain),
-
-                    dr:
-                      ahrefsColumnMap.dr !== -1
-                        ? row[
-                            ahrefsColumnMap.dr
-                          ]
-                        : "",
-
-                    traffic:
-                      ahrefsColumnMap.traffic !== -1
-                        ? row[
-                            ahrefsColumnMap.traffic
-                          ]
-                        : "",
-
-                    rd:
-                      ahrefsColumnMap.rd !== -1
-                        ? row[
-                            ahrefsColumnMap.rd
-                          ]
-                        : "",
-
-                    ld:
-                      ahrefsColumnMap.ld !== -1
-                        ? row[
-                            ahrefsColumnMap.ld
-                          ]
-                        : "",
-
-                    country:
-                      ahrefsColumnMap.country !== -1
-                        ? row[
-                            ahrefsColumnMap.country
-                          ]
-                        : "",
-
-                    passed:
-                      requirementResult.passed,
-
-                    failures:
-                      requirementResult.failures,
-
-                    missing:
-                      requirementResult.missing
-
-                  };
-
-                }
-              )
-              .filter(Boolean);
-
-        }
-
-        else {
-
-          const domains =
-            extractDomains(
-              domainInput.value
-            );
+  resultsCard.classList.remove(
+    "hidden"
+  );
 
 
-          results =
-            domains.map(
-              domain => ({
-
-                mode:
-                  "text",
-
-                domain,
-
-                status:
-                  databaseMap.has(domain)
-                    ? databaseMap.get(domain)
-                    : "Not found",
-
-                found:
-                  databaseMap.has(domain)
-
-              })
-            );
-
-        }
+  resultsSummary.textContent =
+    `${results.length} shown · ${allResults.length} total`;
 
 
-        renderResults(
-          results
-        );
+  resultsBody.innerHTML = "";
 
-      }
+
+  const isAhrefs =
+    allResults.some(
+      x =>
+        x.mode === "ahrefs"
     );
 
 
-  /* RESULTS */
+  if (isAhrefs) {
 
-  function renderResults(
-    results
-  ) {
+    resultsHead.innerHTML = `
+      <tr>
+        <th>Domain</th>
+        <th>Status</th>
+        <th>DR</th>
+        <th>Traffic</th>
+        <th>RD</th>
+        <th>LD</th>
+        <th>Country</th>
+        <th>Result</th>
+      </tr>
+    `;
 
-    const card =
-      document.getElementById(
-        "resultsCard"
+  }
+
+  else {
+
+    resultsHead.innerHTML = `
+      <tr>
+        <th>Domain</th>
+        <th>Status</th>
+      </tr>
+    `;
+
+  }
+
+
+  results.forEach(
+    result => {
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      if (
+        result.mode === "text"
+      ) {
+
+        tr.innerHTML = `
+          <td>${result.domain}</td>
+          <td>${result.status}</td>
+        `;
+
+      }
+
+      else {
+
+        tr.innerHTML = `
+          <td>${result.domain}</td>
+          <td>${result.status}</td>
+          <td>${result.dr}</td>
+          <td>${result.traffic}</td>
+          <td>${result.rd}</td>
+          <td>${result.ld}</td>
+          <td>${result.country}</td>
+          <td>
+            ${
+              result.passed
+                ? '<span class="success">Passed</span>'
+                : '<span class="error">Failed</span>'
+            }
+            ${
+              result.failures.length
+                ? `<div class="fail-reasons">${result.failures.join("<br>")}</div>`
+                : ""
+            }
+          </td>
+        `;
+
+      }
+
+
+      resultsBody.appendChild(
+        tr
       );
 
+    }
+  );
 
-    const head =
-      document.getElementById(
-        "resultsHead"
-      );
-
-
-    const body =
-      document.getElementById(
-        "resultsBody"
-      );
+}
 
 
-    const summary =
-      document.getElementById(
-        "resultsSummary"
-      );
+/* EXPORT */
+
+exportFiltered.onclick =
+  function () {
+
+    const results =
+      getFilteredResults();
 
 
-    body.innerHTML = "";
-
-
-    if (
-      results.length === 0
-    ) {
-
-      summary.textContent =
-        "No domains detected.";
-
-      head.innerHTML = "";
-
-      card.classList.remove(
-        "hidden"
-      );
-
+    if (!results.length) {
       return;
-
     }
 
 
@@ -3631,229 +2761,137 @@ Another site: www.test.co.uk"
       "ahrefs";
 
 
-    const foundCount =
-      results.filter(
-        item => item.found
-      ).length;
-
-
-    summary.textContent =
-      results.length +
-      " domains checked · " +
-      foundCount +
-      " found in database · " +
-      (
-        results.length -
-        foundCount
-      ) +
-      " not found";
+    const rows = [];
 
 
     if (isAhrefs) {
 
-      head.innerHTML = `
-        <tr>
-          <th>Domain</th>
-          <th>Status</th>
-          <th>DR</th>
-          <th>Traffic</th>
-          <th>RD</th>
-          <th>LD</th>
-          <th>Country</th>
-          <th>Requirements</th>
-        </tr>
-      `;
+      rows.push([
+        "Domain",
+        "Status",
+        "DR",
+        "Traffic",
+        "RD",
+        "LD",
+        "Country",
+        "Result",
+        "Reasons"
+      ]);
+
+
+      results.forEach(
+        x => {
+
+          rows.push([
+            x.domain,
+            x.status,
+            x.dr,
+            x.traffic,
+            x.rd,
+            x.ld,
+            x.country,
+            x.passed
+              ? "Passed"
+              : "Failed",
+            x.failures.join("; ")
+          ]);
+
+        }
+      );
 
     }
 
     else {
 
-      head.innerHTML = `
-        <tr>
-          <th>Domain</th>
-          <th>Status</th>
-        </tr>
-      `;
+      rows.push([
+        "Domain",
+        "Status"
+      ]);
+
+
+      results.forEach(
+        x => {
+
+          rows.push([
+            x.domain,
+            x.status
+          ]);
+
+        }
+      );
 
     }
 
 
-    results.forEach(
-      result => {
-
-        const tr =
-          document.createElement(
-            "tr"
-          );
-
-
-        if (!isAhrefs) {
-
-          const domainTd =
-            document.createElement(
-              "td"
-            );
-
-          domainTd.textContent =
-            result.domain;
-
-
-          const statusTd =
-            document.createElement(
-              "td"
-            );
-
-          statusTd.textContent =
-            result.status;
-
-
-          if (!result.found) {
-            statusTd.className =
-              "muted";
-          }
-
-
-          tr.appendChild(
-            domainTd
-          );
-
-
-          tr.appendChild(
-            statusTd
-          );
-
-        }
-
-        else {
-
-          const cells = [
-            result.domain,
-            result.status,
-            result.dr,
-            result.traffic,
-            result.rd,
-            result.ld,
-            result.country
-          ];
-
-
-          cells.forEach(
-            (value, index) => {
-
-              const td =
-                document.createElement(
-                  "td"
-                );
-
-
-              td.textContent =
-                value;
-
-
-              if (
-                index === 1 &&
-                !result.found
-              ) {
-                td.className =
-                  "muted";
-              }
-
-
-              tr.appendChild(td);
-
-            }
-          );
-
-
-          const reqTd =
-            document.createElement(
-              "td"
-            );
-
-
-          if (
-            result.passed
-          ) {
-
-            reqTd.innerHTML =
-              '<span class="success">Pass</span>';
-
-          }
-
-          else {
-
-            reqTd.innerHTML =
-              '<span class="error">Fail</span>';
-
-
-            const reasons = [
-              ...result.failures,
-              ...result.missing.map(
-                item =>
-                  "Missing column: " +
-                  item
+    const csv =
+      rows
+        .map(
+          row =>
+            row
+              .map(
+                value =>
+                  '"' +
+                  String(
+                    value ?? ""
+                  )
+                    .replace(
+                      /"/g,
+                      '""'
+                    ) +
+                  '"'
               )
-            ];
+              .join(",")
+        )
+        .join("\n");
 
 
-            if (
-              reasons.length
-            ) {
-
-              const div =
-                document.createElement(
-                  "div"
-                );
-
-
-              div.className =
-                "fail-reasons";
-
-
-              div.innerHTML =
-                reasons.join(
-                  "<br>"
-                );
-
-
-              reqTd.appendChild(
-                div
-              );
-
-            }
-
-          }
-
-
-          tr.appendChild(
-            reqTd
-          );
-
+    const blob =
+      new Blob(
+        [csv],
+        {
+          type:
+            "text/csv;charset=utf-8;"
         }
+      );
 
 
-        body.appendChild(tr);
+    const url =
+      URL.createObjectURL(
+        blob
+      );
 
-      }
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+
+    link.href =
+      url;
+
+
+    link.download =
+      "filtered-prospects.csv";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+      url
     );
 
-
-    card.classList.remove(
-      "hidden"
-    );
-
-  }
+  };
 
 
-  const existingDatabase =
-    localStorage.getItem(
-      "prospectCheckerDatabase"
-    );
-
-
-  if (existingDatabase) {
-    showChecker();
-  }
+if (
+  localStorage.getItem(
+    "prospectCheckerDatabase"
+  )
+) {
+  showChecker();
+}
 
 </script>
 
