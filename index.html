@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Link Prospect Checker</title>
 
   <style>
@@ -18,31 +19,31 @@
     }
 
     .container {
-      width: 90%;
-      max-width: 950px;
+      width: 92%;
+      max-width: 1100px;
       margin: 50px auto;
     }
 
     h1 {
-      margin-bottom: 8px;
+      margin: 0 0 8px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
     }
 
     .subtitle {
       color: #6b7280;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
 
     .card {
-      background: white;
+      background: #fff;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
       padding: 24px;
       margin-bottom: 20px;
-    }
-
-    .card h2 {
-      margin-top: 0;
-      font-size: 18px;
     }
 
     .description {
@@ -51,43 +52,28 @@
       line-height: 1.5;
     }
 
-    .requirement {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 16px 0;
+    .hidden {
+      display: none !important;
     }
 
-    .requirement label {
-      min-width: 220px;
+    .success {
+      color: #15803d;
+      font-weight: 600;
     }
 
-    input[type="number"],
-    input[type="text"],
-    select {
-      padding: 8px 10px;
-      border: 1px solid #d1d5db;
-      border-radius: 7px;
-      background: white;
+    .error {
+      color: #b91c1c;
+      font-weight: 600;
     }
 
-    input[type="number"] {
-      width: 110px;
+    .muted {
+      color: #9ca3af;
     }
 
-    input[type="text"] {
-      width: 280px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 220px;
-      padding: 14px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      resize: vertical;
-      font-family: Arial, sans-serif;
+    .stats {
       font-size: 14px;
+      color: #6b7280;
+      margin-top: 8px;
     }
 
     .file-info {
@@ -112,20 +98,63 @@
 
     .mapping-row label {
       display: inline-block;
-      width: 130px;
+      width: 140px;
+      font-size: 14px;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .requirement label {
+      min-width: 230px;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    input[type="number"] {
+      width: 120px;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      max-width: 100%;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     button {
-      border: none;
+      border: 0;
       border-radius: 8px;
       padding: 12px 18px;
-      font-weight: 600;
       cursor: pointer;
+      font-weight: 600;
     }
 
     .primary {
       background: #111827;
-      color: white;
+      color: #fff;
     }
 
     .secondary {
@@ -141,50 +170,78 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 20px;
       margin-bottom: 24px;
     }
 
-    .stats {
-      color: #6b7280;
+    .upload-block {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .input-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .summary {
+      margin-bottom: 14px;
       font-size: 14px;
-      margin-top: 8px;
+      color: #4b5563;
     }
 
-    .success {
-      color: #15803d;
-      font-weight: 600;
-    }
-
-    .error {
-      color: #b91c1c;
-      font-weight: 600;
-    }
-
-    .hidden {
-      display: none;
+    .table-wrap {
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 18px;
-      background: white;
+      min-width: 700px;
     }
 
     th,
     td {
-      padding: 12px;
-      text-align: left;
+      padding: 11px 12px;
       border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      vertical-align: top;
       font-size: 14px;
     }
 
     th {
       background: #f9fafb;
+      white-space: nowrap;
     }
 
-    .not-found {
-      color: #9ca3af;
+    .fail-reasons {
+      margin-top: 4px;
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        margin: 25px auto;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .requirement {
+        align-items: flex-start;
+      }
+
+      .requirement label {
+        min-width: 180px;
+      }
     }
   </style>
 </head>
@@ -200,8 +257,9 @@
     <h1>Link Prospect Checker</h1>
 
     <p class="subtitle">
-      Set up your database and requirements.
+      Set up your database and requirements once, then use the checker anytime.
     </p>
+
 
     <section class="card">
 
@@ -209,6 +267,7 @@
 
       <p class="description">
         Upload a CSV with your existing domains and statuses.
+        We’ll try to detect the correct columns automatically.
       </p>
 
       <input
@@ -217,19 +276,33 @@
         accept=".csv,text/csv"
       >
 
-      <div class="file-info" id="fileInfo">
+      <div
+        class="file-info"
+        id="fileInfo"
+      >
         No database uploaded.
       </div>
 
-      <div class="mapping" id="mapping">
+
+      <div
+        class="mapping"
+        id="mapping"
+      >
 
         <div class="mapping-row">
-          <label>Domain column</label>
+          <label for="domainColumn">
+            Domain column
+          </label>
+
           <select id="domainColumn"></select>
         </div>
 
+
         <div class="mapping-row">
-          <label>Status column</label>
+          <label for="statusColumn">
+            Status column
+          </label>
+
           <select id="statusColumn"></select>
         </div>
 
@@ -242,37 +315,105 @@
 
       <h2>2. Your Requirements</h2>
 
-      <div class="requirement">
-        <input type="checkbox" id="useDR">
-        <label for="useDR">Minimum DR</label>
-        <input type="number" id="minDR" value="50">
-      </div>
+      <p class="description">
+        Choose only the Ahrefs metrics you want to check.
+      </p>
+
 
       <div class="requirement">
-        <input type="checkbox" id="useTraffic">
-        <label for="useTraffic">Minimum Organic Traffic</label>
-        <input type="number" id="minTraffic" value="2000">
+
+        <input
+          type="checkbox"
+          id="useDR"
+        >
+
+        <label for="useDR">
+          Minimum DR
+        </label>
+
+        <input
+          type="number"
+          id="minDR"
+          value="50"
+          min="0"
+        >
+
       </div>
 
-      <div class="requirement">
-        <input type="checkbox" id="useRD">
-        <label for="useRD">Minimum Referring Domains</label>
-        <input type="number" id="minRD" value="500">
-      </div>
 
       <div class="requirement">
-        <input type="checkbox" id="useRDLD">
-        <label for="useRDLD">Referring Domains ≥ Linked Domains</label>
+
+        <input
+          type="checkbox"
+          id="useTraffic"
+        >
+
+        <label for="useTraffic">
+          Minimum Organic Traffic
+        </label>
+
+        <input
+          type="number"
+          id="minTraffic"
+          value="2000"
+          min="0"
+        >
+
       </div>
 
+
       <div class="requirement">
-        <input type="checkbox" id="useCountry">
-        <label for="useCountry">Allowed top countries</label>
+
+        <input
+          type="checkbox"
+          id="useRD"
+        >
+
+        <label for="useRD">
+          Minimum Referring Domains
+        </label>
+
+        <input
+          type="number"
+          id="minRD"
+          value="500"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="requirement">
+
+        <input
+          type="checkbox"
+          id="useRDLD"
+        >
+
+        <label for="useRDLD">
+          Referring Domains ≥ Linked Domains
+        </label>
+
+      </div>
+
+
+      <div class="requirement">
+
+        <input
+          type="checkbox"
+          id="useCountry"
+        >
+
+        <label for="useCountry">
+          Allowed top countries
+        </label>
+
         <input
           type="text"
           id="countries"
           placeholder="US, UK, CA, AU"
         >
+
       </div>
 
     </section>
@@ -299,11 +440,13 @@
 
       <div>
         <h1>Link Prospect Checker</h1>
+
         <div
           class="stats"
           id="databaseStats"
         ></div>
       </div>
+
 
       <button
         id="editSettings"
@@ -320,30 +463,65 @@
       <h2>Check Domains</h2>
 
       <p class="description">
-        Paste domains, URLs, vendor messages or any text.
-        We'll extract the domains automatically.
+        Paste domains, URLs, a vendor message, or any other text.
+        Or upload an Ahrefs Batch Analysis CSV below.
       </p>
+
 
       <textarea
         id="domainInput"
-        placeholder="Paste anything here..."
+        placeholder="Paste anything here...
+
+Example:
+https://example.com/blog/
+site.com DR 70 $100
+Another site: www.test.co.uk"
       ></textarea>
+
 
       <div
         class="stats"
         id="detectedInfo"
       >
-        0 domains detected
+        0 unique domains detected
       </div>
 
-      <br>
 
-      <button
-        id="checkDomains"
-        class="primary"
-      >
-        Check domains
-      </button>
+      <div class="upload-block">
+
+        <strong>
+          Or upload Ahrefs Batch Analysis CSV
+        </strong>
+
+        <div style="margin-top: 10px;">
+
+          <input
+            type="file"
+            id="ahrefsFile"
+            accept=".csv,text/csv"
+          >
+
+        </div>
+
+
+        <div
+          class="stats"
+          id="ahrefsInfo"
+        ></div>
+
+      </div>
+
+
+      <div class="input-actions">
+
+        <button
+          id="checkDomains"
+          class="primary"
+        >
+          Check domains
+        </button>
+
+      </div>
 
     </section>
 
@@ -355,20 +533,23 @@
 
       <h2>Results</h2>
 
-      <div id="resultsSummary"></div>
+      <div
+        class="summary"
+        id="resultsSummary"
+      ></div>
 
-      <table>
 
-        <thead>
-          <tr>
-            <th>Domain</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+      <div class="table-wrap">
 
-        <tbody id="resultsBody"></tbody>
+        <table>
 
-      </table>
+          <thead id="resultsHead"></thead>
+
+          <tbody id="resultsBody"></tbody>
+
+        </table>
+
+      </div>
 
     </section>
 
@@ -379,730 +560,990 @@
 
 <script>
 
-let rawDatabase = [];
-let databaseHeaders = [];
+  let rawDatabase = [];
+  let databaseHeaders = [];
+
+  let ahrefsRows = [];
+  let ahrefsHeaders = [];
+  let ahrefsColumnMap = null;
 
 
-/* =========================
-   HELPERS
-========================= */
+  /* =========================
+     GENERAL HELPERS
+  ========================= */
 
-function cleanHeader(value) {
+  function cleanHeader(value) {
 
-  return String(value || "")
-    .replace(/^\uFEFF/, "")
-    .trim()
-    .toLowerCase();
-
-}
-
-
-function parseCSV(text) {
-
-  const rows = [];
-
-  let row = [];
-  let cell = "";
-  let insideQuotes = false;
-
-
-  for (let i = 0; i < text.length; i++) {
-
-    const char = text[i];
-    const next = text[i + 1];
-
-
-    if (
-      char === '"' &&
-      insideQuotes &&
-      next === '"'
-    ) {
-
-      cell += '"';
-      i++;
-
-    }
-
-    else if (char === '"') {
-
-      insideQuotes = !insideQuotes;
-
-    }
-
-    else if (
-      char === "," &&
-      !insideQuotes
-    ) {
-
-      row.push(cell);
-      cell = "";
-
-    }
-
-    else if (
-      (char === "\n" || char === "\r") &&
-      !insideQuotes
-    ) {
-
-      if (
-        char === "\r" &&
-        next === "\n"
-      ) {
-        i++;
-      }
-
-      row.push(cell);
-
-      if (
-        row.some(
-          value =>
-            String(value).trim() !== ""
-        )
-      ) {
-        rows.push(row);
-      }
-
-      row = [];
-      cell = "";
-
-    }
-
-    else {
-
-      cell += char;
-
-    }
-
-  }
-
-
-  row.push(cell);
-
-  if (
-    row.some(
-      value =>
-        String(value).trim() !== ""
-    )
-  ) {
-    rows.push(row);
-  }
-
-
-  return rows;
-
-}
-
-
-function findColumn(
-  headers,
-  possibleNames
-) {
-
-  const normalized =
-    headers.map(cleanHeader);
-
-
-  for (
-    const name of possibleNames
-  ) {
-
-    const index =
-      normalized.indexOf(name);
-
-    if (index !== -1) {
-      return index;
-    }
-
-  }
-
-
-  return -1;
-
-}
-
-
-/* =========================
-   DOMAIN NORMALIZATION
-========================= */
-
-function normalizeDomain(value) {
-
-  if (!value) {
-    return "";
-  }
-
-
-  let domain =
-    String(value)
+    return String(value || "")
+      .replace(/^\uFEFF/, "")
       .trim()
       .toLowerCase();
 
-
-  domain =
-    domain.replace(
-      /^[("'[\]{}<>]+/,
-      ""
-    );
-
-
-  domain =
-    domain.replace(
-      /[)"'\],;:{}<>.!?]+$/,
-      ""
-    );
-
-
-  domain =
-    domain.replace(
-      /^https?:\/\//i,
-      ""
-    );
-
-
-  domain =
-    domain.replace(
-      /^www\./i,
-      ""
-    );
-
-
-  domain =
-    domain.split("/")[0];
-
-  domain =
-    domain.split("?")[0];
-
-  domain =
-    domain.split("#")[0];
-
-
-  return domain.trim();
-
-}
-
-
-/* =========================
-   EXTRACT DOMAINS FROM TEXT
-========================= */
-
-function extractDomains(text) {
-
-  if (!text) {
-    return [];
   }
 
 
-  const regex =
-    /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>"']*)?/gi;
+  function detectDelimiter(text) {
+
+    const firstLine =
+      text.split(/\r?\n/)[0] || "";
+
+    const commaCount =
+      (firstLine.match(/,/g) || []).length;
+
+    const semicolonCount =
+      (firstLine.match(/;/g) || []).length;
+
+    const tabCount =
+      (firstLine.match(/\t/g) || []).length;
 
 
-  const matches =
-    text.match(regex) || [];
+    if (
+      semicolonCount > commaCount &&
+      semicolonCount >= tabCount
+    ) {
+      return ";";
+    }
 
 
-  const domains =
-    matches
-      .map(normalizeDomain)
-      .filter(domain =>
-        domain &&
-        domain.includes(".")
+    if (
+      tabCount > commaCount &&
+      tabCount > semicolonCount
+    ) {
+      return "\t";
+    }
+
+
+    return ",";
+
+  }
+
+
+  function parseCSV(text) {
+
+    const delimiter =
+      detectDelimiter(text);
+
+    const rows = [];
+
+    let row = [];
+    let cell = "";
+    let insideQuotes = false;
+
+
+    for (
+      let i = 0;
+      i < text.length;
+      i++
+    ) {
+
+      const char = text[i];
+      const next = text[i + 1];
+
+
+      if (
+        char === '"' &&
+        insideQuotes &&
+        next === '"'
+      ) {
+
+        cell += '"';
+        i++;
+
+      }
+
+      else if (char === '"') {
+
+        insideQuotes =
+          !insideQuotes;
+
+      }
+
+      else if (
+        char === delimiter &&
+        !insideQuotes
+      ) {
+
+        row.push(cell);
+        cell = "";
+
+      }
+
+      else if (
+        (char === "\n" ||
+          char === "\r") &&
+        !insideQuotes
+      ) {
+
+        if (
+          char === "\r" &&
+          next === "\n"
+        ) {
+          i++;
+        }
+
+        row.push(cell);
+
+        if (
+          row.some(
+            value =>
+              String(value).trim() !== ""
+          )
+        ) {
+          rows.push(row);
+        }
+
+        row = [];
+        cell = "";
+
+      }
+
+      else {
+
+        cell += char;
+
+      }
+
+    }
+
+
+    row.push(cell);
+
+    if (
+      row.some(
+        value =>
+          String(value).trim() !== ""
+      )
+    ) {
+      rows.push(row);
+    }
+
+
+    return rows;
+
+  }
+
+
+  function findColumn(
+    headers,
+    possibleNames
+  ) {
+
+    const normalized =
+      headers.map(cleanHeader);
+
+
+    for (
+      const name of possibleNames
+    ) {
+
+      const index =
+        normalized.indexOf(
+          name.toLowerCase()
+        );
+
+      if (index !== -1) {
+        return index;
+      }
+
+    }
+
+
+    return -1;
+
+  }
+
+
+  function numberValue(value) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return 0;
+    }
+
+
+    let cleaned =
+      String(value)
+        .replace(/\s/g, "")
+        .replace(/,/g, "")
+        .trim();
+
+
+    const lower =
+      cleaned.toLowerCase();
+
+
+    let multiplier = 1;
+
+
+    if (lower.endsWith("k")) {
+
+      multiplier = 1000;
+
+      cleaned =
+        cleaned.slice(0, -1);
+
+    }
+
+    else if (
+      lower.endsWith("m")
+    ) {
+
+      multiplier = 1000000;
+
+      cleaned =
+        cleaned.slice(0, -1);
+
+    }
+
+
+    const number =
+      Number(cleaned);
+
+
+    return Number.isFinite(number)
+      ? number * multiplier
+      : 0;
+
+  }
+
+
+  /* =========================
+     DOMAIN NORMALIZATION
+  ========================= */
+
+  function normalizeDomain(value) {
+
+    if (!value) {
+      return "";
+    }
+
+
+    let domain =
+      String(value)
+        .trim()
+        .toLowerCase();
+
+
+    domain =
+      domain.replace(
+        /^[("'[\]{}<>]+/,
+        ""
       );
 
 
-  return [
-    ...new Set(domains)
-  ];
+    domain =
+      domain.replace(
+        /[)"'\],;:{}<>!?]+$/,
+        ""
+      );
 
-}
+
+    domain =
+      domain.replace(
+        /^https?:\/\//i,
+        ""
+      );
 
 
-/* =========================
-   DATABASE UPLOAD
-========================= */
+    domain =
+      domain.replace(
+        /^www\./i,
+        ""
+      );
 
-const databaseFile =
-  document.getElementById(
-    "databaseFile"
+
+    domain =
+      domain.split("/")[0];
+
+    domain =
+      domain.split("?")[0];
+
+    domain =
+      domain.split("#")[0];
+
+    domain =
+      domain.replace(
+        /:\d+$/,
+        ""
+      );
+
+
+    return domain.trim();
+
+  }
+
+
+  function extractDomains(text) {
+
+    if (!text) {
+      return [];
+    }
+
+
+    const regex =
+      /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>"']*)?/gi;
+
+
+    const matches =
+      text.match(regex) || [];
+
+
+    const domains =
+      matches
+        .map(normalizeDomain)
+        .filter(
+          domain =>
+            domain &&
+            domain.includes(".")
+        );
+
+
+    return [
+      ...new Set(domains)
+    ];
+
+  }
+
+
+  /* =========================
+     DATABASE UPLOAD
+  ========================= */
+
+  const databaseFile =
+    document.getElementById(
+      "databaseFile"
+    );
+
+  const fileInfo =
+    document.getElementById(
+      "fileInfo"
+    );
+
+  const mapping =
+    document.getElementById(
+      "mapping"
+    );
+
+  const domainColumn =
+    document.getElementById(
+      "domainColumn"
+    );
+
+  const statusColumn =
+    document.getElementById(
+      "statusColumn"
+    );
+
+
+  databaseFile.addEventListener(
+    "change",
+    function () {
+
+      const file =
+        databaseFile.files[0];
+
+
+      if (!file) {
+        return;
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function (event) {
+
+          try {
+
+            const rows =
+              parseCSV(
+                event.target.result
+              );
+
+
+            if (
+              rows.length < 2
+            ) {
+
+              fileInfo.innerHTML =
+                '<span class="error">Could not read this CSV.</span>';
+
+              return;
+
+            }
+
+
+            databaseHeaders =
+              rows[0].map(
+                header =>
+                  String(
+                    header || ""
+                  )
+                    .replace(
+                      /^\uFEFF/,
+                      ""
+                    )
+                    .trim()
+              );
+
+
+            rawDatabase =
+              rows.slice(1);
+
+
+            domainColumn.innerHTML = "";
+            statusColumn.innerHTML = "";
+
+
+            databaseHeaders.forEach(
+              (header, index) => {
+
+                const option1 =
+                  document.createElement(
+                    "option"
+                  );
+
+                option1.value =
+                  index;
+
+                option1.textContent =
+                  header ||
+                  "Column " +
+                  (index + 1);
+
+                domainColumn.appendChild(
+                  option1
+                );
+
+
+                const option2 =
+                  document.createElement(
+                    "option"
+                  );
+
+                option2.value =
+                  index;
+
+                option2.textContent =
+                  header ||
+                  "Column " +
+                  (index + 1);
+
+                statusColumn.appendChild(
+                  option2
+                );
+
+              }
+            );
+
+
+            const detectedDomain =
+              findColumn(
+                databaseHeaders,
+                [
+                  "domain",
+                  "website",
+                  "site",
+                  "url",
+                  "domain name",
+                  "website url"
+                ]
+              );
+
+
+            const detectedStatus =
+              findColumn(
+                databaseHeaders,
+                [
+                  "status",
+                  "state",
+                  "stage",
+                  "current status"
+                ]
+              );
+
+
+            if (
+              detectedDomain !== -1
+            ) {
+
+              domainColumn.value =
+                detectedDomain;
+
+            }
+
+
+            if (
+              detectedStatus !== -1
+            ) {
+
+              statusColumn.value =
+                detectedStatus;
+
+            }
+
+
+            mapping.style.display =
+              "block";
+
+
+            updateDatabasePreview();
+
+          }
+
+          catch (error) {
+
+            fileInfo.innerHTML =
+              '<span class="error">Something went wrong while reading the CSV.</span>';
+
+          }
+
+        };
+
+
+      reader.readAsText(file);
+
+    }
   );
 
-const fileInfo =
-  document.getElementById(
-    "fileInfo"
-  );
 
-const mapping =
-  document.getElementById(
-    "mapping"
-  );
-
-const domainColumn =
-  document.getElementById(
-    "domainColumn"
-  );
-
-const statusColumn =
-  document.getElementById(
-    "statusColumn"
+  domainColumn.addEventListener(
+    "change",
+    updateDatabasePreview
   );
 
 
-databaseFile.addEventListener(
-  "change",
-  function () {
+  statusColumn.addEventListener(
+    "change",
+    updateDatabasePreview
+  );
 
-    const file =
-      databaseFile.files[0];
 
-    if (!file) {
+  function updateDatabasePreview() {
+
+    if (!rawDatabase.length) {
       return;
     }
 
 
-    const reader =
-      new FileReader();
+    const domainIndex =
+      Number(
+        domainColumn.value
+      );
+
+    const statusIndex =
+      Number(
+        statusColumn.value
+      );
 
 
-    reader.onload =
-      function (event) {
+    const domains =
+      rawDatabase
+        .map(
+          row =>
+            normalizeDomain(
+              row[domainIndex]
+            )
+        )
+        .filter(Boolean);
 
-        const rows =
-          parseCSV(
-            event.target.result
+
+    const uniqueDomains =
+      [...new Set(domains)];
+
+
+    const statuses =
+      rawDatabase
+        .map(
+          row =>
+            String(
+              row[statusIndex] || ""
+            ).trim()
+        )
+        .filter(Boolean);
+
+
+    const uniqueStatuses =
+      [...new Set(statuses)];
+
+
+    fileInfo.innerHTML =
+      '<span class="success">✓ Database loaded</span>' +
+      "<br>" +
+      uniqueDomains.length +
+      " unique domains detected" +
+      "<br>" +
+      uniqueStatuses.length +
+      " status variations detected";
+
+  }
+
+
+  /* =========================
+     SAVE SETTINGS
+  ========================= */
+
+  document
+    .getElementById(
+      "saveSettings"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+        if (
+          !rawDatabase.length &&
+          !localStorage.getItem(
+            "prospectCheckerDatabase"
+          )
+        ) {
+
+          alert(
+            "Please upload your database first."
           );
-
-
-        if (rows.length < 2) {
-
-          fileInfo.innerHTML =
-            '<span class="error">Could not read CSV.</span>';
 
           return;
 
         }
 
 
-        databaseHeaders =
-          rows[0].map(
-            header =>
-              String(header || "")
-                .replace(
-                  /^\uFEFF/,
-                  ""
-                )
-                .trim()
-          );
-
-
-        rawDatabase =
-          rows.slice(1);
-
-
-        domainColumn.innerHTML = "";
-        statusColumn.innerHTML = "";
-
-
-        databaseHeaders.forEach(
-          (header, index) => {
-
-            const option1 =
-              document.createElement(
-                "option"
-              );
-
-            option1.value = index;
-            option1.textContent =
-              header ||
-              "Column " +
-              (index + 1);
-
-            domainColumn.appendChild(
-              option1
-            );
-
-
-            const option2 =
-              document.createElement(
-                "option"
-              );
-
-            option2.value = index;
-            option2.textContent =
-              header ||
-              "Column " +
-              (index + 1);
-
-            statusColumn.appendChild(
-              option2
-            );
-
-          }
-        );
-
-
-        const detectedDomain =
-          findColumn(
-            databaseHeaders,
-            [
-              "domain",
-              "website",
-              "site",
-              "url",
-              "domain name",
-              "website url"
-            ]
-          );
-
-
-        const detectedStatus =
-          findColumn(
-            databaseHeaders,
-            [
-              "status",
-              "state",
-              "stage",
-              "current status"
-            ]
-          );
-
-
-        if (
-          detectedDomain !== -1
-        ) {
-
-          domainColumn.value =
-            detectedDomain;
-
-        }
-
-
-        if (
-          detectedStatus !== -1
-        ) {
-
-          statusColumn.value =
-            detectedStatus;
-
-        }
-
-
-        mapping.style.display =
-          "block";
-
-
-        updateDatabasePreview();
-
-      };
-
-
-    reader.readAsText(file);
-
-  }
-);
-
-
-/* =========================
-   DATABASE PREVIEW
-========================= */
-
-function updateDatabasePreview() {
-
-  if (!rawDatabase.length) {
-    return;
-  }
-
-
-  const domainIndex =
-    Number(
-      domainColumn.value
-    );
-
-  const statusIndex =
-    Number(
-      statusColumn.value
-    );
-
-
-  const domains =
-    rawDatabase
-      .map(row =>
-        normalizeDomain(
-          row[domainIndex]
-        )
-      )
-      .filter(Boolean);
-
-
-  const statuses =
-    rawDatabase
-      .map(row =>
-        String(
-          row[statusIndex] || ""
-        ).trim()
-      )
-      .filter(Boolean);
-
-
-  const uniqueStatuses =
-    [...new Set(statuses)];
-
-
-  fileInfo.innerHTML =
-    '<span class="success">✓ Database loaded</span>' +
-    "<br>" +
-    domains.length +
-    " domains detected" +
-    "<br>" +
-    uniqueStatuses.length +
-    " status variations detected";
-
-}
-
-
-domainColumn.addEventListener(
-  "change",
-  updateDatabasePreview
-);
-
-statusColumn.addEventListener(
-  "change",
-  updateDatabasePreview
-);
-
-
-/* =========================
-   SAVE SETTINGS
-========================= */
-
-document
-  .getElementById(
-    "saveSettings"
-  )
-  .addEventListener(
-    "click",
-    function () {
-
-      const settings = {
-
-        useDR:
-          document.getElementById(
-            "useDR"
-          ).checked,
-
-        minDR:
-          document.getElementById(
-            "minDR"
-          ).value,
-
-        useTraffic:
-          document.getElementById(
-            "useTraffic"
-          ).checked,
-
-        minTraffic:
-          document.getElementById(
-            "minTraffic"
-          ).value,
-
-        useRD:
-          document.getElementById(
-            "useRD"
-          ).checked,
-
-        minRD:
-          document.getElementById(
-            "minRD"
-          ).value,
-
-        useRDLD:
-          document.getElementById(
-            "useRDLD"
-          ).checked,
-
-        useCountry:
-          document.getElementById(
-            "useCountry"
-          ).checked,
-
-        countries:
-          document.getElementById(
-            "countries"
-          ).value
-
-      };
-
-
-      localStorage.setItem(
-        "prospectCheckerSettings",
-        JSON.stringify(settings)
-      );
-
-
-      if (rawDatabase.length) {
-
-        const databaseData = {
-
-          headers:
-            databaseHeaders,
-
-          rows:
-            rawDatabase,
-
-          domainColumn:
-            Number(
-              domainColumn.value
-            ),
-
-          statusColumn:
-            Number(
-              statusColumn.value
-            )
+        const settings = {
+
+          useDR:
+            document.getElementById(
+              "useDR"
+            ).checked,
+
+          minDR:
+            document.getElementById(
+              "minDR"
+            ).value,
+
+          useTraffic:
+            document.getElementById(
+              "useTraffic"
+            ).checked,
+
+          minTraffic:
+            document.getElementById(
+              "minTraffic"
+            ).value,
+
+          useRD:
+            document.getElementById(
+              "useRD"
+            ).checked,
+
+          minRD:
+            document.getElementById(
+              "minRD"
+            ).value,
+
+          useRDLD:
+            document.getElementById(
+              "useRDLD"
+            ).checked,
+
+          useCountry:
+            document.getElementById(
+              "useCountry"
+            ).checked,
+
+          countries:
+            document.getElementById(
+              "countries"
+            ).value
 
         };
 
 
         localStorage.setItem(
-          "prospectCheckerDatabase",
+          "prospectCheckerSettings",
           JSON.stringify(
-            databaseData
+            settings
           )
         );
 
+
+        if (
+          rawDatabase.length
+        ) {
+
+          const databaseData = {
+
+            headers:
+              databaseHeaders,
+
+            rows:
+              rawDatabase,
+
+            domainColumn:
+              Number(
+                domainColumn.value
+              ),
+
+            statusColumn:
+              Number(
+                statusColumn.value
+              )
+
+          };
+
+
+          try {
+
+            localStorage.setItem(
+              "prospectCheckerDatabase",
+              JSON.stringify(
+                databaseData
+              )
+            );
+
+          }
+
+          catch (error) {
+
+            alert(
+              "Your database is too large for browser local storage. We’ll switch to a larger local database method next."
+            );
+
+            return;
+
+          }
+
+        }
+
+
+        showChecker();
+
       }
-
-
-      showChecker();
-
-    }
-  );
-
-
-/* =========================
-   SHOW CHECKER
-========================= */
-
-function showChecker() {
-
-  const savedDatabase =
-    localStorage.getItem(
-      "prospectCheckerDatabase"
     );
 
 
-  if (!savedDatabase) {
+  /* =========================
+     SHOW / EDIT SETTINGS
+  ========================= */
 
-    alert(
-      "Please upload and save your database first."
-    );
+  function showChecker() {
 
-    return;
-
-  }
-
-
-  const database =
-    JSON.parse(savedDatabase);
+    const savedDatabase =
+      localStorage.getItem(
+        "prospectCheckerDatabase"
+      );
 
 
-  document
-    .getElementById(
-      "setupScreen"
-    )
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById(
-      "checkerScreen"
-    )
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById(
-      "databaseStats"
-    )
-    .textContent =
-      database.rows.length +
-      " rows in your database";
-
-}
-
-
-/* =========================
-   EDIT SETTINGS
-========================= */
-
-document
-  .getElementById(
-    "editSettings"
-  )
-  .addEventListener(
-    "click",
-    function () {
-
-      document
-        .getElementById(
-          "checkerScreen"
-        )
-        .classList
-        .add("hidden");
-
-
-      document
-        .getElementById(
-          "setupScreen"
-        )
-        .classList
-        .remove("hidden");
-
+    if (!savedDatabase) {
+      return;
     }
-  );
 
 
-/* =========================
-   LIVE DOMAIN COUNT
-========================= */
-
-const domainInput =
-  document.getElementById(
-    "domainInput"
-  );
-
-
-domainInput.addEventListener(
-  "input",
-  function () {
-
-    const domains =
-      extractDomains(
-        domainInput.value
+    const database =
+      JSON.parse(
+        savedDatabase
       );
 
 
     document
       .getElementById(
-        "detectedInfo"
+        "setupScreen"
+      )
+      .classList
+      .add("hidden");
+
+
+    document
+      .getElementById(
+        "checkerScreen"
+      )
+      .classList
+      .remove("hidden");
+
+
+    const uniqueDomains =
+      new Set();
+
+
+    database.rows.forEach(
+      row => {
+
+        const domain =
+          normalizeDomain(
+            row[
+              database.domainColumn
+            ]
+          );
+
+
+        if (domain) {
+          uniqueDomains.add(domain);
+        }
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "databaseStats"
       )
       .textContent =
-        domains.length +
-        " unique domains detected";
+        uniqueDomains.size +
+        " domains in your saved database";
 
   }
-);
 
 
-/* =========================
-   CHECK DOMAINS
-========================= */
+  document
+    .getElementById(
+      "editSettings"
+    )
+    .addEventListener(
+      "click",
+      function () {
 
-document
-  .getElementById(
-    "checkDomains"
-  )
-  .addEventListener(
-    "click",
+        document
+          .getElementById(
+            "checkerScreen"
+          )
+          .classList
+          .add("hidden");
+
+
+        document
+          .getElementById(
+            "setupScreen"
+          )
+          .classList
+          .remove("hidden");
+
+
+        const savedDatabase =
+          localStorage.getItem(
+            "prospectCheckerDatabase"
+          );
+
+
+        if (savedDatabase) {
+
+          const database =
+            JSON.parse(
+              savedDatabase
+            );
+
+
+          fileInfo.innerHTML =
+            '<span class="success">✓ Saved database found</span>' +
+            "<br>" +
+            database.rows.length +
+            " rows stored in this browser";
+
+        }
+
+      }
+    );
+
+
+  /* =========================
+     LOAD SAVED SETTINGS
+  ========================= */
+
+  const savedSettings =
+    localStorage.getItem(
+      "prospectCheckerSettings"
+    );
+
+
+  if (savedSettings) {
+
+    const settings =
+      JSON.parse(
+        savedSettings
+      );
+
+
+    document.getElementById(
+      "useDR"
+    ).checked =
+      Boolean(
+        settings.useDR
+      );
+
+
+    document.getElementById(
+      "minDR"
+    ).value =
+      settings.minDR ?? 50;
+
+
+    document.getElementById(
+      "useTraffic"
+    ).checked =
+      Boolean(
+        settings.useTraffic
+      );
+
+
+    document.getElementById(
+      "minTraffic"
+    ).value =
+      settings.minTraffic ?? 2000;
+
+
+    document.getElementById(
+      "useRD"
+    ).checked =
+      Boolean(
+        settings.useRD
+      );
+
+
+    document.getElementById(
+      "minRD"
+    ).value =
+      settings.minRD ?? 500;
+
+
+    document.getElementById(
+      "useRDLD"
+    ).checked =
+      Boolean(
+        settings.useRDLD
+      );
+
+
+    document.getElementById(
+      "useCountry"
+    ).checked =
+      Boolean(
+        settings.useCountry
+      );
+
+
+    document.getElementById(
+      "countries"
+    ).value =
+      settings.countries || "";
+
+  }
+
+
+  /* =========================
+     DOMAIN INPUT
+  ========================= */
+
+  const domainInput =
+    document.getElementById(
+      "domainInput"
+    );
+
+
+  domainInput.addEventListener(
+    "input",
     function () {
 
       const domains =
@@ -1111,231 +1552,1044 @@ document
         );
 
 
-      const savedDatabase =
-        JSON.parse(
-          localStorage.getItem(
-            "prospectCheckerDatabase"
-          )
-        );
-
-
-      const domainIndex =
-        savedDatabase.domainColumn;
-
-      const statusIndex =
-        savedDatabase.statusColumn;
-
-
-      const databaseMap =
-        new Map();
-
-
-      savedDatabase.rows.forEach(
-        row => {
-
-          const domain =
-            normalizeDomain(
-              row[domainIndex]
-            );
-
-
-          const status =
-            String(
-              row[statusIndex] || ""
-            ).trim();
-
-
-          if (domain) {
-
-            databaseMap.set(
-              domain,
-              status
-            );
-
-          }
-
-        }
-      );
-
-
-      const resultsBody =
-        document.getElementById(
-          "resultsBody"
-        );
-
-
-      resultsBody.innerHTML = "";
-
-
-      let foundCount = 0;
-
-
-      domains.forEach(
-        domain => {
-
-          const status =
-            databaseMap.has(domain)
-              ? databaseMap.get(domain)
-              : "Not found";
-
-
-          if (
-            databaseMap.has(domain)
-          ) {
-            foundCount++;
-          }
-
-
-          const row =
-            document.createElement(
-              "tr"
-            );
-
-
-          const domainCell =
-            document.createElement(
-              "td"
-            );
-
-          domainCell.textContent =
-            domain;
-
-
-          const statusCell =
-            document.createElement(
-              "td"
-            );
-
-          statusCell.textContent =
-            status;
-
-
-          if (
-            status === "Not found"
-          ) {
-            statusCell.className =
-              "not-found";
-          }
-
-
-          row.appendChild(
-            domainCell
-          );
-
-          row.appendChild(
-            statusCell
-          );
-
-          resultsBody.appendChild(
-            row
-          );
-
-        }
-      );
-
-
       document
         .getElementById(
-          "resultsSummary"
+          "detectedInfo"
         )
         .textContent =
           domains.length +
-          " domains checked · " +
-          foundCount +
-          " found in database · " +
-          (domains.length -
-            foundCount) +
-          " not found";
-
-
-      document
-        .getElementById(
-          "resultsCard"
-        )
-        .classList
-        .remove("hidden");
+          " unique domains detected";
 
     }
   );
 
 
-/* =========================
-   LOAD EXISTING DATA
-========================= */
+  /* =========================
+     AHREFS CSV
+  ========================= */
 
-const savedSettings =
-  localStorage.getItem(
-    "prospectCheckerSettings"
-  );
+  function detectAhrefsColumns(
+    headers
+  ) {
+
+    return {
+
+      domain:
+        findColumn(
+          headers,
+          [
+            "target",
+            "domain",
+            "url"
+          ]
+        ),
+
+      dr:
+        findColumn(
+          headers,
+          [
+            "domain rating",
+            "dr"
+          ]
+        ),
+
+      traffic:
+        findColumn(
+          headers,
+          [
+            "organic traffic",
+            "organic traffic total",
+            "traffic"
+          ]
+        ),
+
+      rd:
+        findColumn(
+          headers,
+          [
+            "referring domains",
+            "ref domains",
+            "rd"
+          ]
+        ),
+
+      ld:
+        findColumn(
+          headers,
+          [
+            "linked domains",
+            "linked domains dofollow",
+            "dofollow linked domains",
+            "linked domains total"
+          ]
+        ),
+
+      country:
+        findColumn(
+          headers,
+          [
+            "organic traffic top country",
+            "top country",
+            "country"
+          ]
+        )
+
+    };
+
+  }
 
 
-if (savedSettings) {
-
-  const settings =
-    JSON.parse(
-      savedSettings
+  const ahrefsFile =
+    document.getElementById(
+      "ahrefsFile"
     );
 
 
-  document.getElementById(
-    "useDR"
-  ).checked =
-    settings.useDR;
-
-  document.getElementById(
-    "minDR"
-  ).value =
-    settings.minDR;
-
-  document.getElementById(
-    "useTraffic"
-  ).checked =
-    settings.useTraffic;
-
-  document.getElementById(
-    "minTraffic"
-  ).value =
-    settings.minTraffic;
-
-  document.getElementById(
-    "useRD"
-  ).checked =
-    settings.useRD;
-
-  document.getElementById(
-    "minRD"
-  ).value =
-    settings.minRD;
-
-  document.getElementById(
-    "useRDLD"
-  ).checked =
-    settings.useRDLD;
-
-  document.getElementById(
-    "useCountry"
-  ).checked =
-    settings.useCountry;
-
-  document.getElementById(
-    "countries"
-  ).value =
-    settings.countries || "";
-
-}
+  const ahrefsInfo =
+    document.getElementById(
+      "ahrefsInfo"
+    );
 
 
-const savedDatabase =
-  localStorage.getItem(
-    "prospectCheckerDatabase"
+  ahrefsFile.addEventListener(
+    "change",
+    function () {
+
+      const file =
+        ahrefsFile.files[0];
+
+
+      if (!file) {
+        return;
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function (event) {
+
+          try {
+
+            const rows =
+              parseCSV(
+                event.target.result
+              );
+
+
+            if (
+              rows.length < 2
+            ) {
+
+              ahrefsInfo.innerHTML =
+                '<span class="error">Could not read this CSV.</span>';
+
+              return;
+
+            }
+
+
+            ahrefsHeaders =
+              rows[0].map(
+                header =>
+                  String(
+                    header || ""
+                  )
+                    .replace(
+                      /^\uFEFF/,
+                      ""
+                    )
+                    .trim()
+              );
+
+
+            ahrefsRows =
+              rows.slice(1);
+
+
+            ahrefsColumnMap =
+              detectAhrefsColumns(
+                ahrefsHeaders
+              );
+
+
+            if (
+              ahrefsColumnMap.domain === -1
+            ) {
+
+              ahrefsInfo.innerHTML =
+                '<span class="error">Could not detect the domain column.</span>';
+
+              return;
+
+            }
+
+
+            const detectedDomains =
+              ahrefsRows
+                .map(
+                  row =>
+                    normalizeDomain(
+                      row[
+                        ahrefsColumnMap.domain
+                      ]
+                    )
+                )
+                .filter(Boolean);
+
+
+            ahrefsInfo.innerHTML =
+              '<span class="success">✓ Ahrefs Batch loaded</span>' +
+              "<br>" +
+              detectedDomains.length +
+              " domains detected";
+
+
+            domainInput.value = "";
+
+
+            document
+              .getElementById(
+                "detectedInfo"
+              )
+              .textContent =
+                "Using Ahrefs Batch CSV";
+
+          }
+
+          catch (error) {
+
+            ahrefsInfo.innerHTML =
+              '<span class="error">Something went wrong while reading the Ahrefs CSV.</span>';
+
+          }
+
+        };
+
+
+      reader.readAsText(file);
+
+    }
   );
 
 
-if (savedDatabase) {
+  /* =========================
+     REQUIREMENTS
+  ========================= */
 
-  showChecker();
+  function evaluateRequirements(
+    row
+  ) {
 
-}
+    const settings =
+      JSON.parse(
+        localStorage.getItem(
+          "prospectCheckerSettings"
+        ) || "{}"
+      );
+
+
+    const failures = [];
+    const missing = [];
+
+
+    if (
+      settings.useDR
+    ) {
+
+      if (
+        ahrefsColumnMap.dr === -1
+      ) {
+
+        missing.push("DR");
+
+      }
+
+      else {
+
+        const dr =
+          numberValue(
+            row[
+              ahrefsColumnMap.dr
+            ]
+          );
+
+        const minDR =
+          numberValue(
+            settings.minDR
+          );
+
+
+        if (
+          dr < minDR
+        ) {
+
+          failures.push(
+            "DR " +
+            dr +
+            " < " +
+            minDR
+          );
+
+        }
+
+      }
+
+    }
+
+
+    if (
+      settings.useTraffic
+    ) {
+
+      if (
+        ahrefsColumnMap.traffic === -1
+      ) {
+
+        missing.push(
+          "Organic Traffic"
+        );
+
+      }
+
+      else {
+
+        const traffic =
+          numberValue(
+            row[
+              ahrefsColumnMap.traffic
+            ]
+          );
+
+        const minTraffic =
+          numberValue(
+            settings.minTraffic
+          );
+
+
+        if (
+          traffic <
+          minTraffic
+        ) {
+
+          failures.push(
+            "Traffic " +
+            traffic +
+            " < " +
+            minTraffic
+          );
+
+        }
+
+      }
+
+    }
+
+
+    if (
+      settings.useRD
+    ) {
+
+      if (
+        ahrefsColumnMap.rd === -1
+      ) {
+
+        missing.push(
+          "Referring Domains"
+        );
+
+      }
+
+      else {
+
+        const rd =
+          numberValue(
+            row[
+              ahrefsColumnMap.rd
+            ]
+          );
+
+        const minRD =
+          numberValue(
+            settings.minRD
+          );
+
+
+        if (
+          rd < minRD
+        ) {
+
+          failures.push(
+            "RD " +
+            rd +
+            " < " +
+            minRD
+          );
+
+        }
+
+      }
+
+    }
+
+
+    if (
+      settings.useRDLD
+    ) {
+
+      if (
+        ahrefsColumnMap.rd === -1 ||
+        ahrefsColumnMap.ld === -1
+      ) {
+
+        missing.push(
+          "RD / Linked Domains"
+        );
+
+      }
+
+      else {
+
+        const rd =
+          numberValue(
+            row[
+              ahrefsColumnMap.rd
+            ]
+          );
+
+        const ld =
+          numberValue(
+            row[
+              ahrefsColumnMap.ld
+            ]
+          );
+
+
+        if (
+          rd < ld
+        ) {
+
+          failures.push(
+            "RD " +
+            rd +
+            " < LD " +
+            ld
+          );
+
+        }
+
+      }
+
+    }
+
+
+    if (
+      settings.useCountry
+    ) {
+
+      if (
+        ahrefsColumnMap.country === -1
+      ) {
+
+        missing.push(
+          "Top Country"
+        );
+
+      }
+
+      else {
+
+        const allowedCountries =
+          String(
+            settings.countries || ""
+          )
+            .split(",")
+            .map(
+              value =>
+                value
+                  .trim()
+                  .toUpperCase()
+            )
+            .filter(Boolean);
+
+
+        const actualCountry =
+          String(
+            row[
+              ahrefsColumnMap.country
+            ] || ""
+          )
+            .trim()
+            .toUpperCase();
+
+
+        if (
+          allowedCountries.length &&
+          !allowedCountries.includes(
+            actualCountry
+          )
+        ) {
+
+          failures.push(
+            "Country " +
+            actualCountry +
+            " not allowed"
+          );
+
+        }
+
+      }
+
+    }
+
+
+    return {
+
+      passed:
+        failures.length === 0 &&
+        missing.length === 0,
+
+      failures,
+
+      missing
+
+    };
+
+  }
+
+
+  /* =========================
+     DATABASE MAP
+  ========================= */
+
+  function getSavedDatabaseMap() {
+
+    const saved =
+      localStorage.getItem(
+        "prospectCheckerDatabase"
+      );
+
+
+    if (!saved) {
+      return null;
+    }
+
+
+    const database =
+      JSON.parse(saved);
+
+
+    const map =
+      new Map();
+
+
+    database.rows.forEach(
+      row => {
+
+        const domain =
+          normalizeDomain(
+            row[
+              database.domainColumn
+            ]
+          );
+
+
+        const status =
+          String(
+            row[
+              database.statusColumn
+            ] || ""
+          ).trim();
+
+
+        if (domain) {
+
+          map.set(
+            domain,
+            status
+          );
+
+        }
+
+      }
+    );
+
+
+    return {
+      map,
+      database
+    };
+
+  }
+
+
+  /* =========================
+     CHECK
+  ========================= */
+
+  document
+    .getElementById(
+      "checkDomains"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+        const databaseData =
+          getSavedDatabaseMap();
+
+
+        if (!databaseData) {
+
+          alert(
+            "Please save your database first."
+          );
+
+          return;
+
+        }
+
+
+        const databaseMap =
+          databaseData.map;
+
+
+        let results = [];
+
+
+        if (
+          ahrefsRows.length &&
+          ahrefsColumnMap &&
+          ahrefsColumnMap.domain !== -1
+        ) {
+
+          const seen =
+            new Set();
+
+
+          results =
+            ahrefsRows
+              .map(
+                row => {
+
+                  const domain =
+                    normalizeDomain(
+                      row[
+                        ahrefsColumnMap.domain
+                      ]
+                    );
+
+
+                  if (
+                    !domain ||
+                    seen.has(domain)
+                  ) {
+                    return null;
+                  }
+
+
+                  seen.add(domain);
+
+
+                  const requirementResult =
+                    evaluateRequirements(
+                      row
+                    );
+
+
+                  return {
+
+                    mode:
+                      "ahrefs",
+
+                    domain,
+
+                    status:
+                      databaseMap.has(domain)
+                        ? databaseMap.get(domain)
+                        : "Not found",
+
+                    found:
+                      databaseMap.has(domain),
+
+                    dr:
+                      ahrefsColumnMap.dr !== -1
+                        ? row[
+                            ahrefsColumnMap.dr
+                          ]
+                        : "",
+
+                    traffic:
+                      ahrefsColumnMap.traffic !== -1
+                        ? row[
+                            ahrefsColumnMap.traffic
+                          ]
+                        : "",
+
+                    rd:
+                      ahrefsColumnMap.rd !== -1
+                        ? row[
+                            ahrefsColumnMap.rd
+                          ]
+                        : "",
+
+                    ld:
+                      ahrefsColumnMap.ld !== -1
+                        ? row[
+                            ahrefsColumnMap.ld
+                          ]
+                        : "",
+
+                    country:
+                      ahrefsColumnMap.country !== -1
+                        ? row[
+                            ahrefsColumnMap.country
+                          ]
+                        : "",
+
+                    passed:
+                      requirementResult.passed,
+
+                    failures:
+                      requirementResult.failures,
+
+                    missing:
+                      requirementResult.missing
+
+                  };
+
+                }
+              )
+              .filter(Boolean);
+
+        }
+
+        else {
+
+          const domains =
+            extractDomains(
+              domainInput.value
+            );
+
+
+          results =
+            domains.map(
+              domain => ({
+
+                mode:
+                  "text",
+
+                domain,
+
+                status:
+                  databaseMap.has(domain)
+                    ? databaseMap.get(domain)
+                    : "Not found",
+
+                found:
+                  databaseMap.has(domain)
+
+              })
+            );
+
+        }
+
+
+        renderResults(
+          results
+        );
+
+      }
+    );
+
+
+  /* =========================
+     RESULTS
+  ========================= */
+
+  function renderResults(
+    results
+  ) {
+
+    const card =
+      document.getElementById(
+        "resultsCard"
+      );
+
+    const head =
+      document.getElementById(
+        "resultsHead"
+      );
+
+    const body =
+      document.getElementById(
+        "resultsBody"
+      );
+
+    const summary =
+      document.getElementById(
+        "resultsSummary"
+      );
+
+
+    body.innerHTML = "";
+
+
+    if (
+      results.length === 0
+    ) {
+
+      summary.textContent =
+        "No domains detected.";
+
+      head.innerHTML = "";
+
+      card.classList.remove(
+        "hidden"
+      );
+
+      return;
+
+    }
+
+
+    const isAhrefs =
+      results[0].mode ===
+      "ahrefs";
+
+
+    const foundCount =
+      results.filter(
+        item => item.found
+      ).length;
+
+
+    summary.textContent =
+      results.length +
+      " domains checked · " +
+      foundCount +
+      " found in database · " +
+      (
+        results.length -
+        foundCount
+      ) +
+      " not found";
+
+
+    if (isAhrefs) {
+
+      head.innerHTML = `
+        <tr>
+          <th>Domain</th>
+          <th>Status</th>
+          <th>DR</th>
+          <th>Traffic</th>
+          <th>RD</th>
+          <th>LD</th>
+          <th>Country</th>
+          <th>Requirements</th>
+        </tr>
+      `;
+
+    }
+
+    else {
+
+      head.innerHTML = `
+        <tr>
+          <th>Domain</th>
+          <th>Status</th>
+        </tr>
+      `;
+
+    }
+
+
+    results.forEach(
+      result => {
+
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+
+        if (!isAhrefs) {
+
+          const domainTd =
+            document.createElement(
+              "td"
+            );
+
+          domainTd.textContent =
+            result.domain;
+
+
+          const statusTd =
+            document.createElement(
+              "td"
+            );
+
+          statusTd.textContent =
+            result.status;
+
+
+          if (!result.found) {
+
+            statusTd.className =
+              "muted";
+
+          }
+
+
+          tr.appendChild(
+            domainTd
+          );
+
+          tr.appendChild(
+            statusTd
+          );
+
+        }
+
+        else {
+
+          const cells = [
+            result.domain,
+            result.status,
+            result.dr,
+            result.traffic,
+            result.rd,
+            result.ld,
+            result.country
+          ];
+
+
+          cells.forEach(
+            (value, index) => {
+
+              const td =
+                document.createElement(
+                  "td"
+                );
+
+
+              td.textContent =
+                value;
+
+
+              if (
+                index === 1 &&
+                !result.found
+              ) {
+
+                td.className =
+                  "muted";
+
+              }
+
+
+              tr.appendChild(td);
+
+            }
+          );
+
+
+          const reqTd =
+            document.createElement(
+              "td"
+            );
+
+
+          if (
+            result.passed
+          ) {
+
+            reqTd.innerHTML =
+              '<span class="success">Pass</span>';
+
+          }
+
+          else {
+
+            reqTd.innerHTML =
+              '<span class="error">Fail</span>';
+
+
+            const reasons = [
+              ...result.failures,
+              ...result.missing.map(
+                item =>
+                  "Missing column: " +
+                  item
+              )
+            ];
+
+
+            if (
+              reasons.length
+            ) {
+
+              const div =
+                document.createElement(
+                  "div"
+                );
+
+              div.className =
+                "fail-reasons";
+
+              div.innerHTML =
+                reasons.join(
+                  "<br>"
+                );
+
+
+              reqTd.appendChild(
+                div
+              );
+
+            }
+
+          }
+
+
+          tr.appendChild(
+            reqTd
+          );
+
+        }
+
+
+        body.appendChild(tr);
+
+      }
+    );
+
+
+    card.classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  /* =========================
+     AUTO OPEN CHECKER
+  ========================= */
+
+  const existingDatabase =
+    localStorage.getItem(
+      "prospectCheckerDatabase"
+    );
+
+
+  if (existingDatabase) {
+
+    showChecker();
+
+  }
 
 </script>
 
