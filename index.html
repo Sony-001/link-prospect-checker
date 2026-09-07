@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Link Prospect Checker</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -18,10 +15,7 @@
       color: #171717;
     }
 
-    button,
-    input,
-    textarea,
-    select {
+    button, input, textarea, select {
       font: inherit;
     }
 
@@ -31,14 +25,12 @@
       margin: 40px auto;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     h1 {
       margin: 0 0 8px;
       font-size: 32px;
-      letter-spacing: -0.8px;
+      letter-spacing: -.8px;
     }
 
     h2 {
@@ -46,9 +38,7 @@
       font-size: 18px;
     }
 
-    p {
-      margin: 0;
-    }
+    p { margin: 0; }
 
     .subtitle {
       margin-top: 6px;
@@ -93,9 +83,7 @@
       transition: .15s ease;
     }
 
-    button:hover {
-      transform: translateY(-1px);
-    }
+    button:hover { transform: translateY(-1px); }
 
     .primary {
       background: #111;
@@ -113,20 +101,13 @@
       color: #525252;
     }
 
-    .danger {
-      background: #fff1f2;
-      color: #be123c;
-    }
-
     .danger-ghost {
       padding: 7px 9px;
       background: transparent;
       color: #be123c;
     }
 
-    .full {
-      width: 100%;
-    }
+    .full { width: 100%; }
 
     .success {
       color: #15803d;
@@ -143,6 +124,11 @@
       font-weight: 600;
     }
 
+    .unknown {
+      color: #a16207;
+      font-weight: 600;
+    }
+
     .muted {
       color: #a3a3a3;
     }
@@ -151,8 +137,6 @@
       color: #737373;
       font-size: 13px;
     }
-
-    /* PROJECT BAR */
 
     .project-bar {
       display: flex;
@@ -164,40 +148,29 @@
       background: #fff;
       border: 1px solid #e7e7e7;
       border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,.025);
     }
 
-    .project-left {
+    .project-left,
+    .project-actions {
       display: flex;
       align-items: center;
       gap: 10px;
-      min-width: 0;
     }
 
     .project-label {
       color: #8a8a8a;
       font-size: 12px;
       font-weight: 600;
-      white-space: nowrap;
     }
 
     .project-select {
       min-width: 220px;
-      max-width: 360px;
       padding: 9px 36px 9px 11px;
       border: 1px solid #dedede;
       border-radius: 9px;
       background: #fff;
       font-weight: 600;
     }
-
-    .project-actions {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-    }
-
-    /* MODAL */
 
     .modal-backdrop {
       position: fixed;
@@ -216,7 +189,6 @@
       padding: 24px;
       background: #fff;
       border-radius: 18px;
-      box-shadow: 0 24px 80px rgba(0,0,0,.2);
     }
 
     .modal h3 {
@@ -228,7 +200,6 @@
       margin-top: 7px;
       color: #737373;
       font-size: 13px;
-      line-height: 1.5;
     }
 
     .modal input {
@@ -237,7 +208,6 @@
       padding: 11px 12px;
       border: 1px solid #dcdcdc;
       border-radius: 10px;
-      outline: none;
     }
 
     .modal-actions {
@@ -247,8 +217,6 @@
       margin-top: 18px;
     }
 
-    /* DATABASE */
-
     .db-dropzone {
       margin-top: 18px;
       padding: 28px;
@@ -257,13 +225,6 @@
       background: #fafafa;
       text-align: center;
       cursor: pointer;
-      transition: .15s ease;
-    }
-
-    .db-dropzone:hover,
-    .db-dropzone.dragging {
-      background: #fff;
-      border-color: #111;
     }
 
     .db-saved {
@@ -278,9 +239,7 @@
       gap: 18px;
     }
 
-    .db-saved.active {
-      display: flex;
-    }
+    .db-saved.active { display: flex; }
 
     .db-saved-meta {
       margin-top: 4px;
@@ -298,12 +257,9 @@
       border-radius: 10px;
       color: #92400e;
       font-size: 13px;
-      line-height: 1.5;
     }
 
-    .db-warning.active {
-      display: block;
-    }
+    .db-warning.active { display: block; }
 
     .mapping {
       display: none;
@@ -314,9 +270,7 @@
       background: #fafafa;
     }
 
-    .mapping.active {
-      display: block;
-    }
+    .mapping.active { display: block; }
 
     .mapping-row {
       display: flex;
@@ -335,18 +289,15 @@
       background: #fff;
     }
 
-    /* REQUIREMENTS */
-
     .requirements-list {
       margin-top: 18px;
       border: 1px solid #ececec;
       border-radius: 14px;
-      overflow: visible;
     }
 
     .requirement-row {
       display: grid;
-      grid-template-columns: 44px 1fr minmax(150px, auto);
+      grid-template-columns: 44px 1fr minmax(150px,auto);
       gap: 14px;
       align-items: center;
       padding: 16px 18px;
@@ -354,9 +305,7 @@
       position: relative;
     }
 
-    .requirement-row:last-child {
-      border-bottom: 0;
-    }
+    .requirement-row:last-child { border-bottom: 0; }
 
     .requirement-title {
       font-size: 14px;
@@ -401,15 +350,11 @@
       transition: .2s ease;
     }
 
-    .switch input:checked + .slider {
-      background: #111;
-    }
+    .switch input:checked + .slider { background: #111; }
 
     .switch input:checked + .slider:before {
       transform: translateX(16px);
     }
-
-    /* COUNTRY */
 
     .country-picker {
       position: relative;
@@ -453,7 +398,6 @@
       padding: 0;
       background: transparent;
       color: #737373;
-      transform: none;
     }
 
     .country-menu {
@@ -472,9 +416,7 @@
       box-shadow: 0 16px 40px rgba(0,0,0,.12);
     }
 
-    .country-menu.active {
-      display: block;
-    }
+    .country-menu.active { display: block; }
 
     .country-option {
       display: flex;
@@ -486,12 +428,6 @@
       cursor: pointer;
     }
 
-    .country-option:hover {
-      background: #f7f7f7;
-    }
-
-    /* CHECKER */
-
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -500,34 +436,11 @@
       margin-bottom: 24px;
     }
 
-    .current-check {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border: 1px solid #e7e7e7;
-      border-radius: 14px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .current-check-title {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .current-check-meta {
-      margin-top: 4px;
-      color: #737373;
-      font-size: 12px;
-    }
-
     .prospect-input {
       margin-top: 18px;
       border: 1.5px solid #dcdcdc;
       border-radius: 16px;
-      background: white;
+      background: #fff;
       overflow: hidden;
     }
 
@@ -563,9 +476,7 @@
       gap: 15px;
     }
 
-    .file-loaded.active {
-      display: flex;
-    }
+    .file-loaded.active { display: flex; }
 
     .checker-actions {
       display: flex;
@@ -575,8 +486,6 @@
       margin-top: 14px;
       flex-wrap: wrap;
     }
-
-    /* RESULTS */
 
     .results-toolbar {
       margin: 20px 0 14px;
@@ -626,7 +535,6 @@
       padding: 10px 12px;
       border: 1px solid #dcdcdc;
       border-radius: 10px;
-      outline: none;
     }
 
     .result-actions {
@@ -636,15 +544,7 @@
       flex-wrap: wrap;
     }
 
-    .copy-feedback {
-      color: #15803d;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
+    .table-wrap { overflow-x: auto; }
 
     table {
       width: 100%;
@@ -652,8 +552,7 @@
       border-collapse: collapse;
     }
 
-    th,
-    td {
+    th, td {
       padding: 11px 12px;
       border-bottom: 1px solid #ececec;
       text-align: left;
@@ -691,28 +590,12 @@
       font-size: 14px;
     }
 
-    @media (max-width: 760px) {
-      .container {
-        margin: 22px auto;
-      }
-
+    @media (max-width:760px) {
       .project-bar,
       .topbar,
-      .db-saved,
-      .current-check {
+      .db-saved {
         flex-direction: column;
         align-items: flex-start;
-      }
-
-      .project-left {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .project-select {
-        width: 100%;
-        max-width: none;
       }
 
       .requirement-row {
@@ -722,10 +605,6 @@
       .requirement-row > :last-child {
         grid-column: 2;
       }
-
-      .country-picker {
-        width: 100%;
-      }
     }
   </style>
 </head>
@@ -734,74 +613,45 @@
 
 <main class="container">
 
-  <!-- PROJECT SWITCHER -->
-
   <div class="project-bar">
 
     <div class="project-left">
-
-      <div class="project-label">
-        PROJECT
-      </div>
+      <div class="project-label">PROJECT</div>
 
       <select
         id="projectSelect"
         class="project-select"
       ></select>
-
     </div>
 
-
     <div class="project-actions">
-
-      <button
-        id="newProjectButton"
-        class="secondary"
-      >
-        + New project
-      </button>
-
-      <button
-        id="renameProjectButton"
-        class="ghost"
-      >
-        Rename
-      </button>
-
-      <button
-        id="deleteProjectButton"
-        class="danger-ghost"
-      >
-        Delete
-      </button>
-
+      <button id="newProjectButton" class="secondary">+ New project</button>
+      <button id="renameProjectButton" class="ghost">Rename</button>
+      <button id="deleteProjectButton" class="danger-ghost">Delete</button>
     </div>
 
   </div>
 
 
-  <!-- SETUP -->
-
   <section id="setupScreen">
 
-    <div class="eyebrow">
-      Step 1 of 2 · Setup
-    </div>
+    <div class="eyebrow">Step 1 of 2 · Setup</div>
 
     <h1>Set up your project</h1>
 
     <p class="subtitle">
-      Add a database and choose the rules for this project.
+      Add a database if you want to compare against existing domains, or skip it and use this project only for metric checks.
     </p>
 
 
     <section class="card">
 
-      <h2>Your database</h2>
+      <h2>Domain database <span class="muted">(optional)</span></h2>
 
       <p class="card-description">
-        Upload a CSV with domains and statuses.
+        If you upload a database, both Domain and Status columns are required.
       </p>
+
 
       <input
         type="file"
@@ -829,16 +679,13 @@
       >
 
         <div>
-
           <strong>Database ready</strong>
 
           <div
             class="db-saved-meta"
             id="dbSavedMeta"
           ></div>
-
         </div>
-
 
         <button
           id="replaceDatabase"
@@ -873,28 +720,13 @@
       >
 
         <div class="mapping-row">
-
-          <label>
-            Domain column
-          </label>
-
-          <select
-            id="domainColumn"
-          ></select>
-
+          <label>Domain column *</label>
+          <select id="domainColumn"></select>
         </div>
 
-
         <div class="mapping-row">
-
-          <label>
-            Status column
-          </label>
-
-          <select
-            id="statusColumn"
-          ></select>
-
+          <label>Status column *</label>
+          <select id="statusColumn"></select>
         </div>
 
       </div>
@@ -907,7 +739,7 @@
       <h2>Your requirements</h2>
 
       <p class="card-description">
-        These rules apply only to this project.
+        These rules are used when you upload an Ahrefs Batch Analysis CSV.
       </p>
 
 
@@ -921,13 +753,8 @@
           </label>
 
           <div>
-            <div class="requirement-title">
-              Minimum DR
-            </div>
-
-            <div class="requirement-hint">
-              0–100
-            </div>
+            <div class="requirement-title">Minimum DR</div>
+            <div class="requirement-hint">Domain Rating from 0 to 100</div>
           </div>
 
           <input
@@ -990,10 +817,8 @@
             <span class="slider"></span>
           </label>
 
-          <div>
-            <div class="requirement-title">
-              RD ≥ LD
-            </div>
+          <div class="requirement-title">
+            RD ≥ LD
           </div>
 
           <div></div>
@@ -1061,8 +886,6 @@
   </section>
 
 
-  <!-- CHECKER -->
-
   <section
     id="checkerScreen"
     class="hidden"
@@ -1071,10 +894,7 @@
     <div class="topbar">
 
       <div>
-
-        <div class="eyebrow">
-          Step 2 of 2 · Checker
-        </div>
+        <div class="eyebrow">Step 2 of 2 · Checker</div>
 
         <h1>Check prospects</h1>
 
@@ -1082,9 +902,7 @@
           class="stats"
           id="databaseStats"
         ></div>
-
       </div>
-
 
       <button
         id="editSettings"
@@ -1096,40 +914,9 @@
     </div>
 
 
-    <div
-      class="current-check hidden"
-      id="currentCheck"
-    >
-
-      <div>
-
-        <div class="current-check-title">
-          Current check
-        </div>
-
-        <div
-          class="current-check-meta"
-          id="currentCheckMeta"
-        ></div>
-
-      </div>
-
-
-      <button
-        id="clearCurrentCheck"
-        class="danger-ghost"
-        type="button"
-      >
-        Clear current check
-      </button>
-
-    </div>
-
-
     <section class="card">
 
       <h2>Add prospects</h2>
-
 
       <div
         class="prospect-input"
@@ -1148,23 +935,14 @@
         >
 
           <div>
+            <strong>Drop Ahrefs Batch CSV here</strong>
 
-            <strong>
-              Drop Ahrefs Batch CSV here
-            </strong>
-
-            <div
-              class="stats"
-              style="margin-top:4px;"
-            >
+            <div class="stats" style="margin-top:4px;">
               or choose a file from your computer
             </div>
-
           </div>
 
-          <strong>
-            Browse files
-          </strong>
+          <strong>Browse files</strong>
 
         </div>
 
@@ -1175,18 +953,13 @@
         >
 
           <div>
-
-            <strong
-              id="loadedFileName"
-            ></strong>
+            <strong id="loadedFileName"></strong>
 
             <div
               class="stats"
               id="loadedFileMeta"
             ></div>
-
           </div>
-
 
           <button
             id="removeFile"
@@ -1218,7 +991,6 @@
           0 unique domains detected
         </div>
 
-
         <button
           id="checkDomains"
           class="primary"
@@ -1230,8 +1002,6 @@
 
     </section>
 
-
-    <!-- RESULTS -->
 
     <section
       class="card hidden"
@@ -1256,10 +1026,7 @@
             data-filter="all"
           >
             All
-            <span
-              class="filter-count"
-              id="countAll"
-            ></span>
+            <span class="filter-count" id="countAll"></span>
           </button>
 
           <button
@@ -1267,10 +1034,7 @@
             data-filter="passed"
           >
             Passed
-            <span
-              class="filter-count"
-              id="countPassed"
-            ></span>
+            <span class="filter-count" id="countPassed"></span>
           </button>
 
           <button
@@ -1278,32 +1042,31 @@
             data-filter="failed"
           >
             Failed
-            <span
-              class="filter-count"
-              id="countFailed"
-            ></span>
+            <span class="filter-count" id="countFailed"></span>
           </button>
 
           <button
             class="filter-tab"
+            data-filter="unknown"
+          >
+            Cannot evaluate
+            <span class="filter-count" id="countUnknown"></span>
+          </button>
+
+          <button
+            class="filter-tab db-only"
             data-filter="database"
           >
             In database
-            <span
-              class="filter-count"
-              id="countDatabase"
-            ></span>
+            <span class="filter-count" id="countDatabase"></span>
           </button>
 
           <button
-            class="filter-tab"
+            class="filter-tab db-only"
             data-filter="new"
           >
             New
-            <span
-              class="filter-count"
-              id="countNew"
-            ></span>
+            <span class="filter-count" id="countNew"></span>
           </button>
 
         </div>
@@ -1325,12 +1088,13 @@
 
           <div class="result-actions">
 
-            <select id="statusFilter">
-
+            <select
+              id="statusFilter"
+              class="db-only"
+            >
               <option value="all">
                 All statuses
               </option>
-
             </select>
 
 
@@ -1349,12 +1113,6 @@
               Export CSV
             </button>
 
-
-            <span
-              id="copyFeedback"
-              class="copy-feedback"
-            ></span>
-
           </div>
 
         </div>
@@ -1365,15 +1123,8 @@
       <div class="table-wrap">
 
         <table>
-
-          <thead
-            id="resultsHead"
-          ></thead>
-
-          <tbody
-            id="resultsBody"
-          ></tbody>
-
+          <thead id="resultsHead"></thead>
+          <tbody id="resultsBody"></tbody>
         </table>
 
       </div>
@@ -1393,8 +1144,6 @@
 </main>
 
 
-<!-- PROJECT MODAL -->
-
 <div
   id="projectModalBackdrop"
   class="modal-backdrop hidden"
@@ -1402,18 +1151,13 @@
 
   <div class="modal">
 
-    <h3
-      id="projectModalTitle"
-    >
+    <h3 id="projectModalTitle">
       New project
     </h3>
 
-    <p
-      id="projectModalDescription"
-    >
+    <p id="projectModalDescription">
       Give this project a name.
     </p>
-
 
     <input
       type="text"
@@ -1421,7 +1165,6 @@
       placeholder="Project name"
       maxlength="60"
     >
-
 
     <div class="modal-actions">
 
@@ -1448,12 +1191,7 @@
 
 <script>
 
-  /* =========================
-     STATE
-  ========================= */
-
   let projects = [];
-
   let activeProjectId = null;
 
   let rawDatabase = [];
@@ -1472,6 +1210,8 @@
 
   let projectModalMode = "new";
 
+  let activeProjectHasDatabase = false;
+
 
   const PROJECTS_KEY =
     "linkProspectCheckerProjects";
@@ -1480,480 +1220,263 @@
     "linkProspectCheckerActiveProject";
 
 
-  /* =========================
-     DOM
-  ========================= */
-
   const projectSelect =
-    document.getElementById(
-      "projectSelect"
-    );
+    document.getElementById("projectSelect");
 
   const newProjectButton =
-    document.getElementById(
-      "newProjectButton"
-    );
+    document.getElementById("newProjectButton");
 
   const renameProjectButton =
-    document.getElementById(
-      "renameProjectButton"
-    );
+    document.getElementById("renameProjectButton");
 
   const deleteProjectButton =
-    document.getElementById(
-      "deleteProjectButton"
-    );
+    document.getElementById("deleteProjectButton");
 
   const projectModalBackdrop =
-    document.getElementById(
-      "projectModalBackdrop"
-    );
+    document.getElementById("projectModalBackdrop");
 
   const projectModalTitle =
-    document.getElementById(
-      "projectModalTitle"
-    );
+    document.getElementById("projectModalTitle");
 
   const projectModalDescription =
-    document.getElementById(
-      "projectModalDescription"
-    );
+    document.getElementById("projectModalDescription");
 
   const projectNameInput =
-    document.getElementById(
-      "projectNameInput"
-    );
+    document.getElementById("projectNameInput");
 
   const cancelProjectModal =
-    document.getElementById(
-      "cancelProjectModal"
-    );
+    document.getElementById("cancelProjectModal");
 
   const saveProjectModal =
-    document.getElementById(
-      "saveProjectModal"
-    );
+    document.getElementById("saveProjectModal");
 
 
   const setupScreen =
-    document.getElementById(
-      "setupScreen"
-    );
+    document.getElementById("setupScreen");
 
   const checkerScreen =
-    document.getElementById(
-      "checkerScreen"
-    );
+    document.getElementById("checkerScreen");
 
   const databaseFile =
-    document.getElementById(
-      "databaseFile"
-    );
+    document.getElementById("databaseFile");
 
   const dbDropzone =
-    document.getElementById(
-      "dbDropzone"
-    );
+    document.getElementById("dbDropzone");
 
   const dbSaved =
-    document.getElementById(
-      "dbSaved"
-    );
+    document.getElementById("dbSaved");
 
   const dbSavedMeta =
-    document.getElementById(
-      "dbSavedMeta"
-    );
+    document.getElementById("dbSavedMeta");
 
   const dbWarning =
-    document.getElementById(
-      "dbWarning"
-    );
+    document.getElementById("dbWarning");
 
   const replaceDatabase =
-    document.getElementById(
-      "replaceDatabase"
-    );
+    document.getElementById("replaceDatabase");
 
   const toggleMapping =
-    document.getElementById(
-      "toggleMapping"
-    );
+    document.getElementById("toggleMapping");
 
   const mapping =
-    document.getElementById(
-      "mapping"
-    );
+    document.getElementById("mapping");
 
   const domainColumn =
-    document.getElementById(
-      "domainColumn"
-    );
+    document.getElementById("domainColumn");
 
   const statusColumn =
-    document.getElementById(
-      "statusColumn"
-    );
+    document.getElementById("statusColumn");
 
   const saveSettings =
-    document.getElementById(
-      "saveSettings"
-    );
+    document.getElementById("saveSettings");
 
   const editSettings =
-    document.getElementById(
-      "editSettings"
-    );
+    document.getElementById("editSettings");
 
   const databaseStats =
-    document.getElementById(
-      "databaseStats"
-    );
-
-  const currentCheck =
-    document.getElementById(
-      "currentCheck"
-    );
-
-  const currentCheckMeta =
-    document.getElementById(
-      "currentCheckMeta"
-    );
-
-  const clearCurrentCheck =
-    document.getElementById(
-      "clearCurrentCheck"
-    );
+    document.getElementById("databaseStats");
 
   const domainInput =
-    document.getElementById(
-      "domainInput"
-    );
+    document.getElementById("domainInput");
 
   const prospectInput =
-    document.getElementById(
-      "prospectInput"
-    );
+    document.getElementById("prospectInput");
 
   const ahrefsFile =
-    document.getElementById(
-      "ahrefsFile"
-    );
+    document.getElementById("ahrefsFile");
 
   const uploadZone =
-    document.getElementById(
-      "uploadZone"
-    );
+    document.getElementById("uploadZone");
 
   const fileLoaded =
-    document.getElementById(
-      "fileLoaded"
-    );
+    document.getElementById("fileLoaded");
 
   const loadedFileName =
-    document.getElementById(
-      "loadedFileName"
-    );
+    document.getElementById("loadedFileName");
 
   const loadedFileMeta =
-    document.getElementById(
-      "loadedFileMeta"
-    );
+    document.getElementById("loadedFileMeta");
 
   const removeFile =
-    document.getElementById(
-      "removeFile"
-    );
+    document.getElementById("removeFile");
 
   const detectedInfo =
-    document.getElementById(
-      "detectedInfo"
-    );
+    document.getElementById("detectedInfo");
 
   const checkDomains =
-    document.getElementById(
-      "checkDomains"
-    );
+    document.getElementById("checkDomains");
 
   const resultsCard =
-    document.getElementById(
-      "resultsCard"
-    );
+    document.getElementById("resultsCard");
 
   const resultsSummary =
-    document.getElementById(
-      "resultsSummary"
-    );
+    document.getElementById("resultsSummary");
 
   const resultsHead =
-    document.getElementById(
-      "resultsHead"
-    );
+    document.getElementById("resultsHead");
 
   const resultsBody =
-    document.getElementById(
-      "resultsBody"
-    );
+    document.getElementById("resultsBody");
 
   const emptyResults =
-    document.getElementById(
-      "emptyResults"
-    );
+    document.getElementById("emptyResults");
 
   const statusFilter =
-    document.getElementById(
-      "statusFilter"
-    );
+    document.getElementById("statusFilter");
 
   const resultSearch =
-    document.getElementById(
-      "resultSearch"
-    );
+    document.getElementById("resultSearch");
 
   const copyFiltered =
-    document.getElementById(
-      "copyFiltered"
-    );
+    document.getElementById("copyFiltered");
 
   const exportFiltered =
-    document.getElementById(
-      "exportFiltered"
-    );
-
-  const copyFeedback =
-    document.getElementById(
-      "copyFeedback"
-    );
+    document.getElementById("exportFiltered");
 
   const useDR =
-    document.getElementById(
-      "useDR"
-    );
+    document.getElementById("useDR");
 
   const minDR =
-    document.getElementById(
-      "minDR"
-    );
+    document.getElementById("minDR");
 
   const useTraffic =
-    document.getElementById(
-      "useTraffic"
-    );
+    document.getElementById("useTraffic");
 
   const minTraffic =
-    document.getElementById(
-      "minTraffic"
-    );
+    document.getElementById("minTraffic");
 
   const useRD =
-    document.getElementById(
-      "useRD"
-    );
+    document.getElementById("useRD");
 
   const minRD =
-    document.getElementById(
-      "minRD"
-    );
+    document.getElementById("minRD");
 
   const useRDLD =
-    document.getElementById(
-      "useRDLD"
-    );
+    document.getElementById("useRDLD");
 
   const useCountry =
-    document.getElementById(
-      "useCountry"
-    );
+    document.getElementById("useCountry");
 
   const countryPicker =
-    document.getElementById(
-      "countryPicker"
-    );
+    document.getElementById("countryPicker");
 
   const countryControl =
-    document.getElementById(
-      "countryControl"
-    );
+    document.getElementById("countryControl");
 
   const countryMenu =
-    document.getElementById(
-      "countryMenu"
-    );
+    document.getElementById("countryMenu");
 
   const countryChips =
-    document.getElementById(
-      "countryChips"
-    );
+    document.getElementById("countryChips");
 
   const countryPlaceholder =
-    document.getElementById(
-      "countryPlaceholder"
-    );
+    document.getElementById("countryPlaceholder");
 
-
-  /* =========================
-     PROJECT HELPERS
-  ========================= */
 
   function generateId() {
-
     return (
       "project_" +
       Date.now() +
       "_" +
-      Math.random()
-        .toString(36)
-        .slice(2, 8)
+      Math.random().toString(36).slice(2,8)
     );
-
   }
 
 
   function getActiveProject() {
-
     return projects.find(
-      project =>
-        project.id ===
-        activeProjectId
+      item =>
+        item.id === activeProjectId
     ) || null;
-
   }
 
 
-  function getProjectSettingsKey(
-    projectId
-  ) {
-
+  function getProjectSettingsKey(projectId) {
     return (
       "linkProspectCheckerSettings_" +
       projectId
     );
-
-  }
-
-
-  function getProjectCheckKey(
-    projectId
-  ) {
-
-    return (
-      "linkProspectCheckerCheck_" +
-      projectId
-    );
-
   }
 
 
   function saveProjects() {
-
     localStorage.setItem(
       PROJECTS_KEY,
-      JSON.stringify(
-        projects
-      )
+      JSON.stringify(projects)
     );
-
 
     localStorage.setItem(
       ACTIVE_PROJECT_KEY,
       activeProjectId || ""
     );
-
   }
 
 
   function loadProjects() {
 
     try {
-
       projects =
         JSON.parse(
-          localStorage.getItem(
-            PROJECTS_KEY
-          ) || "[]"
+          localStorage.getItem(PROJECTS_KEY) || "[]"
         );
-
-    }
-
-    catch {
-
+    } catch {
       projects = [];
-
     }
 
-
-    if (
-      !Array.isArray(
-        projects
-      )
-    ) {
-
+    if (!Array.isArray(projects)) {
       projects = [];
-
     }
 
+    if (!projects.length) {
 
-    if (
-      projects.length === 0
-    ) {
-
-      const defaultProject = {
-
-        id:
-          generateId(),
-
-        name:
-          "My Project",
-
-        createdAt:
-          Date.now()
-
+      const project = {
+        id: generateId(),
+        name: "My Project",
+        createdAt: Date.now()
       };
 
-
-      projects.push(
-        defaultProject
-      );
-
+      projects.push(project);
 
       activeProjectId =
-        defaultProject.id;
-
+        project.id;
 
       saveProjects();
 
-    }
-
-    else {
+    } else {
 
       const savedActive =
         localStorage.getItem(
           ACTIVE_PROJECT_KEY
         );
 
-
-      if (
+      activeProjectId =
         projects.some(
-          project =>
-            project.id ===
-            savedActive
+          item =>
+            item.id === savedActive
         )
-      ) {
-
-        activeProjectId =
-          savedActive;
-
-      }
-
-      else {
-
-        activeProjectId =
-          projects[0].id;
-
-      }
-
+          ? savedActive
+          : projects[0].id;
     }
-
   }
 
 
@@ -1962,59 +1485,45 @@
     projectSelect.innerHTML =
       "";
 
-
     projects.forEach(
       project => {
-
         projectSelect.add(
           new Option(
             project.name,
             project.id
           )
         );
-
       }
     );
-
 
     projectSelect.value =
       activeProjectId;
 
-
     deleteProjectButton.disabled =
       projects.length <= 1;
-
   }
 
 
-  function openProjectModal(
-    mode
-  ) {
+  function openProjectModal(mode) {
 
     projectModalMode =
       mode;
 
-
     const project =
       getActiveProject();
 
-
-    if (
-      mode === "new"
-    ) {
+    if (mode === "new") {
 
       projectModalTitle.textContent =
         "New project";
 
       projectModalDescription.textContent =
-        "Create a separate workspace with its own database and requirements.";
+        "Create a separate workspace with its own rules and optional database.";
 
       projectNameInput.value =
         "";
 
-    }
-
-    else {
+    } else {
 
       projectModalTitle.textContent =
         "Rename project";
@@ -2023,235 +1532,123 @@
         "Change the name of this project.";
 
       projectNameInput.value =
-        project
-          ? project.name
-          : "";
-
+        project?.name || "";
     }
 
-
-    projectModalBackdrop
-      .classList
-      .remove(
-        "hidden"
-      );
-
-
-    setTimeout(
-      () => {
-
-        projectNameInput.focus();
-
-        projectNameInput.select();
-
-      },
-      30
+    projectModalBackdrop.classList.remove(
+      "hidden"
     );
 
+    setTimeout(() => {
+      projectNameInput.focus();
+      projectNameInput.select();
+    }, 20);
   }
 
 
   function closeProjectModal() {
-
-    projectModalBackdrop
-      .classList
-      .add(
-        "hidden"
-      );
-
+    projectModalBackdrop.classList.add(
+      "hidden"
+    );
   }
 
 
-  newProjectButton.addEventListener(
-    "click",
+  newProjectButton.onclick =
     () =>
-      openProjectModal(
-        "new"
-      )
-  );
+      openProjectModal("new");
 
 
-  renameProjectButton.addEventListener(
-    "click",
+  renameProjectButton.onclick =
     () =>
-      openProjectModal(
-        "rename"
-      )
-  );
+      openProjectModal("rename");
 
 
-  cancelProjectModal.addEventListener(
-    "click",
-    closeProjectModal
-  );
+  cancelProjectModal.onclick =
+    closeProjectModal;
 
 
-  projectModalBackdrop.addEventListener(
-    "click",
-    event => {
-
-      if (
-        event.target ===
-        projectModalBackdrop
-      ) {
-
-        closeProjectModal();
-
-      }
-
-    }
-  );
-
-
-  projectNameInput.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key ===
-        "Enter"
-      ) {
-
-        saveProjectModal.click();
-
-      }
-
-    }
-  );
-
-
-  saveProjectModal.addEventListener(
-    "click",
+  saveProjectModal.onclick =
     async () => {
 
       const name =
-        projectNameInput.value
-          .trim();
-
+        projectNameInput.value.trim();
 
       if (!name) {
         return;
       }
 
-
-      if (
-        projectModalMode ===
-        "new"
-      ) {
+      if (projectModalMode === "new") {
 
         const project = {
-
-          id:
-            generateId(),
-
+          id: generateId(),
           name,
-
-          createdAt:
-            Date.now()
-
+          createdAt: Date.now()
         };
 
-
-        projects.push(
-          project
-        );
-
+        projects.push(project);
 
         activeProjectId =
           project.id;
 
-
-        saveProjects();
-
-        renderProjectSelect();
-
-        closeProjectModal();
-
-        await loadActiveProject();
-
-      }
-
-      else {
+      } else {
 
         const project =
           getActiveProject();
 
-
         if (project) {
-
           project.name =
             name;
-
-
-          saveProjects();
-
-          renderProjectSelect();
-
         }
-
-
-        closeProjectModal();
-
       }
 
-    }
-  );
+      saveProjects();
+
+      renderProjectSelect();
+
+      closeProjectModal();
+
+      await loadActiveProject();
+    };
 
 
-  projectSelect.addEventListener(
-    "change",
+  projectSelect.onchange =
     async () => {
 
       activeProjectId =
         projectSelect.value;
 
-
       saveProjects();
 
-
       await loadActiveProject();
-
-    }
-  );
+    };
 
 
-  deleteProjectButton.addEventListener(
-    "click",
+  deleteProjectButton.onclick =
     async () => {
 
-      if (
-        projects.length <= 1
-      ) {
+      if (projects.length <= 1) {
         return;
       }
 
-
       const project =
         getActiveProject();
-
 
       if (!project) {
         return;
       }
 
-
       const confirmed =
         confirm(
-          'Delete "' +
-          project.name +
-          '"? Its database, settings and current check will be removed.'
+          `Delete "${project.name}"?`
         );
-
 
       if (!confirmed) {
         return;
       }
 
-
       await deleteProjectDatabase(
         project.id
       );
-
 
       localStorage.removeItem(
         getProjectSettingsKey(
@@ -2259,40 +1656,22 @@
         )
       );
 
-
-      localStorage.removeItem(
-        getProjectCheckKey(
-          project.id
-        )
-      );
-
-
       projects =
         projects.filter(
           item =>
-            item.id !==
-            project.id
+            item.id !== project.id
         );
-
 
       activeProjectId =
         projects[0].id;
-
 
       saveProjects();
 
       renderProjectSelect();
 
-
       await loadActiveProject();
+    };
 
-    }
-  );
-
-
-  /* =========================
-     INDEXED DB
-  ========================= */
 
   const DB_NAME =
     "LinkProspectCheckerDB";
@@ -2307,10 +1686,7 @@
   function openDatabase() {
 
     return new Promise(
-      (
-        resolve,
-        reject
-      ) => {
+      (resolve,reject) => {
 
         const request =
           indexedDB.open(
@@ -2318,51 +1694,35 @@
             DB_VERSION
           );
 
-
         request.onupgradeneeded =
-          function (
-            event
-          ) {
+          event => {
 
             const db =
               event.target.result;
-
 
             if (
               !db.objectStoreNames.contains(
                 STORE_NAME
               )
             ) {
-
               db.createObjectStore(
                 STORE_NAME,
                 {
-                  keyPath:
-                    "projectId"
+                  keyPath: "projectId"
                 }
               );
-
             }
-
           };
-
 
         request.onsuccess =
           () =>
-            resolve(
-              request.result
-            );
-
+            resolve(request.result);
 
         request.onerror =
           () =>
-            reject(
-              request.error
-            );
-
+            reject(request.error);
       }
     );
-
   }
 
 
@@ -2374,46 +1734,30 @@
     const db =
       await openDatabase();
 
-
     return new Promise(
-      (
-        resolve,
-        reject
-      ) => {
+      (resolve,reject) => {
 
-        const transaction =
+        const tx =
           db.transaction(
             STORE_NAME,
             "readwrite"
           );
 
+        tx.objectStore(
+          STORE_NAME
+        ).put({
+          projectId,
+          ...data
+        });
 
-        transaction
-          .objectStore(
-            STORE_NAME
-          )
-          .put({
-
-            projectId,
-
-            ...data
-
-          });
-
-
-        transaction.oncomplete =
+        tx.oncomplete =
           resolve;
 
-
-        transaction.onerror =
+        tx.onerror =
           () =>
-            reject(
-              transaction.error
-            );
-
+            reject(tx.error);
       }
     );
-
   }
 
 
@@ -2424,47 +1768,30 @@
     const db =
       await openDatabase();
 
-
     return new Promise(
-      (
-        resolve,
-        reject
-      ) => {
+      (resolve,reject) => {
 
-        const transaction =
+        const request =
           db.transaction(
             STORE_NAME,
             "readonly"
-          );
-
-
-        const request =
-          transaction
-            .objectStore(
-              STORE_NAME
-            )
-            .get(
-              projectId
-            );
-
+          )
+          .objectStore(
+            STORE_NAME
+          )
+          .get(projectId);
 
         request.onsuccess =
           () =>
             resolve(
-              request.result ||
-              null
+              request.result || null
             );
-
 
         request.onerror =
           () =>
-            reject(
-              request.error
-            );
-
+            reject(request.error);
       }
     );
-
   }
 
 
@@ -2475,139 +1802,68 @@
     const db =
       await openDatabase();
 
-
     return new Promise(
-      (
-        resolve,
-        reject
-      ) => {
+      (resolve,reject) => {
 
-        const transaction =
+        const tx =
           db.transaction(
             STORE_NAME,
             "readwrite"
           );
 
+        tx.objectStore(
+          STORE_NAME
+        ).delete(projectId);
 
-        transaction
-          .objectStore(
-            STORE_NAME
-          )
-          .delete(
-            projectId
-          );
-
-
-        transaction.oncomplete =
+        tx.oncomplete =
           resolve;
 
-
-        transaction.onerror =
+        tx.onerror =
           () =>
-            reject(
-              transaction.error
-            );
-
+            reject(tx.error);
       }
     );
-
   }
 
 
-  /* =========================
-     CSV / HELPERS
-  ========================= */
-
-  function cleanHeader(
-    value
-  ) {
-
-    return String(
-      value || ""
-    )
-      .replace(
-        /^\uFEFF/,
-        ""
-      )
+  function cleanHeader(value) {
+    return String(value || "")
+      .replace(/^\uFEFF/,"")
       .trim()
       .toLowerCase();
-
   }
 
 
-  function detectDelimiter(
-    text
-  ) {
+  function detectDelimiter(text) {
 
     const first =
-      text.split(
-        /\r?\n/
-      )[0] || "";
+      text.split(/\r?\n/)[0] || "";
 
-
-    const candidates = [
-
-      [
-        ",",
-        (
-          first.match(
-            /,/g
-          ) || []
-        ).length
-      ],
-
-      [
-        ";",
-        (
-          first.match(
-            /;/g
-          ) || []
-        ).length
-      ],
-
-      [
-        "\t",
-        (
-          first.match(
-            /\t/g
-          ) || []
-        ).length
-      ]
-
+    const options = [
+      [",",(first.match(/,/g) || []).length],
+      [";",(first.match(/;/g) || []).length],
+      ["\t",(first.match(/\t/g) || []).length]
     ];
 
-
-    candidates.sort(
-      (
-        a,
-        b
-      ) =>
-        b[1] -
-        a[1]
+    options.sort(
+      (a,b) =>
+        b[1] - a[1]
     );
 
-
-    return candidates[0][0];
-
+    return options[0][0];
   }
 
 
-  function parseCSV(
-    text
-  ) {
+  function parseCSV(text) {
 
     const delimiter =
-      detectDelimiter(
-        text
-      );
-
+      detectDelimiter(text);
 
     const rows = [];
 
     let row = [];
     let cell = "";
     let quoted = false;
-
 
     for (
       let i = 0;
@@ -2619,50 +1875,32 @@
         text[i];
 
       const next =
-        text[
-          i + 1
-        ];
-
+        text[i+1];
 
       if (
         char === '"' &&
         quoted &&
         next === '"'
       ) {
-
         cell += '"';
         i++;
-
       }
 
-      else if (
-        char === '"'
-      ) {
-
+      else if (char === '"') {
         quoted =
           !quoted;
-
       }
 
       else if (
-        char ===
-          delimiter &&
+        char === delimiter &&
         !quoted
       ) {
-
-        row.push(
-          cell
-        );
-
+        row.push(cell);
         cell = "";
-
       }
 
       else if (
-        (
-          char === "\n" ||
-          char === "\r"
-        ) &&
+        (char === "\n" || char === "\r") &&
         !quoted
       ) {
 
@@ -2673,272 +1911,136 @@
           i++;
         }
 
-
-        row.push(
-          cell
-        );
-
+        row.push(cell);
 
         if (
           row.some(
             item =>
-              String(
-                item
-              ).trim() !==
-              ""
+              String(item).trim() !== ""
           )
         ) {
-
-          rows.push(
-            row
-          );
-
+          rows.push(row);
         }
-
 
         row = [];
         cell = "";
-
       }
 
       else {
-
-        cell +=
-          char;
-
+        cell += char;
       }
-
     }
 
-
-    row.push(
-      cell
-    );
-
+    row.push(cell);
 
     if (
       row.some(
         item =>
-          String(
-            item
-          ).trim() !==
-          ""
+          String(item).trim() !== ""
       )
     ) {
-
-      rows.push(
-        row
-      );
-
+      rows.push(row);
     }
 
-
     return rows;
-
   }
 
 
-  function findColumn(
-    headers,
-    names
-  ) {
+  function findColumn(headers,names) {
 
     const clean =
-      headers.map(
-        cleanHeader
-      );
+      headers.map(cleanHeader);
 
-
-    for (
-      const name
-      of names
-    ) {
+    for (const name of names) {
 
       const index =
         clean.indexOf(
-          name
-            .toLowerCase()
+          name.toLowerCase()
         );
 
-
-      if (
-        index !== -1
-      ) {
-
+      if (index !== -1) {
         return index;
-
       }
-
     }
-
 
     return -1;
-
   }
 
 
-  function numberValue(
-    value
-  ) {
-
-    let text =
-      String(
-        value || ""
-      )
-        .replace(
-          /\s/g,
-          ""
-        )
-        .replace(
-          /,/g,
-          ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    let multiplier =
-      1;
-
-
-    if (
-      text.endsWith(
-        "k"
-      )
-    ) {
-
-      multiplier =
-        1000;
-
-      text =
-        text.slice(
-          0,
-          -1
-        );
-
-    }
-
-
-    if (
-      text.endsWith(
-        "m"
-      )
-    ) {
-
-      multiplier =
-        1000000;
-
-      text =
-        text.slice(
-          0,
-          -1
-        );
-
-    }
-
-
-    const number =
-      Number(
-        text
-      );
-
-
-    return Number.isFinite(
-      number
-    )
-      ? number *
-        multiplier
-      : 0;
-
-  }
-
-
-  function normalizeDomain(
-    value
-  ) {
+  function normalizeDomain(value) {
 
     if (!value) {
       return "";
     }
 
-
     let domain =
-      String(
-        value
-      )
+      String(value)
         .trim()
         .toLowerCase()
-        .replace(
-          /^https?:\/\//i,
-          ""
-        )
-        .replace(
-          /^www\./i,
-          ""
-        );
-
+        .replace(/^https?:\/\//i,"")
+        .replace(/^www\./i,"");
 
     domain =
-      domain.split(
-        "/"
-      )[0];
-
+      domain.split("/")[0];
 
     domain =
-      domain.split(
-        "?"
-      )[0];
-
+      domain.split("?")[0];
 
     domain =
-      domain.split(
-        "#"
-      )[0];
-
+      domain.split("#")[0];
 
     domain =
-      domain.replace(
-        /:\d+$/,
-        ""
-      );
-
+      domain.replace(/:\d+$/,"");
 
     return domain
-      .replace(
-        /[.,;:!?)]+$/,
-        ""
-      )
+      .replace(/[.,;:!?)]+$/,"")
       .trim();
-
   }
 
 
-  function extractDomains(
-    text
-  ) {
+  function extractDomains(text) {
 
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>"']*)?/gi;
 
-
     return [
       ...new Set(
-
-        (
-          text.match(
-            regex
-          ) || []
-        )
-          .map(
-            normalizeDomain
-          )
-          .filter(
-            Boolean
-          )
-
+        (text.match(regex) || [])
+          .map(normalizeDomain)
+          .filter(Boolean)
       )
     ];
+  }
 
+
+  function numberValue(value) {
+
+    let text =
+      String(value || "")
+        .replace(/\s/g,"")
+        .replace(/,/g,"")
+        .trim()
+        .toLowerCase();
+
+    let multiplier =
+      1;
+
+    if (text.endsWith("k")) {
+      multiplier = 1000;
+      text = text.slice(0,-1);
+    }
+
+    if (text.endsWith("m")) {
+      multiplier = 1000000;
+      text = text.slice(0,-1);
+    }
+
+    const number =
+      Number(text);
+
+    return Number.isFinite(number)
+      ? number * multiplier
+      : 0;
   }
 
 
@@ -2951,119 +2053,63 @@
     const map =
       new Map();
 
-
     rows.forEach(
       row => {
 
         const domain =
           normalizeDomain(
-            row[
-              domainIndex
-            ]
+            row[domainIndex]
           );
-
 
         if (!domain) {
           return;
         }
 
-
         const status =
           String(
-            row[
-              statusIndex
-            ] || ""
+            row[statusIndex] || ""
           ).trim();
 
-
-        if (
-          !map.has(
-            domain
-          )
-        ) {
-
-          map.set(
-            domain,
-            {
-              rows: 0,
-              statuses:
-                new Set()
-            }
-          );
-
+        if (!map.has(domain)) {
+          map.set(domain,{
+            rows: 0,
+            statuses: new Set()
+          });
         }
 
+        const item =
+          map.get(domain);
 
-        const entry =
-          map.get(
-            domain
-          );
+        item.rows++;
 
-
-        entry.rows++;
-
-
-        if (
-          status
-        ) {
-
-          entry.statuses.add(
-            status
-          );
-
+        if (status) {
+          item.statuses.add(status);
         }
-
       }
     );
 
-
-    let duplicateRows =
-      0;
-
-    let conflictingDomains =
-      0;
-
+    let duplicateRows = 0;
+    let conflicts = 0;
 
     map.forEach(
-      entry => {
+      item => {
 
-        if (
-          entry.rows >
-          1
-        ) {
-
+        if (item.rows > 1) {
           duplicateRows +=
-            entry.rows -
-            1;
-
+            item.rows - 1;
         }
 
-
-        if (
-          entry.statuses
-            .size >
-          1
-        ) {
-
-          conflictingDomains++;
-
+        if (item.statuses.size > 1) {
+          conflicts++;
         }
-
       }
     );
 
-
     return {
-
-      uniqueDomains:
-        map.size,
-
+      uniqueDomains: map.size,
       duplicateRows,
-
-      conflictingDomains
-
+      conflicts
     };
-
   }
 
 
@@ -3076,177 +2122,55 @@
     const map =
       new Map();
 
-
     rows.forEach(
       row => {
 
         const domain =
           normalizeDomain(
-            row[
-              domainIndex
-            ]
+            row[domainIndex]
           );
-
 
         if (!domain) {
           return;
         }
 
-
         const status =
           String(
-            row[
-              statusIndex
-            ] || ""
+            row[statusIndex] || ""
           ).trim();
 
-
-        if (
-          !map.has(
-            domain
-          )
-        ) {
-
+        if (!map.has(domain)) {
           map.set(
             domain,
             new Set()
           );
-
         }
 
-
-        if (
-          status
-        ) {
-
-          map
-            .get(
-              domain
-            )
-            .add(
-              status
-            );
-
+        if (status) {
+          map.get(domain).add(status);
         }
-
       }
     );
 
-
-    const finalMap =
+    const result =
       new Map();
 
-
     map.forEach(
-      (
-        statuses,
-        domain
-      ) => {
+      (statuses,domain) => {
 
-        finalMap.set(
+        result.set(
           domain,
-          [...statuses]
-            .join(
-              " / "
-            )
+          [...statuses].join(" / ")
         );
 
       }
     );
 
-
-    return finalMap;
-
+    return result;
   }
 
-
-  function formatRelativeTime(
-    timestamp
-  ) {
-
-    if (
-      !timestamp
-    ) {
-      return "";
-    }
-
-
-    const diff =
-      Date.now() -
-      timestamp;
-
-
-    const minutes =
-      Math.floor(
-        diff /
-        60000
-      );
-
-
-    if (
-      minutes <
-      1
-    ) {
-
-      return "just now";
-
-    }
-
-
-    if (
-      minutes <
-      60
-    ) {
-
-      return (
-        minutes +
-        " min ago"
-      );
-
-    }
-
-
-    const hours =
-      Math.floor(
-        minutes /
-        60
-      );
-
-
-    if (
-      hours <
-      24
-    ) {
-
-      return (
-        hours +
-        "h ago"
-      );
-
-    }
-
-
-    const days =
-      Math.floor(
-        hours /
-        24
-      );
-
-
-    return (
-      days +
-      "d ago"
-    );
-
-  }
-
-
-  /* =========================
-     COUNTRIES
-  ========================= */
 
   const countryList = [
-
     ["US","United States"],
     ["GB","United Kingdom"],
     ["CA","Canada"],
@@ -3284,7 +2208,6 @@
     ["AE","United Arab Emirates"],
     ["SA","Saudi Arabia"],
     ["ZA","South Africa"]
-
   ];
 
 
@@ -3293,102 +2216,65 @@
     countryMenu.innerHTML =
       "";
 
-
     countryList.forEach(
-      (
-        [
-          code,
-          name
-        ]
-      ) => {
+      ([code,name]) => {
 
-        const option =
+        const label =
           document.createElement(
             "label"
           );
 
-
-        option.className =
+        label.className =
           "country-option";
-
 
         const checkbox =
           document.createElement(
             "input"
           );
 
-
         checkbox.type =
           "checkbox";
 
-
         checkbox.checked =
-          selectedCountries
-            .includes(
-              code
-            );
-
-
-        checkbox.addEventListener(
-          "change",
-          () => {
-
-            if (
-              checkbox.checked
-            ) {
-
-              if (
-                !selectedCountries
-                  .includes(
-                    code
-                  )
-              ) {
-
-                selectedCountries
-                  .push(
-                    code
-                  );
-
-              }
-
-            }
-
-            else {
-
-              selectedCountries =
-                selectedCountries
-                  .filter(
-                    item =>
-                      item !==
-                      code
-                  );
-
-            }
-
-
-            renderCountries();
-
-          }
-        );
-
-
-        option.append(
-          checkbox,
-          document
-            .createTextNode(
-              name
-            )
-        );
-
-
-        countryMenu
-          .appendChild(
-            option
+          selectedCountries.includes(
+            code
           );
 
+        checkbox.onchange =
+          () => {
+
+            if (checkbox.checked) {
+
+              if (
+                !selectedCountries.includes(
+                  code
+                )
+              ) {
+                selectedCountries.push(code);
+              }
+
+            } else {
+
+              selectedCountries =
+                selectedCountries.filter(
+                  item =>
+                    item !== code
+                );
+            }
+
+            renderCountries();
+          };
+
+        label.append(
+          checkbox,
+          document.createTextNode(name)
+        );
+
+        countryMenu.appendChild(
+          label
+        );
       }
     );
-
   }
 
 
@@ -3397,121 +2283,44 @@
     countryChips.innerHTML =
       "";
 
+    countryPlaceholder.style.display =
+      selectedCountries.length
+        ? "none"
+        : "block";
 
-    countryPlaceholder
-      .style
-      .display =
-        selectedCountries
-          .length
-          ? "none"
-          : "block";
+    selectedCountries.forEach(
+      code => {
 
+        const name =
+          countryList.find(
+            item =>
+              item[0] === code
+          )?.[1] || code;
 
-    selectedCountries
-      .forEach(
-        code => {
-
-          const name =
-            countryList
-              .find(
-                item =>
-                  item[0] ===
-                  code
-              )?.[1] ||
-            code;
-
-
-          const chip =
-            document
-              .createElement(
-                "span"
-              );
-
-
-          chip.className =
-            "country-chip";
-
-
-          const text =
-            document
-              .createElement(
-                "span"
-              );
-
-
-          text.textContent =
-            name;
-
-
-          const remove =
-            document
-              .createElement(
-                "button"
-              );
-
-
-          remove.type =
-            "button";
-
-
-          remove.textContent =
-            "×";
-
-
-          remove.addEventListener(
-            "click",
-            event => {
-
-              event
-                .stopPropagation();
-
-
-              selectedCountries =
-                selectedCountries
-                  .filter(
-                    item =>
-                      item !==
-                      code
-                  );
-
-
-              buildCountries();
-
-              renderCountries();
-
-            }
+        const chip =
+          document.createElement(
+            "span"
           );
 
+        chip.className =
+          "country-chip";
 
-          chip.append(
-            text,
-            remove
-          );
+        chip.textContent =
+          name;
 
-
-          countryChips
-            .appendChild(
-              chip
-            );
-
-        }
-      );
-
+        countryChips.appendChild(
+          chip
+        );
+      }
+    );
   }
 
 
-  countryControl.addEventListener(
-    "click",
-    () => {
-
-      countryMenu
-        .classList
-        .toggle(
-          "active"
-        );
-
-    }
-  );
+  countryControl.onclick =
+    () =>
+      countryMenu.classList.toggle(
+        "active"
+      );
 
 
   document.addEventListener(
@@ -3519,176 +2328,112 @@
     event => {
 
       if (
-        !countryPicker
-          .contains(
-            event.target
+        !countryPicker.contains(
+          event.target
+        )
+      ) {
+        countryMenu.classList.remove(
+          "active"
+        );
+      }
+    }
+  );
+
+
+  dbDropzone.onclick =
+    () =>
+      databaseFile.click();
+
+
+  replaceDatabase.onclick =
+    () =>
+      databaseFile.click();
+
+
+  databaseFile.onchange =
+    () => {
+
+      const file =
+        databaseFile.files[0];
+
+      if (file) {
+        loadDatabaseFile(file);
+      }
+    };
+
+
+  function populateDatabaseColumns() {
+
+    domainColumn.innerHTML =
+      "";
+
+    statusColumn.innerHTML =
+      "";
+
+    domainColumn.add(
+      new Option(
+        "Select column",
+        ""
+      )
+    );
+
+    statusColumn.add(
+      new Option(
+        "Select column",
+        ""
+      )
+    );
+
+    databaseHeaders.forEach(
+      (header,index) => {
+
+        domainColumn.add(
+          new Option(
+            header || `Column ${index+1}`,
+            index
           )
-      ) {
+        );
 
-        countryMenu
-          .classList
-          .remove(
-            "active"
-          );
-
+        statusColumn.add(
+          new Option(
+            header || `Column ${index+1}`,
+            index
+          )
+        );
       }
-
-    }
-  );
-
-
-  /* =========================
-     DATABASE UPLOAD
-  ========================= */
-
-  dbDropzone.addEventListener(
-    "click",
-    () =>
-      databaseFile
-        .click()
-  );
+    );
+  }
 
 
-  replaceDatabase.addEventListener(
-    "click",
-    () =>
-      databaseFile
-        .click()
-  );
-
-
-  databaseFile.addEventListener(
-    "change",
-    () => {
-
-      const file =
-        databaseFile
-          .files[0];
-
-
-      if (
-        file
-      ) {
-
-        loadDatabaseFile(
-          file
-        );
-
-      }
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "dragover",
-    event => {
-
-      event.preventDefault();
-
-      dbDropzone
-        .classList
-        .add(
-          "dragging"
-        );
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "dragleave",
-    () => {
-
-      dbDropzone
-        .classList
-        .remove(
-          "dragging"
-        );
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "drop",
-    event => {
-
-      event.preventDefault();
-
-
-      dbDropzone
-        .classList
-        .remove(
-          "dragging"
-        );
-
-
-      const file =
-        event
-          .dataTransfer
-          .files[0];
-
-
-      if (
-        file
-      ) {
-
-        loadDatabaseFile(
-          file
-        );
-
-      }
-
-    }
-  );
-
-
-  function loadDatabaseFile(
-    file
-  ) {
+  function loadDatabaseFile(file) {
 
     const reader =
       new FileReader();
-
 
     reader.onload =
       event => {
 
         const rows =
           parseCSV(
-            event
-              .target
-              .result
+            event.target.result
           );
 
-
-        if (
-          rows.length <
-          2
-        ) {
+        if (rows.length < 2) {
 
           alert(
             "Could not read this database CSV."
           );
 
           return;
-
         }
-
 
         databaseHeaders =
           rows[0];
 
-
         rawDatabase =
-          rows.slice(
-            1
-          );
-
+          rows.slice(1);
 
         populateDatabaseColumns();
-
 
         const detectedDomain =
           findColumn(
@@ -3703,7 +2448,6 @@
             ]
           );
 
-
         const detectedStatus =
           findColumn(
             databaseHeaders,
@@ -3715,98 +2459,38 @@
             ]
           );
 
-
-        if (
-          detectedDomain !==
-          -1
-        ) {
-
+        if (detectedDomain !== -1) {
           domainColumn.value =
             detectedDomain;
-
         }
 
-
-        if (
-          detectedStatus !==
-          -1
-        ) {
-
+        if (detectedStatus !== -1) {
           statusColumn.value =
             detectedStatus;
-
         }
-
 
         updateDatabasePreview(
           file.name
         );
 
+        dbDropzone.classList.add(
+          "hidden"
+        );
 
-        dbDropzone
-          .classList
-          .add(
-            "hidden"
-          );
+        dbSaved.classList.add(
+          "active"
+        );
 
+        toggleMapping.classList.remove(
+          "hidden"
+        );
 
-        dbSaved
-          .classList
-          .add(
-            "active"
-          );
-
-
-        toggleMapping
-          .classList
-          .remove(
-            "hidden"
-          );
-
+        mapping.classList.add(
+          "active"
+        );
       };
 
-
-    reader.readAsText(
-      file
-    );
-
-  }
-
-
-  function populateDatabaseColumns() {
-
-    domainColumn.innerHTML =
-      "";
-
-    statusColumn.innerHTML =
-      "";
-
-
-    databaseHeaders
-      .forEach(
-        (
-          header,
-          index
-        ) => {
-
-          domainColumn.add(
-            new Option(
-              header,
-              index
-            )
-          );
-
-
-          statusColumn.add(
-            new Option(
-              header,
-              index
-            )
-          );
-
-        }
-      );
-
+    reader.readAsText(file);
   }
 
 
@@ -3814,215 +2498,132 @@
     filename = ""
   ) {
 
-    if (
-      !rawDatabase
-        .length
-    ) {
-
+    if (!rawDatabase.length) {
       return;
-
     }
 
+    if (
+      domainColumn.value === "" ||
+      statusColumn.value === ""
+    ) {
+
+      dbSavedMeta.innerHTML =
+        (
+          filename
+            ? filename + "<br>"
+            : ""
+        ) +
+        "Choose Domain and Status columns";
+
+      dbWarning.classList.remove(
+        "active"
+      );
+
+      return;
+    }
 
     const analysis =
       analyzeDatabaseRows(
-
         rawDatabase,
-
-        Number(
-          domainColumn
-            .value
-        ),
-
-        Number(
-          statusColumn
-            .value
-        )
-
+        Number(domainColumn.value),
+        Number(statusColumn.value)
       );
 
-
     dbSavedMeta.innerHTML =
-
       (
         filename
-          ? filename +
-            "<br>"
+          ? filename + "<br>"
           : ""
       ) +
-
-      analysis
-        .uniqueDomains +
-
+      analysis.uniqueDomains +
       " unique domains · " +
-
-      analysis
-        .duplicateRows +
-
+      analysis.duplicateRows +
       " duplicate rows";
 
+    if (analysis.conflicts > 0) {
 
-    if (
-      analysis
-        .conflictingDomains >
-      0
-    ) {
+      dbWarning.classList.add(
+        "active"
+      );
 
-      dbWarning
-        .classList
-        .add(
-          "active"
-        );
+      dbWarning.textContent =
+        analysis.conflicts +
+        " domains have conflicting statuses. All unique statuses will be kept.";
 
+    } else {
 
-      dbWarning.innerHTML =
+      dbWarning.classList.remove(
+        "active"
+      );
 
-        analysis
-          .conflictingDomains +
-
-        " domains have conflicting statuses. " +
-
-        "All unique statuses will be kept.";
-
-    }
-
-    else {
-
-      dbWarning
-        .classList
-        .remove(
-          "active"
-        );
-
-
-      dbWarning.innerHTML =
+      dbWarning.textContent =
         "";
-
     }
-
   }
 
 
-  domainColumn.addEventListener(
-    "change",
+  domainColumn.onchange =
     () =>
-      updateDatabasePreview()
-  );
+      updateDatabasePreview();
 
 
-  statusColumn.addEventListener(
-    "change",
+  statusColumn.onchange =
     () =>
-      updateDatabasePreview()
-  );
+      updateDatabasePreview();
 
 
-  toggleMapping.addEventListener(
-    "click",
-    () => {
-
-      mapping
-        .classList
-        .toggle(
-          "active"
-        );
-
-    }
-  );
+  toggleMapping.onclick =
+    () =>
+      mapping.classList.toggle(
+        "active"
+      );
 
 
-  /* =========================
-     PROJECT SETTINGS
-  ========================= */
-
-  function getCurrentSettings() {
+  function getProjectSettings() {
 
     let dr =
       Number(
         minDR.value
       );
 
-
     dr =
       Math.max(
         0,
         Math.min(
           100,
-          Number
-            .isFinite(
-              dr
-            )
+          Number.isFinite(dr)
             ? dr
             : 0
         )
       );
 
-
     minDR.value =
       dr;
 
-
     return {
-
-      useDR:
-        useDR.checked,
-
-      minDR:
-        dr,
-
-      useTraffic:
-        useTraffic.checked,
-
-      minTraffic:
-        Number(
-          minTraffic.value
-        ) || 0,
-
-      useRD:
-        useRD.checked,
-
-      minRD:
-        Number(
-          minRD.value
-        ) || 0,
-
-      useRDLD:
-        useRDLD.checked,
-
-      useCountry:
-        useCountry.checked,
-
-      countries:
-        [
-          ...selectedCountries
-        ]
-
+      useDR: useDR.checked,
+      minDR: dr,
+      useTraffic: useTraffic.checked,
+      minTraffic: Number(minTraffic.value) || 0,
+      useRD: useRD.checked,
+      minRD: Number(minRD.value) || 0,
+      useRDLD: useRDLD.checked,
+      useCountry: useCountry.checked,
+      countries: [...selectedCountries]
     };
-
   }
 
 
   function saveProjectSettings() {
 
-    if (
-      !activeProjectId
-    ) {
-      return;
-    }
-
-
     localStorage.setItem(
-
       getProjectSettingsKey(
         activeProjectId
       ),
-
       JSON.stringify(
-        getCurrentSettings()
+        getProjectSettings()
       )
-
     );
-
   }
 
 
@@ -4034,704 +2635,178 @@
           getProjectSettingsKey(
             activeProjectId
           )
-        ) ||
-        "null"
+        ) || "null"
       );
-
 
     useDR.checked =
       Boolean(
-        settings
-          ?.useDR
+        settings?.useDR
       );
 
-
     minDR.value =
-      settings
-        ?.minDR ??
-      50;
-
+      settings?.minDR ?? 50;
 
     useTraffic.checked =
       Boolean(
-        settings
-          ?.useTraffic
+        settings?.useTraffic
       );
 
-
     minTraffic.value =
-      settings
-        ?.minTraffic ??
-      2000;
-
+      settings?.minTraffic ?? 2000;
 
     useRD.checked =
       Boolean(
-        settings
-          ?.useRD
+        settings?.useRD
       );
 
-
     minRD.value =
-      settings
-        ?.minRD ??
-      500;
-
+      settings?.minRD ?? 500;
 
     useRDLD.checked =
       Boolean(
-        settings
-          ?.useRDLD
+        settings?.useRDLD
       );
-
 
     useCountry.checked =
       Boolean(
-        settings
-          ?.useCountry
+        settings?.useCountry
       );
-
 
     selectedCountries =
       Array.isArray(
-        settings
-          ?.countries
+        settings?.countries
       )
-        ? settings
-            .countries
+        ? settings.countries
         : [];
-
 
     buildCountries();
 
     renderCountries();
-
   }
 
 
-  saveSettings.addEventListener(
-    "click",
+  saveSettings.onclick =
     async () => {
+
+      if (rawDatabase.length) {
+
+        if (
+          domainColumn.value === "" ||
+          statusColumn.value === ""
+        ) {
+
+          mapping.classList.add(
+            "active"
+          );
+
+          alert(
+            "Please select both Domain and Status columns."
+          );
+
+          return;
+        }
+      }
 
       saveProjectSettings();
 
-
-      if (
-        rawDatabase
-          .length
-      ) {
+      if (rawDatabase.length) {
 
         await saveProjectDatabase(
-
           activeProjectId,
-
           {
-
-            headers:
-              databaseHeaders,
-
-            rows:
-              rawDatabase,
-
-            domainColumn:
-              Number(
-                domainColumn
-                  .value
-              ),
-
-            statusColumn:
-              Number(
-                statusColumn
-                  .value
-              )
-
+            headers: databaseHeaders,
+            rows: rawDatabase,
+            domainColumn: Number(domainColumn.value),
+            statusColumn: Number(statusColumn.value)
           }
-
         );
 
-      }
+        activeProjectHasDatabase =
+          true;
 
+      } else {
 
-      const db =
-        await loadProjectDatabase(
+        await deleteProjectDatabase(
           activeProjectId
         );
 
-
-      if (
-        !db
-      ) {
-
-        alert(
-          "Please upload a database first."
-        );
-
-        return;
-
+        activeProjectHasDatabase =
+          false;
       }
 
-
-      showChecker(
-        db
-      );
-
-    }
-  );
-
-
-  editSettings.addEventListener(
-    "click",
-    () => {
-
-      checkerScreen
-        .classList
-        .add(
-          "hidden"
-        );
-
-
-      setupScreen
-        .classList
-        .remove(
-          "hidden"
-        );
-
-    }
-  );
-
-
-  /* =========================
-     CURRENT CHECK
-  ========================= */
-
-  function saveCurrentCheck() {
-
-    if (
-      !activeProjectId ||
-      !allResults.length
-    ) {
-
-      return;
-
-    }
-
-
-    const data = {
-
-      results:
-        allResults,
-
-      filter:
-        currentResultFilter,
-
-      status:
-        statusFilter.value,
-
-      search:
-        resultSearch.value,
-
-      sortColumn,
-
-      sortDirection,
-
-      timestamp:
-        Date.now()
-
+      showChecker();
     };
 
 
-    localStorage.setItem(
+  editSettings.onclick =
+    () => {
 
-      getProjectCheckKey(
-        activeProjectId
-      ),
+      checkerScreen.classList.add(
+        "hidden"
+      );
 
-      JSON.stringify(
-        data
+      setupScreen.classList.remove(
+        "hidden"
+      );
+    };
+
+
+  function showChecker() {
+
+    setupScreen.classList.add(
+      "hidden"
+    );
+
+    checkerScreen.classList.remove(
+      "hidden"
+    );
+
+    if (activeProjectHasDatabase) {
+
+      const analysis =
+        analyzeDatabaseRows(
+          rawDatabase,
+          Number(domainColumn.value),
+          Number(statusColumn.value)
+        );
+
+      databaseStats.textContent =
+        analysis.uniqueDomains +
+        " domains in this project database";
+
+    } else {
+
+      databaseStats.textContent =
+        "Metrics-only project · no domain database";
+    }
+
+    updateDatabaseDependentUI();
+  }
+
+
+  function updateDatabaseDependentUI() {
+
+    document
+      .querySelectorAll(
+        ".db-only"
       )
+      .forEach(
+        element => {
 
-    );
-
-
-    updateCurrentCheckBanner(
-      data
-    );
-
+          element.classList.toggle(
+            "hidden",
+            !activeProjectHasDatabase
+          );
+        }
+      );
   }
 
-
-  function loadCurrentCheck() {
-
-    try {
-
-      return JSON.parse(
-        localStorage.getItem(
-          getProjectCheckKey(
-            activeProjectId
-          )
-        ) ||
-        "null"
-      );
-
-    }
-
-    catch {
-
-      return null;
-
-    }
-
-  }
-
-
-  function updateCurrentCheckBanner(
-    data
-  ) {
-
-    if (
-      !data ||
-      !Array.isArray(
-        data.results
-      ) ||
-      !data.results
-        .length
-    ) {
-
-      currentCheck
-        .classList
-        .add(
-          "hidden"
-        );
-
-      return;
-
-    }
-
-
-    currentCheck
-      .classList
-      .remove(
-        "hidden"
-      );
-
-
-    currentCheckMeta
-      .textContent =
-
-        data.results
-          .length +
-
-        " domains · checked " +
-
-        formatRelativeTime(
-          data.timestamp
-        );
-
-  }
-
-
-  function clearCurrentCheckState() {
-
-    localStorage.removeItem(
-      getProjectCheckKey(
-        activeProjectId
-      )
-    );
-
-
-    allResults = [];
-
-    currentResultFilter =
-      "all";
-
-    sortColumn =
-      null;
-
-    sortDirection =
-      "asc";
-
-
-    resultSearch.value =
-      "";
-
-
-    statusFilter.innerHTML =
-      '<option value="all">All statuses</option>';
-
-
-    resultsCard
-      .classList
-      .add(
-        "hidden"
-      );
-
-
-    currentCheck
-      .classList
-      .add(
-        "hidden"
-      );
-
-
-    resetProspectInput();
-
-  }
-
-
-  clearCurrentCheck.addEventListener(
-    "click",
-    clearCurrentCheckState
-  );
-
-
-  /* =========================
-     SHOW PROJECT
-  ========================= */
-
-  function resetSetupDatabaseUI() {
-
-    rawDatabase = [];
-
-    databaseHeaders = [];
-
-
-    databaseFile.value =
-      "";
-
-
-    domainColumn.innerHTML =
-      "";
-
-    statusColumn.innerHTML =
-      "";
-
-
-    mapping
-      .classList
-      .remove(
-        "active"
-      );
-
-
-    toggleMapping
-      .classList
-      .add(
-        "hidden"
-      );
-
-
-    dbSaved
-      .classList
-      .remove(
-        "active"
-      );
-
-
-    dbDropzone
-      .classList
-      .remove(
-        "hidden"
-      );
-
-
-    dbSavedMeta.innerHTML =
-      "";
-
-
-    dbWarning
-      .classList
-      .remove(
-        "active"
-      );
-
-
-    dbWarning.innerHTML =
-      "";
-
-  }
-
-
-  function resetProspectInput() {
-
-    ahrefsRows = [];
-
-    ahrefsColumnMap =
-      null;
-
-
-    ahrefsFile.value =
-      "";
-
-
-    domainInput.value =
-      "";
-
-    domainInput.disabled =
-      false;
-
-
-    fileLoaded
-      .classList
-      .remove(
-        "active"
-      );
-
-
-    uploadZone
-      .classList
-      .remove(
-        "hidden"
-      );
-
-
-    detectedInfo.textContent =
-      "0 unique domains detected";
-
-  }
-
-
-  async function loadActiveProject() {
-
-    resetSetupDatabaseUI();
-
-    resetProspectInput();
-
-
-    allResults = [];
-
-    currentResultFilter =
-      "all";
-
-    sortColumn =
-      null;
-
-    sortDirection =
-      "asc";
-
-
-    resultsCard
-      .classList
-      .add(
-        "hidden"
-      );
-
-
-    currentCheck
-      .classList
-      .add(
-        "hidden"
-      );
-
-
-    loadProjectSettings();
-
-
-    const db =
-      await loadProjectDatabase(
-        activeProjectId
-      );
-
-
-    if (
-      db
-    ) {
-
-      rawDatabase =
-        db.rows ||
-        [];
-
-
-      databaseHeaders =
-        db.headers ||
-        [];
-
-
-      populateDatabaseColumns();
-
-
-      domainColumn.value =
-        db.domainColumn;
-
-
-      statusColumn.value =
-        db.statusColumn;
-
-
-      updateDatabasePreview(
-        "Saved database"
-      );
-
-
-      dbDropzone
-        .classList
-        .add(
-          "hidden"
-        );
-
-
-      dbSaved
-        .classList
-        .add(
-          "active"
-        );
-
-
-      toggleMapping
-        .classList
-        .remove(
-          "hidden"
-        );
-
-
-      showChecker(
-        db
-      );
-
-    }
-
-    else {
-
-      checkerScreen
-        .classList
-        .add(
-          "hidden"
-        );
-
-
-      setupScreen
-        .classList
-        .remove(
-          "hidden"
-        );
-
-    }
-
-
-    const savedCheck =
-      loadCurrentCheck();
-
-
-    if (
-      savedCheck &&
-      Array.isArray(
-        savedCheck.results
-      ) &&
-      savedCheck.results
-        .length
-    ) {
-
-      allResults =
-        savedCheck.results;
-
-
-      currentResultFilter =
-        savedCheck.filter ||
-        "all";
-
-
-      sortColumn =
-        savedCheck.sortColumn ||
-        null;
-
-
-      sortDirection =
-        savedCheck.sortDirection ||
-        "asc";
-
-
-      buildStatusFilter();
-
-
-      if (
-        [
-          ...statusFilter
-            .options
-        ]
-          .some(
-            option =>
-              option.value ===
-              savedCheck.status
-          )
-      ) {
-
-        statusFilter.value =
-          savedCheck.status;
-
-      }
-
-
-      resultSearch.value =
-        savedCheck.search ||
-        "";
-
-
-      updateFilterCounts();
-
-      setActiveFilter(
-        currentResultFilter
-      );
-
-
-      renderFilteredResults();
-
-      updateCurrentCheckBanner(
-        savedCheck
-      );
-
-    }
-
-  }
-
-
-  function showChecker(
-    db
-  ) {
-
-    setupScreen
-      .classList
-      .add(
-        "hidden"
-      );
-
-
-    checkerScreen
-      .classList
-      .remove(
-        "hidden"
-      );
-
-
-    const analysis =
-      analyzeDatabaseRows(
-
-        db.rows,
-
-        db.domainColumn,
-
-        db.statusColumn
-
-      );
-
-
-    databaseStats.textContent =
-
-      analysis.uniqueDomains +
-
-      " domains in this project";
-
-  }
-
-
-  /* =========================
-     AHREFS
-  ========================= */
 
   function detectAhrefsColumns(
     headers
   ) {
 
     return {
-
       domain:
         findColumn(
           headers,
@@ -4780,9 +2855,7 @@
             "outgoing domains / followed"
           ]
         )
-
     };
-
   }
 
 
@@ -4791,154 +2864,96 @@
   ) {
 
     const match =
-      String(
-        value || ""
-      )
+      String(value || "")
         .match(
           /\(([a-z]{2}),/i
         );
 
-
     return match
-      ? match[1]
-          .toUpperCase()
+      ? match[1].toUpperCase()
       : "";
-
   }
 
 
-  uploadZone.addEventListener(
-    "click",
+  uploadZone.onclick =
     () =>
-      ahrefsFile
-        .click()
-  );
+      ahrefsFile.click();
 
 
-  ahrefsFile.addEventListener(
-    "change",
+  ahrefsFile.onchange =
     () => {
 
       const file =
-        ahrefsFile
-          .files[0];
+        ahrefsFile.files[0];
 
-
-      if (
-        file
-      ) {
-
-        loadAhrefsFile(
-          file
-        );
-
+      if (file) {
+        loadAhrefsFile(file);
       }
-
-    }
-  );
+    };
 
 
-  prospectInput.addEventListener(
-    "dragover",
+  prospectInput.ondragover =
+    event =>
+      event.preventDefault();
+
+
+  prospectInput.ondrop =
     event => {
 
       event.preventDefault();
-
-    }
-  );
-
-
-  prospectInput.addEventListener(
-    "drop",
-    event => {
-
-      event.preventDefault();
-
 
       const file =
-        event
-          .dataTransfer
-          .files[0];
-
+        event.dataTransfer.files[0];
 
       if (
         file &&
-        file.name
-          .toLowerCase()
-          .endsWith(
-            ".csv"
-          )
+        file.name.toLowerCase().endsWith(
+          ".csv"
+        )
       ) {
-
-        loadAhrefsFile(
-          file
-        );
-
+        loadAhrefsFile(file);
       }
-
-    }
-  );
+    };
 
 
-  function loadAhrefsFile(
-    file
-  ) {
+  function loadAhrefsFile(file) {
 
     const reader =
       new FileReader();
-
 
     reader.onload =
       event => {
 
         const rows =
           parseCSV(
-            event
-              .target
-              .result
+            event.target.result
           );
 
-
-        if (
-          rows.length <
-          2
-        ) {
+        if (rows.length < 2) {
 
           alert(
             "Could not read this Ahrefs CSV."
           );
 
           return;
-
         }
-
 
         ahrefsColumnMap =
           detectAhrefsColumns(
             rows[0]
           );
 
-
-        if (
-          ahrefsColumnMap
-            .domain ===
-          -1
-        ) {
+        if (ahrefsColumnMap.domain === -1) {
 
           alert(
             "Could not detect the Target column."
           );
 
           return;
-
         }
 
-
         ahrefsRows =
-          rows.slice(
-            1
-          );
-
+          rows.slice(1);
 
         const domains =
           ahrefsRows
@@ -4946,46 +2961,26 @@
               row =>
                 normalizeDomain(
                   row[
-                    ahrefsColumnMap
-                      .domain
+                    ahrefsColumnMap.domain
                   ]
                 )
             )
-            .filter(
-              Boolean
-            );
+            .filter(Boolean);
 
+        loadedFileName.textContent =
+          file.name;
 
-        loadedFileName
-          .textContent =
-            file.name;
+        loadedFileMeta.textContent =
+          [...new Set(domains)].length +
+          " unique domains detected";
 
+        uploadZone.classList.add(
+          "hidden"
+        );
 
-        loadedFileMeta
-          .textContent =
-
-            [
-              ...new Set(
-                domains
-              )
-            ].length +
-
-            " unique domains detected";
-
-
-        uploadZone
-          .classList
-          .add(
-            "hidden"
-          );
-
-
-        fileLoaded
-          .classList
-          .add(
-            "active"
-          );
-
+        fileLoaded.classList.add(
+          "active"
+        );
 
         domainInput.value =
           "";
@@ -4993,59 +2988,59 @@
         domainInput.disabled =
           true;
 
-
         detectedInfo.textContent =
-
-          [
-            ...new Set(
-              domains
-            )
-          ].length +
-
+          [...new Set(domains)].length +
           " domains ready to check";
-
       };
 
-
-    reader.readAsText(
-      file
-    );
-
+    reader.readAsText(file);
   }
 
 
-  removeFile.addEventListener(
-    "click",
-    resetProspectInput
-  );
-
-
-  domainInput.addEventListener(
-    "input",
+  removeFile.onclick =
     () => {
 
-      if (
-        ahrefsRows.length
-      ) {
-        return;
-      }
+      ahrefsRows = [];
 
+      ahrefsColumnMap =
+        null;
+
+      ahrefsFile.value =
+        "";
+
+      fileLoaded.classList.remove(
+        "active"
+      );
+
+      uploadZone.classList.remove(
+        "hidden"
+      );
+
+      domainInput.disabled =
+        false;
 
       detectedInfo.textContent =
-
         extractDomains(
           domainInput.value
         ).length +
-
         " unique domains detected";
-
-    }
-  );
+    };
 
 
-  /* =========================
-     REQUIREMENTS
-  ========================= */
+  domainInput.oninput =
+    () => {
+
+      if (ahrefsRows.length) {
+        return;
+      }
+
+      detectedInfo.textContent =
+        extractDomains(
+          domainInput.value
+        ).length +
+        " unique domains detected";
+    };
+
 
   function evaluateRequirements(
     row
@@ -5057,218 +3052,269 @@
           getProjectSettingsKey(
             activeProjectId
           )
-        ) ||
-        "{}"
+        ) || "{}"
       );
-
 
     const failures = [];
+    const missing = [];
 
 
-    const dr =
-      ahrefsColumnMap.dr !==
-      -1
-        ? numberValue(
-            row[
-              ahrefsColumnMap
-                .dr
-            ]
-          )
-        : 0;
+    let dr = null;
+    let traffic = null;
+    let rd = null;
+    let ld = null;
+    let country = "";
 
 
-    const traffic =
-      ahrefsColumnMap
-        .traffic !==
-      -1
-        ? numberValue(
-            row[
-              ahrefsColumnMap
-                .traffic
-            ]
-          )
-        : 0;
-
-
-    const rd =
-      ahrefsColumnMap.rd !==
-      -1
-        ? numberValue(
-            row[
-              ahrefsColumnMap
-                .rd
-            ]
-          )
-        : 0;
-
-
-    const ld =
-      ahrefsColumnMap.ld !==
-      -1
-        ? numberValue(
-            row[
-              ahrefsColumnMap
-                .ld
-            ]
-          )
-        : 0;
-
-
-    const country =
-      ahrefsColumnMap
-        .country !==
-      -1
-        ? extractTopCountry(
-            row[
-              ahrefsColumnMap
-                .country
-            ]
-          )
-        : "";
-
-
-    if (
-      settings.useDR &&
-      dr <
-      settings.minDR
-    ) {
-
-      failures.push(
-        `DR ${dr} < ${settings.minDR}`
-      );
-
+    if (ahrefsColumnMap.dr !== -1) {
+      dr =
+        numberValue(
+          row[
+            ahrefsColumnMap.dr
+          ]
+        );
     }
 
 
-    if (
-      settings.useTraffic &&
-      traffic <
-      settings.minTraffic
-    ) {
-
-      failures.push(
-        `Traffic ${traffic} < ${settings.minTraffic}`
-      );
-
+    if (ahrefsColumnMap.traffic !== -1) {
+      traffic =
+        numberValue(
+          row[
+            ahrefsColumnMap.traffic
+          ]
+        );
     }
 
 
-    if (
-      settings.useRD &&
-      rd <
-      settings.minRD
-    ) {
-
-      failures.push(
-        `RD ${rd} < ${settings.minRD}`
-      );
-
+    if (ahrefsColumnMap.rd !== -1) {
+      rd =
+        numberValue(
+          row[
+            ahrefsColumnMap.rd
+          ]
+        );
     }
 
 
-    if (
-      settings.useRDLD &&
-      rd <
-      ld
-    ) {
-
-      failures.push(
-        `RD ${rd} < LD ${ld}`
-      );
-
+    if (ahrefsColumnMap.ld !== -1) {
+      ld =
+        numberValue(
+          row[
+            ahrefsColumnMap.ld
+          ]
+        );
     }
 
 
-    if (
-      settings.useCountry &&
-      Array.isArray(
-        settings.countries
-      ) &&
-      settings.countries
-        .length &&
-      !settings.countries
-        .includes(
+    if (ahrefsColumnMap.country !== -1) {
+      country =
+        extractTopCountry(
+          row[
+            ahrefsColumnMap.country
+          ]
+        );
+    }
+
+
+    if (settings.useDR) {
+
+      if (ahrefsColumnMap.dr === -1) {
+        missing.push(
+          "DR column"
+        );
+      }
+
+      else if (
+        dr < settings.minDR
+      ) {
+        failures.push(
+          `DR ${dr} < ${settings.minDR}`
+        );
+      }
+    }
+
+
+    if (settings.useTraffic) {
+
+      if (ahrefsColumnMap.traffic === -1) {
+        missing.push(
+          "Organic traffic column"
+        );
+      }
+
+      else if (
+        traffic <
+        settings.minTraffic
+      ) {
+        failures.push(
+          `Traffic ${traffic} < ${settings.minTraffic}`
+        );
+      }
+    }
+
+
+    if (settings.useRD) {
+
+      if (ahrefsColumnMap.rd === -1) {
+        missing.push(
+          "RD column"
+        );
+      }
+
+      else if (
+        rd < settings.minRD
+      ) {
+        failures.push(
+          `RD ${rd} < ${settings.minRD}`
+        );
+      }
+    }
+
+
+    if (settings.useRDLD) {
+
+      if (
+        ahrefsColumnMap.rd === -1 ||
+        ahrefsColumnMap.ld === -1
+      ) {
+
+        missing.push(
+          "RD or LD column"
+        );
+
+      }
+
+      else if (rd < ld) {
+
+        failures.push(
+          `RD ${rd} < LD ${ld}`
+        );
+      }
+    }
+
+
+    if (settings.useCountry) {
+
+      if (ahrefsColumnMap.country === -1) {
+
+        missing.push(
+          "Top country column"
+        );
+
+      }
+
+      else if (
+        Array.isArray(
+          settings.countries
+        ) &&
+        settings.countries.length &&
+        !settings.countries.includes(
           country
         )
-    ) {
+      ) {
 
-      failures.push(
-        `Country ${country || "N/A"} not allowed`
-      );
+        failures.push(
+          `Country ${country || "N/A"} not allowed`
+        );
+      }
+    }
 
+
+    let evaluation =
+      "passed";
+
+    if (missing.length) {
+      evaluation =
+        "unknown";
+    }
+
+    else if (failures.length) {
+      evaluation =
+        "failed";
     }
 
 
     return {
-
+      evaluation,
       passed:
-        failures.length ===
-        0,
-
+        evaluation === "passed",
       failures,
-
+      missing,
       dr,
-
       traffic,
-
       rd,
-
       ld,
-
       country
-
     };
-
   }
 
 
-  /* =========================
-     CHECK
-  ========================= */
-
-  checkDomains.addEventListener(
-    "click",
+  checkDomains.onclick =
     async () => {
 
-      const db =
-        await loadProjectDatabase(
-          activeProjectId
-        );
+      let dbMap =
+        null;
 
+      if (activeProjectHasDatabase) {
 
-      if (
-        !db
-      ) {
+        const db =
+          await loadProjectDatabase(
+            activeProjectId
+          );
 
-        alert(
-          "Database not found."
-        );
+        if (!db) {
+          alert(
+            "Project database not found."
+          );
+          return;
+        }
 
-        return;
-
+        dbMap =
+          buildDatabaseStatusMap(
+            db.rows,
+            db.domainColumn,
+            db.statusColumn
+          );
       }
 
 
-      const dbMap =
-        buildDatabaseStatusMap(
+      if (!ahrefsRows.length) {
 
-          db.rows,
+        if (!activeProjectHasDatabase) {
 
-          db.domainColumn,
+          alert(
+            "Without a domain database, upload an Ahrefs Batch CSV to evaluate metrics."
+          );
 
-          db.statusColumn
+          return;
+        }
 
-        );
+        const domains =
+          extractDomains(
+            domainInput.value
+          );
 
+        allResults =
+          domains.map(
+            domain => ({
+              mode: "text",
+              domain,
+              found:
+                dbMap.has(domain),
+              status:
+                dbMap.has(domain)
+                  ? (
+                      dbMap.get(domain) ||
+                      "No status"
+                    )
+                  : "Not found"
+            })
+          );
 
-      if (
-        ahrefsRows
-          .length
-      ) {
+      } else {
 
         const seen =
           new Set();
-
 
         allResults =
           ahrefsRows
@@ -5278,123 +3324,61 @@
                 const domain =
                   normalizeDomain(
                     row[
-                      ahrefsColumnMap
-                        .domain
+                      ahrefsColumnMap.domain
                     ]
                   );
 
-
                 if (
                   !domain ||
-                  seen.has(
-                    domain
-                  )
+                  seen.has(domain)
                 ) {
-
                   return null;
-
                 }
 
-
-                seen.add(
-                  domain
-                );
-
+                seen.add(domain);
 
                 const check =
                   evaluateRequirements(
                     row
                   );
 
-
                 return {
-
-                  mode:
-                    "ahrefs",
-
+                  mode: "ahrefs",
                   domain,
-
                   found:
-                    dbMap.has(
-                      domain
-                    ),
-
+                    activeProjectHasDatabase
+                      ? dbMap.has(domain)
+                      : false,
                   status:
-                    dbMap.has(
-                      domain
-                    )
+                    activeProjectHasDatabase
                       ? (
-                          dbMap.get(
-                            domain
-                          ) ||
-                          "No status"
+                          dbMap.has(domain)
+                            ? (
+                                dbMap.get(domain) ||
+                                "No status"
+                              )
+                            : "Not found"
                         )
-                      : "Not found",
-
+                      : "",
                   ...check
-
                 };
-
               }
             )
-            .filter(
-              Boolean
-            );
-
-      }
-
-      else {
-
-        allResults =
-          extractDomains(
-            domainInput.value
-          )
-            .map(
-              domain => ({
-
-                mode:
-                  "text",
-
-                domain,
-
-                found:
-                  dbMap.has(
-                    domain
-                  ),
-
-                status:
-                  dbMap.has(
-                    domain
-                  )
-                    ? (
-                        dbMap.get(
-                          domain
-                        ) ||
-                        "No status"
-                      )
-                    : "Not found"
-
-              })
-            );
-
+            .filter(Boolean);
       }
 
 
       currentResultFilter =
         "all";
 
-
       sortColumn =
         null;
-
 
       sortDirection =
         "asc";
 
-
       resultSearch.value =
         "";
-
 
       buildStatusFilter();
 
@@ -5405,87 +3389,67 @@
       );
 
       renderFilteredResults();
+    };
 
-      saveCurrentCheck();
-
-    }
-  );
-
-
-  /* =========================
-     FILTERS
-  ========================= */
 
   function updateFilterCounts() {
 
-    document
-      .getElementById(
-        "countAll"
-      )
-      .textContent =
-        allResults
-          .length;
+    document.getElementById(
+      "countAll"
+    ).textContent =
+      allResults.length;
 
 
-    document
-      .getElementById(
-        "countPassed"
-      )
-      .textContent =
-
-        allResults
-          .filter(
-            item =>
-              item.mode ===
-                "ahrefs" &&
-              item.passed
-          )
-          .length;
+    document.getElementById(
+      "countPassed"
+    ).textContent =
+      allResults.filter(
+        item =>
+          item.mode === "ahrefs" &&
+          item.evaluation === "passed"
+      ).length;
 
 
-    document
-      .getElementById(
-        "countFailed"
-      )
-      .textContent =
-
-        allResults
-          .filter(
-            item =>
-              item.mode ===
-                "ahrefs" &&
-              !item.passed
-          )
-          .length;
+    document.getElementById(
+      "countFailed"
+    ).textContent =
+      allResults.filter(
+        item =>
+          item.mode === "ahrefs" &&
+          item.evaluation === "failed"
+      ).length;
 
 
-    document
-      .getElementById(
-        "countDatabase"
-      )
-      .textContent =
+    document.getElementById(
+      "countUnknown"
+    ).textContent =
+      allResults.filter(
+        item =>
+          item.mode === "ahrefs" &&
+          item.evaluation === "unknown"
+      ).length;
 
-        allResults
-          .filter(
+
+    document.getElementById(
+      "countDatabase"
+    ).textContent =
+      activeProjectHasDatabase
+        ? allResults.filter(
             item =>
               item.found
-          )
-          .length;
+          ).length
+        : 0;
 
 
-    document
-      .getElementById(
-        "countNew"
-      )
-      .textContent =
-
-        allResults
-          .filter(
+    document.getElementById(
+      "countNew"
+    ).textContent =
+      activeProjectHasDatabase
+        ? allResults.filter(
             item =>
               !item.found
-          )
-          .length;
-
+          ).length
+        : 0;
   }
 
 
@@ -5494,6 +3458,9 @@
     statusFilter.innerHTML =
       '<option value="all">All statuses</option>';
 
+    if (!activeProjectHasDatabase) {
+      return;
+    }
 
     const statuses =
       [
@@ -5503,13 +3470,9 @@
               item =>
                 item.status
             )
-            .filter(
-              Boolean
-            )
+            .filter(Boolean)
         )
-      ]
-        .sort();
-
+      ].sort();
 
     statuses.forEach(
       status => {
@@ -5520,20 +3483,15 @@
             status
           )
         );
-
       }
     );
-
   }
 
 
-  function setActiveFilter(
-    filter
-  ) {
+  function setActiveFilter(filter) {
 
     currentResultFilter =
       filter;
-
 
     document
       .querySelectorAll(
@@ -5542,22 +3500,12 @@
       .forEach(
         button => {
 
-          button
-            .classList
-            .toggle(
-
-              "active",
-
-              button
-                .dataset
-                .filter ===
-                filter
-
-            );
-
+          button.classList.toggle(
+            "active",
+            button.dataset.filter === filter
+          );
         }
       );
-
   }
 
 
@@ -5568,95 +3516,74 @@
     .forEach(
       button => {
 
-        button.addEventListener(
-          "click",
+        button.onclick =
           () => {
 
             setActiveFilter(
-              button
-                .dataset
-                .filter
+              button.dataset.filter
             );
 
-
             renderFilteredResults();
-
-            saveCurrentCheck();
-
-          }
-        );
-
+          };
       }
     );
 
 
-  statusFilter.addEventListener(
-    "change",
-    () => {
-
-      renderFilteredResults();
-
-      saveCurrentCheck();
-
-    }
-  );
+  statusFilter.onchange =
+    renderFilteredResults;
 
 
-  resultSearch.addEventListener(
-    "input",
-    () => {
-
-      renderFilteredResults();
-
-      saveCurrentCheck();
-
-    }
-  );
+  resultSearch.oninput =
+    renderFilteredResults;
 
 
   function getFilteredResults() {
 
     let results =
-      [
-        ...allResults
-      ];
+      [...allResults];
 
 
     if (
-      currentResultFilter ===
-      "passed"
+      currentResultFilter === "passed"
     ) {
 
       results =
         results.filter(
           item =>
-            item.mode ===
-              "ahrefs" &&
-            item.passed
+            item.mode === "ahrefs" &&
+            item.evaluation === "passed"
         );
-
     }
 
 
     else if (
-      currentResultFilter ===
-      "failed"
+      currentResultFilter === "failed"
     ) {
 
       results =
         results.filter(
           item =>
-            item.mode ===
-              "ahrefs" &&
-            !item.passed
+            item.mode === "ahrefs" &&
+            item.evaluation === "failed"
         );
-
     }
 
 
     else if (
-      currentResultFilter ===
-      "database"
+      currentResultFilter === "unknown"
+    ) {
+
+      results =
+        results.filter(
+          item =>
+            item.mode === "ahrefs" &&
+            item.evaluation === "unknown"
+        );
+    }
+
+
+    else if (
+      currentResultFilter === "database"
     ) {
 
       results =
@@ -5664,13 +3591,11 @@
           item =>
             item.found
         );
-
     }
 
 
     else if (
-      currentResultFilter ===
-      "new"
+      currentResultFilter === "new"
     ) {
 
       results =
@@ -5678,13 +3603,12 @@
           item =>
             !item.found
         );
-
     }
 
 
     if (
-      statusFilter.value !==
-      "all"
+      activeProjectHasDatabase &&
+      statusFilter.value !== "all"
     ) {
 
       results =
@@ -5693,7 +3617,6 @@
             item.status ===
             statusFilter.value
         );
-
     }
 
 
@@ -5702,42 +3625,28 @@
         .trim()
         .toLowerCase();
 
-
-    if (
-      search
-    ) {
+    if (search) {
 
       results =
         results.filter(
           item =>
-
             [
               item.domain,
               item.status,
               item.country
             ]
-              .filter(
-                Boolean
-              )
+              .filter(Boolean)
               .some(
                 value =>
-                  String(
-                    value
-                  )
+                  String(value)
                     .toLowerCase()
-                    .includes(
-                      search
-                    )
+                    .includes(search)
               )
-
         );
-
     }
 
 
-    if (
-      sortColumn
-    ) {
+    if (sortColumn) {
 
       const numeric =
         [
@@ -5747,12 +3656,8 @@
           "ld"
         ];
 
-
       results.sort(
-        (
-          a,
-          b
-        ) => {
+        (a,b) => {
 
           if (
             numeric.includes(
@@ -5761,207 +3666,145 @@
           ) {
 
             return (
-
               Number(
-                a[
-                  sortColumn
-                ] || 0
+                a[sortColumn] ?? 0
               ) -
-
               Number(
-                b[
-                  sortColumn
-                ] || 0
+                b[sortColumn] ?? 0
               )
-
             ) *
-
             (
-              sortDirection ===
-              "asc"
+              sortDirection === "asc"
                 ? 1
                 : -1
             );
-
           }
 
-
           return String(
-            a[
-              sortColumn
-            ] || ""
-          )
-            .localeCompare(
-              String(
-                b[
-                  sortColumn
-                ] || ""
-              )
-            ) *
-
-            (
-              sortDirection ===
-              "asc"
-                ? 1
-                : -1
-            );
-
+            a[sortColumn] || ""
+          ).localeCompare(
+            String(
+              b[sortColumn] || ""
+            )
+          ) *
+          (
+            sortDirection === "asc"
+              ? 1
+              : -1
+          );
         }
       );
-
     }
 
 
     return results;
-
   }
 
 
-  /* =========================
-     SORT
-  ========================= */
+  function sortResults(column) {
 
-  function sortResults(
-    column
-  ) {
-
-    if (
-      sortColumn ===
-      column
-    ) {
+    if (sortColumn === column) {
 
       sortDirection =
-        sortDirection ===
-        "asc"
+        sortDirection === "asc"
           ? "desc"
           : "asc";
 
-    }
-
-    else {
+    } else {
 
       sortColumn =
         column;
 
       sortDirection =
         "asc";
-
     }
 
-
     renderFilteredResults();
-
-    saveCurrentCheck();
-
   }
 
 
-  function sortHeader(
-    title,
-    column
-  ) {
+  function sortHeader(title,column) {
 
     let icon =
       "↕";
 
-
-    if (
-      sortColumn ===
-      column
-    ) {
-
+    if (sortColumn === column) {
       icon =
-        sortDirection ===
-        "asc"
+        sortDirection === "asc"
           ? "↑"
           : "↓";
-
     }
 
-
     return `
-      <th
-        class="sortable"
-        data-sort="${column}"
-      >
+      <th class="sortable" data-sort="${column}">
         ${title}
-        <span class="sort-icon">
-          ${icon}
-        </span>
+        <span class="sort-icon">${icon}</span>
       </th>
     `;
-
   }
 
-
-  /* =========================
-     RENDER
-  ========================= */
 
   function renderFilteredResults() {
 
     const results =
       getFilteredResults();
 
-
-    resultsCard
-      .classList
-      .remove(
-        "hidden"
-      );
-
+    resultsCard.classList.remove(
+      "hidden"
+    );
 
     resultsSummary.textContent =
-
       results.length +
-
       " shown · " +
-
       allResults.length +
-
       " total";
-
 
     resultsBody.innerHTML =
       "";
 
-
     const isAhrefs =
       allResults.some(
         item =>
-          item.mode ===
-          "ahrefs"
+          item.mode === "ahrefs"
       );
 
 
-    if (
-      isAhrefs
-    ) {
+    if (isAhrefs) {
+
+      resultsHead.innerHTML =
+        activeProjectHasDatabase
+          ? `
+            <tr>
+              ${sortHeader("Domain","domain")}
+              ${sortHeader("Status","status")}
+              ${sortHeader("DR","dr")}
+              ${sortHeader("Traffic","traffic")}
+              ${sortHeader("RD","rd")}
+              ${sortHeader("LD","ld")}
+              ${sortHeader("Country","country")}
+              <th>Result</th>
+            </tr>
+          `
+          : `
+            <tr>
+              ${sortHeader("Domain","domain")}
+              ${sortHeader("DR","dr")}
+              ${sortHeader("Traffic","traffic")}
+              ${sortHeader("RD","rd")}
+              ${sortHeader("LD","ld")}
+              ${sortHeader("Country","country")}
+              <th>Result</th>
+            </tr>
+          `;
+
+    } else {
 
       resultsHead.innerHTML = `
         <tr>
           ${sortHeader("Domain","domain")}
           ${sortHeader("Status","status")}
-          ${sortHeader("DR","dr")}
-          ${sortHeader("Traffic","traffic")}
-          ${sortHeader("RD","rd")}
-          ${sortHeader("LD","ld")}
-          ${sortHeader("Country","country")}
-          <th>Result</th>
         </tr>
       `;
-
-    }
-
-    else {
-
-      resultsHead.innerHTML = `
-        <tr>
-          ${sortHeader("Domain","domain")}
-          ${sortHeader("Status","status")}
-        </tr>
-      `;
-
     }
 
 
@@ -5972,56 +3815,40 @@
       .forEach(
         header => {
 
-          header.addEventListener(
-            "click",
+          header.onclick =
             () =>
               sortResults(
-                header
-                  .dataset
-                  .sort
-              )
-          );
-
+                header.dataset.sort
+              );
         }
       );
 
 
-    if (
-      !results.length
-    ) {
+    if (!results.length) {
 
-      emptyResults
-        .classList
-        .remove(
-          "hidden"
-        );
+      emptyResults.classList.remove(
+        "hidden"
+      );
 
       return;
-
     }
 
 
-    emptyResults
-      .classList
-      .add(
-        "hidden"
-      );
+    emptyResults.classList.add(
+      "hidden"
+    );
 
 
     results.forEach(
       result => {
 
         const row =
-          document
-            .createElement(
-              "tr"
-            );
+          document.createElement(
+            "tr"
+          );
 
 
-        if (
-          result.mode ===
-          "text"
-        ) {
+        if (result.mode === "text") {
 
           row.innerHTML = `
             <td>${result.domain}</td>
@@ -6032,198 +3859,210 @@
 
         else {
 
-          row.innerHTML = `
-            <td>${result.domain}</td>
-            <td>${result.status}</td>
-            <td>${result.dr}</td>
-            <td>${result.traffic}</td>
-            <td>${result.rd}</td>
-            <td>${result.ld}</td>
-            <td>${result.country}</td>
-
-            <td>
-
-              ${
-                result.passed
-                  ? '<span class="success">Passed</span>'
-                  : '<span class="error">Failed</span>'
-              }
-
-              ${
-                result.failures.length
-                  ? `<div class="fail-reasons">${result.failures.join("<br>")}</div>`
-                  : ""
-              }
-
-            </td>
-          `;
-
-        }
-
-
-        resultsBody
-          .appendChild(
-            row
-          );
-
-      }
-    );
-
-  }
-
-
-  /* =========================
-     COPY / EXPORT
-  ========================= */
-
-  copyFiltered.addEventListener(
-    "click",
-    async () => {
-
-      const results =
-        getFilteredResults();
-
-
-      const domains =
-        results
-          .map(
-            item =>
-              item.domain
-          )
-          .join(
-            "\n"
-          );
-
-
-      if (
-        !domains
-      ) {
-        return;
-      }
-
-
-      await navigator
-        .clipboard
-        .writeText(
-          domains
-        );
-
-
-      copyFeedback.textContent =
-
-        results.length +
-
-        " copied ✓";
-
-
-      setTimeout(
-        () => {
-
-          copyFeedback.textContent =
+          let resultHtml =
             "";
 
-        },
-        1500
-      );
-
-    }
-  );
-
-
-  exportFiltered.addEventListener(
-    "click",
-    () => {
-
-      const results =
-        getFilteredResults();
-
-
-      if (
-        !results.length
-      ) {
-        return;
-      }
-
-
-      const isAhrefs =
-        results.some(
-          item =>
-            item.mode ===
-            "ahrefs"
-        );
-
-
-      const rows =
-        isAhrefs
-
-          ? [[
-              "Domain",
-              "Status",
-              "DR",
-              "Traffic",
-              "RD",
-              "LD",
-              "Country",
-              "Result",
-              "Reasons"
-            ]]
-
-          : [[
-              "Domain",
-              "Status"
-            ]];
-
-
-      results.forEach(
-        item => {
-
           if (
-            isAhrefs
+            result.evaluation ===
+            "passed"
           ) {
 
-            rows.push([
+            resultHtml =
+              '<span class="success">Passed</span>';
 
-              item.domain,
+          }
 
-              item.status,
+          else if (
+            result.evaluation ===
+            "failed"
+          ) {
 
-              item.dr,
+            resultHtml =
+              '<span class="error">Failed</span>';
 
-              item.traffic,
+            if (result.failures.length) {
 
-              item.rd,
-
-              item.ld,
-
-              item.country,
-
-              item.passed
-                ? "Passed"
-                : "Failed",
-
-              item.failures
-                .join(
-                  "; "
-                )
-
-            ]);
+              resultHtml +=
+                `<div class="fail-reasons">${result.failures.join("<br>")}</div>`;
+            }
 
           }
 
           else {
 
-            rows.push([
+            resultHtml =
+              '<span class="unknown">Cannot evaluate</span>';
 
-              item.domain,
+            if (result.missing.length) {
 
-              item.status
-
-            ]);
-
+              resultHtml +=
+                `<div class="fail-reasons">Missing: ${result.missing.join(", ")}</div>`;
+            }
           }
 
+
+          if (activeProjectHasDatabase) {
+
+            row.innerHTML = `
+              <td>${result.domain}</td>
+              <td>${result.status}</td>
+              <td>${result.dr ?? "—"}</td>
+              <td>${result.traffic ?? "—"}</td>
+              <td>${result.rd ?? "—"}</td>
+              <td>${result.ld ?? "—"}</td>
+              <td>${result.country || "—"}</td>
+              <td>${resultHtml}</td>
+            `;
+
+          } else {
+
+            row.innerHTML = `
+              <td>${result.domain}</td>
+              <td>${result.dr ?? "—"}</td>
+              <td>${result.traffic ?? "—"}</td>
+              <td>${result.rd ?? "—"}</td>
+              <td>${result.ld ?? "—"}</td>
+              <td>${result.country || "—"}</td>
+              <td>${resultHtml}</td>
+            `;
+          }
         }
+
+
+        resultsBody.appendChild(
+          row
+        );
+      }
+    );
+  }
+
+
+  copyFiltered.onclick =
+    async () => {
+
+      const domains =
+        getFilteredResults()
+          .map(
+            item =>
+              item.domain
+          )
+          .join("\n");
+
+      if (!domains) {
+        return;
+      }
+
+      await navigator.clipboard.writeText(
+        domains
       );
+    };
+
+
+  exportFiltered.onclick =
+    () => {
+
+      const results =
+        getFilteredResults();
+
+      if (!results.length) {
+        return;
+      }
+
+      const isAhrefs =
+        results.some(
+          item =>
+            item.mode === "ahrefs"
+        );
+
+      let rows = [];
+
+      if (isAhrefs) {
+
+        rows.push(
+          activeProjectHasDatabase
+            ? [
+                "Domain",
+                "Status",
+                "DR",
+                "Traffic",
+                "RD",
+                "LD",
+                "Country",
+                "Result",
+                "Reasons"
+              ]
+            : [
+                "Domain",
+                "DR",
+                "Traffic",
+                "RD",
+                "LD",
+                "Country",
+                "Result",
+                "Reasons"
+              ]
+        );
+
+        results.forEach(
+          item => {
+
+            const reason =
+              item.evaluation === "unknown"
+                ? (
+                    "Missing: " +
+                    item.missing.join(", ")
+                  )
+                : item.failures.join("; ");
+
+            if (activeProjectHasDatabase) {
+
+              rows.push([
+                item.domain,
+                item.status,
+                item.dr ?? "",
+                item.traffic ?? "",
+                item.rd ?? "",
+                item.ld ?? "",
+                item.country ?? "",
+                item.evaluation,
+                reason
+              ]);
+
+            } else {
+
+              rows.push([
+                item.domain,
+                item.dr ?? "",
+                item.traffic ?? "",
+                item.rd ?? "",
+                item.ld ?? "",
+                item.country ?? "",
+                item.evaluation,
+                reason
+              ]);
+            }
+          }
+        );
+
+      } else {
+
+        rows = [
+          [
+            "Domain",
+            "Status"
+          ]
+        ];
+
+        results.forEach(
+          item => {
+
+            rows.push([
+              item.domain,
+              item.status
+            ]);
+          }
+        );
+      }
 
 
       const csv =
@@ -6233,24 +4072,12 @@
               row
                 .map(
                   value =>
-                    '"' +
-                    String(
-                      value ??
-                      ""
-                    )
-                      .replace(
-                        /"/g,
-                        '""'
-                      ) +
-                    '"'
+                    `"${String(value ?? "")
+                      .replace(/"/g,'""')}"`
                 )
-                .join(
-                  ","
-                )
+                .join(",")
           )
-          .join(
-            "\n"
-          );
+          .join("\n");
 
 
       const blob =
@@ -6270,34 +4097,165 @@
 
 
       const link =
-        document
-          .createElement(
-            "a"
-          );
-
+        document.createElement(
+          "a"
+        );
 
       link.href =
         url;
 
-
       link.download =
         "filtered-prospects.csv";
 
-
       link.click();
-
 
       URL.revokeObjectURL(
         url
       );
+    };
 
+
+  function resetSetupDatabaseUI() {
+
+    rawDatabase = [];
+
+    databaseHeaders = [];
+
+    databaseFile.value =
+      "";
+
+    domainColumn.innerHTML =
+      "";
+
+    statusColumn.innerHTML =
+      "";
+
+    mapping.classList.remove(
+      "active"
+    );
+
+    toggleMapping.classList.add(
+      "hidden"
+    );
+
+    dbSaved.classList.remove(
+      "active"
+    );
+
+    dbDropzone.classList.remove(
+      "hidden"
+    );
+
+    dbSavedMeta.innerHTML =
+      "";
+
+    dbWarning.classList.remove(
+      "active"
+    );
+  }
+
+
+  function resetCheckerUI() {
+
+    ahrefsRows = [];
+
+    ahrefsColumnMap =
+      null;
+
+    ahrefsFile.value =
+      "";
+
+    domainInput.value =
+      "";
+
+    domainInput.disabled =
+      false;
+
+    fileLoaded.classList.remove(
+      "active"
+    );
+
+    uploadZone.classList.remove(
+      "hidden"
+    );
+
+    detectedInfo.textContent =
+      "0 unique domains detected";
+
+    resultsCard.classList.add(
+      "hidden"
+    );
+
+    allResults = [];
+
+    currentResultFilter =
+      "all";
+
+    sortColumn =
+      null;
+
+    sortDirection =
+      "asc";
+  }
+
+
+  async function loadActiveProject() {
+
+    resetSetupDatabaseUI();
+
+    resetCheckerUI();
+
+    loadProjectSettings();
+
+    const db =
+      await loadProjectDatabase(
+        activeProjectId
+      );
+
+    if (db) {
+
+      activeProjectHasDatabase =
+        true;
+
+      rawDatabase =
+        db.rows || [];
+
+      databaseHeaders =
+        db.headers || [];
+
+      populateDatabaseColumns();
+
+      domainColumn.value =
+        db.domainColumn;
+
+      statusColumn.value =
+        db.statusColumn;
+
+      updateDatabasePreview(
+        "Saved database"
+      );
+
+      dbDropzone.classList.add(
+        "hidden"
+      );
+
+      dbSaved.classList.add(
+        "active"
+      );
+
+      toggleMapping.classList.remove(
+        "hidden"
+      );
+
+    } else {
+
+      activeProjectHasDatabase =
+        false;
     }
-  );
 
+    showChecker();
+  }
 
-  /* =========================
-     INITIALISE
-  ========================= */
 
   async function init() {
 
@@ -6309,9 +4267,7 @@
 
     renderCountries();
 
-
     await loadActiveProject();
-
   }
 
 
