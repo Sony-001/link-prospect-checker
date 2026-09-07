@@ -49,6 +49,7 @@
     .description {
       color: #6b7280;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     .requirement {
@@ -63,10 +64,12 @@
     }
 
     input[type="number"],
-    input[type="text"] {
+    input[type="text"],
+    select {
       padding: 8px 10px;
       border: 1px solid #d1d5db;
       border-radius: 7px;
+      background: white;
     }
 
     input[type="number"] {
@@ -77,14 +80,44 @@
       width: 280px;
     }
 
-    input[type="file"] {
-      margin-top: 10px;
+    select {
+      min-width: 180px;
     }
 
     .file-info {
-      margin-top: 15px;
+      margin-top: 18px;
+      padding: 15px;
+      background: #f9fafb;
+      border-radius: 8px;
       font-size: 14px;
-      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    .success {
+      color: #15803d;
+      font-weight: 600;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .mapping {
+      display: none;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .mapping-row {
+      margin: 12px 0;
+    }
+
+    .mapping-row label {
+      display: inline-block;
+      width: 130px;
+      font-size: 14px;
     }
 
     .save-button {
@@ -115,287 +148,695 @@
 
 <body>
 
-  <main class="container">
+<main class="container">
 
-    <h1>Link Prospect Checker</h1>
+  <h1>Link Prospect Checker</h1>
 
-    <p class="subtitle">
-      Set up your database and prospect requirements.
-      You only need to do this once.
+  <p class="subtitle">
+    Set up your database and prospect requirements.
+    You only need to do this once.
+  </p>
+
+
+  <!-- DATABASE -->
+
+  <section class="card">
+
+    <h2>1. Your Database</h2>
+
+    <p class="description">
+      Upload a CSV with the domains you've already worked with.
+      We'll detect the domain and status columns automatically.
+    </p>
+
+    <input
+      type="file"
+      id="databaseFile"
+      accept=".csv,text/csv"
+    >
+
+    <div class="file-info" id="fileInfo">
+      No database uploaded.
+    </div>
+
+
+    <div class="mapping" id="mapping">
+
+      <strong>Database columns</strong>
+
+      <div class="mapping-row">
+        <label>Domain column</label>
+        <select id="domainColumn"></select>
+      </div>
+
+      <div class="mapping-row">
+        <label>Status column</label>
+        <select id="statusColumn"></select>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REQUIREMENTS -->
+
+  <section class="card">
+
+    <h2>2. Your Requirements</h2>
+
+    <p class="description">
+      Choose which Ahrefs metrics should be checked.
+      Disabled metrics will be ignored.
     </p>
 
 
-    <!-- DATABASE -->
+    <div class="requirement">
+      <input type="checkbox" id="useDR">
 
-    <section class="card">
-
-      <h2>1. Your Database</h2>
-
-      <p class="description">
-        Upload a CSV containing the domains you've already worked with.
-        The file should contain a domain column and a status column.
-      </p>
+      <label for="useDR">
+        Minimum DR
+      </label>
 
       <input
-        type="file"
-        id="databaseFile"
-        accept=".csv"
+        type="number"
+        id="minDR"
+        value="50"
+        min="0"
       >
-
-      <div class="file-info" id="fileInfo">
-        No database uploaded.
-      </div>
-
-    </section>
-
-
-    <!-- REQUIREMENTS -->
-
-    <section class="card">
-
-      <h2>2. Your Requirements</h2>
-
-      <p class="description">
-        Choose which Ahrefs metrics should be checked.
-      </p>
-
-
-      <div class="requirement">
-
-        <input
-          type="checkbox"
-          id="useDR"
-        >
-
-        <label for="useDR">
-          Minimum DR
-        </label>
-
-        <input
-          type="number"
-          id="minDR"
-          value="50"
-          min="0"
-        >
-
-      </div>
-
-
-      <div class="requirement">
-
-        <input
-          type="checkbox"
-          id="useTraffic"
-        >
-
-        <label for="useTraffic">
-          Minimum Organic Traffic
-        </label>
-
-        <input
-          type="number"
-          id="minTraffic"
-          value="2000"
-          min="0"
-        >
-
-      </div>
-
-
-      <div class="requirement">
-
-        <input
-          type="checkbox"
-          id="useRD"
-        >
-
-        <label for="useRD">
-          Minimum Referring Domains
-        </label>
-
-        <input
-          type="number"
-          id="minRD"
-          value="500"
-          min="0"
-        >
-
-      </div>
-
-
-      <div class="requirement">
-
-        <input
-          type="checkbox"
-          id="useRDLD"
-        >
-
-        <label for="useRDLD">
-          Referring Domains ≥ Linked Domains
-        </label>
-
-      </div>
-
-
-      <div class="requirement">
-
-        <input
-          type="checkbox"
-          id="useCountry"
-        >
-
-        <label for="useCountry">
-          Allowed top countries
-        </label>
-
-        <input
-          type="text"
-          id="countries"
-          placeholder="US, UK, CA, AU"
-        >
-
-      </div>
-
-    </section>
-
-
-    <button
-      class="save-button"
-      id="saveSettings"
-    >
-      Save Settings
-    </button>
-
-    <div
-      class="saved-message"
-      id="savedMessage"
-    >
-      Settings saved ✓
     </div>
 
-  </main>
+
+    <div class="requirement">
+      <input type="checkbox" id="useTraffic">
+
+      <label for="useTraffic">
+        Minimum Organic Traffic
+      </label>
+
+      <input
+        type="number"
+        id="minTraffic"
+        value="2000"
+        min="0"
+      >
+    </div>
 
 
-  <script>
+    <div class="requirement">
+      <input type="checkbox" id="useRD">
 
-    const databaseFile =
-      document.getElementById("databaseFile");
+      <label for="useRD">
+        Minimum Referring Domains
+      </label>
 
-    const fileInfo =
-      document.getElementById("fileInfo");
+      <input
+        type="number"
+        id="minRD"
+        value="500"
+        min="0"
+      >
+    </div>
 
-    const saveButton =
-      document.getElementById("saveSettings");
 
-    const savedMessage =
-      document.getElementById("savedMessage");
+    <div class="requirement">
+      <input type="checkbox" id="useRDLD">
+
+      <label for="useRDLD">
+        Referring Domains ≥ Linked Domains
+      </label>
+    </div>
 
 
-    // SHOW DATABASE FILE NAME
+    <div class="requirement">
+      <input type="checkbox" id="useCountry">
 
-    databaseFile.addEventListener("change", function () {
+      <label for="useCountry">
+        Allowed top countries
+      </label>
 
-      if (databaseFile.files.length > 0) {
+      <input
+        type="text"
+        id="countries"
+        placeholder="US, UK, CA, AU"
+      >
+    </div>
 
-        const file = databaseFile.files[0];
+  </section>
 
-        fileInfo.textContent =
-          "Selected database: " + file.name;
+
+  <button
+    class="save-button"
+    id="saveSettings"
+  >
+    Save Settings
+  </button>
+
+  <div
+    class="saved-message"
+    id="savedMessage"
+  >
+    Settings saved ✓
+  </div>
+
+</main>
+
+
+<script>
+
+let rawDatabase = [];
+let databaseHeaders = [];
+
+
+/* -----------------------
+   CSV PARSER
+----------------------- */
+
+function parseCSV(text) {
+
+  const rows = [];
+
+  let row = [];
+  let cell = "";
+  let insideQuotes = false;
+
+
+  for (let i = 0; i < text.length; i++) {
+
+    const char = text[i];
+    const next = text[i + 1];
+
+
+    if (char === '"' && insideQuotes && next === '"') {
+
+      cell += '"';
+      i++;
+
+    }
+
+    else if (char === '"') {
+
+      insideQuotes = !insideQuotes;
+
+    }
+
+    else if (char === "," && !insideQuotes) {
+
+      row.push(cell);
+      cell = "";
+
+    }
+
+    else if (
+      (char === "\n" || char === "\r") &&
+      !insideQuotes
+    ) {
+
+      if (char === "\r" && next === "\n") {
+        i++;
+      }
+
+      row.push(cell);
+
+      if (row.some(value => value.trim() !== "")) {
+        rows.push(row);
+      }
+
+      row = [];
+      cell = "";
+
+    }
+
+    else {
+
+      cell += char;
+
+    }
+
+  }
+
+
+  row.push(cell);
+
+  if (row.some(value => value.trim() !== "")) {
+    rows.push(row);
+  }
+
+
+  return rows;
+
+}
+
+
+/* -----------------------
+   COLUMN DETECTION
+----------------------- */
+
+function cleanHeader(value) {
+
+  return String(value || "")
+    .replace(/^\uFEFF/, "")
+    .trim()
+    .toLowerCase();
+
+}
+
+
+function findColumn(headers, possibleNames) {
+
+  const normalizedHeaders =
+    headers.map(cleanHeader);
+
+
+  for (const name of possibleNames) {
+
+    const index =
+      normalizedHeaders.indexOf(name);
+
+    if (index !== -1) {
+      return index;
+    }
+
+  }
+
+
+  return -1;
+
+}
+
+
+/* -----------------------
+   DATABASE UPLOAD
+----------------------- */
+
+const databaseFile =
+  document.getElementById("databaseFile");
+
+const fileInfo =
+  document.getElementById("fileInfo");
+
+const mapping =
+  document.getElementById("mapping");
+
+const domainColumn =
+  document.getElementById("domainColumn");
+
+const statusColumn =
+  document.getElementById("statusColumn");
+
+
+databaseFile.addEventListener(
+  "change",
+  function () {
+
+    const file = databaseFile.files[0];
+
+    if (!file) {
+      return;
+    }
+
+
+    const reader = new FileReader();
+
+
+    reader.onload = function (event) {
+
+      try {
+
+        const text = event.target.result;
+
+        const rows = parseCSV(text);
+
+
+        if (rows.length < 2) {
+
+          fileInfo.innerHTML =
+            '<span class="error">Could not read this CSV.</span>';
+
+          return;
+
+        }
+
+
+        databaseHeaders =
+          rows[0].map(header =>
+            String(header || "")
+              .replace(/^\uFEFF/, "")
+              .trim()
+          );
+
+
+        rawDatabase =
+          rows.slice(1);
+
+
+        /* Fill column selectors */
+
+        domainColumn.innerHTML = "";
+        statusColumn.innerHTML = "";
+
+
+        databaseHeaders.forEach(
+          (header, index) => {
+
+            const domainOption =
+              document.createElement("option");
+
+            domainOption.value = index;
+            domainOption.textContent =
+              header || "Column " + (index + 1);
+
+            domainColumn.appendChild(
+              domainOption
+            );
+
+
+            const statusOption =
+              document.createElement("option");
+
+            statusOption.value = index;
+            statusOption.textContent =
+              header || "Column " + (index + 1);
+
+            statusColumn.appendChild(
+              statusOption
+            );
+
+          }
+        );
+
+
+        /* Detect domain column */
+
+        const detectedDomain =
+          findColumn(
+            databaseHeaders,
+            [
+              "domain",
+              "website",
+              "site",
+              "url",
+              "domain name",
+              "website url"
+            ]
+          );
+
+
+        /* Detect status column */
+
+        const detectedStatus =
+          findColumn(
+            databaseHeaders,
+            [
+              "status",
+              "state",
+              "stage",
+              "current status"
+            ]
+          );
+
+
+        if (detectedDomain !== -1) {
+
+          domainColumn.value =
+            detectedDomain;
+
+        }
+
+
+        if (detectedStatus !== -1) {
+
+          statusColumn.value =
+            detectedStatus;
+
+        }
+
+
+        mapping.style.display =
+          "block";
+
+
+        updateDatabasePreview();
+
+
+        domainColumn.addEventListener(
+          "change",
+          updateDatabasePreview
+        );
+
+
+        statusColumn.addEventListener(
+          "change",
+          updateDatabasePreview
+        );
 
       }
 
-    });
+      catch (error) {
+
+        fileInfo.innerHTML =
+          '<span class="error">Something went wrong while reading the CSV.</span>';
+
+      }
+
+    };
 
 
-    // SAVE SETTINGS
+    reader.readAsText(file);
 
-    saveButton.addEventListener("click", function () {
+  }
+);
 
-      const settings = {
 
-        useDR:
-          document.getElementById("useDR").checked,
+/* -----------------------
+   DATABASE PREVIEW
+----------------------- */
 
-        minDR:
-          document.getElementById("minDR").value,
+function updateDatabasePreview() {
 
-        useTraffic:
-          document.getElementById("useTraffic").checked,
+  if (!rawDatabase.length) {
+    return;
+  }
 
-        minTraffic:
-          document.getElementById("minTraffic").value,
 
-        useRD:
-          document.getElementById("useRD").checked,
+  const domainIndex =
+    Number(domainColumn.value);
 
-        minRD:
-          document.getElementById("minRD").value,
+  const statusIndex =
+    Number(statusColumn.value);
 
-        useRDLD:
-          document.getElementById("useRDLD").checked,
 
-        useCountry:
-          document.getElementById("useCountry").checked,
+  const domains = rawDatabase
+    .map(row =>
+      String(row[domainIndex] || "").trim()
+    )
+    .filter(Boolean);
 
-        countries:
-          document.getElementById("countries").value
+
+  const statuses =
+    rawDatabase
+      .map(row =>
+        String(row[statusIndex] || "").trim()
+      )
+      .filter(Boolean);
+
+
+  const uniqueStatuses =
+    [...new Set(statuses)];
+
+
+  fileInfo.innerHTML =
+
+    '<span class="success">✓ Database loaded</span>' +
+
+    "<br>" +
+
+    domains.length +
+    " rows detected" +
+
+    "<br>" +
+
+    uniqueStatuses.length +
+    " status variations detected";
+
+}
+
+
+/* -----------------------
+   SETTINGS
+----------------------- */
+
+const saveButton =
+  document.getElementById("saveSettings");
+
+const savedMessage =
+  document.getElementById("savedMessage");
+
+
+saveButton.addEventListener(
+  "click",
+  function () {
+
+    const settings = {
+
+      useDR:
+        document.getElementById("useDR").checked,
+
+      minDR:
+        document.getElementById("minDR").value,
+
+      useTraffic:
+        document.getElementById("useTraffic").checked,
+
+      minTraffic:
+        document.getElementById("minTraffic").value,
+
+      useRD:
+        document.getElementById("useRD").checked,
+
+      minRD:
+        document.getElementById("minRD").value,
+
+      useRDLD:
+        document.getElementById("useRDLD").checked,
+
+      useCountry:
+        document.getElementById("useCountry").checked,
+
+      countries:
+        document.getElementById("countries").value
+
+    };
+
+
+    localStorage.setItem(
+      "prospectCheckerSettings",
+      JSON.stringify(settings)
+    );
+
+
+    /* Save database */
+
+    if (rawDatabase.length) {
+
+      const databaseData = {
+
+        headers:
+          databaseHeaders,
+
+        rows:
+          rawDatabase,
+
+        domainColumn:
+          Number(domainColumn.value),
+
+        statusColumn:
+          Number(statusColumn.value)
 
       };
 
 
       localStorage.setItem(
-        "prospectCheckerSettings",
-        JSON.stringify(settings)
+        "prospectCheckerDatabase",
+        JSON.stringify(databaseData)
       );
-
-
-      savedMessage.style.display = "block";
-
-    });
-
-
-    // LOAD SAVED SETTINGS
-
-    const savedSettings =
-      localStorage.getItem("prospectCheckerSettings");
-
-
-    if (savedSettings) {
-
-      const settings =
-        JSON.parse(savedSettings);
-
-
-      document.getElementById("useDR").checked =
-        settings.useDR;
-
-      document.getElementById("minDR").value =
-        settings.minDR;
-
-      document.getElementById("useTraffic").checked =
-        settings.useTraffic;
-
-      document.getElementById("minTraffic").value =
-        settings.minTraffic;
-
-      document.getElementById("useRD").checked =
-        settings.useRD;
-
-      document.getElementById("minRD").value =
-        settings.minRD;
-
-      document.getElementById("useRDLD").checked =
-        settings.useRDLD;
-
-      document.getElementById("useCountry").checked =
-        settings.useCountry;
-
-      document.getElementById("countries").value =
-        settings.countries;
 
     }
 
-  </script>
+
+    savedMessage.style.display =
+      "block";
+
+  }
+);
+
+
+/* -----------------------
+   LOAD SAVED SETTINGS
+----------------------- */
+
+const savedSettings =
+  localStorage.getItem(
+    "prospectCheckerSettings"
+  );
+
+
+if (savedSettings) {
+
+  const settings =
+    JSON.parse(savedSettings);
+
+
+  document.getElementById("useDR").checked =
+    settings.useDR;
+
+  document.getElementById("minDR").value =
+    settings.minDR;
+
+  document.getElementById("useTraffic").checked =
+    settings.useTraffic;
+
+  document.getElementById("minTraffic").value =
+    settings.minTraffic;
+
+  document.getElementById("useRD").checked =
+    settings.useRD;
+
+  document.getElementById("minRD").value =
+    settings.minRD;
+
+  document.getElementById("useRDLD").checked =
+    settings.useRDLD;
+
+  document.getElementById("useCountry").checked =
+    settings.useCountry;
+
+  document.getElementById("countries").value =
+    settings.countries;
+
+}
+
+
+/* -----------------------
+   LOAD SAVED DATABASE
+----------------------- */
+
+const savedDatabase =
+  localStorage.getItem(
+    "prospectCheckerDatabase"
+  );
+
+
+if (savedDatabase) {
+
+  try {
+
+    const database =
+      JSON.parse(savedDatabase);
+
+
+    fileInfo.innerHTML =
+
+      '<span class="success">✓ Saved database found</span>' +
+
+      "<br>" +
+
+      database.rows.length +
+      " rows stored in this browser";
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Could not load saved database."
+    );
+
+  }
+
+}
+
+</script>
 
 </body>
 </html>
