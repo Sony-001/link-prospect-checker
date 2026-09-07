@@ -1818,16 +1818,45 @@
     }
 
   
+    .checkout-toast {
+      position: fixed;
+      z-index: 360;
+      right: 24px;
+      bottom: 24px;
+      max-width: 380px;
+      padding: 13px 15px;
+      border: 1px solid #dfe2f2;
+      border-radius: 14px;
+      background: rgba(255,255,255,.97);
+      color: #4f5870;
+      box-shadow: 0 18px 50px rgba(49,54,110,.16);
+      font-size: 12.5px;
+      line-height: 1.45;
+      backdrop-filter: blur(12px);
+    }
+
+    .checkout-toast.success {
+      color: var(--success);
+      border-color: #ccebdc;
+      background: #f3fff8;
+    }
+
+    .checkout-toast.error {
+      color: var(--danger);
+      border-color: #f4d1ce;
+      background: #fff7f6;
+    }
+
+  
     .auth-inline-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      justify-content: flex-end;
       margin-top: 8px;
     }
 
     .auth-link {
-      padding: 0;
+      padding: 3px 0;
       border: 0;
       background: transparent;
       color: #5b5cf0;
@@ -1836,35 +1865,44 @@
       box-shadow: none;
     }
 
-    .auth-link:hover {
+    .auth-link:hover:not(:disabled) {
       transform: none;
       text-decoration: underline;
     }
 
     .auth-secondary-action {
       width: 100%;
-      margin-top: 9px;
-      background: #f1f3f8;
-      color: #596077;
+      margin-top: 8px;
+      padding: 9px 10px;
+      border: 1px solid #dfe3f2;
+      background: #f7f8ff;
+      color: #4b50b0;
+      font-size: 12px;
       box-shadow: none;
     }
 
     .auth-reset-card {
       margin-top: 14px;
-      padding: 13px 14px;
-      border: 1px solid #e2e5f2;
-      border-radius: 12px;
-      background: #fafbff;
-      color: #667085;
-      font-size: 11.5px;
-      line-height: 1.5;
+      padding: 14px;
+      border: 1px solid #e0e4f2;
+      border-radius: 13px;
+      background: #f9faff;
+    }
+
+    .auth-reset-card > strong {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 4px;
     }
 
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 </head>
 
 <body>
+<div id="checkoutToast" class="checkout-toast hidden"></div>
 
 
 <div id="pricingModalBackdrop" class="modal-backdrop hidden">
@@ -1877,12 +1915,11 @@
       <div class="guide-card"><span class="plan-pill">Free</span><h4 style="margin-top:14px">Temporary workspace</h4>
         <ul><li>1 temporary project</li><li>Up to 500 domains per check</li><li>Database + Ahrefs Batch</li><li>Filters and export</li><li>Clears when the browser session ends</li></ul>
       </div>
-      <div class="guide-card" style="border-color:#cfd2ff;background:#fafaff"><span class="plan-pill">Pro · $3/month</span><h4 style="margin-top:14px">Saved workspace</h4>
+      <div class="guide-card" style="border-color:#cfd2ff;background:#fafaff"><span class="plan-pill">Pro · $5/month</span><h4 style="margin-top:14px">Saved workspace</h4>
         <ul><li>Unlimited projects</li><li>Saved projects, databases and rules</li><li>Up to 25,000 domains/month</li><li>Database + Ahrefs Batch</li><li>Filters and export</li></ul>
-        <button id="pricingLoginButton" class="primary" type="button" style="width:100%;margin-top:14px">Log in / Create account</button>
+        <button id="pricingLoginButton" class="primary" type="button" style="width:100%;margin-top:14px">Continue</button>
       </div>
     </div>
-    <p style="margin-top:16px;color:#8a90a2;font-size:11.5px">Payments will be connected in the next step.</p>
   </div>
 </div>
 
@@ -1909,7 +1946,7 @@
 
     <h1 id="authTitle" class="auth-title">Welcome back</h1>
     <p id="authCopy" class="auth-copy">
-      Log in to continue to your projects and usage limits.
+      Log in to your Pro workspace.
     </p>
 
     <div class="auth-tabs">
@@ -1930,7 +1967,6 @@
       </div>
 
       <div class="auth-inline-row">
-        <span></span>
         <button id="forgotPasswordButton" class="auth-link" type="button">
           Forgot password?
         </button>
@@ -1948,10 +1984,12 @@
 
       <div id="resetPasswordPanel" class="auth-reset-card hidden">
         <strong>Set a new password</strong>
+
         <div class="auth-field">
           <label for="newPassword">New password</label>
           <input id="newPassword" type="password" minlength="8" placeholder="At least 8 characters">
         </div>
+
         <button id="saveNewPasswordButton" class="primary auth-submit" type="button">
           Save new password
         </button>
@@ -2014,8 +2052,8 @@
   <div id="accountEmail" class="account-email"></div>
 
   <div class="account-meta">
-    <span id="accountPlanPill" class="plan-pill">Free</span>
-    <span id="accountUsagePill" class="usage-pill">0 / 500 domains</span>
+    <span id="accountPlanPill" class="plan-pill hidden">Pro</span>
+    <span id="accountUsagePill" class="usage-pill hidden">0 / 25000 domains</span>
     <span id="accountProjectPill" class="usage-pill">0 / 2 projects</span>
   </div>
 
@@ -2057,9 +2095,9 @@
         How to use
       </button>
     
-      <button id="upgradeButton" class="primary" type="button">Upgrade · $3/mo</button>
+      <button id="upgradeButton" class="primary" type="button">Upgrade · $5/mo</button>
       <div class="account-area">
-        <span id="guestPlanPill" class="plan-pill">Free · Temporary</span>
+        <span id="guestPlanPill" class="plan-pill hidden">Free · Temporary</span>
         <span id="headerPlanPill" class="plan-pill hidden">Pro</span>
         <span id="headerUsagePill" class="usage-pill hidden">0 / 500</span>
 
@@ -2907,6 +2945,19 @@
     );
 
 
+  const PADDLE_CLIENT_TOKEN =
+    "live_f536b11104312087b03fc5f2839";
+
+  const PADDLE_PRO_PRICE_ID =
+    "pri_01m1yw1zdrpmh02rpzs09dp0w2";
+
+  const UPGRADE_INTENT_KEY =
+    "easyUpgradeIntent";
+
+  let paddleInitialized =
+    false;
+
+
 
   const PROJECTS_KEY =
     "linkProspectCheckerProjects";
@@ -2945,6 +2996,9 @@
   const closePricingButton = document.getElementById("closePricingButton");
   const pricingLoginButton = document.getElementById("pricingLoginButton");
 
+  const checkoutToast =
+    document.getElementById("checkoutToast");
+
   const authOverlay =
     document.getElementById("authOverlay");
 
@@ -2975,9 +3029,6 @@
   const authMessage =
     document.getElementById("authMessage");
 
-  const authNote =
-    document.getElementById("authNote");
-
   const forgotPasswordButton =
     document.getElementById("forgotPasswordButton");
 
@@ -2992,6 +3043,9 @@
 
   const saveNewPasswordButton =
     document.getElementById("saveNewPasswordButton");
+
+  const authNote =
+    document.getElementById("authNote");
 
   const accountButton =
     document.getElementById("accountButton");
@@ -3615,15 +3669,10 @@
 
 
   function getAuthRedirectUrl() {
-    const url =
-      new URL(
-        window.location.href
-      );
-
-    url.search = "";
-    url.hash = "";
-
-    return url.toString();
+    return (
+      window.location.origin +
+      window.location.pathname
+    );
   }
 
 
@@ -3640,7 +3689,6 @@
 
 
   async function resendConfirmationEmail() {
-
     const email =
       authEmail.value.trim();
 
@@ -3656,7 +3704,6 @@
       true;
 
     try {
-
       const {
         error
       } =
@@ -3679,7 +3726,6 @@
       );
 
     } catch (error) {
-
       showAuthMessage(
         error?.message ||
         "Could not resend the confirmation email.",
@@ -3687,7 +3733,6 @@
       );
 
     } finally {
-
       resendConfirmationButton.disabled =
         false;
     }
@@ -3695,7 +3740,6 @@
 
 
   async function sendPasswordReset() {
-
     const email =
       authEmail.value.trim();
 
@@ -3711,7 +3755,6 @@
       true;
 
     try {
-
       const {
         error
       } =
@@ -3733,7 +3776,6 @@
       );
 
     } catch (error) {
-
       showAuthMessage(
         error?.message ||
         "Could not send the reset email.",
@@ -3741,7 +3783,6 @@
       );
 
     } finally {
-
       forgotPasswordButton.disabled =
         false;
     }
@@ -3749,7 +3790,6 @@
 
 
   async function saveRecoveredPassword() {
-
     const password =
       newPassword.value;
 
@@ -3771,7 +3811,6 @@
       "Saving…";
 
     try {
-
       const {
         error
       } =
@@ -3791,7 +3830,7 @@
         "";
 
       showAuthMessage(
-        "Password updated. You can continue.",
+        "Password updated.",
         "success"
       );
 
@@ -3803,11 +3842,12 @@
         await supabaseClient.auth.getUser();
 
       if (user) {
-        await handleSignedIn(user);
+        await handleSignedIn(
+          user
+        );
       }
 
     } catch (error) {
-
       showAuthMessage(
         error?.message ||
         "Could not update the password.",
@@ -3815,7 +3855,6 @@
       );
 
     } finally {
-
       saveNewPasswordButton.disabled =
         false;
 
@@ -3847,18 +3886,6 @@
     const isSignup =
       mode === "signup";
 
-    authSubmitButton.classList.remove(
-      "hidden"
-    );
-
-    loginTab.classList.remove(
-      "hidden"
-    );
-
-    signupTab.classList.remove(
-      "hidden"
-    );
-
     loginTab.classList.toggle(
       "active",
       !isSignup
@@ -3876,7 +3903,7 @@
 
     authCopy.textContent =
       isSignup
-        ? "Create your Pro account."
+        ? "Create your Easy Pro account."
         : "Log in to your Pro workspace.";
 
     authSubmitButton.textContent =
@@ -3906,6 +3933,18 @@
     forgotPasswordButton.classList.toggle(
       "hidden",
       isSignup
+    );
+
+    authSubmitButton.classList.remove(
+      "hidden"
+    );
+
+    loginTab.classList.remove(
+      "hidden"
+    );
+
+    signupTab.classList.remove(
+      "hidden"
     );
   }
 
@@ -3956,12 +3995,20 @@
 
 
   function updateAccountUI() {
+    const pro =
+      isProUser();
 
-    guestPlanPill.classList.toggle("hidden", isProUser());
-    upgradeButton.classList.toggle("hidden", isProUser());
+    // Keep the normal interface clean: only Pro is shown as a plan.
+    guestPlanPill.classList.add(
+      "hidden"
+    );
+
+    upgradeButton.classList.toggle(
+      "hidden",
+      pro
+    );
 
     if (!currentUser) {
-
       accountButton.classList.add(
         "hidden"
       );
@@ -3978,36 +4025,20 @@
         "hidden"
       );
 
+      pricingLoginButton.textContent =
+        "Log in to continue";
+
+      applyPlanLimits();
       return;
     }
 
     const profile =
       currentProfile || {
         plan: "free",
-        project_limit: 2,
+        project_limit: 1,
         monthly_domain_limit: 500,
         domains_used: 0
       };
-
-    const plan =
-      String(
-        profile.plan || "free"
-      );
-
-    const projectLimit =
-      Number(
-        profile.project_limit ?? 2
-      );
-
-    const domainLimit =
-      Number(
-        profile.monthly_domain_limit ?? 500
-      );
-
-    const used =
-      Number(
-        profile.domains_used ?? 0
-      );
 
     const email =
       currentUser.email || "";
@@ -4020,46 +4051,104 @@
     accountEmail.textContent =
       email;
 
-    headerPlanPill.textContent =
-      plan;
-
-    accountPlanPill.textContent =
-      plan;
-
-    headerUsagePill.textContent =
-      `${used} / ${domainLimit}`;
-
-    accountUsagePill.textContent =
-      `${used} / ${domainLimit} domains`;
-
-    accountProjectPill.textContent =
-      `${projects.length} / ${projectLimit} projects`;
-
     accountButton.classList.remove(
       "hidden"
     );
 
-    headerPlanPill.classList.remove(
-      "hidden"
-    );
+    if (pro) {
+      const domainLimit =
+        Number(
+          profile.monthly_domain_limit ?? 25000
+        );
 
-    headerUsagePill.classList.remove(
-      "hidden"
-    );
+      const used =
+        Number(
+          profile.domains_used ?? 0
+        );
+
+      headerPlanPill.textContent =
+        "Pro";
+
+      accountPlanPill.textContent =
+        "Pro";
+
+      headerUsagePill.textContent =
+        `${used} / ${domainLimit}`;
+
+      accountUsagePill.textContent =
+        `${used} / ${domainLimit} domains`;
+
+      accountProjectPill.textContent =
+        `${projects.length} projects`;
+
+      headerPlanPill.classList.remove(
+        "hidden"
+      );
+
+      headerUsagePill.classList.remove(
+        "hidden"
+      );
+
+      accountPlanPill.classList.remove(
+        "hidden"
+      );
+
+      accountUsagePill.classList.remove(
+        "hidden"
+      );
+
+      pricingLoginButton.textContent =
+        "Already on Pro";
+
+    } else {
+      headerPlanPill.classList.add(
+        "hidden"
+      );
+
+      headerUsagePill.classList.add(
+        "hidden"
+      );
+
+      accountPlanPill.classList.add(
+        "hidden"
+      );
+
+      accountUsagePill.classList.add(
+        "hidden"
+      );
+
+      accountProjectPill.textContent =
+        "1 temporary project";
+
+      pricingLoginButton.textContent =
+        "Continue to checkout";
+    }
 
     applyPlanLimits();
   }
 
 
   function applyPlanLimits() {
-    const pro = isProUser();
+    const pro =
+      isProUser();
 
-    newProjectButton.disabled = !pro;
-    newProjectButton.title = pro ? "" : "Free includes one temporary project.";
-    deleteProjectButton.disabled = !pro || projects.length <= 1;
+    newProjectButton.disabled =
+      !pro;
+
+    newProjectButton.title =
+      pro
+        ? ""
+        : "Upgrade to Pro to create more projects.";
+
+    deleteProjectButton.disabled =
+      !pro ||
+      projects.length <= 1;
 
     if (accountProjectPill) {
-      accountProjectPill.textContent = pro ? `${projects.length} projects` : "1 temporary project";
+      accountProjectPill.textContent =
+        pro
+          ? `${projects.length} projects`
+          : "1 temporary project";
     }
   }
 
@@ -4081,6 +4170,22 @@
       "";
 
     updateAccountUI();
+
+    if (
+      !isProUser() &&
+      sessionStorage.getItem(
+        UPGRADE_INTENT_KEY
+      ) === "1"
+    ) {
+      sessionStorage.removeItem(
+        UPGRADE_INTENT_KEY
+      );
+
+      setTimeout(
+        openPaddleCheckout,
+        250
+      );
+    }
   }
 
 
@@ -4146,7 +4251,11 @@
           } =
             await supabaseClient.auth.signUp({
               email,
-              password
+              password,
+              options: {
+                emailRedirectTo:
+                  getAuthRedirectUrl()
+              }
             });
 
           if (error) {
@@ -4217,8 +4326,7 @@
 
         if (
           lower.includes("confirm") ||
-          lower.includes("not confirmed") ||
-          lower.includes("email")
+          lower.includes("not confirmed")
         ) {
           resendConfirmationButton.classList.remove(
             "hidden"
@@ -4289,7 +4397,6 @@
       if (
         event === "PASSWORD_RECOVERY"
       ) {
-
         currentUser =
           session?.user || null;
 
@@ -4333,6 +4440,7 @@
         return;
       }
 
+
       if (
         event === "SIGNED_OUT"
       ) {
@@ -4364,6 +4472,22 @@
 
         document.body.style.overflow =
           "";
+
+        if (
+          !isProUser() &&
+          sessionStorage.getItem(
+            UPGRADE_INTENT_KEY
+          ) === "1"
+        ) {
+          sessionStorage.removeItem(
+            UPGRADE_INTENT_KEY
+          );
+
+          setTimeout(
+            openPaddleCheckout,
+            250
+          );
+        }
       }
     }
   );
@@ -4371,6 +4495,253 @@
 
   function isProUser() {
     return Boolean(currentUser && currentProfile && currentProfile.plan === "pro");
+  }
+
+
+  function showCheckoutToast(
+    message,
+    type = ""
+  ) {
+    checkoutToast.textContent =
+      message;
+
+    checkoutToast.className =
+      `checkout-toast ${type}`.trim();
+
+    checkoutToast.classList.remove(
+      "hidden"
+    );
+
+    clearTimeout(
+      showCheckoutToast.timer
+    );
+
+    showCheckoutToast.timer =
+      setTimeout(
+        () =>
+          checkoutToast.classList.add(
+            "hidden"
+          ),
+        6500
+      );
+  }
+
+
+  function initializePaddleCheckout() {
+    if (
+      paddleInitialized ||
+      !window.Paddle
+    ) {
+      return;
+    }
+
+    Paddle.Initialize({
+      token:
+        PADDLE_CLIENT_TOKEN,
+
+      eventCallback:
+        async function(event) {
+          if (
+            event?.name ===
+            "checkout.completed"
+          ) {
+            showCheckoutToast(
+              "Payment received. Activating Pro…"
+            );
+
+            await waitForProActivation();
+          }
+
+          if (
+            event?.name ===
+            "checkout.payment.failed"
+          ) {
+            showCheckoutToast(
+              "Payment failed. Please try another payment method.",
+              "error"
+            );
+          }
+        }
+    });
+
+    paddleInitialized =
+      true;
+  }
+
+
+  async function waitForProActivation() {
+    for (
+      let attempt = 0;
+      attempt < 12;
+      attempt++
+    ) {
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            1200
+          )
+      );
+
+      await loadProfile();
+
+      if (isProUser()) {
+        migrateCurrentWorkspaceToPro();
+        updateAccountUI();
+
+        showCheckoutToast(
+          "Easy Pro is active ✓",
+          "success"
+        );
+
+        return true;
+      }
+    }
+
+    showCheckoutToast(
+      "Payment succeeded. Pro may take a moment to activate.",
+      ""
+    );
+
+    return false;
+  }
+
+
+  function migrateCurrentWorkspaceToPro() {
+    if (!isProUser()) {
+      return;
+    }
+
+    const guestProjects =
+      sessionStorage.getItem(
+        PROJECTS_KEY
+      );
+
+    const guestActive =
+      sessionStorage.getItem(
+        ACTIVE_PROJECT_KEY
+      );
+
+    if (
+      guestProjects &&
+      !localStorage.getItem(
+        PROJECTS_KEY
+      )
+    ) {
+      localStorage.setItem(
+        PROJECTS_KEY,
+        guestProjects
+      );
+    }
+
+    if (
+      guestActive &&
+      !localStorage.getItem(
+        ACTIVE_PROJECT_KEY
+      )
+    ) {
+      localStorage.setItem(
+        ACTIVE_PROJECT_KEY,
+        guestActive
+      );
+    }
+
+    projects.forEach(
+      project => {
+        const key =
+          getProjectSettingsKey(
+            project.id
+          );
+
+        const settings =
+          sessionStorage.getItem(
+            key
+          );
+
+        if (
+          settings &&
+          !localStorage.getItem(
+            key
+          )
+        ) {
+          localStorage.setItem(
+            key,
+            settings
+          );
+        }
+      }
+    );
+  }
+
+
+  function openPaddleCheckout() {
+    if (isProUser()) {
+      showCheckoutToast(
+        "Easy Pro is already active.",
+        "success"
+      );
+      return;
+    }
+
+    if (!currentUser) {
+      sessionStorage.setItem(
+        UPGRADE_INTENT_KEY,
+        "1"
+      );
+
+      closePricing();
+      setAuthMode(
+        "login"
+      );
+      openAuth();
+      return;
+    }
+
+    initializePaddleCheckout();
+
+    if (
+      !window.Paddle ||
+      !paddleInitialized
+    ) {
+      showCheckoutToast(
+        "Checkout could not load. Please refresh and try again.",
+        "error"
+      );
+      return;
+    }
+
+    closePricing();
+
+    Paddle.Checkout.open({
+      items: [
+        {
+          priceId:
+            PADDLE_PRO_PRICE_ID,
+          quantity: 1
+        }
+      ],
+
+      customer: {
+        email:
+          currentUser.email
+      },
+
+      customData: {
+        user_id:
+          currentUser.id
+      },
+
+      settings: {
+        displayMode:
+          "overlay",
+        variant:
+          "one-page",
+        theme:
+          "light",
+        allowLogout:
+          false
+      }
+    });
   }
 
   function openAuth() {
@@ -4394,7 +4765,16 @@
   closeAuthButton.onclick = closeAuth;
   upgradeButton.onclick = openPricing;
   closePricingButton.onclick = closePricing;
-  pricingLoginButton.onclick = () => { closePricing(); openAuth(); };
+  pricingLoginButton.onclick =
+    () =>
+      openPaddleCheckout();
+
+  function appStorage() {
+    return isProUser()
+      ? localStorage
+      : sessionStorage;
+  }
+
 
   function generateId() {
     return (
@@ -4423,12 +4803,12 @@
 
 
   function saveProjects() {
-    localStorage.setItem(
+    appStorage().setItem(
       PROJECTS_KEY,
       JSON.stringify(projects)
     );
 
-    localStorage.setItem(
+    appStorage().setItem(
       ACTIVE_PROJECT_KEY,
       activeProjectId || ""
     );
@@ -4666,7 +5046,7 @@
         project.id
       );
 
-      localStorage.removeItem(
+      appStorage().removeItem(
         getProjectSettingsKey(
           project.id
         )
@@ -5638,7 +6018,7 @@
 
   function saveProjectSettings() {
 
-    localStorage.setItem(
+    appStorage().setItem(
       getProjectSettingsKey(
         activeProjectId
       ),
@@ -5653,7 +6033,7 @@
 
     const settings =
       JSON.parse(
-        localStorage.getItem(
+        appStorage().getItem(
           getProjectSettingsKey(
             activeProjectId
           )
@@ -6108,7 +6488,7 @@
 
     const settings =
       JSON.parse(
-        localStorage.getItem(
+        appStorage().getItem(
           getProjectSettingsKey(
             activeProjectId
           )
@@ -6425,6 +6805,19 @@
               }
             )
             .filter(Boolean);
+      }
+
+
+      if (
+        !isProUser() &&
+        allResults.length > 500
+      ) {
+        alert(
+          "This check supports up to 500 domains at a time. Upgrade to Pro for larger checks."
+        );
+
+        openPricing();
+        return;
       }
 
 
@@ -7338,6 +7731,8 @@
 
 
   async function init() {
+    initializePaddleCheckout();
+
     setAuthMode("login");
 
     const { data: { session } } = await supabaseClient.auth.getSession();
