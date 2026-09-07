@@ -20,7 +20,7 @@
 
     .container {
       width: 90%;
-      max-width: 1100px;
+      max-width: 850px;
       margin: 60px auto;
     }
 
@@ -30,14 +30,14 @@
 
     .subtitle {
       color: #6b7280;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
     .card {
       background: white;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
-      padding: 24px;
+      padding: 25px;
       margin-bottom: 20px;
     }
 
@@ -46,48 +46,69 @@
       font-size: 18px;
     }
 
-    textarea {
-      width: 100%;
-      min-height: 180px;
-      padding: 14px;
+    .description {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .requirement label {
+      min-width: 220px;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      padding: 8px 10px;
       border: 1px solid #d1d5db;
-      border-radius: 8px;
-      resize: vertical;
+      border-radius: 7px;
+    }
+
+    input[type="number"] {
+      width: 110px;
+    }
+
+    input[type="text"] {
+      width: 280px;
     }
 
     input[type="file"] {
       margin-top: 10px;
     }
 
-    button {
-      border: 0;
-      border-radius: 8px;
-      padding: 12px 20px;
-      cursor: pointer;
-      font-weight: 600;
+    .file-info {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #6b7280;
     }
 
-    .primary {
+    .save-button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
       background: #111827;
       color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    .requirement {
-      margin: 12px 0;
+    .save-button:hover {
+      opacity: 0.9;
     }
 
-    .requirement input[type="number"] {
-      width: 100px;
-      margin-left: 10px;
-      padding: 6px;
-    }
-
-    .actions {
-      margin-top: 16px;
-    }
-
-    .placeholder {
-      color: #9ca3af;
+    .saved-message {
+      display: none;
+      text-align: center;
+      margin-top: 15px;
+      color: #15803d;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -97,8 +118,10 @@
   <main class="container">
 
     <h1>Link Prospect Checker</h1>
+
     <p class="subtitle">
-      Filter link prospects using your own database and requirements.
+      Set up your database and prospect requirements.
+      You only need to do this once.
     </p>
 
 
@@ -106,10 +129,11 @@
 
     <section class="card">
 
-      <h2>1. My Database</h2>
+      <h2>1. Your Database</h2>
 
-      <p>
-        Upload a CSV containing your domains and statuses.
+      <p class="description">
+        Upload a CSV containing the domains you've already worked with.
+        The file should contain a domain column and a status column.
       </p>
 
       <input
@@ -118,9 +142,9 @@
         accept=".csv"
       >
 
-      <p class="placeholder">
-        No database uploaded yet.
-      </p>
+      <div class="file-info" id="fileInfo">
+        No database uploaded.
+      </div>
 
     </section>
 
@@ -129,101 +153,249 @@
 
     <section class="card">
 
-      <h2>2. My Requirements</h2>
+      <h2>2. Your Requirements</h2>
+
+      <p class="description">
+        Choose which Ahrefs metrics should be checked.
+      </p>
+
 
       <div class="requirement">
-        <label>
-          <input type="checkbox" checked>
+
+        <input
+          type="checkbox"
+          id="useDR"
+        >
+
+        <label for="useDR">
           Minimum DR
         </label>
 
-        <input type="number" value="50">
+        <input
+          type="number"
+          id="minDR"
+          value="50"
+          min="0"
+        >
+
       </div>
 
 
       <div class="requirement">
-        <label>
-          <input type="checkbox" checked>
+
+        <input
+          type="checkbox"
+          id="useTraffic"
+        >
+
+        <label for="useTraffic">
           Minimum Organic Traffic
         </label>
 
-        <input type="number" value="2000">
+        <input
+          type="number"
+          id="minTraffic"
+          value="2000"
+          min="0"
+        >
+
       </div>
 
 
       <div class="requirement">
-        <label>
-          <input type="checkbox">
+
+        <input
+          type="checkbox"
+          id="useRD"
+        >
+
+        <label for="useRD">
           Minimum Referring Domains
         </label>
 
-        <input type="number" value="500">
+        <input
+          type="number"
+          id="minRD"
+          value="500"
+          min="0"
+        >
+
       </div>
 
 
       <div class="requirement">
-        <label>
-          <input type="checkbox" checked>
-          RD ≥ Linked Domains
+
+        <input
+          type="checkbox"
+          id="useRDLD"
+        >
+
+        <label for="useRDLD">
+          Referring Domains ≥ Linked Domains
         </label>
+
       </div>
 
 
       <div class="requirement">
-        <label>
-          <input type="checkbox">
-          Check top country
+
+        <input
+          type="checkbox"
+          id="useCountry"
+        >
+
+        <label for="useCountry">
+          Allowed top countries
         </label>
+
+        <input
+          type="text"
+          id="countries"
+          placeholder="US, UK, CA, AU"
+        >
+
       </div>
 
     </section>
 
 
-    <!-- CHECK DOMAINS -->
+    <button
+      class="save-button"
+      id="saveSettings"
+    >
+      Save Settings
+    </button>
 
-    <section class="card">
-
-      <h2>3. Check Domains</h2>
-
-      <p>
-        Paste any text containing domains or upload an Ahrefs Batch Analysis CSV.
-      </p>
-
-      <textarea
-        id="domainInput"
-        placeholder="Paste domains, URLs, vendor messages or any text here..."
-      ></textarea>
-
-      <p><strong>or</strong></p>
-
-      <input
-        type="file"
-        id="ahrefsFile"
-        accept=".csv"
-      >
-
-      <div class="actions">
-        <button class="primary" id="checkButton">
-          Check domains
-        </button>
-      </div>
-
-    </section>
-
-
-    <!-- RESULTS -->
-
-    <section class="card">
-
-      <h2>4. Results</h2>
-
-      <p class="placeholder">
-        Your results will appear here.
-      </p>
-
-    </section>
+    <div
+      class="saved-message"
+      id="savedMessage"
+    >
+      Settings saved ✓
+    </div>
 
   </main>
+
+
+  <script>
+
+    const databaseFile =
+      document.getElementById("databaseFile");
+
+    const fileInfo =
+      document.getElementById("fileInfo");
+
+    const saveButton =
+      document.getElementById("saveSettings");
+
+    const savedMessage =
+      document.getElementById("savedMessage");
+
+
+    // SHOW DATABASE FILE NAME
+
+    databaseFile.addEventListener("change", function () {
+
+      if (databaseFile.files.length > 0) {
+
+        const file = databaseFile.files[0];
+
+        fileInfo.textContent =
+          "Selected database: " + file.name;
+
+      }
+
+    });
+
+
+    // SAVE SETTINGS
+
+    saveButton.addEventListener("click", function () {
+
+      const settings = {
+
+        useDR:
+          document.getElementById("useDR").checked,
+
+        minDR:
+          document.getElementById("minDR").value,
+
+        useTraffic:
+          document.getElementById("useTraffic").checked,
+
+        minTraffic:
+          document.getElementById("minTraffic").value,
+
+        useRD:
+          document.getElementById("useRD").checked,
+
+        minRD:
+          document.getElementById("minRD").value,
+
+        useRDLD:
+          document.getElementById("useRDLD").checked,
+
+        useCountry:
+          document.getElementById("useCountry").checked,
+
+        countries:
+          document.getElementById("countries").value
+
+      };
+
+
+      localStorage.setItem(
+        "prospectCheckerSettings",
+        JSON.stringify(settings)
+      );
+
+
+      savedMessage.style.display = "block";
+
+    });
+
+
+    // LOAD SAVED SETTINGS
+
+    const savedSettings =
+      localStorage.getItem("prospectCheckerSettings");
+
+
+    if (savedSettings) {
+
+      const settings =
+        JSON.parse(savedSettings);
+
+
+      document.getElementById("useDR").checked =
+        settings.useDR;
+
+      document.getElementById("minDR").value =
+        settings.minDR;
+
+      document.getElementById("useTraffic").checked =
+        settings.useTraffic;
+
+      document.getElementById("minTraffic").value =
+        settings.minTraffic;
+
+      document.getElementById("useRD").checked =
+        settings.useRD;
+
+      document.getElementById("minRD").value =
+        settings.minRD;
+
+      document.getElementById("useRDLD").checked =
+        settings.useRDLD;
+
+      document.getElementById("useCountry").checked =
+        settings.useCountry;
+
+      document.getElementById("countries").value =
+        settings.countries;
+
+    }
+
+  </script>
 
 </body>
 </html>
