@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Link Prospect Checker</title>
 
   <style>
@@ -113,6 +112,12 @@
       color: #525252;
     }
 
+    .danger-ghost {
+      padding: 8px 10px;
+      background: transparent;
+      color: #b91c1c;
+    }
+
     .full {
       width: 100%;
     }
@@ -136,6 +141,31 @@
       font-size: 13px;
     }
 
+    /* CURRENT CHECK */
+
+    .current-check {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .current-check-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .current-check-meta {
+      margin-top: 4px;
+      color: #737373;
+      font-size: 12px;
+    }
+
     /* DATABASE */
 
     .db-dropzone {
@@ -146,13 +176,6 @@
       background: #fafafa;
       text-align: center;
       cursor: pointer;
-      transition: .15s ease;
-    }
-
-    .db-dropzone:hover,
-    .db-dropzone.dragging {
-      border-color: #111;
-      background: #fff;
     }
 
     .db-saved {
@@ -269,7 +292,7 @@
       height: 16px;
       left: 3px;
       top: 3px;
-      background: white;
+      background: #fff;
       border-radius: 50%;
       transition: .2s ease;
     }
@@ -479,19 +502,11 @@
       outline: none;
     }
 
-    .search-input:focus {
-      border-color: #111;
-    }
-
     .result-actions {
       display: flex;
       align-items: center;
       gap: 9px;
       flex-wrap: wrap;
-    }
-
-    .result-actions select {
-      min-width: 180px;
     }
 
     .copy-feedback {
@@ -529,10 +544,6 @@
       user-select: none;
     }
 
-    th.sortable:hover {
-      background: #f2f2f2;
-    }
-
     .sort-icon {
       margin-left: 5px;
       color: #a3a3a3;
@@ -567,7 +578,8 @@
       }
 
       .topbar,
-      .db-saved {
+      .db-saved,
+      .current-check {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -587,9 +599,7 @@
 
   <section id="setupScreen">
 
-    <div class="eyebrow">
-      Step 1 of 2 · Setup
-    </div>
+    <div class="eyebrow">Step 1 of 2 · Setup</div>
 
     <h1>Set up your checker</h1>
 
@@ -603,7 +613,7 @@
       <h2>Your database</h2>
 
       <p class="card-description">
-        Upload a CSV with domains and statuses. Your original statuses will be preserved.
+        Upload a CSV with domains and statuses.
       </p>
 
       <input
@@ -618,6 +628,7 @@
         id="dbDropzone"
       >
         <strong>Drop your database CSV here</strong>
+
         <div class="stats" style="margin-top:6px;">
           or click to browse files
         </div>
@@ -631,6 +642,7 @@
 
         <div>
           <strong>Database ready</strong>
+
           <div
             class="db-saved-meta"
             id="dbSavedMeta"
@@ -683,7 +695,7 @@
       <h2>Your requirements</h2>
 
       <p class="card-description">
-        Enable only the metrics you want to check in Ahrefs Batch Analysis.
+        Enable only the metrics you want to use.
       </p>
 
 
@@ -698,7 +710,7 @@
 
           <div>
             <div class="requirement-title">Minimum DR</div>
-            <div class="requirement-hint">Domain Rating from 0 to 100</div>
+            <div class="requirement-hint">0–100</div>
           </div>
 
           <input
@@ -719,8 +731,8 @@
             <span class="slider"></span>
           </label>
 
-          <div>
-            <div class="requirement-title">Minimum organic traffic</div>
+          <div class="requirement-title">
+            Minimum organic traffic
           </div>
 
           <input
@@ -740,8 +752,8 @@
             <span class="slider"></span>
           </label>
 
-          <div>
-            <div class="requirement-title">Minimum referring domains</div>
+          <div class="requirement-title">
+            Minimum referring domains
           </div>
 
           <input
@@ -763,9 +775,6 @@
 
           <div>
             <div class="requirement-title">RD ≥ LD</div>
-            <div class="requirement-hint">
-              Referring domains must be equal to or higher than linked domains
-            </div>
           </div>
 
           <div></div>
@@ -780,10 +789,9 @@
             <span class="slider"></span>
           </label>
 
-          <div>
-            <div class="requirement-title">Allowed top countries</div>
+          <div class="requirement-title">
+            Allowed top countries
           </div>
-
 
           <div
             class="country-picker"
@@ -869,14 +877,37 @@
     </div>
 
 
+    <div
+      class="current-check hidden"
+      id="currentCheck"
+    >
+
+      <div>
+        <div class="current-check-title">
+          Current check
+        </div>
+
+        <div
+          class="current-check-meta"
+          id="currentCheckMeta"
+        ></div>
+      </div>
+
+
+      <button
+        id="clearCurrentCheck"
+        class="danger-ghost"
+        type="button"
+      >
+        Clear current check
+      </button>
+
+    </div>
+
+
     <section class="card">
 
       <h2>Add prospects</h2>
-
-      <p class="card-description">
-        Paste any text containing domains, or upload your Ahrefs Batch Analysis CSV.
-      </p>
-
 
       <div
         class="prospect-input"
@@ -885,7 +916,7 @@
 
         <textarea
           id="domainInput"
-          placeholder="Paste domains, URLs, vendor messages, prices, notes... anything."
+          placeholder="Paste domains, URLs, vendor messages, prices, notes..."
         ></textarea>
 
 
@@ -896,6 +927,7 @@
 
           <div>
             <strong>Drop Ahrefs Batch CSV here</strong>
+
             <div class="stats" style="margin-top:4px;">
               or choose a file from your computer
             </div>
@@ -912,16 +944,13 @@
         >
 
           <div>
-
             <strong id="loadedFileName"></strong>
 
             <div
               class="stats"
               id="loadedFileMeta"
             ></div>
-
           </div>
-
 
           <button
             id="removeFile"
@@ -952,7 +981,6 @@
         >
           0 unique domains detected
         </div>
-
 
         <button
           id="checkDomains"
@@ -991,58 +1019,39 @@
             data-filter="all"
           >
             All
-            <span
-              class="filter-count"
-              id="countAll"
-            ></span>
+            <span class="filter-count" id="countAll"></span>
           </button>
-
 
           <button
             class="filter-tab"
             data-filter="passed"
           >
             Passed
-            <span
-              class="filter-count"
-              id="countPassed"
-            ></span>
+            <span class="filter-count" id="countPassed"></span>
           </button>
-
 
           <button
             class="filter-tab"
             data-filter="failed"
           >
             Failed
-            <span
-              class="filter-count"
-              id="countFailed"
-            ></span>
+            <span class="filter-count" id="countFailed"></span>
           </button>
-
 
           <button
             class="filter-tab"
             data-filter="database"
           >
             In database
-            <span
-              class="filter-count"
-              id="countDatabase"
-            ></span>
+            <span class="filter-count" id="countDatabase"></span>
           </button>
-
 
           <button
             class="filter-tab"
             data-filter="new"
           >
             New
-            <span
-              class="filter-count"
-              id="countNew"
-            ></span>
+            <span class="filter-count" id="countNew"></span>
           </button>
 
         </div>
@@ -1102,11 +1111,8 @@
       <div class="table-wrap">
 
         <table>
-
           <thead id="resultsHead"></thead>
-
           <tbody id="resultsBody"></tbody>
-
         </table>
 
       </div>
@@ -1128,9 +1134,9 @@
 
 <script>
 
-  /* ========================================
+  /* =========================
      STATE
-  ======================================== */
+  ========================= */
 
   let rawDatabase = [];
   let databaseHeaders = [];
@@ -1146,10 +1152,13 @@
   let sortColumn = null;
   let sortDirection = "asc";
 
+  const CURRENT_CHECK_KEY =
+    "prospectCheckerCurrentCheck";
 
-  /* ========================================
+
+  /* =========================
      DOM
-  ======================================== */
+  ========================= */
 
   const setupScreen =
     document.getElementById("setupScreen");
@@ -1192,6 +1201,15 @@
 
   const databaseStats =
     document.getElementById("databaseStats");
+
+  const currentCheck =
+    document.getElementById("currentCheck");
+
+  const currentCheckMeta =
+    document.getElementById("currentCheckMeta");
+
+  const clearCurrentCheck =
+    document.getElementById("clearCurrentCheck");
 
   const domainInput =
     document.getElementById("domainInput");
@@ -1293,9 +1311,9 @@
     document.getElementById("countryPlaceholder");
 
 
-  /* ========================================
+  /* =========================
      INDEXED DB
-  ======================================== */
+  ========================= */
 
   const DB_NAME =
     "LinkProspectCheckerDB";
@@ -1453,9 +1471,9 @@
   }
 
 
-  /* ========================================
-     CSV
-  ======================================== */
+  /* =========================
+     HELPERS
+  ========================= */
 
   function cleanHeader(value) {
 
@@ -1688,22 +1706,18 @@
     }
 
 
-    const valueNumber =
+    const n =
       Number(text);
 
 
     return Number.isFinite(
-      valueNumber
+      n
     )
-      ? valueNumber * multiplier
+      ? n * multiplier
       : 0;
 
   }
 
-
-  /* ========================================
-     DOMAINS
-  ======================================== */
 
   function normalizeDomain(value) {
 
@@ -1734,7 +1748,6 @@
 
     domain =
       domain.split("#")[0];
-
 
     domain =
       domain.replace(
@@ -1776,9 +1789,250 @@
   }
 
 
-  /* ========================================
+  function formatRelativeTime(
+    timestamp
+  ) {
+
+    if (!timestamp) {
+      return "";
+    }
+
+
+    const diff =
+      Date.now() -
+      timestamp;
+
+
+    const minutes =
+      Math.floor(
+        diff / 60000
+      );
+
+
+    if (
+      minutes < 1
+    ) {
+      return "just now";
+    }
+
+
+    if (
+      minutes < 60
+    ) {
+      return minutes +
+        " min ago";
+    }
+
+
+    const hours =
+      Math.floor(
+        minutes / 60
+      );
+
+
+    if (
+      hours < 24
+    ) {
+      return hours +
+        "h ago";
+    }
+
+
+    const days =
+      Math.floor(
+        hours / 24
+      );
+
+
+    return days +
+      "d ago";
+
+  }
+
+
+  /* =========================
+     CURRENT CHECK STORAGE
+  ========================= */
+
+  function saveCurrentCheck() {
+
+    if (
+      !allResults.length
+    ) {
+      return;
+    }
+
+
+    const data = {
+
+      results:
+        allResults,
+
+      filter:
+        currentResultFilter,
+
+      status:
+        statusFilter.value,
+
+      search:
+        resultSearch.value,
+
+      sortColumn,
+
+      sortDirection,
+
+      timestamp:
+        Date.now()
+
+    };
+
+
+    localStorage.setItem(
+      CURRENT_CHECK_KEY,
+      JSON.stringify(data)
+    );
+
+
+    updateCurrentCheckBanner(
+      data
+    );
+
+  }
+
+
+  function loadCurrentCheck() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem(
+          CURRENT_CHECK_KEY
+        ) || "null"
+      );
+
+    }
+
+    catch {
+
+      return null;
+
+    }
+
+  }
+
+
+  function updateCurrentCheckBanner(
+    data
+  ) {
+
+    if (
+      !data ||
+      !data.results ||
+      !data.results.length
+    ) {
+
+      currentCheck.classList.add(
+        "hidden"
+      );
+
+      return;
+
+    }
+
+
+    currentCheck.classList.remove(
+      "hidden"
+    );
+
+
+    currentCheckMeta.textContent =
+      data.results.length +
+      " domains · checked " +
+      formatRelativeTime(
+        data.timestamp
+      );
+
+  }
+
+
+  function clearCheckState() {
+
+    localStorage.removeItem(
+      CURRENT_CHECK_KEY
+    );
+
+
+    allResults = [];
+
+    currentResultFilter =
+      "all";
+
+    sortColumn =
+      null;
+
+    sortDirection =
+      "asc";
+
+
+    resultSearch.value =
+      "";
+
+    statusFilter.innerHTML =
+      '<option value="all">All statuses</option>';
+
+
+    resultsCard.classList.add(
+      "hidden"
+    );
+
+
+    currentCheck.classList.add(
+      "hidden"
+    );
+
+
+    domainInput.value =
+      "";
+
+    domainInput.disabled =
+      false;
+
+
+    ahrefsRows = [];
+
+    ahrefsColumnMap =
+      null;
+
+
+    ahrefsFile.value =
+      "";
+
+
+    fileLoaded.classList.remove(
+      "active"
+    );
+
+
+    uploadZone.classList.remove(
+      "hidden"
+    );
+
+
+    detectedInfo.textContent =
+      "0 unique domains detected";
+
+  }
+
+
+  clearCurrentCheck.addEventListener(
+    "click",
+    clearCheckState
+  );
+
+
+  /* =========================
      COUNTRIES
-  ======================================== */
+  ========================= */
 
   const countryList = [
     ["US", "United States"],
@@ -2042,9 +2296,9 @@
   renderCountries();
 
 
-  /* ========================================
+  /* =========================
      DATABASE UPLOAD
-  ======================================== */
+  ========================= */
 
   dbDropzone.addEventListener(
     "click",
@@ -2060,55 +2314,6 @@
   );
 
 
-  dbDropzone.addEventListener(
-    "dragover",
-    event => {
-
-      event.preventDefault();
-
-      dbDropzone.classList.add(
-        "dragging"
-      );
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "dragleave",
-    () => {
-
-      dbDropzone.classList.remove(
-        "dragging"
-      );
-
-    }
-  );
-
-
-  dbDropzone.addEventListener(
-    "drop",
-    event => {
-
-      event.preventDefault();
-
-      dbDropzone.classList.remove(
-        "dragging"
-      );
-
-
-      const file =
-        event.dataTransfer.files[0];
-
-
-      if (file) {
-        loadDatabaseFile(file);
-      }
-
-    }
-  );
-
-
   databaseFile.addEventListener(
     "change",
     () => {
@@ -2118,7 +2323,9 @@
 
 
       if (file) {
-        loadDatabaseFile(file);
+        loadDatabaseFile(
+          file
+        );
       }
 
     }
@@ -2220,20 +2427,16 @@
         if (
           detectedDomain !== -1
         ) {
-
           domainColumn.value =
             detectedDomain;
-
         }
 
 
         if (
           detectedStatus !== -1
         ) {
-
           statusColumn.value =
             detectedStatus;
-
         }
 
 
@@ -2351,9 +2554,9 @@
   );
 
 
-  /* ========================================
+  /* =========================
      SETTINGS
-  ======================================== */
+  ========================= */
 
   saveSettings.addEventListener(
     "click",
@@ -2492,10 +2695,6 @@
   );
 
 
-  /* ========================================
-     SHOW CHECKER
-  ======================================== */
-
   function showChecker(
     db
   ) {
@@ -2530,34 +2729,9 @@
   }
 
 
-  /* ========================================
-     TEXT INPUT
-  ======================================== */
-
-  domainInput.addEventListener(
-    "input",
-    () => {
-
-      if (
-        ahrefsRows.length
-      ) {
-        return;
-      }
-
-
-      detectedInfo.textContent =
-        extractDomains(
-          domainInput.value
-        ).length +
-        " unique domains detected";
-
-    }
-  );
-
-
-  /* ========================================
+  /* =========================
      AHREFS
-  ======================================== */
+  ========================= */
 
   function detectAhrefsColumns(
     headers
@@ -2623,27 +2797,11 @@
     value
   ) {
 
-    const text =
-      String(value || "");
-
-
-    let match =
-      text.match(
+    const match =
+      String(
+        value || ""
+      ).match(
         /\(([a-z]{2}),/i
-      );
-
-
-    if (match) {
-
-      return match[1]
-        .toUpperCase();
-
-    }
-
-
-    match =
-      text.match(
-        /\b([a-z]{2})\b/i
       );
 
 
@@ -2761,19 +2919,6 @@
           );
 
 
-        if (
-          ahrefsColumnMap.domain === -1
-        ) {
-
-          alert(
-            "Could not detect the Target column."
-          );
-
-          return;
-
-        }
-
-
         const domains =
           ahrefsRows
             .map(
@@ -2817,7 +2962,7 @@
           [...new Set(domains)].length +
           " domains ready to check";
 
-    };
+      };
 
 
     reader.readAsText(
@@ -2865,9 +3010,30 @@
   );
 
 
-  /* ========================================
+  domainInput.addEventListener(
+    "input",
+    () => {
+
+      if (
+        ahrefsRows.length
+      ) {
+        return;
+      }
+
+
+      detectedInfo.textContent =
+        extractDomains(
+          domainInput.value
+        ).length +
+        " unique domains detected";
+
+    }
+  );
+
+
+  /* =========================
      REQUIREMENTS
-  ======================================== */
+  ========================= */
 
   function evaluateRequirements(
     row
@@ -3021,9 +3187,9 @@
   }
 
 
-  /* ========================================
-     CHECK DOMAINS
-  ======================================== */
+  /* =========================
+     CHECK
+  ========================= */
 
   checkDomains.addEventListener(
     "click",
@@ -3034,13 +3200,7 @@
 
 
       if (!db) {
-
-        alert(
-          "Database not found."
-        );
-
         return;
-
       }
 
 
@@ -3067,7 +3227,9 @@
             ).trim();
 
 
-          if (domain) {
+          if (
+            domain
+          ) {
 
             dbMap.set(
               domain,
@@ -3103,11 +3265,11 @@
 
                 if (
                   !domain ||
-                  seen.has(domain)
+                  seen.has(
+                    domain
+                  )
                 ) {
-
                   return null;
-
                 }
 
 
@@ -3187,17 +3349,18 @@
       }
 
 
+      currentResultFilter =
+        "all";
+
       sortColumn =
         null;
 
       sortDirection =
         "asc";
 
-      currentResultFilter =
-        "all";
-
       resultSearch.value =
         "";
+
 
       buildStatusFilter();
 
@@ -3207,79 +3370,61 @@
         "all"
       );
 
+
       renderFilteredResults();
+
+      saveCurrentCheck();
 
     }
   );
 
 
-  /* ========================================
+  /* =========================
      FILTERS
-  ======================================== */
+  ========================= */
 
   function updateFilterCounts() {
 
-    const isAhrefs =
-      allResults.some(
-        item =>
-          item.mode === "ahrefs"
-      );
+    document.getElementById(
+      "countAll"
+    ).textContent =
+      allResults.length;
 
 
-    document
-      .getElementById(
-        "countAll"
-      )
-      .textContent =
-        allResults.length;
+    document.getElementById(
+      "countPassed"
+    ).textContent =
+      allResults.filter(
+        x =>
+          x.mode === "ahrefs" &&
+          x.passed
+      ).length;
 
 
-    document
-      .getElementById(
-        "countPassed"
-      )
-      .textContent =
-        isAhrefs
-          ? allResults.filter(
-              x =>
-                x.passed
-            ).length
-          : 0;
+    document.getElementById(
+      "countFailed"
+    ).textContent =
+      allResults.filter(
+        x =>
+          x.mode === "ahrefs" &&
+          !x.passed
+      ).length;
 
 
-    document
-      .getElementById(
-        "countFailed"
-      )
-      .textContent =
-        isAhrefs
-          ? allResults.filter(
-              x =>
-                !x.passed
-            ).length
-          : 0;
+    document.getElementById(
+      "countDatabase"
+    ).textContent =
+      allResults.filter(
+        x => x.found
+      ).length;
 
 
-    document
-      .getElementById(
-        "countDatabase"
-      )
-      .textContent =
-        allResults.filter(
-          x =>
-            x.found
-        ).length;
-
-
-    document
-      .getElementById(
-        "countNew"
-      )
-      .textContent =
-        allResults.filter(
-          x =>
-            !x.found
-        ).length;
+    document.getElementById(
+      "countNew"
+    ).textContent =
+      allResults.filter(
+        x => !x.found
+      ).length;
 
   }
 
@@ -3295,18 +3440,11 @@
         ...new Set(
           allResults
             .map(
-              x =>
-                x.status
+              x => x.status
             )
             .filter(Boolean)
         )
-      ]
-        .sort(
-          (a, b) =>
-            a.localeCompare(
-              b
-            )
-        );
+      ].sort();
 
 
     statuses.forEach(
@@ -3370,6 +3508,8 @@
 
             renderFilteredResults();
 
+            saveCurrentCheck();
+
           }
         );
 
@@ -3379,13 +3519,25 @@
 
   statusFilter.addEventListener(
     "change",
-    renderFilteredResults
+    () => {
+
+      renderFilteredResults();
+
+      saveCurrentCheck();
+
+    }
   );
 
 
   resultSearch.addEventListener(
     "input",
-    renderFilteredResults
+    () => {
+
+      renderFilteredResults();
+
+      saveCurrentCheck();
+
+    }
   );
 
 
@@ -3402,9 +3554,9 @@
 
       results =
         results.filter(
-          item =>
-            item.mode === "ahrefs" &&
-            item.passed
+          x =>
+            x.mode === "ahrefs" &&
+            x.passed
         );
 
     }
@@ -3417,9 +3569,9 @@
 
       results =
         results.filter(
-          item =>
-            item.mode === "ahrefs" &&
-            !item.passed
+          x =>
+            x.mode === "ahrefs" &&
+            !x.passed
         );
 
     }
@@ -3432,8 +3584,7 @@
 
       results =
         results.filter(
-          item =>
-            item.found
+          x => x.found
         );
 
     }
@@ -3446,8 +3597,7 @@
 
       results =
         results.filter(
-          item =>
-            !item.found
+          x => !x.found
         );
 
     }
@@ -3460,8 +3610,8 @@
 
       results =
         results.filter(
-          item =>
-            item.status ===
+          x =>
+            x.status ===
             statusFilter.value
         );
 
@@ -3478,9 +3628,8 @@
 
       results =
         results.filter(
-          item => {
-
-            return [
+          item =>
+            [
               item.domain,
               item.status,
               item.country
@@ -3493,9 +3642,7 @@
                     .includes(
                       search
                     )
-              );
-
-          }
+              )
         );
 
     }
@@ -3505,47 +3652,34 @@
       sortColumn
     ) {
 
+      const numeric = [
+        "dr",
+        "traffic",
+        "rd",
+        "ld"
+      ];
+
+
       results.sort(
         (a, b) => {
 
-          const numericColumns = [
-            "dr",
-            "traffic",
-            "rd",
-            "ld"
-          ];
-
-
-          let valueA =
-            a[
-              sortColumn
-            ];
-
-          let valueB =
-            b[
-              sortColumn
-            ];
-
-
           if (
-            numericColumns.includes(
+            numeric.includes(
               sortColumn
             )
           ) {
 
-            valueA =
-              Number(
-                valueA || 0
-              );
-
-            valueB =
-              Number(
-                valueB || 0
-              );
-
-
             return (
-              valueA - valueB
+              Number(
+                a[
+                  sortColumn
+                ] || 0
+              ) -
+              Number(
+                b[
+                  sortColumn
+                ] || 0
+              )
             ) *
             (
               sortDirection ===
@@ -3557,23 +3691,18 @@
           }
 
 
-          const comparison =
-            String(
-              valueA || ""
-            )
-              .localeCompare(
-                String(
-                  valueB || ""
-                ),
-                undefined,
-                {
-                  sensitivity:
-                    "base"
-                }
-              );
-
-
-          return comparison *
+          return String(
+            a[
+              sortColumn
+            ] || ""
+          )
+            .localeCompare(
+              String(
+                b[
+                  sortColumn
+                ] || ""
+              )
+            ) *
             (
               sortDirection ===
               "asc"
@@ -3592,9 +3721,9 @@
   }
 
 
-  /* ========================================
-     SORTING
-  ======================================== */
+  /* =========================
+     SORT
+  ========================= */
 
   function sortResults(
     column
@@ -3625,6 +3754,8 @@
 
 
     renderFilteredResults();
+
+    saveCurrentCheck();
 
   }
 
@@ -3667,9 +3798,9 @@
   }
 
 
-  /* ========================================
+  /* =========================
      RENDER
-  ======================================== */
+  ========================= */
 
   function renderFilteredResults() {
 
@@ -3695,8 +3826,8 @@
 
     const isAhrefs =
       allResults.some(
-        item =>
-          item.mode === "ahrefs"
+        x =>
+          x.mode === "ahrefs"
       );
 
 
@@ -3752,7 +3883,7 @@
 
 
     if (
-      results.length === 0
+      !results.length
     ) {
 
       emptyResults.classList.remove(
@@ -3783,156 +3914,36 @@
           "text"
         ) {
 
-          const domainCell =
-            document.createElement(
-              "td"
-            );
-
-          domainCell.textContent =
-            result.domain;
-
-
-          const statusCell =
-            document.createElement(
-              "td"
-            );
-
-          statusCell.textContent =
-            result.status;
-
-
-          if (
-            !result.found
-          ) {
-
-            statusCell.className =
-              "muted";
-
-          }
-
-
-          row.append(
-            domainCell,
-            statusCell
-          );
+          row.innerHTML = `
+            <td>${result.domain}</td>
+            <td>${result.status}</td>
+          `;
 
         }
 
         else {
 
-          const values = [
-            result.domain,
-            result.status,
-            result.dr,
-            result.traffic,
-            result.rd,
-            result.ld,
-            result.country
-          ];
-
-
-          values.forEach(
-            (
-              value,
-              index
-            ) => {
-
-              const cell =
-                document.createElement(
-                  "td"
-                );
-
-
-              cell.textContent =
-                value;
-
-
-              if (
-                index === 1 &&
-                !result.found
-              ) {
-
-                cell.className =
-                  "muted";
-
+          row.innerHTML = `
+            <td>${result.domain}</td>
+            <td>${result.status}</td>
+            <td>${result.dr}</td>
+            <td>${result.traffic}</td>
+            <td>${result.rd}</td>
+            <td>${result.ld}</td>
+            <td>${result.country}</td>
+            <td>
+              ${
+                result.passed
+                  ? '<span class="success">Passed</span>'
+                  : '<span class="error">Failed</span>'
               }
-
-
-              row.appendChild(
-                cell
-              );
-
-            }
-          );
-
-
-          const resultCell =
-            document.createElement(
-              "td"
-            );
-
-
-          if (
-            result.passed
-          ) {
-
-            resultCell.innerHTML =
-              '<span class="success">Passed</span>';
-
-          }
-
-          else {
-
-            const label =
-              document.createElement(
-                "span"
-              );
-
-
-            label.className =
-              "error";
-
-            label.textContent =
-              "Failed";
-
-
-            resultCell.appendChild(
-              label
-            );
-
-
-            if (
-              result.failures.length
-            ) {
-
-              const reasons =
-                document.createElement(
-                  "div"
-                );
-
-
-              reasons.className =
-                "fail-reasons";
-
-
-              reasons.innerHTML =
-                result.failures.join(
-                  "<br>"
-                );
-
-
-              resultCell.appendChild(
-                reasons
-              );
-
-            }
-
-          }
-
-
-          row.appendChild(
-            resultCell
-          );
+              ${
+                result.failures.length
+                  ? `<div class="fail-reasons">${result.failures.join("<br>")}</div>`
+                  : ""
+              }
+            </td>
+          `;
 
         }
 
@@ -3947,9 +3958,9 @@
   }
 
 
-  /* ========================================
-     COPY
-  ======================================== */
+  /* =========================
+     COPY / EXPORT
+  ========================= */
 
   copyFiltered.addEventListener(
     "click",
@@ -3959,66 +3970,42 @@
         getFilteredResults();
 
 
-      if (
-        !results.length
-      ) {
-
-        copyFeedback.textContent =
-          "Nothing to copy";
-
-        return;
-
-      }
-
-
       const domains =
         results
           .map(
-            item =>
-              item.domain
+            x => x.domain
           )
           .join("\n");
 
 
-      try {
-
-        await navigator.clipboard.writeText(
-          domains
-        );
-
-
-        copyFeedback.textContent =
-          results.length +
-          " copied ✓";
-
-
-        setTimeout(
-          () => {
-
-            copyFeedback.textContent =
-              "";
-
-          },
-          1800
-        );
-
+      if (!domains) {
+        return;
       }
 
-      catch {
 
-        alert(
-          "Could not copy domains."
-        );
+      await navigator.clipboard.writeText(
+        domains
+      );
 
-      }
+
+      copyFeedback.textContent =
+        results.length +
+        " copied ✓";
+
+
+      setTimeout(
+        () => {
+
+          copyFeedback.textContent =
+            "";
+
+        },
+        1600
+      );
 
     }
   );
 
-
-  /* ========================================
-     EXPORT
-  ======================================== */
 
   exportFiltered.addEventListener(
     "click",
@@ -4037,74 +4024,64 @@
 
       const isAhrefs =
         results.some(
-          item =>
-            item.mode === "ahrefs"
+          x =>
+            x.mode === "ahrefs"
         );
 
 
       const rows =
-        [];
+        isAhrefs
+          ? [[
+              "Domain",
+              "Status",
+              "DR",
+              "Traffic",
+              "RD",
+              "LD",
+              "Country",
+              "Result",
+              "Reasons"
+            ]]
+          : [[
+              "Domain",
+              "Status"
+            ]];
 
 
-      if (isAhrefs) {
+      results.forEach(
+        x => {
 
-        rows.push([
-          "Domain",
-          "Status",
-          "DR",
-          "Traffic",
-          "RD",
-          "LD",
-          "Country",
-          "Result",
-          "Reasons"
-        ]);
-
-
-        results.forEach(
-          item => {
+          if (isAhrefs) {
 
             rows.push([
-              item.domain,
-              item.status,
-              item.dr,
-              item.traffic,
-              item.rd,
-              item.ld,
-              item.country,
-              item.passed
+              x.domain,
+              x.status,
+              x.dr,
+              x.traffic,
+              x.rd,
+              x.ld,
+              x.country,
+              x.passed
                 ? "Passed"
                 : "Failed",
-              item.failures.join(
+              x.failures.join(
                 "; "
               )
             ]);
 
           }
-        );
 
-      }
-
-      else {
-
-        rows.push([
-          "Domain",
-          "Status"
-        ]);
-
-
-        results.forEach(
-          item => {
+          else {
 
             rows.push([
-              item.domain,
-              item.status
+              x.domain,
+              x.status
             ]);
 
           }
-        );
 
-      }
+        }
+      );
 
 
       const csv =
@@ -4114,15 +4091,12 @@
               row
                 .map(
                   value =>
-                    '"' +
-                    String(
+                    `"${String(
                       value ?? ""
-                    )
-                      .replace(
-                        /"/g,
-                        '""'
-                      ) +
-                    '"'
+                    ).replace(
+                      /"/g,
+                      '""'
+                    )}"`
                 )
                 .join(",")
           )
@@ -4154,10 +4128,8 @@
       link.href =
         url;
 
-
       link.download =
         "filtered-prospects.csv";
-
 
       link.click();
 
@@ -4170,9 +4142,9 @@
   );
 
 
-  /* ========================================
+  /* =========================
      INITIAL LOAD
-  ======================================== */
+  ========================= */
 
   async function init() {
 
@@ -4325,6 +4297,76 @@
 
       showChecker(
         db
+      );
+
+    }
+
+
+    const savedCheck =
+      loadCurrentCheck();
+
+
+    if (
+      savedCheck &&
+      Array.isArray(
+        savedCheck.results
+      ) &&
+      savedCheck.results.length
+    ) {
+
+      allResults =
+        savedCheck.results;
+
+
+      currentResultFilter =
+        savedCheck.filter ||
+        "all";
+
+
+      sortColumn =
+        savedCheck.sortColumn ||
+        null;
+
+
+      sortDirection =
+        savedCheck.sortDirection ||
+        "asc";
+
+
+      buildStatusFilter();
+
+
+      if (
+        [
+          ...statusFilter.options
+        ].some(
+          option =>
+            option.value ===
+            savedCheck.status
+        )
+      ) {
+
+        statusFilter.value =
+          savedCheck.status;
+
+      }
+
+
+      resultSearch.value =
+        savedCheck.search || "";
+
+
+      updateFilterCounts();
+
+      setActiveFilter(
+        currentResultFilter
+      );
+
+
+      renderFilteredResults();
+
+      updateCurrentCheckBanner(
+        savedCheck
       );
 
     }
