@@ -1558,32 +1558,32 @@
     <span class="onboarding-kicker">Easy</span>
     <h1>Make prospect checking feel easy.</h1>
     <p class="onboarding-copy">
-      Create a project, set your rules once, then paste any domain list or upload Ahrefs Batch Analysis whenever you need a quick decision.
+      Create a project, set rules, and run a check.
     </p>
 
     <div class="onboarding-steps">
       <div class="onboarding-step">
         <span class="step-number">1</span>
         <strong>Create project</strong>
-        <p>Keep different clients or workflows separate.</p>
+        <p>Keep workflows separate.</p>
       </div>
 
       <div class="onboarding-step">
         <span class="step-number">2</span>
         <strong>Upload database or skip</strong>
-        <p>Use your own domain statuses, or work in metrics-only mode.</p>
+        <p>Upload a database or skip it.</p>
       </div>
 
       <div class="onboarding-step">
         <span class="step-number">3</span>
         <strong>Set rules</strong>
-        <p>Choose only the Ahrefs metrics that matter to you.</p>
+        <p>Choose your metrics.</p>
       </div>
 
       <div class="onboarding-step">
         <span class="step-number">4</span>
         <strong>Check</strong>
-        <p>Paste messy text or upload a Batch Analysis CSV.</p>
+        <p>Paste text or upload CSV.</p>
       </div>
     </div>
 
@@ -1615,7 +1615,6 @@
 
       <div class="brand-copy">
         <div class="brand-name">Easy</div>
-        <div class="brand-tagline">Find better links, faster.</div>
       </div>
     </div>
 
@@ -1661,7 +1660,7 @@
     <h1>Build your checking rules</h1>
 
     <p class="subtitle">
-      Add a database if you want to compare against existing domains, or skip it and use this project only for metric checks.
+      Upload a database or use metrics only.
     </p>
 
 
@@ -1670,7 +1669,7 @@
       <h2>Domain database <span class="muted">(optional)</span></h2>
 
       <p class="card-description">
-        If you upload a database, both Domain and Status columns are required.
+        Domain and Status columns are required.
       </p>
 
 
@@ -1689,7 +1688,7 @@
         <strong>Drop your database CSV here</strong>
 
         <div class="stats" style="margin-top:6px;">
-          or click to browse files
+          or browse files
         </div>
       </div>
 
@@ -1758,10 +1757,6 @@
     <section class="card">
 
       <h2>Your requirements</h2>
-
-      <p class="card-description">
-        These rules are used when you upload an Ahrefs Batch Analysis CSV.
-      </p>
 
 
       <div class="requirements-list">
@@ -1920,7 +1915,7 @@
         <h1>Check prospects</h1>
 
         <p class="subtitle" style="margin-bottom:8px;">
-          Paste a list or upload Ahrefs Batch Analysis for a one-time check.
+          Paste domains or upload Ahrefs Batch Analysis.
         </p>
 
         <div
@@ -1963,7 +1958,7 @@
             <strong>Drop Ahrefs Batch CSV here</strong>
 
             <div class="stats" style="margin-top:4px;">
-              or choose a file from your computer
+              or browse files
             </div>
           </div>
 
@@ -2048,7 +2043,7 @@
       <div class="product-empty-icon">✓</div>
       <strong>No check running yet</strong>
       <p id="checkerEmptyText">
-        Paste domains to compare with your database, or upload Ahrefs Batch Analysis to evaluate your metric rules.
+        Paste domains or upload Ahrefs Batch Analysis.
       </p>
     </div>
 
@@ -2197,7 +2192,7 @@
   <footer class="app-footer">
     <div class="footer-brand">
       <span class="footer-dot"></span>
-      Easy · Link Prospect Checker
+      Easy
     </div>
 
     <button id="footerHelpButton" class="footer-help" type="button">
@@ -2753,8 +2748,8 @@
 
       checkerEmptyText.textContent =
         activeProjectHasDatabase
-          ? "Paste domains to compare with your database, or upload Ahrefs Batch Analysis to evaluate your metric rules."
-          : "This project is in Metrics only mode. Upload Ahrefs Batch Analysis to evaluate your rules.";
+          ? "Paste domains or upload Ahrefs Batch Analysis."
+          : "Upload Ahrefs Batch Analysis.";
     }
   }
 
@@ -4478,12 +4473,12 @@
 
       databaseStats.textContent =
         analysis.uniqueDomains +
-        " domains in this project database";
+        " domains in database";
 
     } else {
 
       databaseStats.textContent =
-        "Metrics only · no domain database";
+        "Metrics only";
     }
 
     updateDatabaseDependentUI();
