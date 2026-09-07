@@ -1823,8 +1823,29 @@
 
 <body>
 
+
+<div id="pricingModalBackdrop" class="modal-backdrop hidden">
+  <div class="modal" style="width:min(680px,94vw);">
+    <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start">
+      <div><h3>Easy Pro</h3><p>Keep your workspace and work with larger lists.</p></div>
+      <button id="closePricingButton" class="help-close" type="button">×</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px">
+      <div class="guide-card"><span class="plan-pill">Free</span><h4 style="margin-top:14px">Temporary workspace</h4>
+        <ul><li>1 temporary project</li><li>Up to 500 domains per check</li><li>Database + Ahrefs Batch</li><li>Filters and export</li><li>Clears when the browser session ends</li></ul>
+      </div>
+      <div class="guide-card" style="border-color:#cfd2ff;background:#fafaff"><span class="plan-pill">Pro · $3/month</span><h4 style="margin-top:14px">Saved workspace</h4>
+        <ul><li>Unlimited projects</li><li>Saved projects, databases and rules</li><li>Up to 25,000 domains/month</li><li>Database + Ahrefs Batch</li><li>Filters and export</li></ul>
+        <button id="pricingLoginButton" class="primary" type="button" style="width:100%;margin-top:14px">Log in / Create account</button>
+      </div>
+    </div>
+    <p style="margin-top:16px;color:#8a90a2;font-size:11.5px">Payments will be connected in the next step.</p>
+  </div>
+</div>
+
 <div id="authOverlay" class="auth-overlay">
-  <div class="auth-card">
+  <div class="auth-card" style="position:relative;">
+    <button id="closeAuthButton" class="help-close" type="button" aria-label="Close" style="position:absolute;right:18px;top:18px;">×</button>
 
     <div class="auth-brand">
       <div class="auth-brand-mark"><svg viewBox="0 0 64 64" aria-hidden="true">
@@ -1872,7 +1893,7 @@
       <div id="authMessage" class="auth-message"></div>
 
       <div id="authNote" class="auth-note">
-        New here? Create a free account with 2 projects and 500 checked domains per month.
+        Pro keeps your workspace between sessions.
       </div>
 
     </form>
@@ -1971,8 +1992,10 @@
         How to use
       </button>
     
+      <button id="upgradeButton" class="primary" type="button">Upgrade · $3/mo</button>
       <div class="account-area">
-        <span id="headerPlanPill" class="plan-pill hidden">Free</span>
+        <span id="guestPlanPill" class="plan-pill">Free · Temporary</span>
+        <span id="headerPlanPill" class="plan-pill hidden">Pro</span>
         <span id="headerUsagePill" class="usage-pill hidden">0 / 500</span>
 
         <button id="accountButton" class="account-button hidden" type="button">
@@ -2850,6 +2873,13 @@
     document.getElementById("supportSubmitButton");
 
 
+  const closeAuthButton = document.getElementById("closeAuthButton");
+  const upgradeButton = document.getElementById("upgradeButton");
+  const guestPlanPill = document.getElementById("guestPlanPill");
+  const pricingModalBackdrop = document.getElementById("pricingModalBackdrop");
+  const closePricingButton = document.getElementById("closePricingButton");
+  const pricingLoginButton = document.getElementById("pricingLoginButton");
+
   const authOverlay =
     document.getElementById("authOverlay");
 
@@ -3530,8 +3560,8 @@
 
     authCopy.textContent =
       isSignup
-        ? "Start free with 2 projects and 500 checked domains per month."
-        : "Log in to continue to Easy.";
+        ? "Create your Pro account."
+        : "Log in to your Pro workspace.";
 
     authSubmitButton.textContent =
       isSignup
@@ -3597,6 +3627,9 @@
 
 
   function updateAccountUI() {
+
+    guestPlanPill.classList.toggle("hidden", isProUser());
+    upgradeButton.classList.toggle("hidden", isProUser());
 
     if (!currentUser) {
 
@@ -3690,33 +3723,15 @@
 
 
   function applyPlanLimits() {
+    const pro = isProUser();
 
-    if (!currentProfile) {
-      return;
+    newProjectButton.disabled = !pro;
+    newProjectButton.title = pro ? "" : "Free includes one temporary project.";
+    deleteProjectButton.disabled = !pro || projects.length <= 1;
+
+    if (accountProjectPill) {
+      accountProjectPill.textContent = pro ? `${projects.length} projects` : "1 temporary project";
     }
-
-    const projectLimit =
-      Number(
-        currentProfile.project_limit ?? 2
-      );
-
-    const atProjectLimit =
-      projects.length >=
-      projectLimit;
-
-    newProjectButton.disabled =
-      atProjectLimit;
-
-    newProjectButton.title =
-      atProjectLimit
-        ? `Your ${currentProfile.plan || "free"} plan allows ${projectLimit} projects.`
-        : "";
-
-    deleteProjectButton.disabled =
-      projects.length <= 1;
-
-    accountProjectPill.textContent =
-      `${projects.length} / ${projectLimit} projects`;
   }
 
 
@@ -3741,29 +3756,12 @@
 
 
   function handleSignedOut() {
-
-    currentUser =
-      null;
-
-    currentProfile =
-      null;
-
-    accountMenu.classList.add(
-      "hidden"
-    );
-
+    currentUser = null;
+    currentProfile = null;
+    accountMenu.classList.add("hidden");
     updateAccountUI();
-
-    authOverlay.classList.remove(
-      "hidden"
-    );
-
-    document.body.style.overflow =
-      "hidden";
-
-    setAuthMode(
-      "login"
-    );
+    authOverlay.classList.add("hidden");
+    document.body.style.overflow = "";
   }
 
 
@@ -3976,6 +3974,33 @@
   );
 
 
+  function isProUser() {
+    return Boolean(currentUser && currentProfile && currentProfile.plan === "pro");
+  }
+
+  function openAuth() {
+    authOverlay.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeAuth() {
+    authOverlay.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  function openPricing() {
+    pricingModalBackdrop.classList.remove("hidden");
+  }
+
+  function closePricing() {
+    pricingModalBackdrop.classList.add("hidden");
+  }
+
+  closeAuthButton.onclick = closeAuth;
+  upgradeButton.onclick = openPricing;
+  closePricingButton.onclick = closePricing;
+  pricingLoginButton.onclick = () => { closePricing(); openAuth(); };
+
   function generateId() {
     return (
       "project_" +
@@ -4020,7 +4045,7 @@
     try {
       projects =
         JSON.parse(
-          localStorage.getItem(PROJECTS_KEY) || "[]"
+          (isProUser() ? localStorage : sessionStorage).getItem(PROJECTS_KEY) || "[]"
         );
     } catch {
       projects = [];
@@ -4144,27 +4169,11 @@
 
   newProjectButton.onclick =
     () => {
-
-      const limit =
-        Number(
-          currentProfile?.project_limit ?? 2
-        );
-
-      if (
-        projects.length >=
-        limit
-      ) {
-
-        alert(
-          `Your ${currentProfile?.plan || "free"} plan allows ${limit} projects.`
-        );
-
+      if (!isProUser()) {
+        openPricing();
         return;
       }
-
-      openProjectModal(
-        "new"
-      );
+      openProjectModal("new");
     };
 
 
@@ -6934,49 +6943,29 @@
 
 
   async function init() {
+    setAuthMode("login");
 
-    document.body.style.overflow =
-      "hidden";
+    const { data: { session } } = await supabaseClient.auth.getSession();
 
-    setAuthMode(
-      "login"
-    );
+    if (session?.user) {
+      currentUser = session.user;
+      await loadProfile();
+    }
 
     loadProjects();
-
     renderProjectSelect();
-
     buildCountries();
-
     renderCountries();
-
     await loadActiveProject();
 
     updateModeBadge();
     updateSetupActionState();
     updateCheckButtonState();
+    updateAccountUI();
+    showFirstTimeOnboarding();
 
-    const {
-      data: {
-        session
-      }
-    } =
-      await supabaseClient.auth.getSession();
-
-    if (
-      session?.user
-    ) {
-
-      await handleSignedIn(
-        session.user
-      );
-
-      showFirstTimeOnboarding();
-
-    } else {
-
-      handleSignedOut();
-    }
+    authOverlay.classList.add("hidden");
+    document.body.style.overflow = "";
   }
 
 
