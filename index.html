@@ -28,7 +28,7 @@
     .container {
       width: 92%;
       max-width: 1180px;
-      margin: 48px auto;
+      margin: 40px auto;
     }
 
     .hidden {
@@ -108,15 +108,20 @@
     }
 
     .ghost {
-      padding: 6px 8px;
+      padding: 7px 9px;
       background: transparent;
       color: #525252;
     }
 
+    .danger {
+      background: #fff1f2;
+      color: #be123c;
+    }
+
     .danger-ghost {
-      padding: 8px 10px;
+      padding: 7px 9px;
       background: transparent;
-      color: #b91c1c;
+      color: #be123c;
     }
 
     .full {
@@ -147,28 +152,102 @@
       font-size: 13px;
     }
 
-    .current-check {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border: 1px solid #e7e7e7;
-      border-radius: 14px;
-      background: #fff;
+    /* PROJECT BAR */
+
+    .project-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 14px;
+      margin-bottom: 26px;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.025);
     }
 
-    .current-check-title {
-      font-size: 13px;
-      font-weight: 700;
+    .project-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
     }
 
-    .current-check-meta {
-      margin-top: 4px;
-      color: #737373;
+    .project-label {
+      color: #8a8a8a;
       font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
     }
+
+    .project-select {
+      min-width: 220px;
+      max-width: 360px;
+      padding: 9px 36px 9px 11px;
+      border: 1px solid #dedede;
+      border-radius: 9px;
+      background: #fff;
+      font-weight: 600;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    /* MODAL */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,.28);
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 460px;
+      padding: 24px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.2);
+    }
+
+    .modal h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .modal p {
+      margin-top: 7px;
+      color: #737373;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .modal input {
+      width: 100%;
+      margin-top: 18px;
+      padding: 11px 12px;
+      border: 1px solid #dcdcdc;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    /* DATABASE */
 
     .db-dropzone {
       margin-top: 18px;
@@ -178,6 +257,13 @@
       background: #fafafa;
       text-align: center;
       cursor: pointer;
+      transition: .15s ease;
+    }
+
+    .db-dropzone:hover,
+    .db-dropzone.dragging {
+      background: #fff;
+      border-color: #111;
     }
 
     .db-saved {
@@ -248,6 +334,8 @@
       border-radius: 9px;
       background: #fff;
     }
+
+    /* REQUIREMENTS */
 
     .requirements-list {
       margin-top: 18px;
@@ -320,6 +408,8 @@
     .switch input:checked + .slider:before {
       transform: translateX(16px);
     }
+
+    /* COUNTRY */
 
     .country-picker {
       position: relative;
@@ -400,12 +490,37 @@
       background: #f7f7f7;
     }
 
+    /* CHECKER */
+
     .topbar {
       display: flex;
       justify-content: space-between;
       gap: 20px;
       align-items: center;
       margin-bottom: 24px;
+    }
+
+    .current-check {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .current-check-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .current-check-meta {
+      margin-top: 4px;
+      color: #737373;
+      font-size: 12px;
     }
 
     .prospect-input {
@@ -460,6 +575,8 @@
       margin-top: 14px;
       flex-wrap: wrap;
     }
+
+    /* RESULTS */
 
     .results-toolbar {
       margin: 20px 0 14px;
@@ -576,7 +693,26 @@
 
     @media (max-width: 760px) {
       .container {
-        margin: 24px auto;
+        margin: 22px auto;
+      }
+
+      .project-bar,
+      .topbar,
+      .db-saved,
+      .current-check {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .project-left {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .project-select {
+        width: 100%;
+        max-width: none;
       }
 
       .requirement-row {
@@ -585,13 +721,6 @@
 
       .requirement-row > :last-child {
         grid-column: 2;
-      }
-
-      .topbar,
-      .db-saved,
-      .current-check {
-        flex-direction: column;
-        align-items: flex-start;
       }
 
       .country-picker {
@@ -605,14 +734,64 @@
 
 <main class="container">
 
+  <!-- PROJECT SWITCHER -->
+
+  <div class="project-bar">
+
+    <div class="project-left">
+
+      <div class="project-label">
+        PROJECT
+      </div>
+
+      <select
+        id="projectSelect"
+        class="project-select"
+      ></select>
+
+    </div>
+
+
+    <div class="project-actions">
+
+      <button
+        id="newProjectButton"
+        class="secondary"
+      >
+        + New project
+      </button>
+
+      <button
+        id="renameProjectButton"
+        class="ghost"
+      >
+        Rename
+      </button>
+
+      <button
+        id="deleteProjectButton"
+        class="danger-ghost"
+      >
+        Delete
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- SETUP -->
+
   <section id="setupScreen">
 
-    <div class="eyebrow">Step 1 of 2 · Setup</div>
+    <div class="eyebrow">
+      Step 1 of 2 · Setup
+    </div>
 
-    <h1>Set up your checker</h1>
+    <h1>Set up your project</h1>
 
     <p class="subtitle">
-      Add your database and choose the metrics you want to use.
+      Add a database and choose the rules for this project.
     </p>
 
 
@@ -630,6 +809,7 @@
         accept=".csv,text/csv"
         hidden
       >
+
 
       <div
         class="db-dropzone"
@@ -649,13 +829,16 @@
       >
 
         <div>
+
           <strong>Database ready</strong>
 
           <div
             class="db-saved-meta"
             id="dbSavedMeta"
           ></div>
+
         </div>
+
 
         <button
           id="replaceDatabase"
@@ -690,13 +873,28 @@
       >
 
         <div class="mapping-row">
-          <label>Domain column</label>
-          <select id="domainColumn"></select>
+
+          <label>
+            Domain column
+          </label>
+
+          <select
+            id="domainColumn"
+          ></select>
+
         </div>
 
+
         <div class="mapping-row">
-          <label>Status column</label>
-          <select id="statusColumn"></select>
+
+          <label>
+            Status column
+          </label>
+
+          <select
+            id="statusColumn"
+          ></select>
+
         </div>
 
       </div>
@@ -709,7 +907,7 @@
       <h2>Your requirements</h2>
 
       <p class="card-description">
-        Enable only the metrics you want to use.
+        These rules apply only to this project.
       </p>
 
 
@@ -723,8 +921,13 @@
           </label>
 
           <div>
-            <div class="requirement-title">Minimum DR</div>
-            <div class="requirement-hint">0–100</div>
+            <div class="requirement-title">
+              Minimum DR
+            </div>
+
+            <div class="requirement-hint">
+              0–100
+            </div>
           </div>
 
           <input
@@ -788,7 +991,9 @@
           </label>
 
           <div>
-            <div class="requirement-title">RD ≥ LD</div>
+            <div class="requirement-title">
+              RD ≥ LD
+            </div>
           </div>
 
           <div></div>
@@ -856,6 +1061,8 @@
   </section>
 
 
+  <!-- CHECKER -->
+
   <section
     id="checkerScreen"
     class="hidden"
@@ -895,6 +1102,7 @@
     >
 
       <div>
+
         <div class="current-check-title">
           Current check
         </div>
@@ -903,6 +1111,7 @@
           class="current-check-meta"
           id="currentCheckMeta"
         ></div>
+
       </div>
 
 
@@ -921,6 +1130,7 @@
 
       <h2>Add prospects</h2>
 
+
       <div
         class="prospect-input"
         id="prospectInput"
@@ -938,14 +1148,23 @@
         >
 
           <div>
-            <strong>Drop Ahrefs Batch CSV here</strong>
 
-            <div class="stats" style="margin-top:4px;">
+            <strong>
+              Drop Ahrefs Batch CSV here
+            </strong>
+
+            <div
+              class="stats"
+              style="margin-top:4px;"
+            >
               or choose a file from your computer
             </div>
+
           </div>
 
-          <strong>Browse files</strong>
+          <strong>
+            Browse files
+          </strong>
 
         </div>
 
@@ -956,13 +1175,18 @@
         >
 
           <div>
-            <strong id="loadedFileName"></strong>
+
+            <strong
+              id="loadedFileName"
+            ></strong>
 
             <div
               class="stats"
               id="loadedFileMeta"
             ></div>
+
           </div>
+
 
           <button
             id="removeFile"
@@ -994,6 +1218,7 @@
           0 unique domains detected
         </div>
 
+
         <button
           id="checkDomains"
           class="primary"
@@ -1005,6 +1230,8 @@
 
     </section>
 
+
+    <!-- RESULTS -->
 
     <section
       class="card hidden"
@@ -1029,7 +1256,10 @@
             data-filter="all"
           >
             All
-            <span class="filter-count" id="countAll"></span>
+            <span
+              class="filter-count"
+              id="countAll"
+            ></span>
           </button>
 
           <button
@@ -1037,7 +1267,10 @@
             data-filter="passed"
           >
             Passed
-            <span class="filter-count" id="countPassed"></span>
+            <span
+              class="filter-count"
+              id="countPassed"
+            ></span>
           </button>
 
           <button
@@ -1045,7 +1278,10 @@
             data-filter="failed"
           >
             Failed
-            <span class="filter-count" id="countFailed"></span>
+            <span
+              class="filter-count"
+              id="countFailed"
+            ></span>
           </button>
 
           <button
@@ -1053,7 +1289,10 @@
             data-filter="database"
           >
             In database
-            <span class="filter-count" id="countDatabase"></span>
+            <span
+              class="filter-count"
+              id="countDatabase"
+            ></span>
           </button>
 
           <button
@@ -1061,7 +1300,10 @@
             data-filter="new"
           >
             New
-            <span class="filter-count" id="countNew"></span>
+            <span
+              class="filter-count"
+              id="countNew"
+            ></span>
           </button>
 
         </div>
@@ -1084,9 +1326,11 @@
           <div class="result-actions">
 
             <select id="statusFilter">
+
               <option value="all">
                 All statuses
               </option>
+
             </select>
 
 
@@ -1121,8 +1365,15 @@
       <div class="table-wrap">
 
         <table>
-          <thead id="resultsHead"></thead>
-          <tbody id="resultsBody"></tbody>
+
+          <thead
+            id="resultsHead"
+          ></thead>
+
+          <tbody
+            id="resultsBody"
+          ></tbody>
+
         </table>
 
       </div>
@@ -1142,7 +1393,68 @@
 </main>
 
 
+<!-- PROJECT MODAL -->
+
+<div
+  id="projectModalBackdrop"
+  class="modal-backdrop hidden"
+>
+
+  <div class="modal">
+
+    <h3
+      id="projectModalTitle"
+    >
+      New project
+    </h3>
+
+    <p
+      id="projectModalDescription"
+    >
+      Give this project a name.
+    </p>
+
+
+    <input
+      type="text"
+      id="projectNameInput"
+      placeholder="Project name"
+      maxlength="60"
+    >
+
+
+    <div class="modal-actions">
+
+      <button
+        id="cancelProjectModal"
+        class="secondary"
+      >
+        Cancel
+      </button>
+
+      <button
+        id="saveProjectModal"
+        class="primary"
+      >
+        Save
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
+
+  /* =========================
+     STATE
+  ========================= */
+
+  let projects = [];
+
+  let activeProjectId = null;
 
   let rawDatabase = [];
   let databaseHeaders = [];
@@ -1158,162 +1470,824 @@
   let sortColumn = null;
   let sortDirection = "asc";
 
-  const CURRENT_CHECK_KEY =
-    "prospectCheckerCurrentCheck";
+  let projectModalMode = "new";
+
+
+  const PROJECTS_KEY =
+    "linkProspectCheckerProjects";
+
+  const ACTIVE_PROJECT_KEY =
+    "linkProspectCheckerActiveProject";
+
+
+  /* =========================
+     DOM
+  ========================= */
+
+  const projectSelect =
+    document.getElementById(
+      "projectSelect"
+    );
+
+  const newProjectButton =
+    document.getElementById(
+      "newProjectButton"
+    );
+
+  const renameProjectButton =
+    document.getElementById(
+      "renameProjectButton"
+    );
+
+  const deleteProjectButton =
+    document.getElementById(
+      "deleteProjectButton"
+    );
+
+  const projectModalBackdrop =
+    document.getElementById(
+      "projectModalBackdrop"
+    );
+
+  const projectModalTitle =
+    document.getElementById(
+      "projectModalTitle"
+    );
+
+  const projectModalDescription =
+    document.getElementById(
+      "projectModalDescription"
+    );
+
+  const projectNameInput =
+    document.getElementById(
+      "projectNameInput"
+    );
+
+  const cancelProjectModal =
+    document.getElementById(
+      "cancelProjectModal"
+    );
+
+  const saveProjectModal =
+    document.getElementById(
+      "saveProjectModal"
+    );
 
 
   const setupScreen =
-    document.getElementById("setupScreen");
+    document.getElementById(
+      "setupScreen"
+    );
 
   const checkerScreen =
-    document.getElementById("checkerScreen");
+    document.getElementById(
+      "checkerScreen"
+    );
 
   const databaseFile =
-    document.getElementById("databaseFile");
+    document.getElementById(
+      "databaseFile"
+    );
 
   const dbDropzone =
-    document.getElementById("dbDropzone");
+    document.getElementById(
+      "dbDropzone"
+    );
 
   const dbSaved =
-    document.getElementById("dbSaved");
+    document.getElementById(
+      "dbSaved"
+    );
 
   const dbSavedMeta =
-    document.getElementById("dbSavedMeta");
+    document.getElementById(
+      "dbSavedMeta"
+    );
 
   const dbWarning =
-    document.getElementById("dbWarning");
+    document.getElementById(
+      "dbWarning"
+    );
 
   const replaceDatabase =
-    document.getElementById("replaceDatabase");
+    document.getElementById(
+      "replaceDatabase"
+    );
 
   const toggleMapping =
-    document.getElementById("toggleMapping");
+    document.getElementById(
+      "toggleMapping"
+    );
 
   const mapping =
-    document.getElementById("mapping");
+    document.getElementById(
+      "mapping"
+    );
 
   const domainColumn =
-    document.getElementById("domainColumn");
+    document.getElementById(
+      "domainColumn"
+    );
 
   const statusColumn =
-    document.getElementById("statusColumn");
+    document.getElementById(
+      "statusColumn"
+    );
 
   const saveSettings =
-    document.getElementById("saveSettings");
+    document.getElementById(
+      "saveSettings"
+    );
 
   const editSettings =
-    document.getElementById("editSettings");
+    document.getElementById(
+      "editSettings"
+    );
 
   const databaseStats =
-    document.getElementById("databaseStats");
+    document.getElementById(
+      "databaseStats"
+    );
 
   const currentCheck =
-    document.getElementById("currentCheck");
+    document.getElementById(
+      "currentCheck"
+    );
 
   const currentCheckMeta =
-    document.getElementById("currentCheckMeta");
+    document.getElementById(
+      "currentCheckMeta"
+    );
 
   const clearCurrentCheck =
-    document.getElementById("clearCurrentCheck");
+    document.getElementById(
+      "clearCurrentCheck"
+    );
 
   const domainInput =
-    document.getElementById("domainInput");
+    document.getElementById(
+      "domainInput"
+    );
 
   const prospectInput =
-    document.getElementById("prospectInput");
+    document.getElementById(
+      "prospectInput"
+    );
 
   const ahrefsFile =
-    document.getElementById("ahrefsFile");
+    document.getElementById(
+      "ahrefsFile"
+    );
 
   const uploadZone =
-    document.getElementById("uploadZone");
+    document.getElementById(
+      "uploadZone"
+    );
 
   const fileLoaded =
-    document.getElementById("fileLoaded");
+    document.getElementById(
+      "fileLoaded"
+    );
 
   const loadedFileName =
-    document.getElementById("loadedFileName");
+    document.getElementById(
+      "loadedFileName"
+    );
 
   const loadedFileMeta =
-    document.getElementById("loadedFileMeta");
+    document.getElementById(
+      "loadedFileMeta"
+    );
 
   const removeFile =
-    document.getElementById("removeFile");
+    document.getElementById(
+      "removeFile"
+    );
 
   const detectedInfo =
-    document.getElementById("detectedInfo");
+    document.getElementById(
+      "detectedInfo"
+    );
 
   const checkDomains =
-    document.getElementById("checkDomains");
+    document.getElementById(
+      "checkDomains"
+    );
 
   const resultsCard =
-    document.getElementById("resultsCard");
+    document.getElementById(
+      "resultsCard"
+    );
 
   const resultsSummary =
-    document.getElementById("resultsSummary");
+    document.getElementById(
+      "resultsSummary"
+    );
 
   const resultsHead =
-    document.getElementById("resultsHead");
+    document.getElementById(
+      "resultsHead"
+    );
 
   const resultsBody =
-    document.getElementById("resultsBody");
+    document.getElementById(
+      "resultsBody"
+    );
 
   const emptyResults =
-    document.getElementById("emptyResults");
+    document.getElementById(
+      "emptyResults"
+    );
 
   const statusFilter =
-    document.getElementById("statusFilter");
+    document.getElementById(
+      "statusFilter"
+    );
 
   const resultSearch =
-    document.getElementById("resultSearch");
+    document.getElementById(
+      "resultSearch"
+    );
 
   const copyFiltered =
-    document.getElementById("copyFiltered");
+    document.getElementById(
+      "copyFiltered"
+    );
 
   const exportFiltered =
-    document.getElementById("exportFiltered");
+    document.getElementById(
+      "exportFiltered"
+    );
 
   const copyFeedback =
-    document.getElementById("copyFeedback");
+    document.getElementById(
+      "copyFeedback"
+    );
 
   const useDR =
-    document.getElementById("useDR");
+    document.getElementById(
+      "useDR"
+    );
 
   const minDR =
-    document.getElementById("minDR");
+    document.getElementById(
+      "minDR"
+    );
 
   const useTraffic =
-    document.getElementById("useTraffic");
+    document.getElementById(
+      "useTraffic"
+    );
 
   const minTraffic =
-    document.getElementById("minTraffic");
+    document.getElementById(
+      "minTraffic"
+    );
 
   const useRD =
-    document.getElementById("useRD");
+    document.getElementById(
+      "useRD"
+    );
 
   const minRD =
-    document.getElementById("minRD");
+    document.getElementById(
+      "minRD"
+    );
 
   const useRDLD =
-    document.getElementById("useRDLD");
+    document.getElementById(
+      "useRDLD"
+    );
 
   const useCountry =
-    document.getElementById("useCountry");
+    document.getElementById(
+      "useCountry"
+    );
 
   const countryPicker =
-    document.getElementById("countryPicker");
+    document.getElementById(
+      "countryPicker"
+    );
 
   const countryControl =
-    document.getElementById("countryControl");
+    document.getElementById(
+      "countryControl"
+    );
 
   const countryMenu =
-    document.getElementById("countryMenu");
+    document.getElementById(
+      "countryMenu"
+    );
 
   const countryChips =
-    document.getElementById("countryChips");
+    document.getElementById(
+      "countryChips"
+    );
 
   const countryPlaceholder =
-    document.getElementById("countryPlaceholder");
+    document.getElementById(
+      "countryPlaceholder"
+    );
+
+
+  /* =========================
+     PROJECT HELPERS
+  ========================= */
+
+  function generateId() {
+
+    return (
+      "project_" +
+      Date.now() +
+      "_" +
+      Math.random()
+        .toString(36)
+        .slice(2, 8)
+    );
+
+  }
+
+
+  function getActiveProject() {
+
+    return projects.find(
+      project =>
+        project.id ===
+        activeProjectId
+    ) || null;
+
+  }
+
+
+  function getProjectSettingsKey(
+    projectId
+  ) {
+
+    return (
+      "linkProspectCheckerSettings_" +
+      projectId
+    );
+
+  }
+
+
+  function getProjectCheckKey(
+    projectId
+  ) {
+
+    return (
+      "linkProspectCheckerCheck_" +
+      projectId
+    );
+
+  }
+
+
+  function saveProjects() {
+
+    localStorage.setItem(
+      PROJECTS_KEY,
+      JSON.stringify(
+        projects
+      )
+    );
+
+
+    localStorage.setItem(
+      ACTIVE_PROJECT_KEY,
+      activeProjectId || ""
+    );
+
+  }
+
+
+  function loadProjects() {
+
+    try {
+
+      projects =
+        JSON.parse(
+          localStorage.getItem(
+            PROJECTS_KEY
+          ) || "[]"
+        );
+
+    }
+
+    catch {
+
+      projects = [];
+
+    }
+
+
+    if (
+      !Array.isArray(
+        projects
+      )
+    ) {
+
+      projects = [];
+
+    }
+
+
+    if (
+      projects.length === 0
+    ) {
+
+      const defaultProject = {
+
+        id:
+          generateId(),
+
+        name:
+          "My Project",
+
+        createdAt:
+          Date.now()
+
+      };
+
+
+      projects.push(
+        defaultProject
+      );
+
+
+      activeProjectId =
+        defaultProject.id;
+
+
+      saveProjects();
+
+    }
+
+    else {
+
+      const savedActive =
+        localStorage.getItem(
+          ACTIVE_PROJECT_KEY
+        );
+
+
+      if (
+        projects.some(
+          project =>
+            project.id ===
+            savedActive
+        )
+      ) {
+
+        activeProjectId =
+          savedActive;
+
+      }
+
+      else {
+
+        activeProjectId =
+          projects[0].id;
+
+      }
+
+    }
+
+  }
+
+
+  function renderProjectSelect() {
+
+    projectSelect.innerHTML =
+      "";
+
+
+    projects.forEach(
+      project => {
+
+        projectSelect.add(
+          new Option(
+            project.name,
+            project.id
+          )
+        );
+
+      }
+    );
+
+
+    projectSelect.value =
+      activeProjectId;
+
+
+    deleteProjectButton.disabled =
+      projects.length <= 1;
+
+  }
+
+
+  function openProjectModal(
+    mode
+  ) {
+
+    projectModalMode =
+      mode;
+
+
+    const project =
+      getActiveProject();
+
+
+    if (
+      mode === "new"
+    ) {
+
+      projectModalTitle.textContent =
+        "New project";
+
+      projectModalDescription.textContent =
+        "Create a separate workspace with its own database and requirements.";
+
+      projectNameInput.value =
+        "";
+
+    }
+
+    else {
+
+      projectModalTitle.textContent =
+        "Rename project";
+
+      projectModalDescription.textContent =
+        "Change the name of this project.";
+
+      projectNameInput.value =
+        project
+          ? project.name
+          : "";
+
+    }
+
+
+    projectModalBackdrop
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    setTimeout(
+      () => {
+
+        projectNameInput.focus();
+
+        projectNameInput.select();
+
+      },
+      30
+    );
+
+  }
+
+
+  function closeProjectModal() {
+
+    projectModalBackdrop
+      .classList
+      .add(
+        "hidden"
+      );
+
+  }
+
+
+  newProjectButton.addEventListener(
+    "click",
+    () =>
+      openProjectModal(
+        "new"
+      )
+  );
+
+
+  renameProjectButton.addEventListener(
+    "click",
+    () =>
+      openProjectModal(
+        "rename"
+      )
+  );
+
+
+  cancelProjectModal.addEventListener(
+    "click",
+    closeProjectModal
+  );
+
+
+  projectModalBackdrop.addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target ===
+        projectModalBackdrop
+      ) {
+
+        closeProjectModal();
+
+      }
+
+    }
+  );
+
+
+  projectNameInput.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key ===
+        "Enter"
+      ) {
+
+        saveProjectModal.click();
+
+      }
+
+    }
+  );
+
+
+  saveProjectModal.addEventListener(
+    "click",
+    async () => {
+
+      const name =
+        projectNameInput.value
+          .trim();
+
+
+      if (!name) {
+        return;
+      }
+
+
+      if (
+        projectModalMode ===
+        "new"
+      ) {
+
+        const project = {
+
+          id:
+            generateId(),
+
+          name,
+
+          createdAt:
+            Date.now()
+
+        };
+
+
+        projects.push(
+          project
+        );
+
+
+        activeProjectId =
+          project.id;
+
+
+        saveProjects();
+
+        renderProjectSelect();
+
+        closeProjectModal();
+
+        await loadActiveProject();
+
+      }
+
+      else {
+
+        const project =
+          getActiveProject();
+
+
+        if (project) {
+
+          project.name =
+            name;
+
+
+          saveProjects();
+
+          renderProjectSelect();
+
+        }
+
+
+        closeProjectModal();
+
+      }
+
+    }
+  );
+
+
+  projectSelect.addEventListener(
+    "change",
+    async () => {
+
+      activeProjectId =
+        projectSelect.value;
+
+
+      saveProjects();
+
+
+      await loadActiveProject();
+
+    }
+  );
+
+
+  deleteProjectButton.addEventListener(
+    "click",
+    async () => {
+
+      if (
+        projects.length <= 1
+      ) {
+        return;
+      }
+
+
+      const project =
+        getActiveProject();
+
+
+      if (!project) {
+        return;
+      }
+
+
+      const confirmed =
+        confirm(
+          'Delete "' +
+          project.name +
+          '"? Its database, settings and current check will be removed.'
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      await deleteProjectDatabase(
+        project.id
+      );
+
+
+      localStorage.removeItem(
+        getProjectSettingsKey(
+          project.id
+        )
+      );
+
+
+      localStorage.removeItem(
+        getProjectCheckKey(
+          project.id
+        )
+      );
+
+
+      projects =
+        projects.filter(
+          item =>
+            item.id !==
+            project.id
+        );
+
+
+      activeProjectId =
+        projects[0].id;
+
+
+      saveProjects();
+
+      renderProjectSelect();
+
+
+      await loadActiveProject();
+
+    }
+  );
 
 
   /* =========================
@@ -1324,16 +2298,19 @@
     "LinkProspectCheckerDB";
 
   const STORE_NAME =
-    "database";
+    "projectDatabases";
 
   const DB_VERSION =
-    1;
+    2;
 
 
   function openDatabase() {
 
     return new Promise(
-      (resolve, reject) => {
+      (
+        resolve,
+        reject
+      ) => {
 
         const request =
           indexedDB.open(
@@ -1343,7 +2320,9 @@
 
 
         request.onupgradeneeded =
-          function (event) {
+          function (
+            event
+          ) {
 
             const db =
               event.target.result;
@@ -1358,7 +2337,8 @@
               db.createObjectStore(
                 STORE_NAME,
                 {
-                  keyPath: "id"
+                  keyPath:
+                    "projectId"
                 }
               );
 
@@ -1386,8 +2366,9 @@
   }
 
 
-  async function saveDatabaseIndexed(
-    database
+  async function saveProjectDatabase(
+    projectId,
+    data
   ) {
 
     const db =
@@ -1395,7 +2376,10 @@
 
 
     return new Promise(
-      (resolve, reject) => {
+      (
+        resolve,
+        reject
+      ) => {
 
         const transaction =
           db.transaction(
@@ -1409,19 +2393,23 @@
             STORE_NAME
           )
           .put({
-            id: "mainDatabase",
-            ...database
+
+            projectId,
+
+            ...data
+
           });
 
 
         transaction.oncomplete =
-          () => resolve();
+          resolve;
 
 
         transaction.onerror =
-          () => reject(
-            transaction.error
-          );
+          () =>
+            reject(
+              transaction.error
+            );
 
       }
     );
@@ -1429,14 +2417,19 @@
   }
 
 
-  async function loadDatabaseIndexed() {
+  async function loadProjectDatabase(
+    projectId
+  ) {
 
     const db =
       await openDatabase();
 
 
     return new Promise(
-      (resolve, reject) => {
+      (
+        resolve,
+        reject
+      ) => {
 
         const transaction =
           db.transaction(
@@ -1451,14 +2444,15 @@
               STORE_NAME
             )
             .get(
-              "mainDatabase"
+              projectId
             );
 
 
         request.onsuccess =
           () =>
             resolve(
-              request.result || null
+              request.result ||
+              null
             );
 
 
@@ -1474,36 +2468,122 @@
   }
 
 
+  async function deleteProjectDatabase(
+    projectId
+  ) {
+
+    const db =
+      await openDatabase();
+
+
+    return new Promise(
+      (
+        resolve,
+        reject
+      ) => {
+
+        const transaction =
+          db.transaction(
+            STORE_NAME,
+            "readwrite"
+          );
+
+
+        transaction
+          .objectStore(
+            STORE_NAME
+          )
+          .delete(
+            projectId
+          );
+
+
+        transaction.oncomplete =
+          resolve;
+
+
+        transaction.onerror =
+          () =>
+            reject(
+              transaction.error
+            );
+
+      }
+    );
+
+  }
+
+
   /* =========================
-     HELPERS
+     CSV / HELPERS
   ========================= */
 
-  function cleanHeader(value) {
+  function cleanHeader(
+    value
+  ) {
 
-    return String(value || "")
-      .replace(/^\uFEFF/, "")
+    return String(
+      value || ""
+    )
+      .replace(
+        /^\uFEFF/,
+        ""
+      )
       .trim()
       .toLowerCase();
 
   }
 
 
-  function detectDelimiter(text) {
+  function detectDelimiter(
+    text
+  ) {
 
     const first =
-      text.split(/\r?\n/)[0] || "";
+      text.split(
+        /\r?\n/
+      )[0] || "";
 
 
     const candidates = [
-      [",", (first.match(/,/g) || []).length],
-      [";", (first.match(/;/g) || []).length],
-      ["\t", (first.match(/\t/g) || []).length]
+
+      [
+        ",",
+        (
+          first.match(
+            /,/g
+          ) || []
+        ).length
+      ],
+
+      [
+        ";",
+        (
+          first.match(
+            /;/g
+          ) || []
+        ).length
+      ],
+
+      [
+        "\t",
+        (
+          first.match(
+            /\t/g
+          ) || []
+        ).length
+      ]
+
     ];
 
 
     candidates.sort(
-      (a, b) =>
-        b[1] - a[1]
+      (
+        a,
+        b
+      ) =>
+        b[1] -
+        a[1]
     );
 
 
@@ -1512,10 +2592,15 @@
   }
 
 
-  function parseCSV(text) {
+  function parseCSV(
+    text
+  ) {
 
     const delimiter =
-      detectDelimiter(text);
+      detectDelimiter(
+        text
+      );
+
 
     const rows = [];
 
@@ -1534,7 +2619,9 @@
         text[i];
 
       const next =
-        text[i + 1];
+        text[
+          i + 1
+        ];
 
 
       if (
@@ -1558,11 +2645,15 @@
       }
 
       else if (
-        char === delimiter &&
+        char ===
+          delimiter &&
         !quoted
       ) {
 
-        row.push(cell);
+        row.push(
+          cell
+        );
+
         cell = "";
 
       }
@@ -1583,16 +2674,25 @@
         }
 
 
-        row.push(cell);
+        row.push(
+          cell
+        );
 
 
         if (
           row.some(
-            x =>
-              String(x).trim() !== ""
+            item =>
+              String(
+                item
+              ).trim() !==
+              ""
           )
         ) {
-          rows.push(row);
+
+          rows.push(
+            row
+          );
+
         }
 
 
@@ -1603,23 +2703,33 @@
 
       else {
 
-        cell += char;
+        cell +=
+          char;
 
       }
 
     }
 
 
-    row.push(cell);
+    row.push(
+      cell
+    );
 
 
     if (
       row.some(
-        x =>
-          String(x).trim() !== ""
+        item =>
+          String(
+            item
+          ).trim() !==
+          ""
       )
     ) {
-      rows.push(row);
+
+      rows.push(
+        row
+      );
+
     }
 
 
@@ -1640,19 +2750,23 @@
 
 
     for (
-      const name of names
+      const name
+      of names
     ) {
 
       const index =
         clean.indexOf(
-          name.toLowerCase()
+          name
+            .toLowerCase()
         );
 
 
       if (
         index !== -1
       ) {
+
         return index;
+
       }
 
     }
@@ -1663,12 +2777,22 @@
   }
 
 
-  function numberValue(value) {
+  function numberValue(
+    value
+  ) {
 
     let text =
-      String(value || "")
-        .replace(/\s/g, "")
-        .replace(/,/g, "")
+      String(
+        value || ""
+      )
+        .replace(
+          /\s/g,
+          ""
+        )
+        .replace(
+          /,/g,
+          ""
+        )
         .trim()
         .toLowerCase();
 
@@ -1678,7 +2802,9 @@
 
 
     if (
-      text.endsWith("k")
+      text.endsWith(
+        "k"
+      )
     ) {
 
       multiplier =
@@ -1694,7 +2820,9 @@
 
 
     if (
-      text.endsWith("m")
+      text.endsWith(
+        "m"
+      )
     ) {
 
       multiplier =
@@ -1709,20 +2837,25 @@
     }
 
 
-    const n =
-      Number(text);
+    const number =
+      Number(
+        text
+      );
 
 
     return Number.isFinite(
-      n
+      number
     )
-      ? n * multiplier
+      ? number *
+        multiplier
       : 0;
 
   }
 
 
-  function normalizeDomain(value) {
+  function normalizeDomain(
+    value
+  ) {
 
     if (!value) {
       return "";
@@ -1730,7 +2863,9 @@
 
 
     let domain =
-      String(value)
+      String(
+        value
+      )
         .trim()
         .toLowerCase()
         .replace(
@@ -1744,13 +2879,22 @@
 
 
     domain =
-      domain.split("/")[0];
+      domain.split(
+        "/"
+      )[0];
+
 
     domain =
-      domain.split("?")[0];
+      domain.split(
+        "?"
+      )[0];
+
 
     domain =
-      domain.split("#")[0];
+      domain.split(
+        "#"
+      )[0];
+
 
     domain =
       domain.replace(
@@ -1769,7 +2913,9 @@
   }
 
 
-  function extractDomains(text) {
+  function extractDomains(
+    text
+  ) {
 
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s<>"']*)?/gi;
@@ -1777,6 +2923,7 @@
 
     return [
       ...new Set(
+
         (
           text.match(
             regex
@@ -1785,77 +2932,15 @@
           .map(
             normalizeDomain
           )
-          .filter(Boolean)
+          .filter(
+            Boolean
+          )
+
       )
     ];
 
   }
 
-
-  function formatRelativeTime(
-    timestamp
-  ) {
-
-    if (!timestamp) {
-      return "";
-    }
-
-
-    const diff =
-      Date.now() -
-      timestamp;
-
-
-    const minutes =
-      Math.floor(
-        diff / 60000
-      );
-
-
-    if (
-      minutes < 1
-    ) {
-      return "just now";
-    }
-
-
-    if (
-      minutes < 60
-    ) {
-      return minutes +
-        " min ago";
-    }
-
-
-    const hours =
-      Math.floor(
-        minutes / 60
-      );
-
-
-    if (
-      hours < 24
-    ) {
-      return hours +
-        "h ago";
-    }
-
-
-    const days =
-      Math.floor(
-        hours / 24
-      );
-
-
-    return days +
-      "d ago";
-
-  }
-
-
-  /* =========================
-     DATABASE ANALYSIS
-  ========================= */
 
   function analyzeDatabaseRows(
     rows,
@@ -1863,11 +2948,8 @@
     statusIndex
   ) {
 
-    const domainMap =
+    const map =
       new Map();
-
-    let validRows =
-      0;
 
 
     rows.forEach(
@@ -1886,9 +2968,6 @@
         }
 
 
-        validRows++;
-
-
         const status =
           String(
             row[
@@ -1898,16 +2977,17 @@
 
 
         if (
-          !domainMap.has(
+          !map.has(
             domain
           )
         ) {
 
-          domainMap.set(
+          map.set(
             domain,
             {
               rows: 0,
-              statuses: new Set()
+              statuses:
+                new Set()
             }
           );
 
@@ -1915,7 +2995,7 @@
 
 
         const entry =
-          domainMap.get(
+          map.get(
             domain
           );
 
@@ -1923,7 +3003,9 @@
         entry.rows++;
 
 
-        if (status) {
+        if (
+          status
+        ) {
 
           entry.statuses.add(
             status
@@ -1942,21 +3024,25 @@
       0;
 
 
-    domainMap.forEach(
+    map.forEach(
       entry => {
 
         if (
-          entry.rows > 1
+          entry.rows >
+          1
         ) {
 
           duplicateRows +=
-            entry.rows - 1;
+            entry.rows -
+            1;
 
         }
 
 
         if (
-          entry.statuses.size > 1
+          entry.statuses
+            .size >
+          1
         ) {
 
           conflictingDomains++;
@@ -1970,15 +3056,11 @@
     return {
 
       uniqueDomains:
-        domainMap.size,
-
-      validRows,
+        map.size,
 
       duplicateRows,
 
-      conflictingDomains,
-
-      domainMap
+      conflictingDomains
 
     };
 
@@ -2033,13 +3115,17 @@
         }
 
 
-        if (status) {
+        if (
+          status
+        ) {
 
-          map.get(
-            domain
-          ).add(
-            status
-          );
+          map
+            .get(
+              domain
+            )
+            .add(
+              status
+            );
 
         }
 
@@ -2057,15 +3143,12 @@
         domain
       ) => {
 
-        const values =
-          [...statuses];
-
-
         finalMap.set(
           domain,
-          values.length
-            ? values.join(" / ")
-            : ""
+          [...statuses]
+            .join(
+              " / "
+            )
         );
 
       }
@@ -2077,184 +3160,85 @@
   }
 
 
-  /* =========================
-     CURRENT CHECK
-  ========================= */
-
-  function saveCurrentCheck() {
-
-    if (
-      !allResults.length
-    ) {
-      return;
-    }
-
-
-    const data = {
-
-      results:
-        allResults,
-
-      filter:
-        currentResultFilter,
-
-      status:
-        statusFilter.value,
-
-      search:
-        resultSearch.value,
-
-      sortColumn,
-
-      sortDirection,
-
-      timestamp:
-        Date.now()
-
-    };
-
-
-    localStorage.setItem(
-      CURRENT_CHECK_KEY,
-      JSON.stringify(data)
-    );
-
-
-    updateCurrentCheckBanner(
-      data
-    );
-
-  }
-
-
-  function loadCurrentCheck() {
-
-    try {
-
-      return JSON.parse(
-        localStorage.getItem(
-          CURRENT_CHECK_KEY
-        ) || "null"
-      );
-
-    }
-
-    catch {
-
-      return null;
-
-    }
-
-  }
-
-
-  function updateCurrentCheckBanner(
-    data
+  function formatRelativeTime(
+    timestamp
   ) {
 
     if (
-      !data ||
-      !data.results ||
-      !data.results.length
+      !timestamp
     ) {
+      return "";
+    }
 
-      currentCheck.classList.add(
-        "hidden"
+
+    const diff =
+      Date.now() -
+      timestamp;
+
+
+    const minutes =
+      Math.floor(
+        diff /
+        60000
       );
 
-      return;
+
+    if (
+      minutes <
+      1
+    ) {
+
+      return "just now";
 
     }
 
 
-    currentCheck.classList.remove(
-      "hidden"
-    );
+    if (
+      minutes <
+      60
+    ) {
 
-
-    currentCheckMeta.textContent =
-      data.results.length +
-      " domains · checked " +
-      formatRelativeTime(
-        data.timestamp
+      return (
+        minutes +
+        " min ago"
       );
 
-  }
+    }
 
 
-  function clearCheckState() {
+    const hours =
+      Math.floor(
+        minutes /
+        60
+      );
 
-    localStorage.removeItem(
-      CURRENT_CHECK_KEY
+
+    if (
+      hours <
+      24
+    ) {
+
+      return (
+        hours +
+        "h ago"
+      );
+
+    }
+
+
+    const days =
+      Math.floor(
+        hours /
+        24
+      );
+
+
+    return (
+      days +
+      "d ago"
     );
-
-
-    allResults = [];
-
-    currentResultFilter =
-      "all";
-
-    sortColumn =
-      null;
-
-    sortDirection =
-      "asc";
-
-
-    resultSearch.value =
-      "";
-
-    statusFilter.innerHTML =
-      '<option value="all">All statuses</option>';
-
-
-    resultsCard.classList.add(
-      "hidden"
-    );
-
-
-    currentCheck.classList.add(
-      "hidden"
-    );
-
-
-    domainInput.value =
-      "";
-
-    domainInput.disabled =
-      false;
-
-
-    ahrefsRows = [];
-
-    ahrefsColumnMap =
-      null;
-
-
-    ahrefsFile.value =
-      "";
-
-
-    fileLoaded.classList.remove(
-      "active"
-    );
-
-
-    uploadZone.classList.remove(
-      "hidden"
-    );
-
-
-    detectedInfo.textContent =
-      "0 unique domains detected";
 
   }
-
-
-  clearCurrentCheck.addEventListener(
-    "click",
-    clearCheckState
-  );
 
 
   /* =========================
@@ -2262,40 +3246,45 @@
   ========================= */
 
   const countryList = [
-    ["US", "United States"],
-    ["GB", "United Kingdom"],
-    ["CA", "Canada"],
-    ["AU", "Australia"],
-    ["NZ", "New Zealand"],
-    ["DE", "Germany"],
-    ["CH", "Switzerland"],
-    ["FR", "France"],
-    ["NL", "Netherlands"],
-    ["SE", "Sweden"],
-    ["NO", "Norway"],
-    ["DK", "Denmark"],
-    ["FI", "Finland"],
-    ["AT", "Austria"],
-    ["IE", "Ireland"],
-    ["BE", "Belgium"],
-    ["ES", "Spain"],
-    ["IT", "Italy"],
-    ["PT", "Portugal"],
-    ["PL", "Poland"],
-    ["CZ", "Czech Republic"],
-    ["RO", "Romania"],
-    ["HU", "Hungary"],
-    ["BR", "Brazil"],
-    ["MX", "Mexico"],
-    ["CO", "Colombia"],
-    ["AR", "Argentina"],
-    ["CL", "Chile"],
-    ["PE", "Peru"],
-    ["SG", "Singapore"],
-    ["JP", "Japan"],
-    ["KR", "South Korea"],
-    ["AE", "United Arab Emirates"],
-    ["ZA", "South Africa"]
+
+    ["US","United States"],
+    ["GB","United Kingdom"],
+    ["CA","Canada"],
+    ["AU","Australia"],
+    ["NZ","New Zealand"],
+    ["DE","Germany"],
+    ["CH","Switzerland"],
+    ["FR","France"],
+    ["NL","Netherlands"],
+    ["SE","Sweden"],
+    ["NO","Norway"],
+    ["DK","Denmark"],
+    ["FI","Finland"],
+    ["AT","Austria"],
+    ["IE","Ireland"],
+    ["BE","Belgium"],
+    ["ES","Spain"],
+    ["IT","Italy"],
+    ["PT","Portugal"],
+    ["PL","Poland"],
+    ["CZ","Czech Republic"],
+    ["RO","Romania"],
+    ["HU","Hungary"],
+    ["GR","Greece"],
+    ["BR","Brazil"],
+    ["MX","Mexico"],
+    ["CO","Colombia"],
+    ["AR","Argentina"],
+    ["CL","Chile"],
+    ["PE","Peru"],
+    ["IN","India"],
+    ["SG","Singapore"],
+    ["JP","Japan"],
+    ["KR","South Korea"],
+    ["AE","United Arab Emirates"],
+    ["SA","Saudi Arabia"],
+    ["ZA","South Africa"]
+
   ];
 
 
@@ -2306,7 +3295,12 @@
 
 
     countryList.forEach(
-      ([code, name]) => {
+      (
+        [
+          code,
+          name
+        ]
+      ) => {
 
         const option =
           document.createElement(
@@ -2329,9 +3323,10 @@
 
 
         checkbox.checked =
-          selectedCountries.includes(
-            code
-          );
+          selectedCountries
+            .includes(
+              code
+            );
 
 
         checkbox.addEventListener(
@@ -2343,14 +3338,16 @@
             ) {
 
               if (
-                !selectedCountries.includes(
-                  code
-                )
+                !selectedCountries
+                  .includes(
+                    code
+                  )
               ) {
 
-                selectedCountries.push(
-                  code
-                );
+                selectedCountries
+                  .push(
+                    code
+                  );
 
               }
 
@@ -2359,10 +3356,12 @@
             else {
 
               selectedCountries =
-                selectedCountries.filter(
-                  item =>
-                    item !== code
-                );
+                selectedCountries
+                  .filter(
+                    item =>
+                      item !==
+                      code
+                  );
 
             }
 
@@ -2375,15 +3374,17 @@
 
         option.append(
           checkbox,
-          document.createTextNode(
-            name
-          )
+          document
+            .createTextNode(
+              name
+            )
         );
 
 
-        countryMenu.appendChild(
-          option
-        );
+        countryMenu
+          .appendChild(
+            option
+          );
 
       }
     );
@@ -2397,88 +3398,104 @@
       "";
 
 
-    countryPlaceholder.style.display =
-      selectedCountries.length
-        ? "none"
-        : "block";
+    countryPlaceholder
+      .style
+      .display =
+        selectedCountries
+          .length
+          ? "none"
+          : "block";
 
 
-    selectedCountries.forEach(
-      code => {
+    selectedCountries
+      .forEach(
+        code => {
 
-        const name =
-          countryList.find(
-            item =>
-              item[0] === code
-          )?.[1] || code;
-
-
-        const chip =
-          document.createElement(
-            "span"
-          );
-
-
-        chip.className =
-          "country-chip";
-
-
-        const text =
-          document.createElement(
-            "span"
-          );
-
-
-        text.textContent =
-          name;
-
-
-        const remove =
-          document.createElement(
-            "button"
-          );
-
-
-        remove.type =
-          "button";
-
-        remove.textContent =
-          "×";
-
-
-        remove.addEventListener(
-          "click",
-          event => {
-
-            event.stopPropagation();
-
-
-            selectedCountries =
-              selectedCountries.filter(
+          const name =
+            countryList
+              .find(
                 item =>
-                  item !== code
+                  item[0] ===
+                  code
+              )?.[1] ||
+            code;
+
+
+          const chip =
+            document
+              .createElement(
+                "span"
               );
 
 
-            buildCountries();
-            renderCountries();
-
-          }
-        );
+          chip.className =
+            "country-chip";
 
 
-        chip.append(
-          text,
-          remove
-        );
+          const text =
+            document
+              .createElement(
+                "span"
+              );
 
 
-        countryChips.appendChild(
-          chip
-        );
+          text.textContent =
+            name;
 
-      }
-    );
+
+          const remove =
+            document
+              .createElement(
+                "button"
+              );
+
+
+          remove.type =
+            "button";
+
+
+          remove.textContent =
+            "×";
+
+
+          remove.addEventListener(
+            "click",
+            event => {
+
+              event
+                .stopPropagation();
+
+
+              selectedCountries =
+                selectedCountries
+                  .filter(
+                    item =>
+                      item !==
+                      code
+                  );
+
+
+              buildCountries();
+
+              renderCountries();
+
+            }
+          );
+
+
+          chip.append(
+            text,
+            remove
+          );
+
+
+          countryChips
+            .appendChild(
+              chip
+            );
+
+        }
+      );
 
   }
 
@@ -2502,9 +3519,10 @@
     event => {
 
       if (
-        !countryPicker.contains(
-          event.target
-        )
+        !countryPicker
+          .contains(
+            event.target
+          )
       ) {
 
         countryMenu
@@ -2519,10 +3537,6 @@
   );
 
 
-  buildCountries();
-  renderCountries();
-
-
   /* =========================
      DATABASE UPLOAD
   ========================= */
@@ -2530,14 +3544,16 @@
   dbDropzone.addEventListener(
     "click",
     () =>
-      databaseFile.click()
+      databaseFile
+        .click()
   );
 
 
   replaceDatabase.addEventListener(
     "click",
     () =>
-      databaseFile.click()
+      databaseFile
+        .click()
   );
 
 
@@ -2546,13 +3562,82 @@
     () => {
 
       const file =
-        databaseFile.files[0];
+        databaseFile
+          .files[0];
 
 
-      if (file) {
+      if (
+        file
+      ) {
+
         loadDatabaseFile(
           file
         );
+
+      }
+
+    }
+  );
+
+
+  dbDropzone.addEventListener(
+    "dragover",
+    event => {
+
+      event.preventDefault();
+
+      dbDropzone
+        .classList
+        .add(
+          "dragging"
+        );
+
+    }
+  );
+
+
+  dbDropzone.addEventListener(
+    "dragleave",
+    () => {
+
+      dbDropzone
+        .classList
+        .remove(
+          "dragging"
+        );
+
+    }
+  );
+
+
+  dbDropzone.addEventListener(
+    "drop",
+    event => {
+
+      event.preventDefault();
+
+
+      dbDropzone
+        .classList
+        .remove(
+          "dragging"
+        );
+
+
+      const file =
+        event
+          .dataTransfer
+          .files[0];
+
+
+      if (
+        file
+      ) {
+
+        loadDatabaseFile(
+          file
+        );
+
       }
 
     }
@@ -2572,12 +3657,15 @@
 
         const rows =
           parseCSV(
-            event.target.result
+            event
+              .target
+              .result
           );
 
 
         if (
-          rows.length < 2
+          rows.length <
+          2
         ) {
 
           alert(
@@ -2592,37 +3680,14 @@
         databaseHeaders =
           rows[0];
 
+
         rawDatabase =
-          rows.slice(1);
+          rows.slice(
+            1
+          );
 
 
-        domainColumn.innerHTML =
-          "";
-
-        statusColumn.innerHTML =
-          "";
-
-
-        databaseHeaders.forEach(
-          (header, index) => {
-
-            domainColumn.add(
-              new Option(
-                header,
-                index
-              )
-            );
-
-
-            statusColumn.add(
-              new Option(
-                header,
-                index
-              )
-            );
-
-          }
-        );
+        populateDatabaseColumns();
 
 
         const detectedDomain =
@@ -2652,18 +3717,24 @@
 
 
         if (
-          detectedDomain !== -1
+          detectedDomain !==
+          -1
         ) {
+
           domainColumn.value =
             detectedDomain;
+
         }
 
 
         if (
-          detectedStatus !== -1
+          detectedStatus !==
+          -1
         ) {
+
           statusColumn.value =
             detectedStatus;
+
         }
 
 
@@ -2672,19 +3743,25 @@
         );
 
 
-        dbDropzone.classList.add(
-          "hidden"
-        );
+        dbDropzone
+          .classList
+          .add(
+            "hidden"
+          );
 
 
-        dbSaved.classList.add(
-          "active"
-        );
+        dbSaved
+          .classList
+          .add(
+            "active"
+          );
 
 
-        toggleMapping.classList.remove(
-          "hidden"
-        );
+        toggleMapping
+          .classList
+          .remove(
+            "hidden"
+          );
 
       };
 
@@ -2696,71 +3773,126 @@
   }
 
 
+  function populateDatabaseColumns() {
+
+    domainColumn.innerHTML =
+      "";
+
+    statusColumn.innerHTML =
+      "";
+
+
+    databaseHeaders
+      .forEach(
+        (
+          header,
+          index
+        ) => {
+
+          domainColumn.add(
+            new Option(
+              header,
+              index
+            )
+          );
+
+
+          statusColumn.add(
+            new Option(
+              header,
+              index
+            )
+          );
+
+        }
+      );
+
+  }
+
+
   function updateDatabasePreview(
     filename = ""
   ) {
 
     if (
-      !rawDatabase.length
+      !rawDatabase
+        .length
     ) {
+
       return;
+
     }
-
-
-    const domainIndex =
-      Number(
-        domainColumn.value
-      );
-
-
-    const statusIndex =
-      Number(
-        statusColumn.value
-      );
 
 
     const analysis =
       analyzeDatabaseRows(
+
         rawDatabase,
-        domainIndex,
-        statusIndex
+
+        Number(
+          domainColumn
+            .value
+        ),
+
+        Number(
+          statusColumn
+            .value
+        )
+
       );
 
 
     dbSavedMeta.innerHTML =
+
       (
         filename
-          ? filename + "<br>"
+          ? filename +
+            "<br>"
           : ""
       ) +
-      analysis.uniqueDomains +
+
+      analysis
+        .uniqueDomains +
+
       " unique domains · " +
-      analysis.duplicateRows +
+
+      analysis
+        .duplicateRows +
+
       " duplicate rows";
 
 
     if (
-      analysis.conflictingDomains > 0
+      analysis
+        .conflictingDomains >
+      0
     ) {
 
-      dbWarning.classList.add(
-        "active"
-      );
+      dbWarning
+        .classList
+        .add(
+          "active"
+        );
 
 
       dbWarning.innerHTML =
-        '<span class="warning">' +
-        analysis.conflictingDomains +
-        " domains have conflicting statuses.</span> " +
-        "All unique statuses will be kept and shown together.";
+
+        analysis
+          .conflictingDomains +
+
+        " domains have conflicting statuses. " +
+
+        "All unique statuses will be kept.";
 
     }
 
     else {
 
-      dbWarning.classList.remove(
-        "active"
-      );
+      dbWarning
+        .classList
+        .remove(
+          "active"
+        );
 
 
       dbWarning.innerHTML =
@@ -2789,123 +3921,249 @@
     "click",
     () => {
 
-      mapping.classList.toggle(
-        "active"
-      );
+      mapping
+        .classList
+        .toggle(
+          "active"
+        );
 
     }
   );
 
 
   /* =========================
-     SETTINGS
+     PROJECT SETTINGS
   ========================= */
+
+  function getCurrentSettings() {
+
+    let dr =
+      Number(
+        minDR.value
+      );
+
+
+    dr =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number
+            .isFinite(
+              dr
+            )
+            ? dr
+            : 0
+        )
+      );
+
+
+    minDR.value =
+      dr;
+
+
+    return {
+
+      useDR:
+        useDR.checked,
+
+      minDR:
+        dr,
+
+      useTraffic:
+        useTraffic.checked,
+
+      minTraffic:
+        Number(
+          minTraffic.value
+        ) || 0,
+
+      useRD:
+        useRD.checked,
+
+      minRD:
+        Number(
+          minRD.value
+        ) || 0,
+
+      useRDLD:
+        useRDLD.checked,
+
+      useCountry:
+        useCountry.checked,
+
+      countries:
+        [
+          ...selectedCountries
+        ]
+
+    };
+
+  }
+
+
+  function saveProjectSettings() {
+
+    if (
+      !activeProjectId
+    ) {
+      return;
+    }
+
+
+    localStorage.setItem(
+
+      getProjectSettingsKey(
+        activeProjectId
+      ),
+
+      JSON.stringify(
+        getCurrentSettings()
+      )
+
+    );
+
+  }
+
+
+  function loadProjectSettings() {
+
+    const settings =
+      JSON.parse(
+        localStorage.getItem(
+          getProjectSettingsKey(
+            activeProjectId
+          )
+        ) ||
+        "null"
+      );
+
+
+    useDR.checked =
+      Boolean(
+        settings
+          ?.useDR
+      );
+
+
+    minDR.value =
+      settings
+        ?.minDR ??
+      50;
+
+
+    useTraffic.checked =
+      Boolean(
+        settings
+          ?.useTraffic
+      );
+
+
+    minTraffic.value =
+      settings
+        ?.minTraffic ??
+      2000;
+
+
+    useRD.checked =
+      Boolean(
+        settings
+          ?.useRD
+      );
+
+
+    minRD.value =
+      settings
+        ?.minRD ??
+      500;
+
+
+    useRDLD.checked =
+      Boolean(
+        settings
+          ?.useRDLD
+      );
+
+
+    useCountry.checked =
+      Boolean(
+        settings
+          ?.useCountry
+      );
+
+
+    selectedCountries =
+      Array.isArray(
+        settings
+          ?.countries
+      )
+        ? settings
+            .countries
+        : [];
+
+
+    buildCountries();
+
+    renderCountries();
+
+  }
+
 
   saveSettings.addEventListener(
     "click",
     async () => {
 
-      let dr =
-        Number(
-          minDR.value
-        );
-
-
-      dr =
-        Math.max(
-          0,
-          Math.min(
-            100,
-            Number.isFinite(dr)
-              ? dr
-              : 0
-          )
-        );
-
-
-      minDR.value =
-        dr;
-
-
-      const settings = {
-
-        useDR:
-          useDR.checked,
-
-        minDR:
-          dr,
-
-        useTraffic:
-          useTraffic.checked,
-
-        minTraffic:
-          Number(
-            minTraffic.value
-          ) || 0,
-
-        useRD:
-          useRD.checked,
-
-        minRD:
-          Number(
-            minRD.value
-          ) || 0,
-
-        useRDLD:
-          useRDLD.checked,
-
-        useCountry:
-          useCountry.checked,
-
-        countries:
-          selectedCountries
-
-      };
-
-
-      localStorage.setItem(
-        "prospectCheckerSettings",
-        JSON.stringify(
-          settings
-        )
-      );
+      saveProjectSettings();
 
 
       if (
-        rawDatabase.length
+        rawDatabase
+          .length
       ) {
 
-        await saveDatabaseIndexed({
+        await saveProjectDatabase(
 
-          headers:
-            databaseHeaders,
+          activeProjectId,
 
-          rows:
-            rawDatabase,
+          {
 
-          domainColumn:
-            Number(
-              domainColumn.value
-            ),
+            headers:
+              databaseHeaders,
 
-          statusColumn:
-            Number(
-              statusColumn.value
-            )
+            rows:
+              rawDatabase,
 
-        });
+            domainColumn:
+              Number(
+                domainColumn
+                  .value
+              ),
+
+            statusColumn:
+              Number(
+                statusColumn
+                  .value
+              )
+
+          }
+
+        );
 
       }
 
 
       const db =
-        await loadDatabaseIndexed();
+        await loadProjectDatabase(
+          activeProjectId
+        );
 
 
-      if (!db) {
+      if (
+        !db
+      ) {
 
         alert(
-          "Please upload your database first."
+          "Please upload a database first."
         );
 
         return;
@@ -2925,44 +4183,541 @@
     "click",
     () => {
 
-      checkerScreen.classList.add(
-        "hidden"
-      );
+      checkerScreen
+        .classList
+        .add(
+          "hidden"
+        );
 
 
-      setupScreen.classList.remove(
-        "hidden"
-      );
+      setupScreen
+        .classList
+        .remove(
+          "hidden"
+        );
 
     }
   );
+
+
+  /* =========================
+     CURRENT CHECK
+  ========================= */
+
+  function saveCurrentCheck() {
+
+    if (
+      !activeProjectId ||
+      !allResults.length
+    ) {
+
+      return;
+
+    }
+
+
+    const data = {
+
+      results:
+        allResults,
+
+      filter:
+        currentResultFilter,
+
+      status:
+        statusFilter.value,
+
+      search:
+        resultSearch.value,
+
+      sortColumn,
+
+      sortDirection,
+
+      timestamp:
+        Date.now()
+
+    };
+
+
+    localStorage.setItem(
+
+      getProjectCheckKey(
+        activeProjectId
+      ),
+
+      JSON.stringify(
+        data
+      )
+
+    );
+
+
+    updateCurrentCheckBanner(
+      data
+    );
+
+  }
+
+
+  function loadCurrentCheck() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem(
+          getProjectCheckKey(
+            activeProjectId
+          )
+        ) ||
+        "null"
+      );
+
+    }
+
+    catch {
+
+      return null;
+
+    }
+
+  }
+
+
+  function updateCurrentCheckBanner(
+    data
+  ) {
+
+    if (
+      !data ||
+      !Array.isArray(
+        data.results
+      ) ||
+      !data.results
+        .length
+    ) {
+
+      currentCheck
+        .classList
+        .add(
+          "hidden"
+        );
+
+      return;
+
+    }
+
+
+    currentCheck
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    currentCheckMeta
+      .textContent =
+
+        data.results
+          .length +
+
+        " domains · checked " +
+
+        formatRelativeTime(
+          data.timestamp
+        );
+
+  }
+
+
+  function clearCurrentCheckState() {
+
+    localStorage.removeItem(
+      getProjectCheckKey(
+        activeProjectId
+      )
+    );
+
+
+    allResults = [];
+
+    currentResultFilter =
+      "all";
+
+    sortColumn =
+      null;
+
+    sortDirection =
+      "asc";
+
+
+    resultSearch.value =
+      "";
+
+
+    statusFilter.innerHTML =
+      '<option value="all">All statuses</option>';
+
+
+    resultsCard
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    currentCheck
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    resetProspectInput();
+
+  }
+
+
+  clearCurrentCheck.addEventListener(
+    "click",
+    clearCurrentCheckState
+  );
+
+
+  /* =========================
+     SHOW PROJECT
+  ========================= */
+
+  function resetSetupDatabaseUI() {
+
+    rawDatabase = [];
+
+    databaseHeaders = [];
+
+
+    databaseFile.value =
+      "";
+
+
+    domainColumn.innerHTML =
+      "";
+
+    statusColumn.innerHTML =
+      "";
+
+
+    mapping
+      .classList
+      .remove(
+        "active"
+      );
+
+
+    toggleMapping
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    dbSaved
+      .classList
+      .remove(
+        "active"
+      );
+
+
+    dbDropzone
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    dbSavedMeta.innerHTML =
+      "";
+
+
+    dbWarning
+      .classList
+      .remove(
+        "active"
+      );
+
+
+    dbWarning.innerHTML =
+      "";
+
+  }
+
+
+  function resetProspectInput() {
+
+    ahrefsRows = [];
+
+    ahrefsColumnMap =
+      null;
+
+
+    ahrefsFile.value =
+      "";
+
+
+    domainInput.value =
+      "";
+
+    domainInput.disabled =
+      false;
+
+
+    fileLoaded
+      .classList
+      .remove(
+        "active"
+      );
+
+
+    uploadZone
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    detectedInfo.textContent =
+      "0 unique domains detected";
+
+  }
+
+
+  async function loadActiveProject() {
+
+    resetSetupDatabaseUI();
+
+    resetProspectInput();
+
+
+    allResults = [];
+
+    currentResultFilter =
+      "all";
+
+    sortColumn =
+      null;
+
+    sortDirection =
+      "asc";
+
+
+    resultsCard
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    currentCheck
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    loadProjectSettings();
+
+
+    const db =
+      await loadProjectDatabase(
+        activeProjectId
+      );
+
+
+    if (
+      db
+    ) {
+
+      rawDatabase =
+        db.rows ||
+        [];
+
+
+      databaseHeaders =
+        db.headers ||
+        [];
+
+
+      populateDatabaseColumns();
+
+
+      domainColumn.value =
+        db.domainColumn;
+
+
+      statusColumn.value =
+        db.statusColumn;
+
+
+      updateDatabasePreview(
+        "Saved database"
+      );
+
+
+      dbDropzone
+        .classList
+        .add(
+          "hidden"
+        );
+
+
+      dbSaved
+        .classList
+        .add(
+          "active"
+        );
+
+
+      toggleMapping
+        .classList
+        .remove(
+          "hidden"
+        );
+
+
+      showChecker(
+        db
+      );
+
+    }
+
+    else {
+
+      checkerScreen
+        .classList
+        .add(
+          "hidden"
+        );
+
+
+      setupScreen
+        .classList
+        .remove(
+          "hidden"
+        );
+
+    }
+
+
+    const savedCheck =
+      loadCurrentCheck();
+
+
+    if (
+      savedCheck &&
+      Array.isArray(
+        savedCheck.results
+      ) &&
+      savedCheck.results
+        .length
+    ) {
+
+      allResults =
+        savedCheck.results;
+
+
+      currentResultFilter =
+        savedCheck.filter ||
+        "all";
+
+
+      sortColumn =
+        savedCheck.sortColumn ||
+        null;
+
+
+      sortDirection =
+        savedCheck.sortDirection ||
+        "asc";
+
+
+      buildStatusFilter();
+
+
+      if (
+        [
+          ...statusFilter
+            .options
+        ]
+          .some(
+            option =>
+              option.value ===
+              savedCheck.status
+          )
+      ) {
+
+        statusFilter.value =
+          savedCheck.status;
+
+      }
+
+
+      resultSearch.value =
+        savedCheck.search ||
+        "";
+
+
+      updateFilterCounts();
+
+      setActiveFilter(
+        currentResultFilter
+      );
+
+
+      renderFilteredResults();
+
+      updateCurrentCheckBanner(
+        savedCheck
+      );
+
+    }
+
+  }
 
 
   function showChecker(
     db
   ) {
 
-    setupScreen.classList.add(
-      "hidden"
-    );
+    setupScreen
+      .classList
+      .add(
+        "hidden"
+      );
 
 
-    checkerScreen.classList.remove(
-      "hidden"
-    );
+    checkerScreen
+      .classList
+      .remove(
+        "hidden"
+      );
 
 
     const analysis =
       analyzeDatabaseRows(
+
         db.rows,
+
         db.domainColumn,
+
         db.statusColumn
+
       );
 
 
     databaseStats.textContent =
+
       analysis.uniqueDomains +
-      " domains in your database";
+
+      " domains in this project";
 
   }
 
@@ -3038,13 +4793,15 @@
     const match =
       String(
         value || ""
-      ).match(
-        /\(([a-z]{2}),/i
-      );
+      )
+        .match(
+          /\(([a-z]{2}),/i
+        );
 
 
     return match
-      ? match[1].toUpperCase()
+      ? match[1]
+          .toUpperCase()
       : "";
 
   }
@@ -3053,7 +4810,8 @@
   uploadZone.addEventListener(
     "click",
     () =>
-      ahrefsFile.click()
+      ahrefsFile
+        .click()
   );
 
 
@@ -3062,13 +4820,18 @@
     () => {
 
       const file =
-        ahrefsFile.files[0];
+        ahrefsFile
+          .files[0];
 
 
-      if (file) {
+      if (
+        file
+      ) {
+
         loadAhrefsFile(
           file
         );
+
       }
 
     }
@@ -3093,14 +4856,18 @@
 
 
       const file =
-        event.dataTransfer.files[0];
+        event
+          .dataTransfer
+          .files[0];
 
 
       if (
         file &&
         file.name
           .toLowerCase()
-          .endsWith(".csv")
+          .endsWith(
+            ".csv"
+          )
       ) {
 
         loadAhrefsFile(
@@ -3126,12 +4893,15 @@
 
         const rows =
           parseCSV(
-            event.target.result
+            event
+              .target
+              .result
           );
 
 
         if (
-          rows.length < 2
+          rows.length <
+          2
         ) {
 
           alert(
@@ -3143,17 +4913,30 @@
         }
 
 
-        const headers =
-          rows[0];
+        ahrefsColumnMap =
+          detectAhrefsColumns(
+            rows[0]
+          );
+
+
+        if (
+          ahrefsColumnMap
+            .domain ===
+          -1
+        ) {
+
+          alert(
+            "Could not detect the Target column."
+          );
+
+          return;
+
+        }
 
 
         ahrefsRows =
-          rows.slice(1);
-
-
-        ahrefsColumnMap =
-          detectAhrefsColumns(
-            headers
+          rows.slice(
+            1
           );
 
 
@@ -3163,30 +4946,45 @@
               row =>
                 normalizeDomain(
                   row[
-                    ahrefsColumnMap.domain
+                    ahrefsColumnMap
+                      .domain
                   ]
                 )
             )
-            .filter(Boolean);
+            .filter(
+              Boolean
+            );
 
 
-        loadedFileName.textContent =
-          file.name;
+        loadedFileName
+          .textContent =
+            file.name;
 
 
-        loadedFileMeta.textContent =
-          [...new Set(domains)].length +
-          " unique domains detected";
+        loadedFileMeta
+          .textContent =
+
+            [
+              ...new Set(
+                domains
+              )
+            ].length +
+
+            " unique domains detected";
 
 
-        uploadZone.classList.add(
-          "hidden"
-        );
+        uploadZone
+          .classList
+          .add(
+            "hidden"
+          );
 
 
-        fileLoaded.classList.add(
-          "active"
-        );
+        fileLoaded
+          .classList
+          .add(
+            "active"
+          );
 
 
         domainInput.value =
@@ -3197,7 +4995,13 @@
 
 
         detectedInfo.textContent =
-          [...new Set(domains)].length +
+
+          [
+            ...new Set(
+              domains
+            )
+          ].length +
+
           " domains ready to check";
 
       };
@@ -3212,39 +5016,7 @@
 
   removeFile.addEventListener(
     "click",
-    () => {
-
-      ahrefsRows = [];
-
-      ahrefsColumnMap =
-        null;
-
-
-      ahrefsFile.value =
-        "";
-
-
-      fileLoaded.classList.remove(
-        "active"
-      );
-
-
-      uploadZone.classList.remove(
-        "hidden"
-      );
-
-
-      domainInput.disabled =
-        false;
-
-
-      detectedInfo.textContent =
-        extractDomains(
-          domainInput.value
-        ).length +
-        " unique domains detected";
-
-    }
+    resetProspectInput
   );
 
 
@@ -3260,9 +5032,11 @@
 
 
       detectedInfo.textContent =
+
         extractDomains(
           domainInput.value
         ).length +
+
         " unique domains detected";
 
     }
@@ -3280,60 +5054,74 @@
     const settings =
       JSON.parse(
         localStorage.getItem(
-          "prospectCheckerSettings"
-        ) || "{}"
+          getProjectSettingsKey(
+            activeProjectId
+          )
+        ) ||
+        "{}"
       );
 
 
-    const failures =
-      [];
+    const failures = [];
 
 
     const dr =
-      ahrefsColumnMap.dr !== -1
+      ahrefsColumnMap.dr !==
+      -1
         ? numberValue(
             row[
-              ahrefsColumnMap.dr
+              ahrefsColumnMap
+                .dr
             ]
           )
         : 0;
 
 
     const traffic =
-      ahrefsColumnMap.traffic !== -1
+      ahrefsColumnMap
+        .traffic !==
+      -1
         ? numberValue(
             row[
-              ahrefsColumnMap.traffic
+              ahrefsColumnMap
+                .traffic
             ]
           )
         : 0;
 
 
     const rd =
-      ahrefsColumnMap.rd !== -1
+      ahrefsColumnMap.rd !==
+      -1
         ? numberValue(
             row[
-              ahrefsColumnMap.rd
+              ahrefsColumnMap
+                .rd
             ]
           )
         : 0;
 
 
     const ld =
-      ahrefsColumnMap.ld !== -1
+      ahrefsColumnMap.ld !==
+      -1
         ? numberValue(
             row[
-              ahrefsColumnMap.ld
+              ahrefsColumnMap
+                .ld
             ]
           )
         : 0;
 
 
     const country =
-      ahrefsColumnMap.country !== -1
+      ahrefsColumnMap
+        .country !==
+      -1
         ? extractTopCountry(
             row[
-              ahrefsColumnMap.country
+              ahrefsColumnMap
+                .country
             ]
           )
         : "";
@@ -3341,7 +5129,8 @@
 
     if (
       settings.useDR &&
-      dr < settings.minDR
+      dr <
+      settings.minDR
     ) {
 
       failures.push(
@@ -3354,7 +5143,7 @@
     if (
       settings.useTraffic &&
       traffic <
-        settings.minTraffic
+      settings.minTraffic
     ) {
 
       failures.push(
@@ -3367,7 +5156,7 @@
     if (
       settings.useRD &&
       rd <
-        settings.minRD
+      settings.minRD
     ) {
 
       failures.push(
@@ -3379,7 +5168,8 @@
 
     if (
       settings.useRDLD &&
-      rd < ld
+      rd <
+      ld
     ) {
 
       failures.push(
@@ -3394,10 +5184,12 @@
       Array.isArray(
         settings.countries
       ) &&
-      settings.countries.length &&
-      !settings.countries.includes(
-        country
-      )
+      settings.countries
+        .length &&
+      !settings.countries
+        .includes(
+          country
+        )
     ) {
 
       failures.push(
@@ -3410,14 +5202,19 @@
     return {
 
       passed:
-        failures.length === 0,
+        failures.length ===
+        0,
 
       failures,
 
       dr,
+
       traffic,
+
       rd,
+
       ld,
+
       country
 
     };
@@ -3434,24 +5231,39 @@
     async () => {
 
       const db =
-        await loadDatabaseIndexed();
+        await loadProjectDatabase(
+          activeProjectId
+        );
 
 
-      if (!db) {
+      if (
+        !db
+      ) {
+
+        alert(
+          "Database not found."
+        );
+
         return;
+
       }
 
 
       const dbMap =
         buildDatabaseStatusMap(
+
           db.rows,
+
           db.domainColumn,
+
           db.statusColumn
+
         );
 
 
       if (
-        ahrefsRows.length
+        ahrefsRows
+          .length
       ) {
 
         const seen =
@@ -3466,7 +5278,8 @@
                 const domain =
                   normalizeDomain(
                     row[
-                      ahrefsColumnMap.domain
+                      ahrefsColumnMap
+                        .domain
                     ]
                   );
 
@@ -3477,7 +5290,9 @@
                     domain
                   )
                 ) {
+
                   return null;
+
                 }
 
 
@@ -3511,7 +5326,8 @@
                       ? (
                           dbMap.get(
                             domain
-                          ) || "No status"
+                          ) ||
+                          "No status"
                         )
                       : "Not found",
 
@@ -3521,7 +5337,9 @@
 
               }
             )
-            .filter(Boolean);
+            .filter(
+              Boolean
+            );
 
       }
 
@@ -3551,7 +5369,8 @@
                     ? (
                         dbMap.get(
                           domain
-                        ) || "No status"
+                        ) ||
+                        "No status"
                       )
                     : "Not found"
 
@@ -3564,11 +5383,14 @@
       currentResultFilter =
         "all";
 
+
       sortColumn =
         null;
 
+
       sortDirection =
         "asc";
+
 
       resultSearch.value =
         "";
@@ -3581,7 +5403,6 @@
       setActiveFilter(
         "all"
       );
-
 
       renderFilteredResults();
 
@@ -3597,46 +5418,73 @@
 
   function updateFilterCounts() {
 
-    document.getElementById(
-      "countAll"
-    ).textContent =
-      allResults.length;
+    document
+      .getElementById(
+        "countAll"
+      )
+      .textContent =
+        allResults
+          .length;
 
 
-    document.getElementById(
-      "countPassed"
-    ).textContent =
-      allResults.filter(
-        x =>
-          x.mode === "ahrefs" &&
-          x.passed
-      ).length;
+    document
+      .getElementById(
+        "countPassed"
+      )
+      .textContent =
+
+        allResults
+          .filter(
+            item =>
+              item.mode ===
+                "ahrefs" &&
+              item.passed
+          )
+          .length;
 
 
-    document.getElementById(
-      "countFailed"
-    ).textContent =
-      allResults.filter(
-        x =>
-          x.mode === "ahrefs" &&
-          !x.passed
-      ).length;
+    document
+      .getElementById(
+        "countFailed"
+      )
+      .textContent =
+
+        allResults
+          .filter(
+            item =>
+              item.mode ===
+                "ahrefs" &&
+              !item.passed
+          )
+          .length;
 
 
-    document.getElementById(
-      "countDatabase"
-    ).textContent =
-      allResults.filter(
-        x => x.found
-      ).length;
+    document
+      .getElementById(
+        "countDatabase"
+      )
+      .textContent =
+
+        allResults
+          .filter(
+            item =>
+              item.found
+          )
+          .length;
 
 
-    document.getElementById(
-      "countNew"
-    ).textContent =
-      allResults.filter(
-        x => !x.found
-      ).length;
+    document
+      .getElementById(
+        "countNew"
+      )
+      .textContent =
+
+        allResults
+          .filter(
+            item =>
+              !item.found
+          )
+          .length;
 
   }
 
@@ -3652,11 +5500,15 @@
         ...new Set(
           allResults
             .map(
-              x => x.status
+              item =>
+                item.status
             )
-            .filter(Boolean)
+            .filter(
+              Boolean
+            )
         )
-      ].sort();
+      ]
+        .sort();
 
 
     statuses.forEach(
@@ -3690,11 +5542,18 @@
       .forEach(
         button => {
 
-          button.classList.toggle(
-            "active",
-            button.dataset.filter ===
-              filter
-          );
+          button
+            .classList
+            .toggle(
+
+              "active",
+
+              button
+                .dataset
+                .filter ===
+                filter
+
+            );
 
         }
       );
@@ -3714,7 +5573,9 @@
           () => {
 
             setActiveFilter(
-              button.dataset.filter
+              button
+                .dataset
+                .filter
             );
 
 
@@ -3756,7 +5617,9 @@
   function getFilteredResults() {
 
     let results =
-      [...allResults];
+      [
+        ...allResults
+      ];
 
 
     if (
@@ -3766,9 +5629,10 @@
 
       results =
         results.filter(
-          x =>
-            x.mode === "ahrefs" &&
-            x.passed
+          item =>
+            item.mode ===
+              "ahrefs" &&
+            item.passed
         );
 
     }
@@ -3781,9 +5645,10 @@
 
       results =
         results.filter(
-          x =>
-            x.mode === "ahrefs" &&
-            !x.passed
+          item =>
+            item.mode ===
+              "ahrefs" &&
+            !item.passed
         );
 
     }
@@ -3796,7 +5661,8 @@
 
       results =
         results.filter(
-          x => x.found
+          item =>
+            item.found
         );
 
     }
@@ -3809,7 +5675,8 @@
 
       results =
         results.filter(
-          x => !x.found
+          item =>
+            !item.found
         );
 
     }
@@ -3822,8 +5689,8 @@
 
       results =
         results.filter(
-          x =>
-            x.status ===
+          item =>
+            item.status ===
             statusFilter.value
         );
 
@@ -3836,25 +5703,33 @@
         .toLowerCase();
 
 
-    if (search) {
+    if (
+      search
+    ) {
 
       results =
         results.filter(
           item =>
+
             [
               item.domain,
               item.status,
               item.country
             ]
-              .filter(Boolean)
+              .filter(
+                Boolean
+              )
               .some(
                 value =>
-                  String(value)
+                  String(
+                    value
+                  )
                     .toLowerCase()
                     .includes(
                       search
                     )
               )
+
         );
 
     }
@@ -3864,16 +5739,20 @@
       sortColumn
     ) {
 
-      const numeric = [
-        "dr",
-        "traffic",
-        "rd",
-        "ld"
-      ];
+      const numeric =
+        [
+          "dr",
+          "traffic",
+          "rd",
+          "ld"
+        ];
 
 
       results.sort(
-        (a, b) => {
+        (
+          a,
+          b
+        ) => {
 
           if (
             numeric.includes(
@@ -3882,17 +5761,21 @@
           ) {
 
             return (
+
               Number(
                 a[
                   sortColumn
                 ] || 0
               ) -
+
               Number(
                 b[
                   sortColumn
                 ] || 0
               )
+
             ) *
+
             (
               sortDirection ===
               "asc"
@@ -3915,6 +5798,7 @@
                 ] || ""
               )
             ) *
+
             (
               sortDirection ===
               "asc"
@@ -4020,15 +5904,21 @@
       getFilteredResults();
 
 
-    resultsCard.classList.remove(
-      "hidden"
-    );
+    resultsCard
+      .classList
+      .remove(
+        "hidden"
+      );
 
 
     resultsSummary.textContent =
+
       results.length +
+
       " shown · " +
+
       allResults.length +
+
       " total";
 
 
@@ -4038,22 +5928,25 @@
 
     const isAhrefs =
       allResults.some(
-        x =>
-          x.mode === "ahrefs"
+        item =>
+          item.mode ===
+          "ahrefs"
       );
 
 
-    if (isAhrefs) {
+    if (
+      isAhrefs
+    ) {
 
       resultsHead.innerHTML = `
         <tr>
-          ${sortHeader("Domain", "domain")}
-          ${sortHeader("Status", "status")}
-          ${sortHeader("DR", "dr")}
-          ${sortHeader("Traffic", "traffic")}
-          ${sortHeader("RD", "rd")}
-          ${sortHeader("LD", "ld")}
-          ${sortHeader("Country", "country")}
+          ${sortHeader("Domain","domain")}
+          ${sortHeader("Status","status")}
+          ${sortHeader("DR","dr")}
+          ${sortHeader("Traffic","traffic")}
+          ${sortHeader("RD","rd")}
+          ${sortHeader("LD","ld")}
+          ${sortHeader("Country","country")}
           <th>Result</th>
         </tr>
       `;
@@ -4064,8 +5957,8 @@
 
       resultsHead.innerHTML = `
         <tr>
-          ${sortHeader("Domain", "domain")}
-          ${sortHeader("Status", "status")}
+          ${sortHeader("Domain","domain")}
+          ${sortHeader("Status","status")}
         </tr>
       `;
 
@@ -4081,13 +5974,12 @@
 
           header.addEventListener(
             "click",
-            () => {
-
+            () =>
               sortResults(
-                header.dataset.sort
-              );
-
-            }
+                header
+                  .dataset
+                  .sort
+              )
           );
 
         }
@@ -4098,27 +5990,32 @@
       !results.length
     ) {
 
-      emptyResults.classList.remove(
-        "hidden"
-      );
+      emptyResults
+        .classList
+        .remove(
+          "hidden"
+        );
 
       return;
 
     }
 
 
-    emptyResults.classList.add(
-      "hidden"
-    );
+    emptyResults
+      .classList
+      .add(
+        "hidden"
+      );
 
 
     results.forEach(
       result => {
 
         const row =
-          document.createElement(
-            "tr"
-          );
+          document
+            .createElement(
+              "tr"
+            );
 
 
         if (
@@ -4143,26 +6040,31 @@
             <td>${result.rd}</td>
             <td>${result.ld}</td>
             <td>${result.country}</td>
+
             <td>
+
               ${
                 result.passed
                   ? '<span class="success">Passed</span>'
                   : '<span class="error">Failed</span>'
               }
+
               ${
                 result.failures.length
                   ? `<div class="fail-reasons">${result.failures.join("<br>")}</div>`
                   : ""
               }
+
             </td>
           `;
 
         }
 
 
-        resultsBody.appendChild(
-          row
-        );
+        resultsBody
+          .appendChild(
+            row
+          );
 
       }
     );
@@ -4185,23 +6087,32 @@
       const domains =
         results
           .map(
-            x => x.domain
+            item =>
+              item.domain
           )
-          .join("\n");
+          .join(
+            "\n"
+          );
 
 
-      if (!domains) {
+      if (
+        !domains
+      ) {
         return;
       }
 
 
-      await navigator.clipboard.writeText(
-        domains
-      );
+      await navigator
+        .clipboard
+        .writeText(
+          domains
+        );
 
 
       copyFeedback.textContent =
+
         results.length +
+
         " copied ✓";
 
 
@@ -4212,7 +6123,7 @@
             "";
 
         },
-        1600
+        1500
       );
 
     }
@@ -4236,13 +6147,15 @@
 
       const isAhrefs =
         results.some(
-          x =>
-            x.mode === "ahrefs"
+          item =>
+            item.mode ===
+            "ahrefs"
         );
 
 
       const rows =
         isAhrefs
+
           ? [[
               "Domain",
               "Status",
@@ -4254,6 +6167,7 @@
               "Result",
               "Reasons"
             ]]
+
           : [[
               "Domain",
               "Status"
@@ -4261,24 +6175,37 @@
 
 
       results.forEach(
-        x => {
+        item => {
 
-          if (isAhrefs) {
+          if (
+            isAhrefs
+          ) {
 
             rows.push([
-              x.domain,
-              x.status,
-              x.dr,
-              x.traffic,
-              x.rd,
-              x.ld,
-              x.country,
-              x.passed
+
+              item.domain,
+
+              item.status,
+
+              item.dr,
+
+              item.traffic,
+
+              item.rd,
+
+              item.ld,
+
+              item.country,
+
+              item.passed
                 ? "Passed"
                 : "Failed",
-              x.failures.join(
-                "; "
-              )
+
+              item.failures
+                .join(
+                  "; "
+                )
+
             ]);
 
           }
@@ -4286,8 +6213,11 @@
           else {
 
             rows.push([
-              x.domain,
-              x.status
+
+              item.domain,
+
+              item.status
+
             ]);
 
           }
@@ -4303,16 +6233,24 @@
               row
                 .map(
                   value =>
-                    `"${String(
-                      value ?? ""
-                    ).replace(
-                      /"/g,
-                      '""'
-                    )}"`
+                    '"' +
+                    String(
+                      value ??
+                      ""
+                    )
+                      .replace(
+                        /"/g,
+                        '""'
+                      ) +
+                    '"'
                 )
-                .join(",")
+                .join(
+                  ","
+                )
           )
-          .join("\n");
+          .join(
+            "\n"
+          );
 
 
       const blob =
@@ -4332,16 +6270,19 @@
 
 
       const link =
-        document.createElement(
-          "a"
-        );
+        document
+          .createElement(
+            "a"
+          );
 
 
       link.href =
         url;
 
+
       link.download =
         "filtered-prospects.csv";
+
 
       link.click();
 
@@ -4355,233 +6296,21 @@
 
 
   /* =========================
-     INITIAL LOAD
+     INITIALISE
   ========================= */
 
   async function init() {
 
-    const settings =
-      JSON.parse(
-        localStorage.getItem(
-          "prospectCheckerSettings"
-        ) || "null"
-      );
+    loadProjects();
 
+    renderProjectSelect();
 
-    if (settings) {
+    buildCountries();
 
-      useDR.checked =
-        Boolean(
-          settings.useDR
-        );
+    renderCountries();
 
 
-      minDR.value =
-        Math.min(
-          100,
-          Math.max(
-            0,
-            Number(
-              settings.minDR ?? 50
-            )
-          )
-        );
-
-
-      useTraffic.checked =
-        Boolean(
-          settings.useTraffic
-        );
-
-
-      minTraffic.value =
-        settings.minTraffic ??
-        2000;
-
-
-      useRD.checked =
-        Boolean(
-          settings.useRD
-        );
-
-
-      minRD.value =
-        settings.minRD ??
-        500;
-
-
-      useRDLD.checked =
-        Boolean(
-          settings.useRDLD
-        );
-
-
-      useCountry.checked =
-        Boolean(
-          settings.useCountry
-        );
-
-
-      selectedCountries =
-        Array.isArray(
-          settings.countries
-        )
-          ? settings.countries
-          : [];
-
-
-      buildCountries();
-      renderCountries();
-
-    }
-
-
-    const db =
-      await loadDatabaseIndexed();
-
-
-    if (db) {
-
-      rawDatabase =
-        db.rows || [];
-
-
-      databaseHeaders =
-        db.headers || [];
-
-
-      domainColumn.innerHTML =
-        "";
-
-      statusColumn.innerHTML =
-        "";
-
-
-      databaseHeaders.forEach(
-        (header, index) => {
-
-          domainColumn.add(
-            new Option(
-              header,
-              index
-            )
-          );
-
-
-          statusColumn.add(
-            new Option(
-              header,
-              index
-            )
-          );
-
-        }
-      );
-
-
-      domainColumn.value =
-        db.domainColumn;
-
-
-      statusColumn.value =
-        db.statusColumn;
-
-
-      updateDatabasePreview(
-        "Saved database"
-      );
-
-
-      dbDropzone.classList.add(
-        "hidden"
-      );
-
-
-      dbSaved.classList.add(
-        "active"
-      );
-
-
-      toggleMapping.classList.remove(
-        "hidden"
-      );
-
-
-      showChecker(
-        db
-      );
-
-    }
-
-
-    const savedCheck =
-      loadCurrentCheck();
-
-
-    if (
-      savedCheck &&
-      Array.isArray(
-        savedCheck.results
-      ) &&
-      savedCheck.results.length
-    ) {
-
-      allResults =
-        savedCheck.results;
-
-
-      currentResultFilter =
-        savedCheck.filter ||
-        "all";
-
-
-      sortColumn =
-        savedCheck.sortColumn ||
-        null;
-
-
-      sortDirection =
-        savedCheck.sortDirection ||
-        "asc";
-
-
-      buildStatusFilter();
-
-
-      if (
-        [
-          ...statusFilter.options
-        ].some(
-          option =>
-            option.value ===
-            savedCheck.status
-        )
-      ) {
-
-        statusFilter.value =
-          savedCheck.status;
-
-      }
-
-
-      resultSearch.value =
-        savedCheck.search || "";
-
-
-      updateFilterCounts();
-
-      setActiveFilter(
-        currentResultFilter
-      );
-
-
-      renderFilteredResults();
-
-      updateCurrentCheckBanner(
-        savedCheck
-      );
-
-    }
+    await loadActiveProject();
 
   }
 
