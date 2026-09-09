@@ -1904,7 +1904,6 @@
 
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 </head>
 
 <body>
@@ -2955,18 +2954,14 @@
     );
 
 
-  const PADDLE_CLIENT_TOKEN =
-    "live_f536b11104312087b03fc5f2839";
-
-  const PADDLE_PRO_PRICE_ID =
-    "pri_01m1yw1zdrpmh02rpzs09dp0w2";
-
   const UPGRADE_INTENT_KEY =
     "easyUpgradeIntent";
 
-  let paddleInitialized =
-    false;
+  const WAYFORPAY_CREATE_CHECKOUT_URL =
+    `${SUPABASE_URL}/functions/v1/wayforpay-create-checkout`;
 
+  const PAYMENT_RETURN_FLAG =
+    "payment";
 
 
   const PROJECTS_KEY =
@@ -4208,7 +4203,7 @@
       );
 
       setTimeout(
-        openPaddleCheckout,
+        openWayForPayCheckout,
         250
       );
     }
@@ -4517,7 +4512,7 @@
           );
 
           setTimeout(
-            openPaddleCheckout,
+            openWayForPayCheckout,
             250
           );
         }
@@ -4557,86 +4552,6 @@
           ),
         6500
       );
-  }
-
-
-  function initializePaddleCheckout() {
-    if (
-      paddleInitialized ||
-      !window.Paddle
-    ) {
-      return;
-    }
-
-    Paddle.Initialize({
-      token:
-        PADDLE_CLIENT_TOKEN,
-
-      eventCallback:
-        async function(event) {
-          if (
-            event?.name ===
-            "checkout.completed"
-          ) {
-            showCheckoutToast(
-              "Payment received. Activating Pro…"
-            );
-
-            await waitForProActivation();
-          }
-
-          if (
-            event?.name ===
-            "checkout.payment.failed"
-          ) {
-            showCheckoutToast(
-              "Payment failed. Please try another payment method.",
-              "error"
-            );
-          }
-        }
-    });
-
-    paddleInitialized =
-      true;
-  }
-
-
-  async function waitForProActivation() {
-    for (
-      let attempt = 0;
-      attempt < 12;
-      attempt++
-    ) {
-      await new Promise(
-        resolve =>
-          setTimeout(
-            resolve,
-            1200
-          )
-      );
-
-      await loadProfile();
-
-      if (isProUser()) {
-        migrateCurrentWorkspaceToPro();
-        updateAccountUI();
-
-        showCheckoutToast(
-          "Easy Pro is active ✓",
-          "success"
-        );
-
-        return true;
-      }
-    }
-
-    showCheckoutToast(
-      "Payment succeeded. Pro may take a moment to activate.",
-      ""
-    );
-
-    return false;
   }
 
 
@@ -4707,7 +4622,67 @@
   }
 
 
-  function openPaddleCheckout() {
+  function submitWayForPayForm(
+    fields
+  ) {
+    const form =
+      document.createElement(
+        "form"
+      );
+
+    form.method =
+      "POST";
+
+    form.action =
+      "https://secure.wayforpay.com/pay";
+
+    form.acceptCharset =
+      "utf-8";
+
+    Object.entries(
+      fields
+    ).forEach(
+      ([key, value]) => {
+        const values =
+          Array.isArray(value)
+            ? value
+            : [value];
+
+        values.forEach(
+          item => {
+            const input =
+              document.createElement(
+                "input"
+              );
+
+            input.type =
+              "hidden";
+
+            input.name =
+              Array.isArray(value)
+                ? `${key}[]`
+                : key;
+
+            input.value =
+              String(item);
+
+            form.appendChild(
+              input
+            );
+          }
+        );
+      }
+    );
+
+    document.body.appendChild(
+      form
+    );
+
+    form.submit();
+  }
+
+
+  async function openWayForPayCheckout() {
     if (isProUser()) {
       showCheckoutToast(
         "Easy Pro is already active.",
@@ -4730,52 +4705,133 @@
       return;
     }
 
-    initializePaddleCheckout();
+    showCheckoutToast(
+      "Opening secure payment…"
+    );
 
-    if (
-      !window.Paddle ||
-      !paddleInitialized
-    ) {
+    try {
+      const {
+        data: {
+          session
+        }
+      } =
+        await supabaseClient.auth.getSession();
+
+      if (!session?.access_token) {
+        throw new Error(
+          "Please log in again."
+        );
+      }
+
+      const response =
+        await fetch(
+          WAYFORPAY_CREATE_CHECKOUT_URL,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+              "Authorization":
+                `Bearer ${session.access_token}`
+            },
+            body:
+              JSON.stringify({
+                plan: "pro_monthly"
+              })
+          }
+        );
+
+      const payload =
+        await response.json();
+
+      if (
+        !response.ok ||
+        !payload?.fields
+      ) {
+        throw new Error(
+          payload?.error ||
+          "Could not create payment."
+        );
+      }
+
+      closePricing();
+
+      submitWayForPayForm(
+        payload.fields
+      );
+
+    } catch (error) {
       showCheckoutToast(
-        "Checkout could not load. Please refresh and try again.",
+        error?.message ||
+        "Could not open payment. Please try again.",
         "error"
       );
+    }
+  }
+
+
+  async function refreshPlanAfterPaymentReturn() {
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    if (
+      params.get(
+        PAYMENT_RETURN_FLAG
+      ) !== "complete"
+    ) {
       return;
     }
 
-    closePricing();
+    showCheckoutToast(
+      "Payment received. Checking Pro access…"
+    );
 
-    Paddle.Checkout.open({
-      items: [
-        {
-          priceId:
-            PADDLE_PRO_PRICE_ID,
-          quantity: 1
-        }
-      ],
+    for (
+      let attempt = 0;
+      attempt < 12;
+      attempt++
+    ) {
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            1200
+          )
+      );
 
-      customer: {
-        email:
-          currentUser.email
-      },
+      await loadProfile();
 
-      customData: {
-        user_id:
-          currentUser.id
-      },
+      if (isProUser()) {
+        migrateCurrentWorkspaceToPro();
+        updateAccountUI();
 
-      settings: {
-        displayMode:
-          "overlay",
-        variant:
-          "one-page",
-        theme:
-          "light",
-        allowLogout:
-          false
+        showCheckoutToast(
+          "Easy Pro is active ✓",
+          "success"
+        );
+
+        const cleanUrl =
+          window.location.origin +
+          window.location.pathname;
+
+        window.history.replaceState(
+          {},
+          "",
+          cleanUrl
+        );
+
+        return;
       }
-    });
+    }
+
+    showCheckoutToast(
+      "Payment is processing. Pro will activate automatically after confirmation.",
+      ""
+    );
   }
+
 
   function openAuth() {
     authOverlay.classList.remove("hidden");
@@ -4800,7 +4856,7 @@
   closePricingButton.onclick = closePricing;
   pricingLoginButton.onclick =
     () =>
-      openPaddleCheckout();
+      openWayForPayCheckout();
 
   function appStorage() {
     return isProUser()
@@ -7764,9 +7820,7 @@
 
 
   async function init() {
-    initializePaddleCheckout();
-
-    setAuthMode("login");
+        setAuthMode("login");
 
     const { data: { session } } = await supabaseClient.auth.getSession();
 
@@ -7789,6 +7843,8 @@
 
     authOverlay.classList.add("hidden");
     document.body.style.overflow = "";
+
+    await refreshPlanAfterPaymentReturn();
   }
 
 
